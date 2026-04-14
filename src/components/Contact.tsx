@@ -5,6 +5,8 @@ import { useScrollAnimation } from '@/hooks/useScrollAnimation';
 import { Send, MapPin, Phone, Mail, Instagram, ChevronDown } from 'lucide-react';
 import { toast } from 'sonner';
 import { supabase } from '@/integrations/supabase/client';
+import { ContactEmailInput, ContactPhoneInput } from '@/components/contact/ContactFormFields';
+import { buildPhoneNumber } from '@/lib/contact-form';
 
 const serviceOptions = [
   { uz: 'Marketing strategiyasi', en: 'Marketing Strategy', ru: 'Маркетинговая стратегия' },
@@ -28,7 +30,7 @@ const Contact = () => {
     setLoading(true);
     const fullMessage = formData.service ? `[${formData.service}] ${formData.message}` : formData.message;
     const { error } = await supabase.from('contacts').insert([{
-      name: formData.name, phone: formData.phone, email: formData.email || null, message: fullMessage,
+      name: formData.name, phone: buildPhoneNumber(formData.phone), email: formData.email || null, message: fullMessage,
     }]);
     if (error) toast.error('Xatolik yuz berdi');
     else { toast.success(t.contact.success); setFormData({ name: '', phone: '', email: '', message: '', service: '' }); }
@@ -83,13 +85,20 @@ const Contact = () => {
             <div className="grid md:grid-cols-2 gap-6">
               <div>
                 <label className="block text-sm font-medium text-foreground mb-2">{t.contact.phone}</label>
-                <input type="tel" required value={formData.phone} onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                  className="w-full px-4 py-3 rounded-xl bg-background border border-border focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all duration-300 text-foreground" />
+                <ContactPhoneInput
+                  id="contact-phone"
+                  required
+                  value={formData.phone}
+                  onChange={(value) => setFormData({ ...formData, phone: value })}
+                />
               </div>
               <div>
                 <label className="block text-sm font-medium text-foreground mb-2">{t.contact.email}</label>
-                <input type="email" value={formData.email} onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                  className="w-full px-4 py-3 rounded-xl bg-background border border-border focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all duration-300 text-foreground" />
+                <ContactEmailInput
+                  id="contact-email"
+                  value={formData.email}
+                  onChange={(value) => setFormData({ ...formData, email: value })}
+                />
               </div>
             </div>
             <div>

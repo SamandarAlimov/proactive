@@ -1,0 +1,173 @@
+@import url('https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600;700;800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Brandbook: Och kulrang #F2F5F7 */
+    --background: 210 28% 96%;
+    /* Brandbook: To'q moviy #264F6B */
+    --foreground: 204 47% 28%;
+    --card: 0 0% 100%;
+    --card-foreground: 204 47% 28%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 204 47% 28%;
+    /* Brandbook: Mentol #52E6C8 */
+    --primary: 166 75% 61%;
+    --primary-foreground: 202 100% 11%;
+    /* Brandbook: To'q moviy #264F6B */
+    --secondary: 204 47% 28%;
+    --secondary-foreground: 0 0% 100%;
+    --muted: 210 18% 91%;
+    /* Brandbook: To'q kulrang #6C7A89 */
+    --muted-foreground: 211 12% 48%;
+    --accent: 166 75% 61%;
+    --accent-foreground: 204 47% 28%;
+    --destructive: 0 78% 60%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 210 18% 88%;
+    --input: 210 18% 88%;
+    --ring: 166 75% 61%;
+    --radius: 1rem;
+
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 240 5.3% 26.1%;
+    --sidebar-primary: 240 5.9% 10%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 240 4.8% 95.9%;
+    --sidebar-accent-foreground: 240 5.9% 10%;
+    --sidebar-border: 220 13% 91%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+
+    /* Brandbook tokens */
+    --brand-dark: 202 100% 11%;       /* #00253A Qora moviy */
+    --brand-yellow: 40 100% 67%;       /* #FFC857 Sariq */
+    --brand-peach: 24 100% 92%;        /* #FFE9D6 Shaftoli */
+    --brand-mint-light: 167 100% 86%;  /* #B9FFF5 Yorqin mentol */
+    --brand-red: 0 78% 60%;            /* #E84D4D Qizil */
+    --brand-violet: 259 43% 51%;       /* #6D4CBA Binafsha */
+    --brand-cyan: 181 100% 50%;        /* #00F9FF Osmon ko'k */
+
+    /* Custom tokens */
+    --glass-bg: 0 0% 100% / 0.15;
+    --glass-border: 0 0% 100% / 0.25;
+    --glass-blur: 20px;
+    --gradient-hero: linear-gradient(180deg, hsl(202, 100%, 11%) 0%, hsl(204, 47%, 20%) 50%, hsl(204, 47%, 28%) 100%);
+    --shadow-glass: 0 8px 32px 0 hsla(204, 47%, 28%, 0.15);
+    --shadow-glow: 0 0 40px hsla(166, 75%, 61%, 0.3);
+  }
+
+  .dark {
+    /* Brandbook: Qora moviy #00253A */
+    --background: 202 100% 11%;
+    --foreground: 210 20% 92%;
+    --card: 204 47% 14%;
+    --card-foreground: 210 20% 92%;
+    --popover: 204 47% 14%;
+    --popover-foreground: 210 20% 92%;
+    --primary: 166 75% 61%;
+    --primary-foreground: 202 100% 11%;
+    --secondary: 204 30% 20%;
+    --secondary-foreground: 210 20% 92%;
+    --muted: 204 30% 16%;
+    --muted-foreground: 210 15% 55%;
+    --accent: 166 75% 61%;
+    --accent-foreground: 202 100% 11%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 204 25% 20%;
+    --input: 204 25% 20%;
+    --ring: 166 75% 61%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground font-body antialiased;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-heading;
+  }
+}
+
+@layer components {
+  .glass {
+    background: hsla(var(--glass-bg));
+    backdrop-filter: blur(var(--glass-blur));
+    -webkit-backdrop-filter: blur(var(--glass-blur));
+    border: 1px solid hsla(var(--glass-border));
+    box-shadow: var(--shadow-glass);
+  }
+
+  .glass-dark {
+    background: hsla(204, 47%, 28%, 0.3);
+    backdrop-filter: blur(var(--glass-blur));
+    -webkit-backdrop-filter: blur(var(--glass-blur));
+    border: 1px solid hsla(204, 47%, 28%, 0.4);
+    box-shadow: var(--shadow-glass);
+  }
+
+  .glass-card {
+    background: hsla(0, 0%, 100%, 0.08);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid hsla(0, 0%, 100%, 0.12);
+    box-shadow: 0 8px 32px hsla(202, 100%, 11%, 0.12);
+  }
+
+  .glass-card-light {
+    background: hsla(0, 0%, 100%, 0.65);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid hsla(210, 18%, 88%, 0.8);
+    box-shadow: 0 4px 24px hsla(204, 47%, 28%, 0.06);
+  }
+
+  .dark .glass-card-light {
+    background: hsla(204, 47%, 14%, 0.6);
+    border: 1px solid hsla(204, 25%, 22%, 0.5);
+    box-shadow: 0 4px 24px hsla(202, 100%, 5%, 0.3);
+  }
+
+  .gradient-text {
+    color: hsl(var(--primary));
+  }
+
+  .gradient-hero {
+    background: var(--gradient-hero);
+  }
+
+  .section-padding {
+    @apply px-6 py-20 md:px-12 lg:px-20 xl:px-32;
+  }
+
+  .glow {
+    box-shadow: var(--shadow-glow);
+  }
+
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: hsl(var(--muted));
+}
+::-webkit-scrollbar-thumb {
+  background: hsl(var(--primary));
+  border-radius: 3px;
+}

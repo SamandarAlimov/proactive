@@ -14,10 +14,6 @@ import aurusGallery06 from '@/assets/projects/aurus/aurus-gallery-06.webp';
 import aurusGallery07 from '@/assets/projects/aurus/aurus-gallery-07.webp';
 import aurusGallery08 from '@/assets/projects/aurus/aurus-gallery-08.webp';
 import milestoneHero from '@/assets/projects/milestone/milestone-hero.webp';
-import milestoneGallery01 from '@/assets/projects/milestone/milestone-gallery-01.webp';
-import milestoneGallery02 from '@/assets/projects/milestone/milestone-gallery-02.webp';
-import milestoneGallery03 from '@/assets/projects/milestone/milestone-gallery-03.webp';
-import milestoneGallery04 from '@/assets/projects/milestone/milestone-gallery-04.webp';
 import milestoneGallery05 from '@/assets/projects/milestone/milestone-gallery-05.webp';
 import milestoneGallery06 from '@/assets/projects/milestone/milestone-gallery-06.webp';
 import milestoneGallery07 from '@/assets/projects/milestone/milestone-gallery-07.webp';
@@ -26,9 +22,6 @@ import milestoneGallery09 from '@/assets/projects/milestone/milestone-gallery-09
 import milestoneGallery10 from '@/assets/projects/milestone/milestone-gallery-10.webp';
 import marfGallery01 from '@/assets/projects/marf/marf-gallery-01.webp';
 import marfGallery02 from '@/assets/projects/marf/marf-gallery-02.webp';
-import marfGallery03 from '@/assets/projects/marf/marf-gallery-03.webp';
-import marfGallery04 from '@/assets/projects/marf/marf-gallery-04.webp';
-import marfGallery05 from '@/assets/projects/marf/marf-gallery-05.webp';
 import marfGallery06 from '@/assets/projects/marf/marf-gallery-06.webp';
 import marfGallery07 from '@/assets/projects/marf/marf-gallery-07.webp';
 
@@ -124,6 +117,7 @@ const projectsData: Record<string, ProjectDetail> = {
           ru: 'Коллекция школьной формы',
         },
       },
+      /*
       {
         src: marfGallery03,
         title: {
@@ -148,6 +142,7 @@ const projectsData: Record<string, ProjectDetail> = {
           ru: 'Точки контакта и бренд-система',
         },
       },
+      */
       {
         src: marfGallery06,
         title: {
@@ -350,6 +345,7 @@ const projectsData: Record<string, ProjectDetail> = {
       ],
     },
     gallery: [
+      /*
       {
         src: milestoneGallery01,
         title: {
@@ -382,6 +378,7 @@ const projectsData: Record<string, ProjectDetail> = {
           ru: 'Логотип, brand platform и система touchpoints',
         },
       },
+      */
       {
         src: milestoneGallery05,
         title: {

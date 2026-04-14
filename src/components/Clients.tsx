@@ -1,19 +1,7 @@
 import { motion } from 'framer-motion';
 import { useI18n } from '@/lib/i18n';
 import { useScrollAnimation } from '@/hooks/useScrollAnimation';
-
-const clients = [
-  'AHMAD TEA',
-  'IMPULS TIBBIYOT INSTITUTI',
-  'MILESTONE IS',
-  'DAMAR',
-  'AURUS PHARM',
-  'BEK OTA',
-  'NAJOT NUR NOTIQLIK MAKTABI',
-  'MERIT CHEMICALS',
-  'ZAHRATUN SUPERMARKET',
-  'AQLY',
-];
+import { clientList } from '@/lib/client-list';
 
 const Clients = () => {
   const { t } = useI18n();
@@ -47,43 +35,25 @@ const Clients = () => {
         </motion.div>
 
         {/* Marquee-style infinite scroll row */}
-        <div className="relative overflow-hidden mb-12">
+        <div className="relative overflow-hidden">
           <div className="absolute left-0 top-0 bottom-0 w-20 z-10 bg-gradient-to-r from-background to-transparent" />
           <div className="absolute right-0 top-0 bottom-0 w-20 z-10 bg-gradient-to-l from-background to-transparent" />
           <motion.div
             animate={{ x: ['0%', '-50%'] }}
-            transition={{ duration: 30, repeat: Infinity, ease: 'linear' }}
+            transition={{ duration: 46, repeat: Infinity, ease: 'linear' }}
             className="flex gap-6 w-max"
           >
-            {[...clients, ...clients].map((client, i) => (
+            {[...clientList, ...clientList].map((client, i) => (
               <div
                 key={`${client}-${i}`}
-                className="flex-shrink-0 px-8 py-5 rounded-2xl glass-card-light flex items-center justify-center min-w-[200px] group hover:border-primary/20 transition-all duration-300"
+                className="glass-card-light group flex min-w-[220px] flex-shrink-0 items-center justify-center rounded-2xl px-8 py-5 transition-all duration-300 hover:border-primary/20"
               >
-                <span className="text-sm font-heading font-bold text-foreground/60 group-hover:text-primary transition-colors duration-300 text-center whitespace-nowrap">
+                <span className="text-center font-heading text-sm font-bold whitespace-nowrap text-foreground/60 transition-colors duration-300 group-hover:text-primary">
                   {client}
                 </span>
               </div>
             ))}
           </motion.div>
-        </div>
-
-        {/* Grid below */}
-        <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
-          {clients.map((client, i) => (
-            <motion.div
-              key={client}
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={isVisible ? { opacity: 1, scale: 1 } : {}}
-              transition={{ duration: 0.4, delay: i * 0.05 }}
-              whileHover={{ y: -4, scale: 1.03 }}
-              className="glass-card-light rounded-2xl p-5 flex items-center justify-center min-h-[80px] group hover:border-primary/20 transition-all duration-500 cursor-default"
-            >
-              <span className="text-xs font-heading font-bold text-foreground/50 group-hover:text-primary transition-colors duration-300 text-center leading-tight">
-                {client}
-              </span>
-            </motion.div>
-          ))}
         </div>
       </div>
     </section>

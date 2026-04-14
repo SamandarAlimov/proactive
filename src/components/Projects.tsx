@@ -6,6 +6,7 @@ import { useI18n } from '@/lib/i18n';
 import { useScrollAnimation } from '@/hooks/useScrollAnimation';
 import marfImg from '@/assets/marf-project.png';
 import milestoneHero from '@/assets/projects/milestone/milestone-hero.webp';
+import { clientList } from '@/lib/client-list';
 
 type FeaturedProject = {
   title: string;
@@ -21,12 +22,7 @@ const Projects = () => {
   const { t, lang } = useI18n();
   const { ref, isVisible } = useScrollAnimation();
 
-  const allProjects = [
-    'Dilmuss', 'Bek Ota', 'Taxtakon', 'Aurus Pharm', 'Ahmad Tea', 'Baxtiyor Oila',
-    'Asr Kimyo', 'MARF', 'Merit Chemicals', 'Najot Nur', 'OXUS University', 'MobetCo',
-    'President Gifts', 'Sfera', 'Tima', 'Zahratun', "Za'faron", 'Impuls Tibbiyot Instituti',
-    'Milestone IS', 'Damar', 'AQLY',
-  ];
+  const allProjects = clientList;
 
   const featured: FeaturedProject[] = [
     {

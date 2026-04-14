@@ -5,6 +5,7 @@ import founderHabibullo from '@/assets/founder-habibullo.png';
 import proactiveLogo from '@/assets/proactive-logo.jpg';
 import { founderProfile, type FounderLang } from '@/lib/founder-profile';
 import { useI18n } from '@/lib/i18n';
+import FounderSpecialtyChips from '@/components/FounderSpecialtyChips';
 
 const AboutPage = () => {
   const { t, lang } = useI18n();
@@ -93,16 +94,7 @@ const AboutPage = () => {
                   </p>
                 </div>
 
-                <div className="mt-6 flex flex-wrap gap-2">
-                  {founderProfile.tags[founderLang].map((tag) => (
-                    <span
-                      key={tag}
-                      className="rounded-full border border-border/60 bg-secondary px-3 py-1 text-xs font-medium text-secondary-foreground"
-                    >
-                      {tag}
-                    </span>
-                  ))}
-                </div>
+                <FounderSpecialtyChips tags={founderProfile.tags[founderLang]} className="mt-6" />
 
                 <p className="mt-6 max-w-2xl text-base leading-relaxed text-muted-foreground md:text-lg">
                   {founderProfile.summary[founderLang]}

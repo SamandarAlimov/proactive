@@ -2,6 +2,13 @@ import { useState, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useI18n } from '@/lib/i18n';
 import { useScrollAnimation } from '@/hooks/useScrollAnimation';
+import {
+  getTeamMemberVisualConfig,
+  TEAM_CARD_HEIGHT,
+  TEAM_CARD_WIDTH,
+  TEAM_TOOLTIP_OFFSET,
+  TEAM_TOOLTIP_WIDTH,
+} from '@/lib/team-showcase-config';
 
 import member1 from '@/assets/team/member-1.png';
 import member2 from '@/assets/team/member-2.png';
@@ -77,13 +84,18 @@ const Team = () => {
           <div className="flex items-end min-w-max px-6 md:px-12 pt-8 pb-0" style={{ gap: '1.5rem' }}>
             {teamMembers.map((member) => {
               const isHovered = hoveredId === member.id;
+              const visual = getTeamMemberVisualConfig(member.id);
+              const tooltipStyle =
+                visual.tooltipSide === 'left'
+                  ? { left: `-${TEAM_TOOLTIP_WIDTH + TEAM_TOOLTIP_OFFSET}px`, top: '-20px', width: `${TEAM_TOOLTIP_WIDTH}px` }
+                  : { right: `-${TEAM_TOOLTIP_WIDTH + TEAM_TOOLTIP_OFFSET}px`, top: '-20px', width: `${TEAM_TOOLTIP_WIDTH}px` };
               return (
-                <div key={member.id} className="relative flex-shrink-0 cursor-pointer" style={{ width: '200px' }}
+                <div key={member.id} className="relative flex-shrink-0 cursor-pointer overflow-visible" style={{ width: `${TEAM_CARD_WIDTH}px` }}
                   onMouseEnter={() => setHoveredId(member.id)} onMouseLeave={() => setHoveredId(null)}>
                   <AnimatePresence>
                     {isHovered && (
                       <motion.div initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0.9 }}
-                        transition={{ duration: 0.2 }} className="absolute z-30 pointer-events-none" style={{ right: '-220px', top: '-20px', width: '200px' }}>
+                        transition={{ duration: 0.2 }} className="absolute z-30 pointer-events-none" style={tooltipStyle}>
                         <div className="rounded-lg p-4 border" style={{
                           background: 'hsla(202, 100%, 11%, 0.85)', backdropFilter: 'blur(12px)', borderColor: 'hsla(166, 75%, 61%, 0.2)',
                         }}>
@@ -95,13 +107,13 @@ const Team = () => {
                     )}
                   </AnimatePresence>
 
-                  <div className="relative" style={{ height: '400px' }}>
+                  <div className="relative overflow-visible" style={{ height: `${TEAM_CARD_HEIGHT}px` }}>
                     <img src={member.image} alt={member.name} loading="lazy"
-                      className="absolute inset-0 w-full h-full object-contain object-bottom transition-opacity duration-300"
-                      style={{ opacity: isHovered ? 0 : 1 }} />
+                      className="absolute inset-0 w-full h-full origin-bottom object-contain object-bottom transition-[opacity,transform] duration-300"
+                      style={{ opacity: isHovered ? 0 : 1, transform: `scale(${visual.defaultScale})` }} />
                     <img src={member.hoverImage} alt={`${member.name} hover`} loading="lazy"
-                      className="absolute inset-0 w-full h-full object-contain object-bottom transition-opacity duration-300"
-                      style={{ opacity: isHovered ? 1 : 0 }} />
+                      className="absolute inset-0 w-full h-full origin-bottom object-contain object-bottom transition-[opacity,transform] duration-300"
+                      style={{ opacity: isHovered ? 1 : 0, transform: `scale(${visual.hoverScale})` }} />
                   </div>
                 </div>
               );

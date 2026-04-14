@@ -5,6 +5,14 @@ import { useI18n } from '@/lib/i18n';
 import PageLayout from '@/components/PageLayout';
 import founderHabibullo from '@/assets/founder-habibullo.png';
 import { founderProfile, type FounderLang } from '@/lib/founder-profile';
+import FounderSpecialtyChips from '@/components/FounderSpecialtyChips';
+import {
+  getTeamMemberVisualConfig,
+  TEAM_CARD_HEIGHT,
+  TEAM_CARD_WIDTH,
+  TEAM_TOOLTIP_OFFSET,
+  TEAM_TOOLTIP_WIDTH,
+} from '@/lib/team-showcase-config';
 
 import member1 from '@/assets/team/member-1.png';
 import member2 from '@/assets/team/member-2.png';
@@ -27,9 +35,6 @@ import member7Hover from '@/assets/team/member-7-hover.png';
 import member8Hover from '@/assets/team/member-8-hover.png';
 import member9Hover from '@/assets/team/member-9-hover.png';
 import member10Hover from '@/assets/team/member-10-hover.png';
-
-const CARD_WIDTH = 200;
-const CARD_HEIGHT = 400;
 
 const teamMembers = [
   { id: 1, name: 'Aziz', image: member1, hoverImage: member1Hover, role: { uz: 'Loyiha menejeri', en: 'Project Manager', ru: 'Проект-менеджер' }, bio: { uz: "Har bir loyihaning muvaffaqiyatli yakunlanishini ta'minlayman.", en: "I ensure every project is completed successfully.", ru: "Обеспечиваю успешное завершение каждого проекта." } },
@@ -88,16 +93,7 @@ const TeamPage = () => {
                   {founderProfile.role[founderLang]}
                 </p>
 
-                <div className="mt-6 flex flex-wrap gap-2">
-                  {founderProfile.tags[founderLang].map((tag) => (
-                    <span
-                      key={tag}
-                      className="rounded-full border border-border/60 bg-secondary px-3 py-1 text-xs font-medium text-secondary-foreground"
-                    >
-                      {tag}
-                    </span>
-                  ))}
-                </div>
+                <FounderSpecialtyChips tags={founderProfile.tags[founderLang]} className="mt-6" />
 
                 <p className="mt-6 max-w-2xl text-base leading-relaxed text-muted-foreground md:text-lg">
                   {founderProfile.summary[founderLang]}
@@ -151,11 +147,16 @@ const TeamPage = () => {
           <div className="flex items-end min-w-max px-6 md:px-12 pt-8 pb-0" style={{ gap: '1.5rem' }}>
             {teamMembers.map((member) => {
               const isHovered = hoveredId === member.id;
+              const visual = getTeamMemberVisualConfig(member.id);
+              const tooltipStyle =
+                visual.tooltipSide === 'left'
+                  ? { left: `-${TEAM_TOOLTIP_WIDTH + TEAM_TOOLTIP_OFFSET}px`, top: '-20px', width: `${TEAM_TOOLTIP_WIDTH}px` }
+                  : { right: `-${TEAM_TOOLTIP_WIDTH + TEAM_TOOLTIP_OFFSET}px`, top: '-20px', width: `${TEAM_TOOLTIP_WIDTH}px` };
               return (
                 <div
                   key={member.id}
-                  className="relative flex-shrink-0 cursor-pointer"
-                  style={{ width: `${CARD_WIDTH}px` }}
+                  className="relative flex-shrink-0 cursor-pointer overflow-visible"
+                  style={{ width: `${TEAM_CARD_WIDTH}px` }}
                   onMouseEnter={() => setHoveredId(member.id)}
                   onMouseLeave={() => setHoveredId(null)}
                 >
@@ -167,7 +168,7 @@ const TeamPage = () => {
                         exit={{ opacity: 0, scale: 0.9 }}
                         transition={{ duration: 0.2 }}
                         className="absolute z-30 pointer-events-none"
-                        style={{ right: '-220px', top: '-20px', width: '200px' }}
+                        style={tooltipStyle}
                       >
                         <div
                           className="rounded-lg border p-4"
@@ -185,20 +186,20 @@ const TeamPage = () => {
                     )}
                   </AnimatePresence>
 
-                  <div className="relative" style={{ height: `${CARD_HEIGHT}px` }}>
+                  <div className="relative overflow-visible" style={{ height: `${TEAM_CARD_HEIGHT}px` }}>
                     <img
                       src={member.image}
                       alt={member.name}
                       loading="lazy"
-                      className="absolute inset-0 h-full w-full object-contain object-bottom transition-opacity duration-300"
-                      style={{ opacity: isHovered ? 0 : 1 }}
+                      className="absolute inset-0 h-full w-full origin-bottom object-contain object-bottom transition-[opacity,transform] duration-300"
+                      style={{ opacity: isHovered ? 0 : 1, transform: `scale(${visual.defaultScale})` }}
                     />
                     <img
                       src={member.hoverImage}
                       alt={`${member.name} hover`}
                       loading="lazy"
-                      className="absolute inset-0 h-full w-full object-contain object-bottom transition-opacity duration-300"
-                      style={{ opacity: isHovered ? 1 : 0 }}
+                      className="absolute inset-0 h-full w-full origin-bottom object-contain object-bottom transition-[opacity,transform] duration-300"
+                      style={{ opacity: isHovered ? 1 : 0, transform: `scale(${visual.hoverScale})` }}
                     />
                   </div>
                 </div>

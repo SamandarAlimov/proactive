@@ -44,7 +44,6 @@ const Navbar = () => {
     { label: t.nav.academy, href: '/academy' },
     { label: t.nav.events, href: '/events' },
     { label: t.nav.careers, href: '/careers' },
-    { label: t.nav.contact, href: '/contact' },
   ];
 
   const otherLangs = (['uz', 'en', 'ru'] as Language[]).filter((currentLang) => currentLang !== lang);
@@ -141,10 +140,10 @@ const Navbar = () => {
 
               <Link
                 to="/contact"
-                className="inline-flex items-center justify-center rounded-xl px-4 py-3 text-sm font-semibold text-white transition-all duration-300 hover:-translate-y-0.5"
+                className="inline-flex items-center justify-center rounded-xl px-4 py-3 font-heading text-sm font-semibold tracking-[0.02em] text-secondary transition-all duration-300 hover:-translate-y-0.5"
                 style={{
-                  background: 'linear-gradient(135deg, #ff7a66 0%, #ff5c52 100%)',
-                  boxShadow: '0 16px 36px rgba(255, 92, 82, 0.22)',
+                  background: 'linear-gradient(135deg, #52E6C8 0%, #79f5e2 100%)',
+                  boxShadow: '0 16px 36px rgba(82, 230, 200, 0.24)',
                 }}
               >
                 {t.nav.contact}
@@ -248,10 +247,10 @@ const Navbar = () => {
                 <Link
                   to="/contact"
                   onClick={() => setMobileOpen(false)}
-                  className="mt-4 inline-flex w-full items-center justify-center rounded-xl px-4 py-3 text-sm font-semibold text-white transition-all duration-300"
+                  className="mt-4 inline-flex w-full items-center justify-center rounded-xl px-4 py-3 font-heading text-sm font-semibold tracking-[0.02em] text-secondary transition-all duration-300"
                   style={{
-                    background: 'linear-gradient(135deg, #ff7a66 0%, #ff5c52 100%)',
-                    boxShadow: '0 16px 36px rgba(255, 92, 82, 0.18)',
+                    background: 'linear-gradient(135deg, #52E6C8 0%, #79f5e2 100%)',
+                    boxShadow: '0 16px 36px rgba(82, 230, 200, 0.2)',
                   }}
                 >
                   {t.nav.contact}

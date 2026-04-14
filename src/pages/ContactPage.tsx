@@ -6,7 +6,7 @@ import { toast } from 'sonner';
 import { supabase } from '@/integrations/supabase/client';
 import PageLayout from '@/components/PageLayout';
 import { ContactEmailInput, ContactPhoneInput } from '@/components/contact/ContactFormFields';
-import { buildPhoneNumber } from '@/lib/contact-form';
+import { buildPhoneNumber, DEFAULT_PHONE_COUNTRY } from '@/lib/contact-form';
 
 const serviceOptions = [
   { uz: 'Marketing strategiyasi', en: 'Marketing Strategy', ru: 'Маркетинговая стратегия' },
@@ -21,7 +21,14 @@ const serviceOptions = [
 
 const ContactPage = () => {
   const { t, lang } = useI18n();
-  const [formData, setFormData] = useState({ name: '', phone: '', email: '', message: '', service: '' });
+  const [formData, setFormData] = useState({
+    name: '',
+    phoneCountry: DEFAULT_PHONE_COUNTRY,
+    phone: '',
+    email: '',
+    message: '',
+    service: '',
+  });
   const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -29,10 +36,23 @@ const ContactPage = () => {
     setLoading(true);
     const fullMessage = formData.service ? `[${formData.service}] ${formData.message}` : formData.message;
     const { error } = await supabase.from('contacts').insert([{
-      name: formData.name, phone: buildPhoneNumber(formData.phone), email: formData.email || null, message: fullMessage,
+      name: formData.name,
+      phone: buildPhoneNumber(formData.phone, formData.phoneCountry),
+      email: formData.email || null,
+      message: fullMessage,
     }]);
     if (error) toast.error('Xatolik yuz berdi');
-    else { toast.success(t.contact.success); setFormData({ name: '', phone: '', email: '', message: '', service: '' }); }
+    else {
+      toast.success(t.contact.success);
+      setFormData({
+        name: '',
+        phoneCountry: DEFAULT_PHONE_COUNTRY,
+        phone: '',
+        email: '',
+        message: '',
+        service: '',
+      });
+    }
     setLoading(false);
   };
 
@@ -80,14 +100,18 @@ const ContactPage = () => {
                 <ContactPhoneInput
                   id="contact-page-phone"
                   required
+                  lang={lang}
+                  country={formData.phoneCountry}
                   value={formData.phone}
                   onChange={(value) => setFormData({ ...formData, phone: value })}
+                  onCountryChange={(phoneCountry) => setFormData({ ...formData, phoneCountry, phone: '' })}
                 />
               </div>
               <div>
                 <label className="block text-sm font-medium text-foreground mb-2">{t.contact.email}</label>
                 <ContactEmailInput
                   id="contact-page-email"
+                  lang={lang}
                   value={formData.email}
                   onChange={(value) => setFormData({ ...formData, email: value })}
                 />

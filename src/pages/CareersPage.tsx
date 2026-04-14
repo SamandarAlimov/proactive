@@ -1,10 +1,12 @@
 import PageLayout from '@/components/PageLayout';
 import { motion } from 'framer-motion';
+import { brandbookContent } from '@/lib/brandbook-content';
 import { useI18n } from '@/lib/i18n';
 import { Briefcase, Users, ArrowRight, MapPin, Clock, Handshake, Star, Zap } from 'lucide-react';
 
 const CareersPage = () => {
   const { t, lang } = useI18n();
+  const currentLang = (lang in brandbookContent.pageLeads.careers ? lang : 'uz') as keyof typeof brandbookContent.pageLeads.careers;
 
   const positions = [
     {
@@ -71,7 +73,7 @@ const CareersPage = () => {
           <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
             <span className="text-sm font-semibold text-primary uppercase tracking-widest">{t.careers.subtitle}</span>
             <h1 className="text-4xl md:text-6xl lg:text-7xl font-heading font-bold mt-4 mb-6">{t.careers.title}</h1>
-            <p className="text-secondary-foreground/70 text-lg md:text-xl max-w-2xl leading-relaxed">{t.careers.description}</p>
+            <p className="text-secondary-foreground/70 text-lg md:text-xl max-w-3xl leading-relaxed">{brandbookContent.pageLeads.careers[currentLang]}</p>
           </motion.div>
         </div>
       </section>

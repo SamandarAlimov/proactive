@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { brandbookContent } from '@/lib/brandbook-content';
 import { useI18n } from '@/lib/i18n';
 import PageLayout from '@/components/PageLayout';
 import marfImg from '@/assets/marf-project.png';
@@ -9,6 +10,7 @@ import milestoneHero from '@/assets/projects/milestone/milestone-hero.webp';
 
 const ProjectsPage = () => {
   const { t, lang } = useI18n();
+  const currentLang = (lang in brandbookContent.pageLeads.projects ? lang : 'uz') as keyof typeof brandbookContent.pageLeads.projects;
 
   const projects = [
     {
@@ -85,6 +87,14 @@ const ProjectsPage = () => {
           >
             {t.projects.title}
           </motion.h1>
+          <motion.p
+            initial={{ opacity: 0, y: 18 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.15 }}
+            className="mx-auto mt-6 max-w-3xl text-lg leading-relaxed text-secondary-foreground/72"
+          >
+            {brandbookContent.pageLeads.projects[currentLang]}
+          </motion.p>
         </div>
       </section>
 

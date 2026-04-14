@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600;700;800&family=Manrope:wght@600;700;800&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -54,7 +54,9 @@
     --glass-bg: 0 0% 100% / 0.15;
     --glass-border: 0 0% 100% / 0.25;
     --glass-blur: 20px;
-    --gradient-hero: linear-gradient(180deg, hsl(202, 100%, 11%) 0%, hsl(204, 47%, 20%) 50%, hsl(204, 47%, 28%) 100%);
+    --gradient-hero: linear-gradient(135deg, hsl(204, 47%, 28%) 0%, hsl(202, 100%, 11%) 62%, hsl(202, 100%, 11%) 100%);
+    --gradient-brand-primary: linear-gradient(135deg, hsl(204, 47%, 28%) 0%, hsl(181, 100%, 50%) 100%);
+    --gradient-brand-soft: linear-gradient(135deg, hsla(166, 75%, 61%, 0.16) 0%, hsla(181, 100%, 50%, 0.08) 100%);
     --shadow-glass: 0 8px 32px 0 hsla(204, 47%, 28%, 0.15);
     --shadow-glow: 0 0 40px hsla(166, 75%, 61%, 0.3);
   }
@@ -92,6 +94,11 @@
   }
   h1, h2, h3, h4, h5, h6 {
     @apply font-heading;
+  }
+  input,
+  textarea,
+  select {
+    @apply font-body;
   }
 }
 
@@ -140,6 +147,16 @@
 
   .gradient-hero {
     background: var(--gradient-hero);
+  }
+
+  .brand-surface {
+    background: linear-gradient(135deg, rgba(38, 79, 107, 0.96) 0%, rgba(0, 37, 58, 0.98) 100%);
+  }
+
+  .brand-chip {
+    background: hsla(166, 75%, 61%, 0.08);
+    border: 1px solid hsla(166, 75%, 61%, 0.14);
+    color: hsl(166, 75%, 48%);
   }
 
   .section-padding {

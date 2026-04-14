@@ -12,6 +12,7 @@ import {
   GraduationCap,
   LayoutGrid,
   LineChart,
+  Quote,
   Send,
   Sparkles,
   Target,
@@ -245,9 +246,71 @@ const speakerFacts = [
 
 const brandNames = ['KochA', 'leti', 'Zaman', 'IDU', 'Impuls Tibbiyot Instituti', 'Qarshi International University', 'Zahratun', 'PCG', 'President', 'Plan Baby.uz', "Registon O'quv Markazi", 'Milestone International School', 'JETSO', 'Ilm-u Ziyo', 'asno', 'OXUS University'];
 
+const quotePanel = {
+  title: {
+    uz: "Bitiruvchilar eng ko'p ta'kidlagan o'zgarishlar",
+    en: 'What graduates mention most often',
+    ru: 'Ð§Ñ‚Ð¾ Ð²Ñ‹Ð¿ÑƒÑÐºÐ½Ð¸ÐºÐ¸ Ð¾Ñ‚Ð¼ÐµÑ‡Ð°ÑŽÑ‚ Ñ‡Ð°Ñ‰Ðµ Ð²ÑÐµÐ³Ð¾',
+  },
+  description: {
+    uz: "Fikrlar orasida qayta-qayta uchraydigan uchta natija kursning amaliy qiymatini eng yaxshi ifodalaydi.",
+    en: 'Three recurring outcomes appear again and again in the feedback and reflect the practical value of the program.',
+    ru: 'Ð¢Ñ€Ð¸ Ð¿Ð¾Ð²Ñ‚Ð¾Ñ€ÑÑŽÑ‰Ð¸Ñ…ÑÑ Ñ€ÐµÐ·ÑƒÐ»ÑŒÑ‚Ð°Ñ‚Ð° Ð»ÑƒÑ‡ÑˆÐµ Ð²ÑÐµÐ³Ð¾ Ð¿Ð¾ÐºÐ°Ð·Ñ‹Ð²Ð°ÑŽÑ‚ Ð¿Ñ€Ð°ÐºÑ‚Ð¸Ñ‡ÐµÑÐºÑƒÑŽ Ñ†ÐµÐ½Ð½Ð¾ÑÑ‚ÑŒ ÐºÑƒÑ€ÑÐ°.',
+  },
+  label: {
+    uz: 'Academy insight',
+    en: 'Academy insight',
+    ru: 'Academy insight',
+  },
+};
+
+const quoteThemes = [
+  {
+    title: {
+      uz: 'Tizimli fikrlash',
+      en: 'System thinking',
+      ru: 'Ð¡Ð¸ÑÑ‚ÐµÐ¼Ð½Ð¾Ðµ Ð¼Ñ‹ÑˆÐ»ÐµÐ½Ð¸Ðµ',
+    },
+    description: {
+      uz: "Marketingni alohida reklama emas, butun biznesni boshqaradigan yaxlit tizim sifatida ko'rish.",
+      en: 'Seeing marketing not as isolated promotion, but as an integrated system that guides the business.',
+      ru: 'Ð’Ð¾ÑÐ¿Ñ€Ð¸ÑÑ‚Ð¸Ðµ Ð¼Ð°Ñ€ÐºÐµÑ‚Ð¸Ð½Ð³Ð° Ð½Ðµ ÐºÐ°Ðº Ð½Ð°Ð±Ð¾Ñ€Ð° Ñ€Ð°Ð·Ñ€Ð¾Ð·Ð½ÐµÐ½Ð½Ñ‹Ñ… Ð°ÐºÑ‚Ð¸Ð²Ð½Ð¾ÑÑ‚ÐµÐ¹, Ð° ÐºÐ°Ðº Ñ†ÐµÐ»Ð¾ÑÑ‚Ð½Ð¾Ð¹ ÑÐ¸ÑÑ‚ÐµÐ¼Ñ‹ ÑƒÐ¿Ñ€Ð°Ð²Ð»ÐµÐ½Ð¸Ñ Ð±Ð¸Ð·Ð½ÐµÑÐ¾Ð¼.',
+    },
+  },
+  {
+    title: {
+      uz: 'Strategik aniqlik',
+      en: 'Strategic clarity',
+      ru: 'Ð¡Ñ‚Ñ€Ð°Ñ‚ÐµÐ³Ð¸Ñ‡ÐµÑÐºÐ°Ñ ÑÑÐ½Ð¾ÑÑ‚ÑŒ',
+    },
+    description: {
+      uz: "KPI, byudjet va strategiyani bir-biri bilan bog'liq zanjir sifatida tushunish.",
+      en: 'Understanding KPI, budgeting, and strategy as one connected chain of decisions.',
+      ru: 'ÐŸÐ¾Ð½Ð¸Ð¼Ð°Ð½Ð¸Ðµ KPI, Ð±ÑŽÐ´Ð¶ÐµÑ‚Ð° Ð¸ ÑÑ‚Ñ€Ð°Ñ‚ÐµÐ³Ð¸Ð¸ ÐºÐ°Ðº ÐµÐ´Ð¸Ð½Ð¾Ð¹ ÑÐ²ÑÐ·Ð°Ð½Ð½Ð¾Ð¹ Ñ†ÐµÐ¿Ð¾Ñ‡ÐºÐ¸ Ñ€ÐµÑˆÐµÐ½Ð¸Ð¹.',
+    },
+  },
+  {
+    title: {
+      uz: 'Amaliy ishonch',
+      en: 'Practical confidence',
+      ru: 'ÐŸÑ€Ð°ÐºÑ‚Ð¸Ñ‡ÐµÑÐºÐ°Ñ ÑƒÐ²ÐµÑ€ÐµÐ½Ð½Ð¾ÑÑ‚ÑŒ',
+    },
+    description: {
+      uz: "Bilimni real vazifalarda qo'llash, qaror qabul qilish va jamoa bilan ishlashda ishonchning ortishi.",
+      en: 'Greater confidence in applying frameworks to real tasks, decision-making, and team collaboration.',
+      ru: 'Ð£Ð²ÐµÐ»Ð¸Ñ‡ÐµÐ½Ð¸Ðµ ÑƒÐ²ÐµÑ€ÐµÐ½Ð½Ð¾ÑÑ‚Ð¸ Ð² Ð¿Ñ€Ð¸Ð¼ÐµÐ½ÐµÐ½Ð¸Ð¸ Ð·Ð½Ð°Ð½Ð¸Ð¹ Ðº Ñ€ÐµÐ°Ð»ÑŒÐ½Ñ‹Ð¼ Ð·Ð°Ð´Ð°Ñ‡Ð°Ð¼, Ð¿Ñ€Ð¸Ð½ÑÑ‚Ð¸Ð¸ Ñ€ÐµÑˆÐµÐ½Ð¸Ð¹ Ð¸ Ñ€Ð°Ð±Ð¾Ñ‚Ðµ Ñ ÐºÐ¾Ð¼Ð°Ð½Ð´Ð¾Ð¹.',
+    },
+  },
+];
+
 const quotes = [
   {
     author: 'Sunnat Raxmonov',
+    takeaway: {
+      uz: 'Tizimlashtirilgan qarash',
+      en: 'A more systemized view',
+      ru: 'Ð‘Ð¾Ð»ÐµÐµ ÑÐ¸ÑÑ‚ÐµÐ¼Ð½Ñ‹Ð¹ Ð²Ð·Ð³Ð»ÑÐ´',
+    },
     text: {
       uz: "Marketingdagi umumiy tushunchalarni tizimlashtirib, o'zimga ishonch berdi.",
       en: 'It systematized my overall understanding of marketing and gave me more confidence.',
@@ -256,6 +319,11 @@ const quotes = [
   },
   {
     author: 'Nazima Akmalovna',
+    takeaway: {
+      uz: 'Strategiya, KPI va byudjet aniqligi',
+      en: 'Clarity in strategy, KPI, and budget',
+      ru: 'Ð¯ÑÐ½Ð¾ÑÑ‚ÑŒ Ð² ÑÑ‚Ñ€Ð°Ñ‚ÐµÐ³Ð¸Ð¸, KPI Ð¸ Ð±ÑŽÐ´Ð¶ÐµÑ‚Ðµ',
+    },
     text: {
       uz: "Strategiya, KPI va byudjetni qanday qurishni aniq tushunib oldim.",
       en: 'I clearly understood how to build strategy, KPI, and the budget.',
@@ -264,6 +332,11 @@ const quotes = [
   },
   {
     author: 'Mirjalol Urinboev',
+    takeaway: {
+      uz: "Marketingga kengroq qarash",
+      en: 'A broader view of marketing',
+      ru: 'Ð‘Ð¾Ð»ÐµÐµ ÑˆÐ¸Ñ€Ð¾ÐºÐ¸Ð¹ Ð²Ð·Ð³Ð»ÑÐ´ Ð½Ð° Ð¼Ð°Ñ€ÐºÐµÑ‚Ð¸Ð½Ð³',
+    },
     text: {
       uz: "Marketing o'ylaganimdan ancha keng tizim ekanini kurs davomida tushundim.",
       en: 'During the course I realized marketing is a much broader system than I expected.',
@@ -436,21 +509,69 @@ const AcademyPage = () => {
         </div>
       </section>
 
-      <section className="bg-[#081625] py-20 text-white">
-        <div className="mx-auto max-w-7xl px-6 md:px-10">
-          <motion.div initial={{ opacity: 0, y: 22 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
-            <h2 className="font-heading text-3xl font-bold md:text-5xl">{text.quotes}</h2>
-            <p className="mt-5 max-w-3xl text-lg leading-relaxed text-white/74">{text.quotesDescription}</p>
-          </motion.div>
-          <div className="mt-12 space-y-5">
-            {quotes.map((quote, index) => (
-              <motion.div key={quote.author} initial={{ opacity: 0, y: 22 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: index * 0.06 }} className="rounded-[1.75rem] border border-white/10 bg-white/[0.03] px-6 py-7 md:px-8">
-                <div className="flex flex-col gap-5 md:flex-row md:items-end md:justify-between">
-                  <p className="max-w-4xl text-xl leading-relaxed md:text-2xl">{tr(quote.text)}</p>
-                  <span className="text-base font-medium text-[#74f2d8] md:text-lg">- {quote.author}</span>
+      <section className="relative overflow-hidden bg-[#081625] py-20 text-white">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(116,242,216,0.08),transparent_32%),linear-gradient(180deg,rgba(255,255,255,0.02),transparent_38%)]" />
+        <div className="relative mx-auto max-w-7xl px-6 md:px-10">
+          <div className="grid gap-10 lg:grid-cols-[0.82fr_1.18fr] lg:items-start">
+            <motion.div initial={{ opacity: 0, y: 22 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="lg:sticky lg:top-24">
+              <h2 className="font-heading text-3xl font-bold md:text-5xl">{text.quotes}</h2>
+              <p className="mt-5 max-w-2xl text-lg leading-relaxed text-white/74">{text.quotesDescription}</p>
+
+              <div className="mt-8 rounded-[2rem] border border-white/10 bg-white/[0.04] p-6 shadow-[0_18px_60px_rgba(0,0,0,0.24)]">
+                <div className="flex items-center gap-3 text-[#74f2d8]">
+                  <Quote className="h-5 w-5" />
+                  <span className="text-xs font-semibold uppercase tracking-[0.28em] text-white/60">{tr(quotePanel.label)}</span>
                 </div>
-              </motion.div>
-            ))}
+                <h3 className="mt-5 font-heading text-2xl font-bold text-white">{tr(quotePanel.title)}</h3>
+                <p className="mt-4 text-base leading-relaxed text-white/68">{tr(quotePanel.description)}</p>
+
+                <div className="mt-7 space-y-4">
+                  {quoteThemes.map((theme, index) => (
+                    <div key={tr(theme.title)} className="rounded-[1.5rem] border border-white/8 bg-black/10 px-4 py-4">
+                      <div className="text-[11px] font-semibold uppercase tracking-[0.28em] text-[#74f2d8]">0{index + 1}</div>
+                      <h4 className="mt-3 text-lg font-semibold text-white">{tr(theme.title)}</h4>
+                      <p className="mt-2 text-sm leading-relaxed text-white/62">{tr(theme.description)}</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </motion.div>
+
+            <div className="grid gap-5">
+              {quotes.map((quote, index) => (
+                <motion.article
+                  key={quote.author}
+                  initial={{ opacity: 0, y: 22 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: index * 0.06 }}
+                  className="group rounded-[2rem] border border-white/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.06),rgba(255,255,255,0.03))] p-6 shadow-[0_22px_70px_rgba(0,0,0,0.26)] transition-transform duration-300 hover:-translate-y-1 md:p-8"
+                >
+                  <div className="flex items-start justify-between gap-5">
+                    <div className="inline-flex rounded-full border border-white/12 bg-white/5 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.28em] text-white/62">
+                      0{index + 1}
+                    </div>
+                    <Quote className="h-9 w-9 text-[#74f2d8]" />
+                  </div>
+
+                  <p className="mt-8 max-w-4xl font-heading text-2xl leading-[1.45] text-white md:text-[2rem]">
+                    {tr(quote.text)}
+                  </p>
+
+                  <div className="mt-8 flex flex-col gap-4 border-t border-white/10 pt-5 md:flex-row md:items-end md:justify-between">
+                    <div>
+                      <div className="text-[11px] font-semibold uppercase tracking-[0.28em] text-white/44">
+                        {tr(quote.takeaway)}
+                      </div>
+                      <div className="mt-3 text-lg font-medium text-[#74f2d8] md:text-xl">{quote.author}</div>
+                    </div>
+                    <div className="text-sm leading-relaxed text-white/48 md:max-w-xs md:text-right">
+                      {text.quotes}
+                    </div>
+                  </div>
+                </motion.article>
+              ))}
+            </div>
           </div>
         </div>
       </section>

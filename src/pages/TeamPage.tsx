@@ -1,7 +1,10 @@
 import { useState, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { Instagram, Send } from 'lucide-react';
 import { useI18n } from '@/lib/i18n';
 import PageLayout from '@/components/PageLayout';
+import founderHabibullo from '@/assets/founder-habibullo.png';
+import { founderProfile, type FounderLang } from '@/lib/founder-profile';
 
 import member1 from '@/assets/team/member-1.png';
 import member2 from '@/assets/team/member-2.png';
@@ -43,6 +46,7 @@ const teamMembers = [
 
 const TeamPage = () => {
   const { t, lang } = useI18n();
+  const founderLang = (lang in founderProfile.intro ? lang : 'uz') as FounderLang;
   const [hoveredId, setHoveredId] = useState<number | null>(null);
   const scrollRef = useRef<HTMLDivElement>(null);
 
@@ -59,14 +63,91 @@ const TeamPage = () => {
         </div>
       </div>
 
-      <div className="bg-muted-foreground/20 dark:bg-muted/30 relative">
-        <div className="h-1 bg-primary w-full" />
+      <section className="bg-background py-14 md:py-16">
+        <div className="max-w-7xl mx-auto px-6 md:px-12">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.15 }}
+            className="overflow-hidden rounded-[2rem] border border-border/60 bg-card shadow-[0_24px_80px_rgba(0,0,0,0.08)]"
+          >
+            <div className="grid gap-0 lg:grid-cols-[0.82fr_1.18fr]">
+              <div className="relative min-h-[320px] overflow-hidden bg-[#f3efe9] dark:bg-[#141414]">
+                <img src={founderHabibullo} alt={founderProfile.name} className="h-full w-full object-cover object-center" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/10 to-transparent dark:from-black/30" />
+              </div>
+
+              <div className="flex flex-col justify-center p-8 md:p-10 lg:p-14">
+                <span className="text-xs font-semibold uppercase tracking-[0.24em] text-primary/80">
+                  {founderProfile.intro[founderLang]}
+                </span>
+                <h2 className="mt-5 font-heading text-3xl font-bold tracking-tight text-foreground md:text-5xl">
+                  {founderProfile.name}
+                </h2>
+                <p className="mt-3 text-sm font-medium uppercase tracking-[0.2em] text-muted-foreground">
+                  {founderProfile.role[founderLang]}
+                </p>
+
+                <div className="mt-6 flex flex-wrap gap-2">
+                  {founderProfile.tags[founderLang].map((tag) => (
+                    <span
+                      key={tag}
+                      className="rounded-full border border-border/60 bg-secondary px-3 py-1 text-xs font-medium text-secondary-foreground"
+                    >
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+
+                <p className="mt-6 max-w-2xl text-base leading-relaxed text-muted-foreground md:text-lg">
+                  {founderProfile.summary[founderLang]}
+                </p>
+
+                <div className="mt-8 flex flex-wrap gap-3">
+                  <a
+                    href={founderProfile.telegram}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 rounded-xl bg-primary px-4 py-2.5 text-sm font-medium text-primary-foreground transition-transform duration-300 hover:-translate-y-0.5"
+                  >
+                    <Send className="h-4 w-4" />
+                    t.me/habibullo_sadulloyev
+                  </a>
+                  <a
+                    href={founderProfile.instagram}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 rounded-xl border border-border/70 bg-background px-4 py-2.5 text-sm font-medium text-foreground transition-colors duration-300 hover:border-primary hover:text-primary"
+                  >
+                    <Instagram className="h-4 w-4" />
+                    @habibullo_sadulloyev
+                  </a>
+                </div>
+              </div>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
+      <section
+        className="relative overflow-hidden"
+        style={{
+          background: 'linear-gradient(180deg, hsla(202, 100%, 11%, 0.05) 0%, transparent 100%)',
+        }}
+      >
+        <div
+          className="h-1"
+          style={{
+            background: 'linear-gradient(90deg, hsl(166, 75%, 61%), hsl(181, 100%, 50%), hsl(259, 43%, 51%))',
+          }}
+        />
+
         <div
           ref={scrollRef}
-          className="overflow-x-auto"
+          className="overflow-x-auto scrollbar-hide"
           style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
         >
-          <style>{`.overflow-x-auto::-webkit-scrollbar { display: none; }`}</style>
+          <style>{`.scrollbar-hide::-webkit-scrollbar { display: none; }`}</style>
           <div className="flex items-end min-w-max px-6 md:px-12 pt-8 pb-0" style={{ gap: '1.5rem' }}>
             {teamMembers.map((member) => {
               const isHovered = hoveredId === member.id;
@@ -88,12 +169,17 @@ const TeamPage = () => {
                         className="absolute z-30 pointer-events-none"
                         style={{ right: '-220px', top: '-20px', width: '200px' }}
                       >
-                        <svg className="absolute" style={{ left: '-60px', top: '40px', width: '70px', height: '60px' }} viewBox="0 0 70 60" fill="none">
-                          <line x1="70" y1="0" x2="0" y2="60" stroke="white" strokeWidth="1.5" />
-                        </svg>
-                        <div className="bg-white/10 backdrop-blur-sm rounded-lg p-4 border border-white/20">
-                          <h4 className="font-heading font-bold text-white text-xl mb-1">{member.name}</h4>
-                          <p className="text-white/80 text-sm leading-relaxed">{member.role[lang]}, {member.bio[lang]}</p>
+                        <div
+                          className="rounded-lg border p-4"
+                          style={{
+                            background: 'hsla(202, 100%, 11%, 0.85)',
+                            backdropFilter: 'blur(12px)',
+                            borderColor: 'hsla(166, 75%, 61%, 0.2)',
+                          }}
+                        >
+                          <h4 className="mb-1 font-heading text-xl font-bold text-white">{member.name}</h4>
+                          <p className="mb-2 text-xs font-medium text-primary">{member.role[lang]}</p>
+                          <p className="text-sm leading-relaxed text-white/70">{member.bio[lang]}</p>
                         </div>
                       </motion.div>
                     )}
@@ -104,14 +190,14 @@ const TeamPage = () => {
                       src={member.image}
                       alt={member.name}
                       loading="lazy"
-                      className="absolute inset-0 w-full h-full object-contain object-bottom transition-opacity duration-300"
+                      className="absolute inset-0 h-full w-full object-contain object-bottom transition-opacity duration-300"
                       style={{ opacity: isHovered ? 0 : 1 }}
                     />
                     <img
                       src={member.hoverImage}
                       alt={`${member.name} hover`}
                       loading="lazy"
-                      className="absolute inset-0 w-full h-full object-contain object-bottom transition-opacity duration-300"
+                      className="absolute inset-0 h-full w-full object-contain object-bottom transition-opacity duration-300"
                       style={{ opacity: isHovered ? 1 : 0 }}
                     />
                   </div>
@@ -120,8 +206,14 @@ const TeamPage = () => {
             })}
           </div>
         </div>
-        <div className="h-1 bg-primary w-full" />
-      </div>
+
+        <div
+          className="h-1"
+          style={{
+            background: 'linear-gradient(90deg, hsl(259, 43%, 51%), hsl(181, 100%, 50%), hsl(166, 75%, 61%))',
+          }}
+        />
+      </section>
     </PageLayout>
   );
 };

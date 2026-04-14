@@ -6,7 +6,7 @@ export type TeamMemberVisualConfig = {
 
 export const TEAM_CARD_WIDTH = 200;
 export const TEAM_CARD_HEIGHT = 400;
-export const TEAM_TOOLTIP_WIDTH = 272;
+export const TEAM_TOOLTIP_WIDTH = 304;
 export const TEAM_TOOLTIP_OFFSET = 28;
 
 export const teamMemberVisualConfig: Record<number, TeamMemberVisualConfig> = {

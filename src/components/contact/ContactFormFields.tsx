@@ -1,5 +1,5 @@
-import { useEffect, useRef, useState } from 'react';
-import { Check, ChevronDown, Mail } from 'lucide-react';
+import { useEffect, useMemo, useRef, useState } from 'react';
+import { Check, ChevronDown, Mail, Search } from 'lucide-react';
 
 import type { Language } from '@/lib/i18n';
 import {
@@ -57,6 +57,18 @@ const emailHelperText: Record<Language, string> = {
   ru: 'Ответ отправим на этот адрес',
 };
 
+const searchPlaceholderText: Record<Language, string> = {
+  uz: 'Davlat yoki kodni qidiring',
+  en: 'Search country or code',
+  ru: 'Найдите страну или код',
+};
+
+const noResultsText: Record<Language, string> = {
+  uz: "Mos davlat topilmadi",
+  en: 'No matching country found',
+  ru: 'Подходящая страна не найдена',
+};
+
 const EmailFieldIcon = () => (
   <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-primary/10 text-primary shadow-[0_12px_30px_-24px_rgba(38,79,107,0.85)]">
     <Mail className="h-5 w-5" />
@@ -75,7 +87,9 @@ export const ContactPhoneInput = ({
   onCountryChange,
 }: ContactPhoneInputProps) => {
   const [countryOpen, setCountryOpen] = useState(false);
+  const [searchQuery, setSearchQuery] = useState('');
   const countryRef = useRef<HTMLDivElement>(null);
+  const searchInputRef = useRef<HTMLInputElement>(null);
   const currentCountry = getPhoneCountry(country);
 
   useEffect(() => {
@@ -89,18 +103,39 @@ export const ContactPhoneInput = ({
     return () => document.removeEventListener('mousedown', handleOutsideClick);
   }, []);
 
+  useEffect(() => {
+    if (countryOpen) {
+      setSearchQuery('');
+      window.setTimeout(() => searchInputRef.current?.focus(), 40);
+    }
+  }, [countryOpen]);
+
+  const filteredCountries = useMemo(() => {
+    const normalizedQuery = searchQuery.trim().toLowerCase();
+
+    if (!normalizedQuery) {
+      return PHONE_COUNTRIES;
+    }
+
+    return PHONE_COUNTRIES.filter((item) =>
+      [item.iso, item.dialCode, item.name.uz, item.name.en, item.name.ru].some((candidate) =>
+        candidate.toLowerCase().includes(normalizedQuery),
+      ),
+    );
+  }, [searchQuery]);
+
   return (
     <div
       className={cn(
-        'group relative rounded-[1.6rem] border border-border bg-background/95 shadow-[0_24px_55px_-35px_rgba(15,23,42,0.45)] transition-all duration-300',
+        'group relative overflow-visible rounded-[1.6rem] border border-border bg-background/95 shadow-[0_24px_55px_-35px_rgba(15,23,42,0.45)] transition-all duration-300',
         'focus-within:border-primary/45 focus-within:ring-4 focus-within:ring-primary/10 dark:bg-background/80',
         className,
       )}
     >
-      <div className="flex min-h-[92px] flex-col sm:flex-row">
+      <div className="flex min-h-[96px] flex-col sm:flex-row">
         <div
           ref={countryRef}
-          className="relative border-b border-border/70 sm:min-w-[228px] sm:border-b-0 sm:border-r"
+          className="relative shrink-0 border-b border-border/70 sm:w-[220px] sm:border-b-0 sm:border-r"
         >
           <button
             type="button"
@@ -114,7 +149,7 @@ export const ContactPhoneInput = ({
             </span>
 
             <div className="min-w-0 flex-1">
-              <div className="text-[10px] font-semibold uppercase tracking-[0.24em] text-muted-foreground">
+              <div className="font-brand text-[10px] font-semibold uppercase tracking-[0.24em] text-muted-foreground">
                 {countryFieldLabel[lang]}
               </div>
               <div className="mt-1 flex items-center gap-2">
@@ -134,61 +169,82 @@ export const ContactPhoneInput = ({
           {countryOpen && (
             <div
               role="listbox"
-              className="absolute left-0 right-0 top-[calc(100%+0.6rem)] z-30 max-h-72 overflow-y-auto rounded-[1.3rem] border border-border bg-background/95 p-2 shadow-[0_30px_65px_-38px_rgba(15,23,42,0.55)] backdrop-blur-xl"
+              className="absolute left-0 top-[calc(100%+0.75rem)] z-30 w-[min(420px,calc(100vw-3rem))] overflow-hidden rounded-[1.5rem] border border-border bg-background/95 shadow-[0_32px_72px_-36px_rgba(15,23,42,0.55)] backdrop-blur-xl"
             >
-              {PHONE_COUNTRIES.map((item) => {
-                const isActive = item.code === currentCountry.code;
+              <div className="border-b border-border/80 p-3">
+                <div className="flex items-center gap-3 rounded-2xl border border-border/80 bg-card/80 px-3 py-3">
+                  <Search className="h-4 w-4 shrink-0 text-muted-foreground" />
+                  <input
+                    ref={searchInputRef}
+                    value={searchQuery}
+                    onChange={(event) => setSearchQuery(event.target.value)}
+                    placeholder={searchPlaceholderText[lang]}
+                    className="w-full bg-transparent text-sm font-medium text-foreground outline-none placeholder:text-muted-foreground/65"
+                  />
+                </div>
+              </div>
 
-                return (
-                  <button
-                    key={item.code}
-                    type="button"
-                    onClick={() => {
-                      onCountryChange(item.code);
-                      setCountryOpen(false);
-                    }}
-                    className={cn(
-                      'flex w-full items-center gap-3 rounded-2xl px-3 py-3 text-left transition-all duration-200',
-                      isActive ? 'bg-primary/10 text-foreground' : 'hover:bg-secondary/5',
-                    )}
-                  >
-                    <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-secondary/8 text-xl">
-                      {item.flag}
-                    </span>
-                    <div className="min-w-0 flex-1">
-                      <div className="text-sm font-semibold text-foreground">{item.name[lang]}</div>
-                      <div className="text-xs uppercase tracking-[0.18em] text-muted-foreground">
-                        {item.iso} {item.dialCode}
-                      </div>
-                    </div>
-                    {isActive ? <Check className="h-4 w-4 text-primary" /> : null}
-                  </button>
-                );
-              })}
+              <div className="max-h-80 overflow-y-auto p-2">
+                {filteredCountries.length === 0 ? (
+                  <div className="px-3 py-4 text-sm text-muted-foreground">{noResultsText[lang]}</div>
+                ) : (
+                  filteredCountries.map((item) => {
+                    const isActive = item.code === currentCountry.code;
+
+                    return (
+                      <button
+                        key={item.code}
+                        type="button"
+                        onClick={() => {
+                          onCountryChange(item.code);
+                          setCountryOpen(false);
+                        }}
+                        className={cn(
+                          'flex w-full items-center gap-3 rounded-2xl px-3 py-3 text-left transition-all duration-200',
+                          isActive ? 'bg-primary/10 text-foreground' : 'hover:bg-secondary/5',
+                        )}
+                      >
+                        <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-secondary/8 text-xl">
+                          {item.flag}
+                        </span>
+
+                        <div className="min-w-0 flex-1">
+                          <div className="text-sm font-semibold text-foreground">{item.name[lang]}</div>
+                          <div className="mt-0.5 font-brand text-[10px] font-semibold uppercase tracking-[0.2em] text-muted-foreground">
+                            {item.iso} {item.dialCode}
+                          </div>
+                        </div>
+
+                        {isActive ? <Check className="h-4 w-4 shrink-0 text-primary" /> : null}
+                      </button>
+                    );
+                  })
+                )}
+              </div>
             </div>
           )}
         </div>
 
-        <div className="flex min-w-0 flex-1 items-center px-4 py-4">
-          <div className="min-w-0 flex-1">
-            <div className="text-[10px] font-semibold uppercase tracking-[0.24em] text-muted-foreground">
+        <div className="flex min-w-0 flex-1 items-center px-5 py-4">
+          <div className="w-full min-w-0">
+            <div className="font-brand text-[10px] font-semibold uppercase tracking-[0.24em] text-muted-foreground">
               {phoneFieldLabel[lang]}
             </div>
-            <div className="mt-2 flex items-end gap-3">
-              <span className="shrink-0 text-xl font-semibold tracking-tight text-foreground">{currentCountry.dialCode}</span>
-              <input
-                id={id}
-                type="tel"
-                inputMode="tel"
-                autoComplete="tel-national"
-                required={required}
-                value={formatPhoneDigits(value, country)}
-                onChange={(event) => onChange(normalizePhoneDigits(event.target.value, country))}
-                placeholder={placeholder ?? currentCountry.placeholder}
-                className="min-w-0 flex-1 bg-transparent pb-0.5 text-lg font-semibold tracking-[0.12em] text-foreground outline-none placeholder:text-muted-foreground/50"
-              />
+            <input
+              id={id}
+              type="tel"
+              inputMode="tel"
+              autoComplete="tel-national"
+              required={required}
+              value={formatPhoneDigits(value, country)}
+              onChange={(event) => onChange(normalizePhoneDigits(event.target.value, country))}
+              placeholder={placeholder ?? currentCountry.placeholder}
+              className="mt-2 w-full bg-transparent text-lg font-semibold tracking-[0.12em] text-foreground outline-none placeholder:text-muted-foreground/50"
+            />
+            <div className="mt-2 flex items-center gap-2 text-xs text-muted-foreground/85">
+              <span className="font-semibold text-primary">{currentCountry.dialCode}</span>
+              <span>{phoneHelperText[lang]}</span>
             </div>
-            <div className="mt-2 text-xs text-muted-foreground/85">{phoneHelperText[lang]}</div>
           </div>
         </div>
       </div>
@@ -207,7 +263,7 @@ export const ContactEmailInput = ({
 }: ContactFieldProps & { lang?: Language }) => (
   <div
     className={cn(
-      'group flex min-h-[92px] items-center gap-4 rounded-[1.6rem] border border-border bg-background/95 px-4 py-4 shadow-[0_24px_55px_-35px_rgba(15,23,42,0.45)] transition-all duration-300',
+      'group flex min-h-[96px] items-center gap-4 rounded-[1.6rem] border border-border bg-background/95 px-4 py-4 shadow-[0_24px_55px_-35px_rgba(15,23,42,0.45)] transition-all duration-300',
       'focus-within:border-primary/45 focus-within:ring-4 focus-within:ring-primary/10 dark:bg-background/80',
       className,
     )}
@@ -215,7 +271,7 @@ export const ContactEmailInput = ({
     <EmailFieldIcon />
 
     <div className="min-w-0 flex-1">
-      <div className="text-[10px] font-semibold uppercase tracking-[0.24em] text-muted-foreground">
+      <div className="font-brand text-[10px] font-semibold uppercase tracking-[0.24em] text-muted-foreground">
         {emailFieldLabel[lang]}
       </div>
       <input

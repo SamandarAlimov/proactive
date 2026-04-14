@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
-import { brandbookContent } from '@/lib/brandbook-content';
 import { useI18n } from '@/lib/i18n';
 import { teamMembers } from '@/lib/team-members';
 import {
@@ -44,7 +43,6 @@ const TeamConnector = ({ side }: { side: 'left' | 'right' }) => {
 
 const TeamShowcaseStrip = ({ className = '' }: { className?: string }) => {
   const { lang } = useI18n();
-  const currentLang = (lang in brandbookContent.team.activeLabel ? lang : 'uz') as keyof typeof brandbookContent.team.activeLabel;
   const [activeId, setActiveId] = useState<number | null>(null);
 
   return (
@@ -112,12 +110,12 @@ const TeamShowcaseStrip = ({ className = '' }: { className?: string }) => {
                         exit={{ opacity: 0, y: 8, scale: 0.97 }}
                         transition={{ duration: 0.24, ease: [0.22, 1, 0.36, 1] }}
                         className="absolute z-30 pointer-events-none"
-                          style={tooltipStyle}
+                        style={tooltipStyle}
                       >
                         <TeamConnector side={visual.tooltipSide} />
                         <div className="rounded-[1.35rem] border border-white/12 bg-[#101114]/94 px-6 py-5 shadow-[0_32px_80px_rgba(0,0,0,0.45)] backdrop-blur-[6px]">
                           <p className="text-[0.62rem] font-semibold uppercase tracking-[0.34em] text-primary/85">
-                            {brandbookContent.team.activeLabel[currentLang]}
+                            Proactive Team
                           </p>
                           <h4 className="mt-3 font-heading text-[2rem] font-semibold leading-none text-white">
                             {member.name}

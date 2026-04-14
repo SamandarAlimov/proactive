@@ -2,7 +2,6 @@ import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import { brandbookContent } from '@/lib/brandbook-content';
 import { useI18n } from '@/lib/i18n';
 import { serviceGradientColors, serviceIcons, serviceKeys, type ServiceContent } from '@/lib/service-config';
 import { useScrollAnimation } from '@/hooks/useScrollAnimation';
@@ -42,9 +41,8 @@ const Card3D = ({ children, delay, isVisible }: { children: React.ReactNode; del
 };
 
 const Services = () => {
-  const { t, lang } = useI18n();
+  const { t } = useI18n();
   const { ref, isVisible } = useScrollAnimation();
-  const currentLang = (lang in brandbookContent.pageLeads.services ? lang : 'uz') as keyof typeof brandbookContent.pageLeads.services;
 
   return (
     <section id="services" className="relative overflow-hidden py-24 md:py-32" ref={ref}>
@@ -76,9 +74,6 @@ const Services = () => {
           <h2 className="mt-6 text-3xl font-heading font-bold tracking-tight text-foreground md:text-5xl lg:text-6xl">
             {t.services.title}
           </h2>
-          <p className="mx-auto mt-6 max-w-3xl text-lg leading-relaxed text-muted-foreground">
-            {brandbookContent.pageLeads.services[currentLang]}
-          </p>
         </motion.div>
 
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">

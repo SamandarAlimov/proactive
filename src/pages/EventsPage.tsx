@@ -1,12 +1,10 @@
 import PageLayout from '@/components/PageLayout';
 import { motion } from 'framer-motion';
-import { brandbookContent } from '@/lib/brandbook-content';
 import { useI18n } from '@/lib/i18n';
 import { Calendar, MapPin, Clock, Users, ArrowRight } from 'lucide-react';
 
 const EventsPage = () => {
   const { t, lang } = useI18n();
-  const currentLang = (lang in brandbookContent.pageLeads.events ? lang : 'uz') as keyof typeof brandbookContent.pageLeads.events;
 
   const upcomingEvents = [
     {
@@ -64,7 +62,7 @@ const EventsPage = () => {
           <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
             <span className="text-sm font-semibold text-primary uppercase tracking-widest">{t.events.subtitle}</span>
             <h1 className="text-4xl md:text-6xl lg:text-7xl font-heading font-bold mt-4 mb-6">{t.events.title}</h1>
-            <p className="text-secondary-foreground/70 text-lg md:text-xl max-w-3xl leading-relaxed">{brandbookContent.pageLeads.events[currentLang]}</p>
+            <p className="text-secondary-foreground/70 text-lg md:text-xl max-w-2xl leading-relaxed">{t.events.description}</p>
           </motion.div>
         </div>
       </section>

@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { brandbookContent, siteContact } from '@/lib/brandbook-content';
 import { useI18n } from '@/lib/i18n';
 import { useScrollAnimation } from '@/hooks/useScrollAnimation';
 import { Send, MapPin, Phone, Mail, Instagram, ChevronDown } from 'lucide-react';
@@ -23,7 +22,6 @@ const serviceOptions = [
 const Contact = () => {
   const { t, lang } = useI18n();
   const { ref, isVisible } = useScrollAnimation();
-  const currentLang = (lang in brandbookContent.pageLeads.contact ? lang : 'uz') as keyof typeof brandbookContent.pageLeads.contact;
   const [formData, setFormData] = useState({ name: '', phone: '', email: '', message: '', service: '' });
   const [loading, setLoading] = useState(false);
 
@@ -41,8 +39,8 @@ const Contact = () => {
 
   const contactCards = [
     { icon: MapPin, title: 'Toshkent, O\'zbekiston', sub: 'Office address' },
-    { icon: Phone, title: siteContact.phone, sub: '24/7' },
-    { icon: Mail, title: siteContact.email, sub: 'Email' },
+    { icon: Phone, title: '+998 90 123 45 67', sub: '24/7' },
+    { icon: Mail, title: 'info@proactive.uz', sub: 'Email' },
   ];
 
   const serviceLabel = lang === 'uz' ? 'Xizmat turini tanlang' : lang === 'ru' ? 'Выберите тип услуги' : 'Select service type';
@@ -61,9 +59,6 @@ const Contact = () => {
             {t.contact.title}
           </span>
           <h2 className="text-3xl md:text-5xl font-heading font-bold text-foreground mt-6">{t.contact.subtitle}</h2>
-          <p className="mx-auto mt-6 max-w-3xl text-lg leading-relaxed text-muted-foreground">
-            {brandbookContent.pageLeads.contact[currentLang]}
-          </p>
         </motion.div>
 
         <div className="grid lg:grid-cols-2 gap-12">
@@ -134,7 +129,7 @@ const Contact = () => {
               </motion.div>
             ))}
 
-            <motion.a href={siteContact.instagram} target="_blank" rel="noopener noreferrer"
+            <motion.a href="https://www.instagram.com/proactive.agencyuz/" target="_blank" rel="noopener noreferrer"
               whileHover={{ y: -4 }} className="glass-card-light rounded-2xl p-6 flex items-center gap-4 group hover:shadow-lg transition-all duration-300 block">
               <div className="w-12 h-12 rounded-xl bg-secondary flex items-center justify-center flex-shrink-0 transition-transform duration-300 group-hover:scale-110">
                 <Instagram className="w-6 h-6 text-secondary-foreground" />

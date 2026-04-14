@@ -2,14 +2,12 @@ import { motion } from 'framer-motion';
 import { ArrowLeft } from 'lucide-react';
 import { Link, useParams } from 'react-router-dom';
 import PageLayout from '@/components/PageLayout';
-import { brandbookContent } from '@/lib/brandbook-content';
 import { useI18n } from '@/lib/i18n';
 import { isServiceKey, serviceIcons, type ServiceContent } from '@/lib/service-config';
 
 const ServiceDetailPage = () => {
   const { slug } = useParams<{ slug: string }>();
-  const { t, lang } = useI18n();
-  const currentLang = (lang in brandbookContent.hero.primaryCta ? lang : 'uz') as keyof typeof brandbookContent.hero.primaryCta;
+  const { t } = useI18n();
 
   if (!slug || !isServiceKey(slug)) {
     return (
@@ -62,7 +60,7 @@ const ServiceDetailPage = () => {
               to="/contact"
               className="inline-flex items-center gap-2 rounded-xl bg-primary px-8 py-4 text-lg font-semibold text-primary-foreground transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-primary/30"
             >
-              {brandbookContent.hero.primaryCta[currentLang]}
+              {t.hero.cta}
             </Link>
           </motion.div>
         </div>

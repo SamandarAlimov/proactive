@@ -16,9 +16,9 @@ export const founderProfile = {
     ru: 'Маркетолог, аналитик, тренер',
   } satisfies LocalizedText,
   summary: {
-    uz: "Habibullo Sa'dullayev 12+ yillik marketing tajribasiga ega asoschi. U Proactive'ning strategik yo'nalishini belgilab, marketing, tahlil va ta'lim yondashuvlarini biznes uchun amaliy o'sish tizimiga aylantiradi.",
-    en: "Habibullo Sa'dullayev is the founder with 12+ years of marketing experience. He shapes Proactive's strategic direction and combines marketing, analytics, and education into practical growth systems for business.",
-    ru: 'Хабибулло Саъдуллаев — основатель с 12+ годами опыта в маркетинге. Он определяет стратегическое направление Proactive и объединяет маркетинг, аналитику и образовательный подход в практичные системы роста для бизнеса.',
+    uz: "Habibullo Sa'dullayev Proactive agentligining strategik yo'nalishini boshqaradi. U marketing, tahlil va ta'lim yondashuvlarini birlashtirib, brendlar uchun amaliy o'sish tizimlarini qurishga e'tibor qaratadi.",
+    en: "Habibullo Sa'dullayev leads Proactive with a strategy-first perspective. He combines marketing, analytics, and education to build practical growth systems for brands.",
+    ru: 'Хабибулло Саъдуллаев определяет стратегическое направление агентства Proactive. Он объединяет маркетинг, аналитику и образовательный подход, чтобы выстраивать для брендов практичные системы роста.',
   } satisfies LocalizedText,
   tags: {
     uz: ['Marketolog', 'Analitik', 'Trener'],

@@ -98,7 +98,7 @@ const pageCopy: Record<LangKey, Record<string, string>> = {
     process: 'Как проходит обучение?',
     processDescription: 'Курс длится 2.5 месяца, и каждое занятие сопровождается практической работой.',
     speakerEyebrow: 'Спикер и автор курса',
-    speakerRole: 'Основатель, маркетолог, аналитик, тренер',
+    speakerRole: 'Founder & CEO, маркетолог, аналитик, тренер',
     brands: 'Где работают наши выпускники?',
     brandsDescription: 'Ведущие бренды в сферах ритейла, образования, сервиса, медицины, агентского бизнеса и медиа.',
     quotes: 'Отзывы студентов',
@@ -221,9 +221,9 @@ const speakerFacts = [
   {
     title: { uz: 'Asosiy fakt', en: 'Key fact', ru: 'Ключевой факт' },
     text: {
-      uz: "12+ yil marketing tajribasi. Proactive'ga asos solgan va marketingni tizim sifatida o'rgatadi.",
-      en: '12+ years of marketing experience. Founder of Proactive and a practitioner who teaches marketing as a system.',
-      ru: '12+ лет опыта в маркетинге. Основатель Proactive и практик, который учит воспринимать маркетинг как систему.',
+      uz: '12+ yil marketing tajribasi. Proactive marketing agentligi va Cubic ekotizimi hamasoschisi.',
+      en: '12+ years of marketing experience. Co-founder of Proactive marketing agency and the Cubic ecosystem.',
+      ru: '12+ лет опыта в маркетинге. Сооснователь агентства Proactive и экосистемы Cubic.',
     },
   },
   {

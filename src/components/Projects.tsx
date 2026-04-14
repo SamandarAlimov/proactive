@@ -2,7 +2,6 @@ import { motion, useScroll, useTransform } from 'framer-motion';
 import { ExternalLink, ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useRef } from 'react';
-import { brandbookContent } from '@/lib/brandbook-content';
 import { useI18n } from '@/lib/i18n';
 import { useScrollAnimation } from '@/hooks/useScrollAnimation';
 import marfImg from '@/assets/marf-project.png';
@@ -22,7 +21,6 @@ type FeaturedProject = {
 const Projects = () => {
   const { t, lang } = useI18n();
   const { ref, isVisible } = useScrollAnimation();
-  const currentLang = (lang in brandbookContent.pageLeads.projects ? lang : 'uz') as keyof typeof brandbookContent.pageLeads.projects;
 
   const allProjects = clientList;
 
@@ -78,9 +76,6 @@ const Projects = () => {
             {t.projects.subtitle}
           </span>
           <h2 className="mt-6 text-3xl font-heading font-bold tracking-tight text-foreground md:text-5xl">{t.projects.title}</h2>
-          <p className="mx-auto mt-6 max-w-3xl text-lg leading-relaxed text-muted-foreground">
-            {brandbookContent.pageLeads.projects[currentLang]}
-          </p>
         </motion.div>
 
         <div className="mb-16 space-y-8">

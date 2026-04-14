@@ -3,13 +3,12 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { useI18n, Language } from '@/lib/i18n';
 import { Menu, X, ChevronDown, Mail, Phone } from 'lucide-react';
 import { Link, useLocation } from 'react-router-dom';
-import BrandMark from '@/components/BrandMark';
+import proactiveLogo from '@/assets/proactive-logo.jpg';
 import { ThemeToggle } from '@/components/ThemeToggle';
-import { siteContact } from '@/lib/brandbook-content';
 
 const langLabels: Record<Language, string> = { uz: "O'z", en: 'En', ru: 'Ru' };
-const headerPhone = siteContact.phone;
-const headerEmail = siteContact.email;
+const headerPhone = '+998 90 123 45 67';
+const headerEmail = 'info@proactive.uz';
 
 const Navbar = () => {
   const { t, lang, setLang } = useI18n();
@@ -45,6 +44,7 @@ const Navbar = () => {
     { label: t.nav.academy, href: '/academy' },
     { label: t.nav.events, href: '/events' },
     { label: t.nav.careers, href: '/careers' },
+    { label: t.nav.contact, href: '/contact' },
   ];
 
   const otherLangs = (['uz', 'en', 'ru'] as Language[]).filter((currentLang) => currentLang !== lang);
@@ -80,12 +80,14 @@ const Navbar = () => {
       >
         <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-6">
           <Link to="/" className="group flex items-center gap-3">
-            <BrandMark
-              tone={scrolled || showDarkNav ? 'light' : 'dark'}
-              size="md"
-              className="transition-transform duration-300 group-hover:scale-[1.02]"
-              wordmarkClassName={brandTextClass}
+            <img
+              src={proactiveLogo}
+              alt="Proactive Logo"
+              className="h-10 w-10 rounded-lg object-cover transition-transform duration-300 group-hover:scale-110"
             />
+            <span className={`font-heading text-xl font-bold transition-colors duration-300 ${brandTextClass}`}>
+              Proactive
+            </span>
           </Link>
 
           <div className="hidden items-center gap-4 xl:gap-5 lg:flex">
@@ -139,11 +141,10 @@ const Navbar = () => {
 
               <Link
                 to="/contact"
-                className="inline-flex items-center justify-center rounded-xl border px-4 py-3 font-heading text-sm font-semibold tracking-[0.01em] text-secondary transition-all duration-300 hover:-translate-y-0.5"
+                className="inline-flex items-center justify-center rounded-xl px-4 py-3 text-sm font-semibold text-white transition-all duration-300 hover:-translate-y-0.5"
                 style={{
-                  background: 'linear-gradient(135deg, hsl(166, 75%, 61%) 0%, hsl(181, 100%, 50%) 100%)',
-                  borderColor: 'hsla(181, 100%, 50%, 0.24)',
-                  boxShadow: '0 18px 38px hsla(38, 100%, 85%, 0.2)',
+                  background: 'linear-gradient(135deg, #ff7a66 0%, #ff5c52 100%)',
+                  boxShadow: '0 16px 36px rgba(255, 92, 82, 0.22)',
                 }}
               >
                 {t.nav.contact}
@@ -247,11 +248,10 @@ const Navbar = () => {
                 <Link
                   to="/contact"
                   onClick={() => setMobileOpen(false)}
-                  className="mt-4 inline-flex w-full items-center justify-center rounded-xl border px-4 py-3 font-heading text-sm font-semibold tracking-[0.01em] text-secondary transition-all duration-300"
+                  className="mt-4 inline-flex w-full items-center justify-center rounded-xl px-4 py-3 text-sm font-semibold text-white transition-all duration-300"
                   style={{
-                    background: 'linear-gradient(135deg, hsl(166, 75%, 61%) 0%, hsl(181, 100%, 50%) 100%)',
-                    borderColor: 'hsla(181, 100%, 50%, 0.24)',
-                    boxShadow: '0 18px 36px hsla(181, 100%, 50%, 0.2)',
+                    background: 'linear-gradient(135deg, #ff7a66 0%, #ff5c52 100%)',
+                    boxShadow: '0 16px 36px rgba(255, 92, 82, 0.18)',
                   }}
                 >
                   {t.nav.contact}

@@ -17,8 +17,6 @@ export default {
       fontFamily: {
         heading: ['"Golos Text"', 'sans-serif'],
         body: ['"Golos Text"', 'sans-serif'],
-        brand: ['"Manrope"', 'sans-serif'],
-        accent: ['"Quinzey"', 'Georgia', 'serif'],
       },
       colors: {
         border: "hsl(var(--border))",

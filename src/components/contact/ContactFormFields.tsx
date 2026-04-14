@@ -1,7 +1,12 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { Check, ChevronDown, Mail, Search } from 'lucide-react';
 
-import type { Language } from '@/lib/i18n';
+import {
+  contactFieldFocusClass,
+  contactFieldShellClass,
+  contactHelperTextClass,
+  contactInputClass,
+} from '@/components/contact/contactFieldStyles';
 import {
   DEFAULT_PHONE_COUNTRY,
   formatPhoneDigits,
@@ -10,6 +15,7 @@ import {
   PHONE_COUNTRIES,
   type PhoneCountryCode,
 } from '@/lib/contact-form';
+import type { Language } from '@/lib/i18n';
 import { cn } from '@/lib/utils';
 
 type ContactFieldProps = {
@@ -27,33 +33,15 @@ type ContactPhoneInputProps = ContactFieldProps & {
   onCountryChange: (country: PhoneCountryCode) => void;
 };
 
-const countryFieldLabel: Record<Language, string> = {
-  uz: 'Davlat kodi',
-  en: 'Country code',
-  ru: 'Код страны',
-};
-
-const phoneFieldLabel: Record<Language, string> = {
-  uz: 'Telefon raqami',
-  en: 'Phone number',
-  ru: 'Номер телефона',
-};
-
 const phoneHelperText: Record<Language, string> = {
-  uz: 'Xalqaro format qabul qilinadi',
-  en: 'International format accepted',
+  uz: 'Xalqaro format qo‘llab-quvvatlanadi',
+  en: 'International format is supported',
   ru: 'Поддерживается международный формат',
-};
-
-const emailFieldLabel: Record<Language, string> = {
-  uz: 'Email manzil',
-  en: 'Email address',
-  ru: 'Email адрес',
 };
 
 const emailHelperText: Record<Language, string> = {
   uz: 'Javobni shu manzilga yuboramiz',
-  en: 'We will send the reply here',
+  en: 'We will send the reply to this address',
   ru: 'Ответ отправим на этот адрес',
 };
 
@@ -64,16 +52,10 @@ const searchPlaceholderText: Record<Language, string> = {
 };
 
 const noResultsText: Record<Language, string> = {
-  uz: "Mos davlat topilmadi",
+  uz: 'Mos davlat topilmadi',
   en: 'No matching country found',
   ru: 'Подходящая страна не найдена',
 };
-
-const EmailFieldIcon = () => (
-  <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-primary/10 text-primary shadow-[0_12px_30px_-24px_rgba(38,79,107,0.85)]">
-    <Mail className="h-5 w-5" />
-  </div>
-);
 
 export const ContactPhoneInput = ({
   id,
@@ -104,10 +86,12 @@ export const ContactPhoneInput = ({
   }, []);
 
   useEffect(() => {
-    if (countryOpen) {
-      setSearchQuery('');
-      window.setTimeout(() => searchInputRef.current?.focus(), 40);
+    if (!countryOpen) {
+      return;
     }
+
+    setSearchQuery('');
+    window.setTimeout(() => searchInputRef.current?.focus(), 40);
   }, [countryOpen]);
 
   const filteredCountries = useMemo(() => {
@@ -125,42 +109,33 @@ export const ContactPhoneInput = ({
   }, [searchQuery]);
 
   return (
-    <div
-      className={cn(
-        'group relative overflow-visible rounded-[1.6rem] border border-border bg-background/95 shadow-[0_24px_55px_-35px_rgba(15,23,42,0.45)] transition-all duration-300',
-        'focus-within:border-primary/45 focus-within:ring-4 focus-within:ring-primary/10 dark:bg-background/80',
-        className,
-      )}
-    >
-      <div className="flex min-h-[96px] flex-col sm:flex-row">
-        <div
-          ref={countryRef}
-          className="relative shrink-0 border-b border-border/70 sm:w-[220px] sm:border-b-0 sm:border-r"
-        >
+    <div className={cn('space-y-2.5', className)}>
+      <div
+        className={cn(
+          contactFieldShellClass,
+          contactFieldFocusClass,
+          'relative flex h-[72px] overflow-visible',
+        )}
+      >
+        <div ref={countryRef} className="relative flex h-full shrink-0">
           <button
             type="button"
             aria-haspopup="listbox"
             aria-expanded={countryOpen}
+            aria-label="Select phone country code"
             onClick={() => setCountryOpen((open) => !open)}
-            className="flex h-full w-full items-center gap-3 px-4 py-4 text-left transition-colors duration-200 hover:bg-secondary/5"
+            className="flex h-full min-w-[148px] items-center gap-3 border-r border-border/70 px-4 text-left transition-colors duration-200 hover:bg-secondary/5 dark:border-white/10"
           >
-            <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-secondary/8 text-2xl shadow-[0_12px_30px_-24px_rgba(38,79,107,0.75)]">
-              {currentCountry.flag}
-            </span>
-
-            <div className="min-w-0 flex-1">
-              <div className="font-brand text-[10px] font-semibold uppercase tracking-[0.24em] text-muted-foreground">
-                {countryFieldLabel[lang]}
+            <span className="text-xl leading-none">{currentCountry.flag}</span>
+            <div className="min-w-0">
+              <div className="font-brand text-[10px] font-semibold uppercase tracking-[0.2em] text-muted-foreground">
+                {currentCountry.iso}
               </div>
-              <div className="mt-1 flex items-center gap-2">
-                <span className="truncate text-sm font-semibold text-foreground">{currentCountry.name[lang]}</span>
-                <span className="text-sm font-semibold text-primary">{currentCountry.dialCode}</span>
-              </div>
+              <div className="text-sm font-semibold text-foreground">{currentCountry.dialCode}</div>
             </div>
-
             <ChevronDown
               className={cn(
-                'h-4 w-4 shrink-0 text-muted-foreground transition-transform duration-200',
+                'ml-auto h-4 w-4 shrink-0 text-muted-foreground transition-transform duration-200',
                 countryOpen && 'rotate-180',
               )}
             />
@@ -169,17 +144,17 @@ export const ContactPhoneInput = ({
           {countryOpen && (
             <div
               role="listbox"
-              className="absolute left-0 top-[calc(100%+0.75rem)] z-30 w-[min(420px,calc(100vw-3rem))] overflow-hidden rounded-[1.5rem] border border-border bg-background/95 shadow-[0_32px_72px_-36px_rgba(15,23,42,0.55)] backdrop-blur-xl"
+              className="absolute left-0 top-[calc(100%+0.8rem)] z-40 w-[min(360px,calc(100vw-3rem))] overflow-hidden rounded-[1.4rem] border border-border/85 bg-background/98 shadow-[0_28px_72px_-32px_rgba(15,23,42,0.45)] backdrop-blur-xl dark:border-white/10 dark:bg-secondary/96"
             >
-              <div className="border-b border-border/80 p-3">
-                <div className="flex items-center gap-3 rounded-2xl border border-border/80 bg-card/80 px-3 py-3">
+              <div className="border-b border-border/80 p-3 dark:border-white/10">
+                <div className="flex items-center gap-3 rounded-2xl border border-border/80 bg-background/80 px-3 py-3 dark:border-white/10 dark:bg-white/[0.04]">
                   <Search className="h-4 w-4 shrink-0 text-muted-foreground" />
                   <input
                     ref={searchInputRef}
                     value={searchQuery}
                     onChange={(event) => setSearchQuery(event.target.value)}
                     placeholder={searchPlaceholderText[lang]}
-                    className="w-full bg-transparent text-sm font-medium text-foreground outline-none placeholder:text-muted-foreground/65"
+                    className="w-full bg-transparent text-sm font-medium text-foreground outline-none placeholder:text-muted-foreground/60"
                   />
                 </div>
               </div>
@@ -201,20 +176,16 @@ export const ContactPhoneInput = ({
                         }}
                         className={cn(
                           'flex w-full items-center gap-3 rounded-2xl px-3 py-3 text-left transition-all duration-200',
-                          isActive ? 'bg-primary/10 text-foreground' : 'hover:bg-secondary/5',
+                          isActive ? 'bg-primary/10 text-foreground' : 'hover:bg-secondary/5 dark:hover:bg-white/[0.03]',
                         )}
                       >
-                        <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-secondary/8 text-xl">
-                          {item.flag}
-                        </span>
-
+                        <span className="text-xl leading-none">{item.flag}</span>
                         <div className="min-w-0 flex-1">
-                          <div className="text-sm font-semibold text-foreground">{item.name[lang]}</div>
+                          <div className="truncate text-sm font-semibold text-foreground">{item.name[lang]}</div>
                           <div className="mt-0.5 font-brand text-[10px] font-semibold uppercase tracking-[0.2em] text-muted-foreground">
                             {item.iso} {item.dialCode}
                           </div>
                         </div>
-
                         {isActive ? <Check className="h-4 w-4 shrink-0 text-primary" /> : null}
                       </button>
                     );
@@ -225,29 +196,25 @@ export const ContactPhoneInput = ({
           )}
         </div>
 
-        <div className="flex min-w-0 flex-1 items-center px-5 py-4">
-          <div className="w-full min-w-0">
-            <div className="font-brand text-[10px] font-semibold uppercase tracking-[0.24em] text-muted-foreground">
-              {phoneFieldLabel[lang]}
-            </div>
-            <input
-              id={id}
-              type="tel"
-              inputMode="tel"
-              autoComplete="tel-national"
-              required={required}
-              value={formatPhoneDigits(value, country)}
-              onChange={(event) => onChange(normalizePhoneDigits(event.target.value, country))}
-              placeholder={placeholder ?? currentCountry.placeholder}
-              className="mt-2 w-full bg-transparent text-lg font-semibold tracking-[0.12em] text-foreground outline-none placeholder:text-muted-foreground/50"
-            />
-            <div className="mt-2 flex items-center gap-2 text-xs text-muted-foreground/85">
-              <span className="font-semibold text-primary">{currentCountry.dialCode}</span>
-              <span>{phoneHelperText[lang]}</span>
-            </div>
-          </div>
+        <div className="flex min-w-0 flex-1 items-center px-4">
+          <input
+            id={id}
+            type="tel"
+            inputMode="tel"
+            autoComplete="tel-national"
+            required={required}
+            value={formatPhoneDigits(value, country)}
+            onChange={(event) => onChange(normalizePhoneDigits(event.target.value, country))}
+            placeholder={placeholder ?? currentCountry.placeholder}
+            className={cn(
+              contactInputClass,
+              'h-full text-base font-semibold tracking-[0.08em] placeholder:font-medium placeholder:tracking-normal',
+            )}
+          />
         </div>
       </div>
+
+      <p className={cn(contactHelperTextClass, 'min-h-[20px]')}>{phoneHelperText[lang]}</p>
     </div>
   );
 };
@@ -261,19 +228,18 @@ export const ContactEmailInput = ({
   className,
   lang = 'uz',
 }: ContactFieldProps & { lang?: Language }) => (
-  <div
-    className={cn(
-      'group flex min-h-[96px] items-center gap-4 rounded-[1.6rem] border border-border bg-background/95 px-4 py-4 shadow-[0_24px_55px_-35px_rgba(15,23,42,0.45)] transition-all duration-300',
-      'focus-within:border-primary/45 focus-within:ring-4 focus-within:ring-primary/10 dark:bg-background/80',
-      className,
-    )}
-  >
-    <EmailFieldIcon />
-
-    <div className="min-w-0 flex-1">
-      <div className="font-brand text-[10px] font-semibold uppercase tracking-[0.24em] text-muted-foreground">
-        {emailFieldLabel[lang]}
+  <div className={cn('space-y-2.5', className)}>
+    <div
+      className={cn(
+        contactFieldShellClass,
+        contactFieldFocusClass,
+        'flex h-[72px] items-center gap-3 px-4',
+      )}
+    >
+      <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-primary/10 text-primary shadow-[0_16px_30px_-26px_rgba(38,79,107,0.75)]">
+        <Mail className="h-5 w-5" />
       </div>
+
       <input
         id={id}
         type="email"
@@ -283,9 +249,10 @@ export const ContactEmailInput = ({
         value={value}
         onChange={(event) => onChange(event.target.value)}
         placeholder={placeholder}
-        className="mt-2 w-full bg-transparent text-base font-semibold text-foreground outline-none placeholder:text-muted-foreground/55"
+        className={cn(contactInputClass, 'h-full min-w-0')}
       />
-      <div className="mt-2 text-xs text-muted-foreground/85">{emailHelperText[lang]}</div>
     </div>
+
+    <p className={cn(contactHelperTextClass, 'min-h-[20px]')}>{emailHelperText[lang]}</p>
   </div>
 );

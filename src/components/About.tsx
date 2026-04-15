@@ -20,7 +20,7 @@ const About = () => {
   ];
 
   const founderName = 'Habibullo Sadulloyev';
-  const founderRole = lang === 'uz' ? 'Asoschi & CEO' : lang === 'ru' ? 'Основатель & CEO' : 'Founder & CEO';
+  const founderRole = lang === 'uz' ? 'Asoschi' : lang === 'ru' ? 'Основатель' : 'Founder';
   const founderBio =
     lang === 'uz'
       ? "12+ yil marketing tajribasi. Proactive marketing agentligi va Cubic ekotizimi hamasoschisi. TSUE (Bakalavr va Magistratura), UJC (PMP), Academy of Applied Arts (New Delhi)."

@@ -98,7 +98,7 @@ const pageCopy: Record<LangKey, Record<string, string>> = {
     process: 'Как проходит обучение?',
     processDescription: 'Курс длится 2.5 месяца, и каждое занятие сопровождается практической работой.',
     speakerEyebrow: 'Спикер и автор курса',
-    speakerRole: 'Founder & CEO, маркетолог, аналитик, тренер',
+    speakerRole: 'Founder, маркетолог, аналитик, тренер',
     brands: 'Где работают наши выпускники?',
     brandsDescription: 'Ведущие бренды в сферах ритейла, образования, сервиса, медицины, агентского бизнеса и медиа.',
     quotes: 'Отзывы студентов',

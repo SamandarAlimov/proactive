@@ -1,5 +1,13 @@
 import { motion } from 'framer-motion';
-import { Award, Send, Target, TrendingUp, Users } from 'lucide-react';
+import {
+  Compass,
+  Layers3,
+  Lightbulb,
+  Send,
+  Sparkles,
+  Target,
+  Workflow,
+} from 'lucide-react';
 import { useI18n } from '@/lib/i18n';
 import { useScrollAnimation } from '@/hooks/useScrollAnimation';
 import proactiveLogo from '@/assets/proactive-logo.jpg';
@@ -12,13 +20,6 @@ const About = () => {
   const { ref, isVisible } = useScrollAnimation();
   const founderLang = (lang in founderProfile.tags ? lang : 'uz') as FounderLang;
 
-  const stats = [
-    { number: '50+', label: t.about.stats.projects, icon: Target },
-    { number: '30+', label: t.about.stats.clients, icon: Users },
-    { number: '5+', label: t.about.stats.experience, icon: TrendingUp },
-    { number: '15+', label: t.about.stats.team, icon: Award },
-  ];
-
   const founderName = 'Habibullo Sadulloyev';
   const founderRole = lang === 'uz' ? 'Asoschi' : lang === 'ru' ? 'Основатель' : 'Founder';
   const founderBio =
@@ -27,6 +28,76 @@ const About = () => {
       : lang === 'ru'
         ? 'Более 12 лет опыта в маркетинге. Сооснователь агентства Proactive и экосистемы Cubic. TSUE, UJC (PMP), Academy of Applied Arts (New Delhi).'
         : '12+ years of marketing experience. Co-founder of Proactive marketing agency and Cubic ecosystem. TSUE, UJC (PMP), Academy of Applied Arts (New Delhi).';
+
+  const capabilityCards =
+    lang === 'uz'
+      ? [
+          {
+            title: 'Strategik yo‘nalish',
+            text: 'Bozorga chiqish, pozitsiya va uzoq muddatli o‘sish yo‘lini aniqlash.',
+            icon: Compass,
+          },
+          {
+            title: 'Tizim qurish',
+            text: 'Marketingni alohida kampaniyalar emas, yagona boshqaruv tizimi sifatida ishlatish.',
+            icon: Workflow,
+          },
+          {
+            title: 'Brend platformasi',
+            text: 'Brendning qadriyati, xabari va farqlanish nuqtalarini aniq belgilash.',
+            icon: Layers3,
+          },
+          {
+            title: 'Amaliy yechimlar',
+            text: 'Strategiyani real jamoa, jarayon va bozorda ishlaydigan formatga tushirish.',
+            icon: Lightbulb,
+          },
+        ]
+      : lang === 'ru'
+        ? [
+            {
+              title: 'Стратегическое направление',
+              text: 'Определяем путь выхода на рынок, позиционирование и долгосрочную траекторию роста.',
+              icon: Compass,
+            },
+            {
+              title: 'Построение системы',
+              text: 'Собираем маркетинг не как набор кампаний, а как единую управленческую систему.',
+              icon: Workflow,
+            },
+            {
+              title: 'Бренд-платформа',
+              text: 'Фиксируем ценность бренда, ключевое сообщение и точки отличия.',
+              icon: Layers3,
+            },
+            {
+              title: 'Практические решения',
+              text: 'Переводим стратегию в формат, который работает внутри команды и на рынке.',
+              icon: Lightbulb,
+            },
+          ]
+        : [
+            {
+              title: 'Strategic direction',
+              text: 'We define market path, positioning, and the long-term direction of growth.',
+              icon: Compass,
+            },
+            {
+              title: 'System building',
+              text: 'We structure marketing not as scattered campaigns, but as one operating system.',
+              icon: Workflow,
+            },
+            {
+              title: 'Brand platform',
+              text: 'We clarify brand value, core message, and meaningful differentiation.',
+              icon: Layers3,
+            },
+            {
+              title: 'Practical execution',
+              text: 'We turn strategy into a format that works inside the team and in the market.',
+              icon: Lightbulb,
+            },
+          ];
 
   return (
     <section id="about" className="relative overflow-hidden py-24 md:py-32" ref={ref}>
@@ -56,6 +127,7 @@ const About = () => {
             <span className="h-1.5 w-1.5 rounded-full bg-primary" />
             {t.about.subtitle}
           </span>
+
           <h2 className="mt-6 text-3xl font-heading font-bold tracking-tight text-foreground md:text-5xl lg:text-6xl">
             {t.about.title}
           </h2>
@@ -67,22 +139,46 @@ const About = () => {
             animate={isVisible ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.7, delay: 0.2 }}
           >
-            <p className="mb-10 text-lg leading-relaxed text-muted-foreground md:text-xl">{t.about.description}</p>
-            <div className="grid grid-cols-2 gap-4">
-              {stats.map((stat, i) => (
+            <p className="mb-10 text-lg leading-relaxed text-muted-foreground md:text-xl">
+              {t.about.description}
+            </p>
+
+            <div className="relative grid gap-4 sm:grid-cols-2">
+              {capabilityCards.map((item, i) => (
                 <motion.div
-                  key={stat.label}
-                  initial={{ opacity: 0, y: 20 }}
+                  key={item.title}
+                  initial={{ opacity: 0, y: 24 }}
                   animate={isVisible ? { opacity: 1, y: 0 } : {}}
-                  transition={{ duration: 0.5, delay: 0.3 + i * 0.1 }}
-                  whileHover={{ y: -6, scale: 1.02 }}
-                  className="glass-card-light group relative cursor-default overflow-hidden rounded-2xl p-6 text-center transition-all duration-300"
+                  transition={{ duration: 0.55, delay: 0.3 + i * 0.1 }}
+                  whileHover={{ y: -6, scale: 1.015 }}
+                  className="group relative overflow-hidden rounded-[1.75rem] border border-border/60 bg-card/90 p-6 shadow-[0_16px_40px_rgba(0,0,0,0.05)] backdrop-blur-sm transition-all duration-300"
                 >
-                  <stat.icon className="relative z-10 mx-auto mb-3 h-7 w-7 text-primary transition-transform duration-300 group-hover:scale-110" />
-                  <div className="relative z-10 text-3xl font-heading font-bold text-foreground">{stat.number}</div>
-                  <div className="relative z-10 mt-1 text-xs uppercase tracking-wide text-muted-foreground">{stat.label}</div>
+                  <div className="absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+                    <div className="absolute -right-10 -top-10 h-32 w-32 rounded-full bg-primary/10 blur-2xl" />
+                  </div>
+
+                  <div className="relative z-10">
+                    <div className="mb-5 inline-flex h-11 w-11 items-center justify-center rounded-2xl bg-primary/10 text-primary ring-1 ring-primary/15">
+                      <item.icon className="h-5 w-5" />
+                    </div>
+
+                    <h3 className="text-lg font-heading font-bold text-foreground md:text-xl">
+                      {item.title}
+                    </h3>
+
+                    <p className="mt-3 text-sm leading-7 text-muted-foreground md:text-base">
+                      {item.text}
+                    </p>
+                  </div>
                 </motion.div>
               ))}
+
+              <motion.div
+                initial={{ opacity: 0, scale: 0.94 }}
+                animate={isVisible ? { opacity: 1, scale: 1 } : {}}
+                transition={{ duration: 0.7, delay: 0.75 }}
+                className="pointer-events-none absolute -left-10 top-12 hidden h-24 w-24 rounded-full border border-primary/10 bg-primary/5 blur-xl lg:block"
+              />
             </div>
           </motion.div>
 
@@ -94,16 +190,57 @@ const About = () => {
           >
             <div
               className="relative flex aspect-square items-center justify-center overflow-hidden rounded-3xl"
-              style={{ background: 'linear-gradient(160deg, hsla(204, 47%, 28%, 0.95) 0%, hsla(202, 100%, 11%, 0.98) 100%)' }}
+              style={{
+                background:
+                  'linear-gradient(160deg, hsla(204, 47%, 28%, 0.95) 0%, hsla(202, 100%, 11%, 0.98) 100%)',
+              }}
             >
-              <div className="absolute right-8 top-8 h-32 w-32 rounded-full" style={{ background: 'radial-gradient(circle, hsla(166, 75%, 61%, 0.12) 0%, transparent 70%)' }} />
-              <div className="absolute bottom-12 left-12 h-48 w-48 rounded-full" style={{ background: 'radial-gradient(circle, hsla(259, 43%, 51%, 0.1) 0%, transparent 70%)' }} />
+              <motion.div
+                animate={{ rotate: 360 }}
+                transition={{ duration: 18, repeat: Infinity, ease: 'linear' }}
+                className="absolute inset-0"
+              >
+                <div className="absolute left-1/2 top-[12%] h-3 w-3 -translate-x-1/2 rounded-full bg-primary/70 shadow-[0_0_20px_rgba(82,230,200,0.55)]" />
+                <div className="absolute right-[14%] top-1/2 h-2.5 w-2.5 -translate-y-1/2 rounded-full bg-white/50" />
+                <div className="absolute bottom-[14%] left-1/2 h-2.5 w-2.5 -translate-x-1/2 rounded-full bg-primary/40" />
+                <div className="absolute left-[14%] top-1/2 h-2 w-2 -translate-y-1/2 rounded-full bg-white/35" />
+              </motion.div>
+
+              <div
+                className="absolute right-8 top-8 h-32 w-32 rounded-full"
+                style={{
+                  background:
+                    'radial-gradient(circle, hsla(166, 75%, 61%, 0.12) 0%, transparent 70%)',
+                }}
+              />
+              <div
+                className="absolute bottom-12 left-12 h-48 w-48 rounded-full"
+                style={{
+                  background:
+                    'radial-gradient(circle, hsla(259, 43%, 51%, 0.1) 0%, transparent 70%)',
+                }}
+              />
+
+              <div className="absolute inset-[14%] rounded-full border border-white/10" />
+              <div className="absolute inset-[24%] rounded-full border border-white/8" />
+
               <div className="relative z-10 text-center">
-                <div className="mx-auto mb-6 h-28 w-28 overflow-hidden rounded-2xl shadow-2xl ring-2 ring-white/10 md:h-36 md:w-36">
+                <motion.div
+                  animate={{ y: [0, -8, 0] }}
+                  transition={{ duration: 4.5, repeat: Infinity, ease: 'easeInOut' }}
+                  className="mx-auto mb-6 h-28 w-28 overflow-hidden rounded-2xl shadow-2xl ring-2 ring-white/10 md:h-36 md:w-36"
+                >
                   <img src={proactiveLogo} alt="Proactive Logo" className="h-full w-full object-cover" />
+                </motion.div>
+
+                <h3 className="mb-2 text-2xl font-heading font-bold text-white md:text-3xl">
+                  Proactive
+                </h3>
+
+                <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-xs uppercase tracking-[0.22em] text-white/60">
+                  <Sparkles className="h-3.5 w-3.5 text-primary" />
+                  Marketing Agency
                 </div>
-                <h3 className="mb-2 text-2xl font-heading font-bold text-white md:text-3xl">Proactive</h3>
-                <p className="text-sm tracking-wide text-white/50">Marketing Agency</p>
               </div>
             </div>
           </motion.div>
@@ -118,14 +255,16 @@ const About = () => {
           <div
             className="relative overflow-hidden rounded-3xl p-8 md:p-12 lg:p-16"
             style={{
-              background: 'linear-gradient(135deg, hsla(204, 47%, 28%, 0.06) 0%, hsla(166, 75%, 61%, 0.04) 100%)',
+              background:
+                'linear-gradient(135deg, hsla(204, 47%, 28%, 0.06) 0%, hsla(166, 75%, 61%, 0.04) 100%)',
               border: '1px solid hsla(166, 75%, 61%, 0.1)',
             }}
           >
             <div
               className="pointer-events-none absolute right-0 top-0 h-80 w-80"
               style={{
-                background: 'radial-gradient(circle, hsla(166, 75%, 61%, 0.06) 0%, transparent 70%)',
+                background:
+                  'radial-gradient(circle, hsla(166, 75%, 61%, 0.06) 0%, transparent 70%)',
                 filter: 'blur(60px)',
               }}
             />
@@ -140,7 +279,9 @@ const About = () => {
 
               <div className="flex-1 text-center md:text-left">
                 <div className="mb-3 flex flex-col gap-2 md:flex-row md:items-center md:gap-4">
-                  <h3 className="text-2xl font-heading font-bold text-foreground md:text-3xl">{founderName}</h3>
+                  <h3 className="text-2xl font-heading font-bold text-foreground md:text-3xl">
+                    {founderName}
+                  </h3>
                   <span className="mx-auto inline-flex w-fit items-center gap-1.5 rounded-full bg-primary/10 px-3 py-1 text-xs font-semibold text-primary md:mx-0">
                     {founderRole}
                   </span>
@@ -151,7 +292,9 @@ const About = () => {
                   className="mb-4 justify-center md:justify-start"
                 />
 
-                <p className="mb-5 max-w-2xl text-base leading-relaxed text-muted-foreground md:text-lg">{founderBio}</p>
+                <p className="mb-5 max-w-2xl text-base leading-relaxed text-muted-foreground md:text-lg">
+                  {founderBio}
+                </p>
 
                 <div className="flex items-center justify-center gap-3 md:justify-start">
                   <a

@@ -161,7 +161,7 @@ const Contact = () => {
               />
             </div>
 
-            <div className="grid items-start gap-6 2xl:grid-cols-2">
+            <div className="grid items-start gap-5 xl:grid-cols-[minmax(0,0.7fr)_minmax(0,1.3fr)]">
               <div>
                 <label className={contactLabelClass} htmlFor="contact-phone">
                   {t.contact.phone}

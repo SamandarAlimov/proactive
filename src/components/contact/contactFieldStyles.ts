@@ -8,13 +8,13 @@ export const contactFieldFocusClass =
   'focus-within:border-primary/40 focus-within:ring-4 focus-within:ring-primary/10';
 
 export const contactInputClass =
-  'min-w-0 w-full bg-transparent text-[13px] font-medium leading-6 text-foreground outline-none placeholder:text-muted-foreground/60 sm:text-sm';
+  'min-w-0 w-full bg-transparent text-[12px] font-medium leading-5 text-foreground outline-none placeholder:text-muted-foreground/60 sm:text-[13px]';
 
 export const contactHelperTextClass =
-  'mt-2 px-1 text-xs leading-5 text-muted-foreground/88';
+  'mt-2 px-1 text-[11px] leading-4.5 text-muted-foreground/88';
 
-export const contactSelectClass = `${contactFieldShellClass} ${contactFieldFocusClass} h-[72px] w-full appearance-none px-4 text-base font-medium text-foreground outline-none`;
+export const contactSelectClass = `${contactFieldShellClass} ${contactFieldFocusClass} h-[68px] w-full appearance-none px-4 text-[14px] font-medium text-foreground outline-none`;
 
-export const contactTextInputClass = `${contactFieldShellClass} ${contactFieldFocusClass} h-[72px] w-full px-4 text-base font-medium text-foreground outline-none`;
+export const contactTextInputClass = `${contactFieldShellClass} ${contactFieldFocusClass} h-[68px] w-full px-4 text-[14px] font-medium text-foreground outline-none`;
 
 export const contactTextareaClass = `${contactFieldShellClass} ${contactFieldFocusClass} min-h-[176px] w-full resize-none px-4 py-4 text-base font-medium leading-7 text-foreground outline-none`;

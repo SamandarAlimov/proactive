@@ -114,7 +114,7 @@ export const ContactPhoneInput = ({
         className={cn(
           contactFieldShellClass,
           contactFieldFocusClass,
-          'relative flex h-[72px] overflow-visible',
+          'relative flex h-[60px] overflow-visible',
         )}
       >
         <div ref={countryRef} className="relative flex h-full shrink-0">
@@ -124,12 +124,12 @@ export const ContactPhoneInput = ({
             aria-expanded={countryOpen}
             aria-label="Select phone country code"
             onClick={() => setCountryOpen((open) => !open)}
-            className="flex h-full w-[82px] shrink-0 items-center gap-2 border-r border-border/70 px-3 text-left transition-colors duration-200 hover:bg-secondary/5 sm:w-[88px] dark:border-white/10"
+            className="flex h-full w-[72px] shrink-0 items-center gap-1.5 border-r border-border/70 px-2.5 text-left transition-colors duration-200 hover:bg-secondary/5 sm:w-[76px] dark:border-white/10"
           >
-            <span className="text-[13px] font-semibold text-foreground sm:text-sm">{currentCountry.iso}</span>
+            <span className="text-[11px] font-semibold text-foreground sm:text-[12px]">{currentCountry.iso}</span>
             <ChevronDown
               className={cn(
-                'ml-auto h-4 w-4 shrink-0 text-muted-foreground transition-transform duration-200',
+                'ml-auto h-3.5 w-3.5 shrink-0 text-muted-foreground transition-transform duration-200',
                 countryOpen && 'rotate-180',
               )}
             />
@@ -190,11 +190,11 @@ export const ContactPhoneInput = ({
           )}
         </div>
 
-        <div className="flex h-full w-[58px] shrink-0 items-center justify-center border-r border-border/70 px-2 text-[12px] font-semibold text-primary sm:w-[64px] sm:text-[13px] dark:border-white/10">
+        <div className="flex h-full w-[50px] shrink-0 items-center justify-center border-r border-border/70 px-2 text-[11px] font-semibold text-primary sm:w-[54px] sm:text-[12px] dark:border-white/10">
           {currentCountry.dialCode}
         </div>
 
-        <div className="flex min-w-0 flex-1 items-center px-3 sm:px-4">
+        <div className="flex min-w-0 flex-1 items-center px-2.5 sm:px-3">
           <input
             id={id}
             type="tel"
@@ -206,7 +206,7 @@ export const ContactPhoneInput = ({
             placeholder={placeholder ?? currentCountry.placeholder}
             className={cn(
               contactInputClass,
-              'h-full min-w-0 flex-1 w-full text-[13px] font-semibold tracking-[0.005em] placeholder:font-medium placeholder:tracking-normal sm:text-[14px]',
+              'h-full min-w-0 w-full flex-1 text-[12px] font-semibold tracking-0 placeholder:font-medium placeholder:tracking-normal sm:text-[13px]',
             )}
           />
         </div>
@@ -231,11 +231,11 @@ export const ContactEmailInput = ({
         className={cn(
           contactFieldShellClass,
           contactFieldFocusClass,
-          'flex h-[72px] items-center gap-2 px-3 sm:gap-2 sm:px-3.5',
+          'flex h-[60px] items-center gap-2 px-2.5 sm:gap-2 sm:px-3',
         )}
       >
-      <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-[0.9rem] bg-primary/10 text-primary shadow-[0_16px_30px_-26px_rgba(38,79,107,0.75)] sm:h-9 sm:w-9">
-        <Mail className="h-4 w-4 sm:h-[18px] sm:w-[18px]" />
+      <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-[0.8rem] bg-primary/10 text-primary shadow-[0_16px_30px_-26px_rgba(38,79,107,0.75)] sm:h-8 sm:w-8">
+        <Mail className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
       </div>
 
       <input
@@ -247,7 +247,7 @@ export const ContactEmailInput = ({
         value={value}
         onChange={(event) => onChange(event.target.value)}
         placeholder={placeholder}
-        className={cn(contactInputClass, 'h-full min-w-0 flex-1 w-full pr-1 text-[13px] sm:text-[14px]')}
+        className={cn(contactInputClass, 'h-full min-w-0 w-full flex-1 pr-1 text-[12px] sm:text-[13px]')}
       />
     </div>
 

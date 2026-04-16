@@ -20,6 +20,7 @@ import {
   Workflow,
 } from 'lucide-react';
 import academySpeaker from '@/assets/academy-speaker.jpg';
+import ruAcademy from '@/locales/academy.ru.json';
 
 type LangKey = 'uz' | 'en' | 'ru';
 type Localized = Record<LangKey, string>;

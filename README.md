@@ -38,6 +38,207 @@ src/
 supabase/
   migrations/        DB migrationlar
 vercel.json          Vercel routing va rewrite config
+
+## Struktura
+
+```text
+Proactive/
+  public/
+    favicon.ico
+    placeholder.svg
+    robots.txt
+  src/
+    App.tsx
+    App.css
+    assets/
+      proactive-logo.jpg
+      hero-bg.jpg
+      founder-photo.jpg
+      founder-habibullo.png
+      academy-speaker.jpg
+      team-photo.png
+      team-hover.png
+      team/
+        member-1.png
+        member-1-hover.png
+        member-2.png
+        member-2-hover.png
+        member-3.png
+        member-3-hover.png
+        member-4.png
+        member-4-hover.png
+        member-5.png
+        member-5-hover.png
+        member-6.png
+        member-6-hover.png
+        member-7.png
+        member-7-hover.png
+        member-8.png
+        member-8-hover.png
+        member-9.png
+        member-9-hover.png
+        member-10.png
+        member-10-hover.png
+      projects/
+        marf-project.png
+        mis-project.png
+        milestone/
+          milestone-hero.webp
+          milestone-gallery-01.webp
+          milestone-gallery-02.webp
+          milestone-gallery-03.webp
+          milestone-gallery-04.webp
+          milestone-gallery-05.webp
+          milestone-gallery-06.webp
+          milestone-gallery-07.webp
+          milestone-gallery-08.webp
+          milestone-gallery-09.webp
+          milestone-gallery-10.webp
+        marf/
+          marf-gallery-01.webp
+          marf-gallery-02.webp
+          marf-gallery-03.webp
+          marf-gallery-04.webp
+          marf-gallery-05.webp
+          marf-gallery-06.webp
+          marf-gallery-07.webp
+        aurus/
+          aurus-hero.webp
+          aurus-gallery-01.webp
+          aurus-gallery-02.webp
+          aurus-gallery-03.webp
+          aurus-gallery-04.webp
+          aurus-gallery-05.webp
+          aurus-gallery-06.webp
+          aurus-gallery-07.webp
+          aurus-gallery-08.webp
+    content/
+    integrations/
+      supabase/
+        client.ts
+        types.ts
+    lib/
+      i18n.tsx
+      team-members.ts
+      founder-profile.ts
+      utils.ts
+      contact-form.ts
+    pages/
+      AcademyPage.tsx
+      AboutPage.tsx
+      ContactPage.tsx
+      TeamPage.tsx
+      ServicesPage.tsx
+      ServiceDetailPage.tsx
+      ProjectsPage.tsx
+      ProjectDetailPage.tsx
+      NewsPage.tsx
+      NewsArticlePage.tsx
+      InternshipPage.tsx
+      Index.tsx
+      EventsPage.tsx
+      CareersPage.tsx
+      AdminLogin.tsx
+      Admin.tsx
+  supabase/
+    migrations/
+      20260401073549_31f1f5ba-cbb6-463c-ab5f-33230e417ade.sql
+      20260330153128_ab67b1e3-4425-4343-b313-3f44889268e6.sql
+    config.toml
+  vercel.json
+  README.md
+  .env
+```
+
+## Struktura
+
+Proactive/
+  public/
+    favicon.ico
+    placeholder.svg
+    robots.txt
+  src/
+    App.tsx
+    App.css
+    assets/
+      proactive-logo.jpg
+      hero-bg.jpg
+      founder-photo.jpg
+      founder-habibullo.png
+      academy-speaker.jpg
+      team-photo.png
+      team-hover.png
+      team/
+        member-1.png
+        member-1-hover.png
+        member-2.png
+        member-2-hover.png
+        member-3.png
+        member-3-hover.png
+        member-4.png
+        member-4-hover.png
+        member-5.png
+        member-5-hover.png
+        member-6.png
+        member-6-hover.png
+        member-7.png
+        member-7-hover.png
+        member-8.png
+        member-8-hover.png
+        member-9.png
+        member-9-hover.png
+        member-10.png
+        member-10-hover.png
+      projects/
+        marf-project.png
+        mis-project.png
+        milestone/
+          milestone-hero.webp
+          milestone-gallery-01.webp
+          milestone-gallery-02.webp
+          milestone-gallery-03.webp
+          milestone-gallery-04.webp
+          milestone-gallery-05.webp
+          milestone-gallery-06.webp
+          milestone-gallery-07.webp
+          milestone-gallery-08.webp
+          milestone-gallery-09.webp
+          milestone-gallery-10.webp
+    content/
+    integrations/
+      supabase/
+        client.ts
+        generated-types.ts
+    lib/
+      i18n.tsx
+    pages/
+  supabase/
+    migrations/
+      20260401073549_31f1f5ba-cbb6-463c-ab5f-33230e417ade.sql
+      20260330153128_ab67b1e3-4425-4343-b313-3f44889268e6.sql
+    config.toml
+  vercel.json
+  .env
+
+## Struktura
+
+```text
+src/
+  App.tsx
+  App.css
+  components/
+  assets/
+  content/
+  integrations/
+  lib/
+  pages/
+supabase/
+  migrations/
+  config.toml
+vercel.json
+README.md
+.env
+```
 ```
 
 ## Route'lar

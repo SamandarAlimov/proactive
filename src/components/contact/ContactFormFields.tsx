@@ -124,10 +124,10 @@ export const ContactPhoneInput = ({
             aria-expanded={countryOpen}
             aria-label="Select phone country code"
             onClick={() => setCountryOpen((open) => !open)}
-            className="flex h-full w-[108px] shrink-0 items-center gap-2 border-r border-border/70 px-3 text-left transition-colors duration-200 hover:bg-secondary/5 sm:w-[118px] dark:border-white/10"
+            className="flex h-full w-[96px] shrink-0 items-center gap-2 border-r border-border/70 px-3 text-left transition-colors duration-200 hover:bg-secondary/5 sm:w-[104px] dark:border-white/10"
           >
             <span className="text-xl leading-none">{currentCountry.flag}</span>
-            <span className="text-sm font-semibold text-foreground">{currentCountry.iso}</span>
+            <span className="text-[13px] font-semibold text-foreground sm:text-sm">{currentCountry.iso}</span>
             <ChevronDown
               className={cn(
                 'ml-auto h-4 w-4 shrink-0 text-muted-foreground transition-transform duration-200',
@@ -191,7 +191,7 @@ export const ContactPhoneInput = ({
           )}
         </div>
 
-        <div className="flex h-full w-[76px] shrink-0 items-center justify-center border-r border-border/70 px-3 text-sm font-semibold text-primary sm:w-[88px] dark:border-white/10">
+        <div className="flex h-full w-[64px] shrink-0 items-center justify-center border-r border-border/70 px-2 text-[13px] font-semibold text-primary sm:w-[72px] sm:px-3 sm:text-sm dark:border-white/10">
           {currentCountry.dialCode}
         </div>
 
@@ -207,7 +207,7 @@ export const ContactPhoneInput = ({
             placeholder={placeholder ?? currentCountry.placeholder}
             className={cn(
               contactInputClass,
-              'h-full min-w-0 flex-1 w-full font-semibold tracking-[0.02em] placeholder:font-medium placeholder:tracking-normal sm:tracking-[0.04em]',
+              'h-full min-w-0 flex-1 w-full text-[14px] font-semibold tracking-[0.01em] placeholder:font-medium placeholder:tracking-normal sm:text-[15px]',
             )}
           />
         </div>
@@ -232,11 +232,11 @@ export const ContactEmailInput = ({
         className={cn(
           contactFieldShellClass,
           contactFieldFocusClass,
-          'flex h-[72px] items-center gap-2.5 px-3.5 sm:gap-3 sm:px-4',
+          'flex h-[72px] items-center gap-2 px-3 sm:gap-2.5 sm:px-4',
         )}
       >
-      <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-[1rem] bg-primary/10 text-primary shadow-[0_16px_30px_-26px_rgba(38,79,107,0.75)] sm:h-11 sm:w-11">
-        <Mail className="h-5 w-5" />
+      <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-[0.95rem] bg-primary/10 text-primary shadow-[0_16px_30px_-26px_rgba(38,79,107,0.75)] sm:h-10 sm:w-10">
+        <Mail className="h-4.5 w-4.5 sm:h-5 sm:w-5" />
       </div>
 
       <input

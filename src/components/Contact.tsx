@@ -161,7 +161,7 @@ const Contact = () => {
               />
             </div>
 
-            <div className="grid items-start gap-6 xl:grid-cols-2">
+            <div className="grid items-start gap-6 2xl:grid-cols-2">
               <div>
                 <label className={contactLabelClass} htmlFor="contact-phone">
                   {t.contact.phone}

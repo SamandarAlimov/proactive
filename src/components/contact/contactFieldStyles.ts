@@ -8,7 +8,7 @@ export const contactFieldFocusClass =
   'focus-within:border-primary/40 focus-within:ring-4 focus-within:ring-primary/10';
 
 export const contactInputClass =
-  'w-full bg-transparent text-base font-medium leading-6 text-foreground outline-none placeholder:text-muted-foreground/60';
+  'min-w-0 w-full bg-transparent text-[15px] font-medium leading-6 text-foreground outline-none placeholder:text-muted-foreground/60 sm:text-base';
 
 export const contactHelperTextClass =
   'mt-2 px-1 text-xs leading-5 text-muted-foreground/88';

@@ -11,6 +11,17 @@ import {
 } from '@/components/contact/contactFieldStyles';
 import { ContactEmailInput, ContactPhoneInput } from '@/components/contact/ContactFormFields';
 import { useScrollAnimation } from '@/hooks/useScrollAnimation';
+import {
+  contactAddressCity,
+  contactAddressFull,
+  contactAddressLine,
+  contactEmail,
+  contactInstagram,
+  contactInstagramHandle,
+  contactMapEmbedUrl,
+  contactMapUrl,
+  contactPhone,
+} from '@/lib/contact-details';
 import { supabase } from '@/integrations/supabase/client';
 import { buildPhoneNumber, DEFAULT_PHONE_COUNTRY } from '@/lib/contact-form';
 import { useI18n } from '@/lib/i18n';
@@ -72,9 +83,9 @@ const Contact = () => {
   };
 
   const contactCards = [
-    { icon: MapPin, title: "Toshkent, O'zbekiston", sub: 'Office address' },
-    { icon: Phone, title: '+998 90 123 45 67', sub: '24/7' },
-    { icon: Mail, title: 'info@proactive.uz', sub: 'Email' },
+    { icon: MapPin, title: contactAddressLine, sub: contactAddressCity },
+    { icon: Phone, title: contactPhone, sub: '24/7' },
+    { icon: Mail, title: contactEmail, sub: 'Email' },
   ];
 
   const serviceLabel =
@@ -226,6 +237,31 @@ const Contact = () => {
             transition={{ duration: 0.6, delay: 0.4 }}
             className="space-y-5 lg:space-y-6"
           >
+            <motion.a
+              href={contactMapUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              whileHover={{ y: -4 }}
+              className="glass-card-light block overflow-hidden rounded-[1.75rem] transition-all duration-300 hover:shadow-lg"
+            >
+              <div className="relative h-[244px] overflow-hidden">
+                <iframe
+                  title={contactAddressFull}
+                  src={contactMapEmbedUrl}
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                  className="h-full w-full border-0"
+                />
+                <div className="pointer-events-none absolute inset-x-0 bottom-0 bg-gradient-to-t from-secondary/90 via-secondary/45 to-transparent p-5">
+                  <p className="font-brand text-[10px] font-semibold uppercase tracking-[0.22em] text-white/72">
+                    Office address
+                  </p>
+                  <p className="mt-2 font-heading text-xl font-bold text-white">{contactAddressLine}</p>
+                  <p className="text-sm text-white/76">{contactAddressCity}</p>
+                </div>
+              </div>
+            </motion.a>
+
             {contactCards.map((card) => (
               <motion.div
                 key={card.title}
@@ -248,7 +284,7 @@ const Contact = () => {
             ))}
 
             <motion.a
-              href="https://www.instagram.com/proactive.agencyuz/"
+              href={contactInstagram}
               target="_blank"
               rel="noopener noreferrer"
               whileHover={{ y: -4 }}
@@ -259,7 +295,7 @@ const Contact = () => {
                   <Instagram className="h-6 w-6 text-secondary-foreground" />
                 </div>
                 <div>
-                  <h4 className="font-heading text-lg font-bold text-foreground">@proactive.agencyuz</h4>
+                  <h4 className="font-heading text-lg font-bold text-foreground">{contactInstagramHandle}</h4>
                   <p className="text-sm leading-6 text-muted-foreground">Instagram</p>
                 </div>
               </div>

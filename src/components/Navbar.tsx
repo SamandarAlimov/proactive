@@ -5,10 +5,11 @@ import { Menu, X, ChevronDown, Mail, Phone } from 'lucide-react';
 import { Link, useLocation } from 'react-router-dom';
 import proactiveLogo from '@/assets/proactive-logo.jpg';
 import { ThemeToggle } from '@/components/ThemeToggle';
+import { contactEmail, contactPhone } from '@/lib/contact-details';
 
 const langLabels: Record<Language, string> = { uz: "O'z", en: 'En', ru: 'Ru' };
-const headerPhone = '+998 90 123 45 67';
-const headerEmail = 'info@proactive.uz';
+const headerPhone = contactPhone;
+const headerEmail = contactEmail;
 
 const Navbar = () => {
   const { t, lang, setLang } = useI18n();

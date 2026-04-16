@@ -20,7 +20,6 @@ import {
   Workflow,
 } from 'lucide-react';
 import academySpeaker from '@/assets/academy-speaker.jpg';
-import ruAcademy from '@/locales/academy.ru.json';
 
 type LangKey = 'uz' | 'en' | 'ru';
 type Localized = Record<LangKey, string>;
@@ -83,23 +82,24 @@ const pageCopy: Record<LangKey, Record<string, string>> = {
   },
   ru: {
     eyebrow: 'Marketing Maximum',
-    title: 'Офлайн-курс на 2.5 месяца, который превращает практический маркетинг в цельную систему.',
+    title: 'Офлайн-курс на 2,5 месяца, который превращает практический маркетинг в цельную систему.',
     description:
       'Курс показывает маркетинг не как набор отдельных рекламных действий, а как систему управления, которая двигает весь бизнес.',
     apply: 'Записаться на курс',
     modules: 'Посмотреть модули',
-    blueprintEyebrow: 'The Strategic Blueprint',
-    blueprintTitle: 'Маркетинг - это не только реклама, а система, которая приводит в движение весь бизнес.',
-    blueprintDescription: 'На курсе вы видите, как анализ, стратегия, планирование и контроль соединяются в одну практическую цепочку.',
-    blueprintSummary: 'Главная цель курса - собрать разрозненные инструменты в единый рабочий механизм.',
+    blueprintEyebrow: 'Стратегический каркас',
+    blueprintTitle: 'Маркетинг — это не только реклама, а система, которая приводит в движение весь бизнес.',
+    blueprintDescription:
+      'На курсе вы увидите, как анализ, стратегия, планирование и контроль соединяются в одну практическую цепочку.',
+    blueprintSummary: 'Главная цель курса — собрать разрозненные инструменты в единый рабочий механизм.',
     who: 'Для кого этот курс?',
     directions: '6 ключевых направлений в рамках 16 занятий',
     map: 'Структурная карта из 9 модулей',
     mapDescription: 'Модули расположены логично, чтобы выстраивать систему шаг за шагом.',
     process: 'Как проходит обучение?',
-    processDescription: 'Курс длится 2.5 месяца, и каждое занятие сопровождается практической работой.',
+    processDescription: 'Курс длится 2,5 месяца, и каждое занятие сопровождается практической работой.',
     speakerEyebrow: 'Спикер и автор курса',
-    speakerRole: 'Founder, маркетолог, аналитик, тренер',
+    speakerRole: 'Основатель, маркетолог, аналитик, тренер',
     brands: 'Где работают наши выпускники?',
     brandsDescription: 'Ведущие бренды в сферах ритейла, образования, сервиса, медицины, агентского бизнеса и медиа.',
     quotes: 'Отзывы студентов',
@@ -209,7 +209,7 @@ const processItems = [
     description: { uz: "Real keyslar va bozor misolida o'rganish.", en: 'Learning through real cases and market examples.', ru: 'Изучение на реальных кейсах и рыночных примерах.' },
   },
   {
-    title: { uz: '3-Qadam | Workshop', en: 'Step 3 | Workshop', ru: 'Шаг 3 | Workshop' },
+    title: { uz: '3-Qadam | Workshop', en: 'Step 3 | Workshop', ru: 'Шаг 3 | Практикум' },
     description: { uz: "Olingan bilimlarni amaliy mashqlarda sinab ko'rish.", en: 'Testing the learned frameworks through practical exercises.', ru: 'Проверка знаний на практических упражнениях.' },
   },
   {
@@ -245,23 +245,40 @@ const speakerFacts = [
   },
 ];
 
-const brandNames = ['KochA', 'leti', 'Zaman', 'IDU', 'Impuls Tibbiyot Instituti', 'Qarshi International University', 'Zahratun', 'PCG', 'President', 'Plan Baby.uz', "Registon O'quv Markazi", 'Milestone International School', 'JETSO', 'Ilm-u Ziyo', 'asno', 'OXUS University'];
+const brandNames = [
+  'KochA',
+  'leti',
+  'Zaman',
+  'IDU',
+  'Impuls Tibbiyot Instituti',
+  'Qarshi International University',
+  'Zahratun',
+  'PCG',
+  'President',
+  'Plan Baby.uz',
+  "Registon O'quv Markazi",
+  'Milestone International School',
+  'JETSO',
+  'Ilm-u Ziyo',
+  'asno',
+  'OXUS University',
+];
 
 const quotePanel = {
   title: {
     uz: "Bitiruvchilar eng ko'p ta'kidlagan o'zgarishlar",
     en: 'What graduates mention most often',
-    ru: 'Ð§Ñ‚Ð¾ Ð²Ñ‹Ð¿ÑƒÑÐºÐ½Ð¸ÐºÐ¸ Ð¾Ñ‚Ð¼ÐµÑ‡Ð°ÑŽÑ‚ Ñ‡Ð°Ñ‰Ðµ Ð²ÑÐµÐ³Ð¾',
+    ru: 'Что выпускники отмечают чаще всего',
   },
   description: {
     uz: "Fikrlar orasida qayta-qayta uchraydigan uchta natija kursning amaliy qiymatini eng yaxshi ifodalaydi.",
     en: 'Three recurring outcomes appear again and again in the feedback and reflect the practical value of the program.',
-    ru: 'Ð¢Ñ€Ð¸ Ð¿Ð¾Ð²Ñ‚Ð¾Ñ€ÑÑŽÑ‰Ð¸Ñ…ÑÑ Ñ€ÐµÐ·ÑƒÐ»ÑŒÑ‚Ð°Ñ‚Ð° Ð»ÑƒÑ‡ÑˆÐµ Ð²ÑÐµÐ³Ð¾ Ð¿Ð¾ÐºÐ°Ð·Ñ‹Ð²Ð°ÑŽÑ‚ Ð¿Ñ€Ð°ÐºÑ‚Ð¸Ñ‡ÐµÑÐºÑƒÑŽ Ñ†ÐµÐ½Ð½Ð¾ÑÑ‚ÑŒ ÐºÑƒÑ€ÑÐ°.',
+    ru: 'Три повторяющихся результата лучше всего показывают практическую ценность курса.',
   },
   label: {
     uz: 'Academy insight',
     en: 'Academy insight',
-    ru: 'Academy insight',
+    ru: 'Вывод академии',
   },
 };
 
@@ -270,36 +287,36 @@ const quoteThemes = [
     title: {
       uz: 'Tizimli fikrlash',
       en: 'System thinking',
-      ru: 'Ð¡Ð¸ÑÑ‚ÐµÐ¼Ð½Ð¾Ðµ Ð¼Ñ‹ÑˆÐ»ÐµÐ½Ð¸Ðµ',
+      ru: 'Системное мышление',
     },
     description: {
       uz: "Marketingni alohida reklama emas, butun biznesni boshqaradigan yaxlit tizim sifatida ko'rish.",
       en: 'Seeing marketing not as isolated promotion, but as an integrated system that guides the business.',
-      ru: 'Ð’Ð¾ÑÐ¿Ñ€Ð¸ÑÑ‚Ð¸Ðµ Ð¼Ð°Ñ€ÐºÐµÑ‚Ð¸Ð½Ð³Ð° Ð½Ðµ ÐºÐ°Ðº Ð½Ð°Ð±Ð¾Ñ€Ð° Ñ€Ð°Ð·Ñ€Ð¾Ð·Ð½ÐµÐ½Ð½Ñ‹Ñ… Ð°ÐºÑ‚Ð¸Ð²Ð½Ð¾ÑÑ‚ÐµÐ¹, Ð° ÐºÐ°Ðº Ñ†ÐµÐ»Ð¾ÑÑ‚Ð½Ð¾Ð¹ ÑÐ¸ÑÑ‚ÐµÐ¼Ñ‹ ÑƒÐ¿Ñ€Ð°Ð²Ð»ÐµÐ½Ð¸Ñ Ð±Ð¸Ð·Ð½ÐµÑÐ¾Ð¼.',
+      ru: 'Восприятие маркетинга не как набора разрозненных активностей, а как целостной системы управления бизнесом.',
     },
   },
   {
     title: {
       uz: 'Strategik aniqlik',
       en: 'Strategic clarity',
-      ru: 'Ð¡Ñ‚Ñ€Ð°Ñ‚ÐµÐ³Ð¸Ñ‡ÐµÑÐºÐ°Ñ ÑÑÐ½Ð¾ÑÑ‚ÑŒ',
+      ru: 'Стратегическая ясность',
     },
     description: {
       uz: "KPI, byudjet va strategiyani bir-biri bilan bog'liq zanjir sifatida tushunish.",
       en: 'Understanding KPI, budgeting, and strategy as one connected chain of decisions.',
-      ru: 'ÐŸÐ¾Ð½Ð¸Ð¼Ð°Ð½Ð¸Ðµ KPI, Ð±ÑŽÐ´Ð¶ÐµÑ‚Ð° Ð¸ ÑÑ‚Ñ€Ð°Ñ‚ÐµÐ³Ð¸Ð¸ ÐºÐ°Ðº ÐµÐ´Ð¸Ð½Ð¾Ð¹ ÑÐ²ÑÐ·Ð°Ð½Ð½Ð¾Ð¹ Ñ†ÐµÐ¿Ð¾Ñ‡ÐºÐ¸ Ñ€ÐµÑˆÐµÐ½Ð¸Ð¹.',
+      ru: 'Понимание KPI, бюджета и стратегии как единой связанной цепочки решений.',
     },
   },
   {
     title: {
       uz: 'Amaliy ishonch',
       en: 'Practical confidence',
-      ru: 'ÐŸÑ€Ð°ÐºÑ‚Ð¸Ñ‡ÐµÑÐºÐ°Ñ ÑƒÐ²ÐµÑ€ÐµÐ½Ð½Ð¾ÑÑ‚ÑŒ',
+      ru: 'Практическая уверенность',
     },
     description: {
       uz: "Bilimni real vazifalarda qo'llash, qaror qabul qilish va jamoa bilan ishlashda ishonchning ortishi.",
       en: 'Greater confidence in applying frameworks to real tasks, decision-making, and team collaboration.',
-      ru: 'Ð£Ð²ÐµÐ»Ð¸Ñ‡ÐµÐ½Ð¸Ðµ ÑƒÐ²ÐµÑ€ÐµÐ½Ð½Ð¾ÑÑ‚Ð¸ Ð² Ð¿Ñ€Ð¸Ð¼ÐµÐ½ÐµÐ½Ð¸Ð¸ Ð·Ð½Ð°Ð½Ð¸Ð¹ Ðº Ñ€ÐµÐ°Ð»ÑŒÐ½Ñ‹Ð¼ Ð·Ð°Ð´Ð°Ñ‡Ð°Ð¼, Ð¿Ñ€Ð¸Ð½ÑÑ‚Ð¸Ð¸ Ñ€ÐµÑˆÐµÐ½Ð¸Ð¹ Ð¸ Ñ€Ð°Ð±Ð¾Ñ‚Ðµ Ñ ÐºÐ¾Ð¼Ð°Ð½Ð´Ð¾Ð¹.',
+      ru: 'Рост уверенности в применении знаний к реальным задачам, в принятии решений и в работе с командой.',
     },
   },
 ];
@@ -310,7 +327,7 @@ const quotes = [
     takeaway: {
       uz: 'Tizimlashtirilgan qarash',
       en: 'A more systemized view',
-      ru: 'Ð‘Ð¾Ð»ÐµÐµ ÑÐ¸ÑÑ‚ÐµÐ¼Ð½Ñ‹Ð¹ Ð²Ð·Ð³Ð»ÑÐ´',
+      ru: 'Более системный взгляд',
     },
     text: {
       uz: "Marketingdagi umumiy tushunchalarni tizimlashtirib, o'zimga ishonch berdi.",
@@ -323,12 +340,12 @@ const quotes = [
     takeaway: {
       uz: 'Strategiya, KPI va byudjet aniqligi',
       en: 'Clarity in strategy, KPI, and budget',
-      ru: 'Ð¯ÑÐ½Ð¾ÑÑ‚ÑŒ Ð² ÑÑ‚Ñ€Ð°Ñ‚ÐµÐ³Ð¸Ð¸, KPI Ð¸ Ð±ÑŽÐ´Ð¶ÐµÑ‚Ðµ',
+      ru: 'Ясность в стратегии, KPI и бюджете',
     },
     text: {
       uz: "Strategiya, KPI va byudjetni qanday qurishni aniq tushunib oldim.",
       en: 'I clearly understood how to build strategy, KPI, and the budget.',
-      ru: 'Я четко поняла, как выстраивать стратегию, KPI и бюджет.',
+      ru: 'Я чётко поняла, как выстраивать стратегию, KPI и бюджет.',
     },
   },
   {
@@ -336,12 +353,12 @@ const quotes = [
     takeaway: {
       uz: "Marketingga kengroq qarash",
       en: 'A broader view of marketing',
-      ru: 'Ð‘Ð¾Ð»ÐµÐµ ÑˆÐ¸Ñ€Ð¾ÐºÐ¸Ð¹ Ð²Ð·Ð³Ð»ÑÐ´ Ð½Ð° Ð¼Ð°Ñ€ÐºÐµÑ‚Ð¸Ð½Ð³',
+      ru: 'Более широкий взгляд на маркетинг',
     },
     text: {
       uz: "Marketing o'ylaganimdan ancha keng tizim ekanini kurs davomida tushundim.",
       en: 'During the course I realized marketing is a much broader system than I expected.',
-      ru: 'Во время курса я понял, что маркетинг - гораздо более широкая система, чем я представлял.',
+      ru: 'Во время курса я понял, что маркетинг — гораздо более широкая система, чем я представлял.',
     },
   },
 ];
@@ -362,14 +379,32 @@ const AcademyPage = () => {
             <h1 className="mt-5 max-w-5xl font-heading text-4xl font-bold leading-tight md:text-6xl lg:text-7xl">{text.title}</h1>
             <p className="mt-6 max-w-3xl text-lg leading-relaxed text-white/76 md:text-xl">{text.description}</p>
             <div className="mt-10 flex flex-wrap gap-4">
-              <a href="/contact" className="inline-flex items-center gap-2 rounded-2xl bg-[#74f2d8] px-6 py-3 text-sm font-semibold text-[#082233] transition-transform duration-300 hover:-translate-y-0.5"><Send className="h-4 w-4" />{text.apply}</a>
-              <a href="#academy-modules" className="inline-flex items-center gap-2 rounded-2xl border border-white/14 bg-white/5 px-6 py-3 text-sm font-semibold text-white transition-colors duration-300 hover:bg-white/10"><ArrowRight className="h-4 w-4" />{text.modules}</a>
+              <a
+                href="/contact"
+                className="inline-flex items-center gap-2 rounded-2xl bg-[#74f2d8] px-6 py-3 text-sm font-semibold text-[#082233] transition-transform duration-300 hover:-translate-y-0.5"
+              >
+                <Send className="h-4 w-4" />
+                {text.apply}
+              </a>
+              <a
+                href="#academy-modules"
+                className="inline-flex items-center gap-2 rounded-2xl border border-white/14 bg-white/5 px-6 py-3 text-sm font-semibold text-white transition-colors duration-300 hover:bg-white/10"
+              >
+                <ArrowRight className="h-4 w-4" />
+                {text.modules}
+              </a>
             </div>
           </motion.div>
 
           <div className="mt-14 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
             {statItems.map((item, index) => (
-              <motion.div key={item.value + tr(item.label)} initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: index * 0.08 }} className="rounded-[1.75rem] border border-white/10 bg-white/[0.04] p-6 backdrop-blur-sm">
+              <motion.div
+                key={item.value + tr(item.label)}
+                initial={{ opacity: 0, y: 18 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: index * 0.08 }}
+                className="rounded-[1.75rem] border border-white/10 bg-white/[0.04] p-6 backdrop-blur-sm"
+              >
                 <item.icon className="h-6 w-6 text-[#74f2d8]" />
                 <div className="mt-6 text-3xl font-heading font-bold md:text-4xl">{item.value}</div>
                 <div className="mt-2 text-sm uppercase tracking-[0.22em] text-white/60">{tr(item.label)}</div>
@@ -378,6 +413,7 @@ const AcademyPage = () => {
           </div>
         </div>
       </section>
+
       <section className="bg-background py-20">
         <div className="mx-auto grid max-w-7xl gap-10 px-6 md:px-10 lg:grid-cols-[0.8fr_1.2fr]">
           <motion.div initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
@@ -387,7 +423,12 @@ const AcademyPage = () => {
             <p className="mt-4 text-base leading-relaxed text-foreground/80">{text.blueprintSummary}</p>
           </motion.div>
 
-          <motion.div initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="grid gap-4 md:grid-cols-2">
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="grid gap-4 md:grid-cols-2"
+          >
             {blueprintSteps.map((step, index) => (
               <div key={tr(step.label)} className="rounded-[1.75rem] border border-border/70 bg-card p-6 shadow-[0_18px_50px_rgba(0,0,0,0.06)]">
                 <div className="flex items-center gap-3 text-primary">
@@ -403,10 +444,24 @@ const AcademyPage = () => {
 
       <section className="bg-muted/20 py-20">
         <div className="mx-auto max-w-7xl px-6 md:px-10">
-          <motion.h2 initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="max-w-3xl font-heading text-3xl font-bold text-foreground md:text-5xl">{text.who}</motion.h2>
+          <motion.h2
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="max-w-3xl font-heading text-3xl font-bold text-foreground md:text-5xl"
+          >
+            {text.who}
+          </motion.h2>
           <div className="mt-12 grid gap-6 md:grid-cols-2">
             {audienceItems.map((item, index) => (
-              <motion.div key={tr(item.title)} initial={{ opacity: 0, y: 22 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: index * 0.06 }} className="rounded-[1.75rem] border border-border/70 bg-card p-7">
+              <motion.div
+                key={tr(item.title)}
+                initial={{ opacity: 0, y: 22 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.06 }}
+                className="rounded-[1.75rem] border border-border/70 bg-card p-7"
+              >
                 <item.icon className="h-7 w-7 text-primary" />
                 <h3 className="mt-5 font-heading text-2xl font-bold text-foreground">{tr(item.title)}</h3>
                 <p className="mt-4 text-base leading-relaxed text-muted-foreground">{tr(item.description)}</p>
@@ -423,7 +478,14 @@ const AcademyPage = () => {
           </motion.div>
           <div className="mt-12 grid gap-6 md:grid-cols-2 xl:grid-cols-3">
             {directionItems.map((item, index) => (
-              <motion.div key={item.order} initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: index * 0.05 }} className="rounded-[1.9rem] border border-border/70 bg-card p-7 shadow-[0_18px_50px_rgba(0,0,0,0.05)]">
+              <motion.div
+                key={item.order}
+                initial={{ opacity: 0, y: 24 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.05 }}
+                className="rounded-[1.9rem] border border-border/70 bg-card p-7 shadow-[0_18px_50px_rgba(0,0,0,0.05)]"
+              >
                 <div className="text-[3.25rem] font-heading font-bold leading-none tracking-[-0.08em] text-primary/85">{item.order}</div>
                 <h3 className="mt-5 font-heading text-2xl font-bold text-foreground">{tr(item.title)}</h3>
                 <p className="mt-4 text-base leading-relaxed text-muted-foreground">{tr(item.description)}</p>
@@ -441,7 +503,14 @@ const AcademyPage = () => {
           </motion.div>
           <div className="mt-12 grid gap-6 lg:grid-cols-3">
             {stageItems.map((stage, index) => (
-              <motion.div key={tr(stage.stage)} initial={{ opacity: 0, y: 22 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: index * 0.07 }} className="rounded-[1.9rem] border border-white/10 bg-white/[0.04] p-7">
+              <motion.div
+                key={tr(stage.stage)}
+                initial={{ opacity: 0, y: 22 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.07 }}
+                className="rounded-[1.9rem] border border-white/10 bg-white/[0.04] p-7"
+              >
                 <span className="text-xs font-semibold uppercase tracking-[0.24em] text-[#74f2d8]">{tr(stage.stage)}</span>
                 <div className="mt-6 space-y-3">
                   {stage.modules.map((module) => (
@@ -465,7 +534,14 @@ const AcademyPage = () => {
           </motion.div>
           <div className="mt-12 grid gap-6 lg:grid-cols-4">
             {processItems.map((item, index) => (
-              <motion.div key={tr(item.title)} initial={{ opacity: 0, y: 22 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: index * 0.06 }} className="rounded-[1.75rem] border border-border/70 bg-card p-6">
+              <motion.div
+                key={tr(item.title)}
+                initial={{ opacity: 0, y: 22 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.06 }}
+                className="rounded-[1.75rem] border border-border/70 bg-card p-6"
+              >
                 <div className="text-xs font-semibold uppercase tracking-[0.24em] text-primary/80">0{index + 1}</div>
                 <h3 className="mt-4 font-heading text-2xl font-bold text-foreground">{tr(item.title)}</h3>
                 <p className="mt-4 text-base leading-relaxed text-muted-foreground">{tr(item.description)}</p>
@@ -477,7 +553,12 @@ const AcademyPage = () => {
 
       <section className="bg-muted/20 py-20">
         <div className="mx-auto grid max-w-7xl gap-10 px-6 md:px-10 lg:grid-cols-[0.86fr_1.14fr]">
-          <motion.div initial={{ opacity: 0, x: -24 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} className="overflow-hidden rounded-[2rem] border border-border/60 bg-card">
+          <motion.div
+            initial={{ opacity: 0, x: -24 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            className="overflow-hidden rounded-[2rem] border border-border/60 bg-card"
+          >
             <img src={academySpeaker} alt="Habibullo Sa'dullayev" className="h-full w-full object-cover" />
           </motion.div>
           <motion.div initial={{ opacity: 0, x: 24 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}>
@@ -504,7 +585,9 @@ const AcademyPage = () => {
           </motion.div>
           <div className="mt-10 flex flex-wrap gap-3">
             {brandNames.map((brand) => (
-              <div key={brand} className="rounded-full border border-border/70 bg-card px-4 py-2 text-sm font-medium text-foreground/84">{brand}</div>
+              <div key={brand} className="rounded-full border border-border/70 bg-card px-4 py-2 text-sm font-medium text-foreground/84">
+                {brand}
+              </div>
             ))}
           </div>
         </div>
@@ -566,9 +649,7 @@ const AcademyPage = () => {
                       </div>
                       <div className="mt-3 text-lg font-medium text-[#74f2d8] md:text-xl">{quote.author}</div>
                     </div>
-                    <div className="text-sm leading-relaxed text-white/48 md:max-w-xs md:text-right">
-                      {text.quotes}
-                    </div>
+                    <div className="text-sm leading-relaxed text-white/48 md:max-w-xs md:text-right">{text.quotes}</div>
                   </div>
                 </motion.article>
               ))}
@@ -579,11 +660,22 @@ const AcademyPage = () => {
 
       <section className="bg-background py-20">
         <div className="mx-auto max-w-5xl px-6 text-center md:px-10">
-          <motion.div initial={{ opacity: 0, y: 22 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="rounded-[2.25rem] border border-border/70 bg-card px-8 py-14 shadow-[0_24px_80px_rgba(0,0,0,0.06)] md:px-14">
+          <motion.div
+            initial={{ opacity: 0, y: 22 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="rounded-[2.25rem] border border-border/70 bg-card px-8 py-14 shadow-[0_24px_80px_rgba(0,0,0,0.06)] md:px-14"
+          >
             <Sparkles className="mx-auto h-8 w-8 text-primary" />
             <h2 className="mt-6 font-heading text-3xl font-bold text-foreground md:text-5xl">{text.finalTitle}</h2>
             <p className="mx-auto mt-6 max-w-3xl text-lg leading-relaxed text-muted-foreground">{text.finalDescription}</p>
-            <a href="/contact" className="mt-10 inline-flex items-center gap-2 rounded-2xl bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground transition-transform duration-300 hover:-translate-y-0.5"><Send className="h-4 w-4" />{text.finalCta}</a>
+            <a
+              href="/contact"
+              className="mt-10 inline-flex items-center gap-2 rounded-2xl bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground transition-transform duration-300 hover:-translate-y-0.5"
+            >
+              <Send className="h-4 w-4" />
+              {text.finalCta}
+            </a>
           </motion.div>
         </div>
       </section>

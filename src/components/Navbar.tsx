@@ -17,6 +17,7 @@ const Navbar = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [langOpen, setLangOpen] = useState(false);
   const langRef = useRef<HTMLDivElement>(null);
+  const navRef = useRef<HTMLElement>(null);
   const location = useLocation();
   const isHome = location.pathname === '/';
 
@@ -37,6 +38,40 @@ const Navbar = () => {
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
+  useEffect(() => {
+    const node = navRef.current;
+
+    if (!node || typeof window === 'undefined') {
+      return undefined;
+    }
+
+    const root = document.documentElement;
+    let rafId = 0;
+
+    const updateHeaderHeight = () => {
+      const nextHeight = Math.ceil(node.getBoundingClientRect().height);
+      root.style.setProperty('--site-header-height', `${nextHeight}px`);
+      root.style.setProperty('--site-header-offset', `${nextHeight}px`);
+    };
+
+    const scheduleUpdate = () => {
+      window.cancelAnimationFrame(rafId);
+      rafId = window.requestAnimationFrame(updateHeaderHeight);
+    };
+
+    scheduleUpdate();
+
+    const observer = new ResizeObserver(scheduleUpdate);
+    observer.observe(node);
+    window.addEventListener('resize', scheduleUpdate);
+
+    return () => {
+      window.cancelAnimationFrame(rafId);
+      observer.disconnect();
+      window.removeEventListener('resize', scheduleUpdate);
+    };
+  }, [scrolled, location.pathname]);
+
   const navItems = [
     { label: t.nav.about, href: '/about' },
     { label: t.nav.services, href: '/services' },
@@ -55,15 +90,16 @@ const Navbar = () => {
   return (
     <>
       <motion.nav
+        ref={navRef}
         initial={{ y: -100 }}
         animate={{ y: 0 }}
         transition={{ duration: 0.6, ease: 'easeOut' }}
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
+        className={`fixed left-0 right-0 top-0 z-50 h-[78px] transition-[background-color,box-shadow,border-color,backdrop-filter] duration-300 xl:h-[88px] ${
           scrolled
-            ? 'py-2 shadow-lg backdrop-blur-xl'
+            ? 'shadow-lg backdrop-blur-xl'
             : showDarkNav
-              ? 'py-5 backdrop-blur-md'
-              : 'py-5 bg-background/80 backdrop-blur-md'
+              ? 'backdrop-blur-md'
+              : 'bg-background/80 backdrop-blur-md'
         }`}
         style={
           scrolled
@@ -78,7 +114,7 @@ const Navbar = () => {
               : undefined
         }
       >
-        <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-6">
+        <div className="mx-auto grid h-full max-w-7xl grid-cols-[auto_1fr_auto] items-center gap-4 px-5 sm:px-6 xl:px-8">
           <Link to="/" className="group flex items-center gap-3">
             <img
               src={proactiveLogo}
@@ -90,14 +126,14 @@ const Navbar = () => {
             </span>
           </Link>
 
-          <div className="hidden items-center gap-4 xl:gap-5 lg:flex">
+          <div className="hidden min-w-0 items-center justify-center gap-4 xl:flex xl:gap-5">
             {navItems.map((item) => (
               <Link
                 key={item.href}
                 to={item.href}
                 className={`group relative text-xs font-medium transition-colors duration-300 ${
                   location.pathname === item.href ? 'text-primary' : navTextClass
-                }`}
+                } whitespace-nowrap xl:text-[13px] 2xl:text-sm`}
               >
                 {item.label}
                 <span
@@ -109,9 +145,20 @@ const Navbar = () => {
             ))}
           </div>
 
-          <div className="hidden items-center gap-2 lg:flex">
+          <div className="hidden items-center justify-end gap-2 xl:flex">
+            <Link
+              to="/contact"
+              className="inline-flex items-center justify-center rounded-xl px-4 py-3 font-heading text-sm font-semibold tracking-[0.02em] text-secondary transition-all duration-300 hover:-translate-y-0.5 2xl:hidden"
+              style={{
+                background: 'linear-gradient(135deg, #52E6C8 0%, #79f5e2 100%)',
+                boxShadow: '0 16px 36px rgba(82, 230, 200, 0.2)',
+              }}
+            >
+              {t.nav.contact}
+            </Link>
+
             <div
-              className="hidden items-center gap-3 rounded-2xl border px-4 py-2.5 xl:flex"
+              className="hidden shrink-0 items-center gap-3 rounded-2xl border px-4 py-3 2xl:flex"
               style={{
                 borderColor: scrolled || showDarkNav ? 'hsla(0, 0%, 100%, 0.14)' : 'hsla(204, 47%, 28%, 0.12)',
                 background: scrolled || showDarkNav ? 'hsla(202, 100%, 11%, 0.22)' : 'hsla(0, 0%, 100%, 0.74)',
@@ -121,7 +168,7 @@ const Navbar = () => {
               <div className="space-y-1 text-right leading-none">
                 <a
                   href={`tel:${headerPhone.replace(/\s+/g, '')}`}
-                  className={`block text-sm font-semibold transition-colors duration-300 ${
+                  className={`block whitespace-nowrap text-sm font-semibold transition-colors duration-300 ${
                     scrolled || showDarkNav ? 'text-white hover:text-primary' : 'text-secondary hover:text-primary'
                   }`}
                 >
@@ -129,7 +176,7 @@ const Navbar = () => {
                 </a>
                 <a
                   href={`mailto:${headerEmail}`}
-                  className={`block text-xs transition-colors duration-300 ${
+                  className={`block whitespace-nowrap text-[11px] transition-colors duration-300 ${
                     scrolled || showDarkNav ? 'text-white/65 hover:text-white' : 'text-foreground/60 hover:text-secondary'
                   }`}
                 >
@@ -201,7 +248,7 @@ const Navbar = () => {
 
           <button
             onClick={() => setMobileOpen(!mobileOpen)}
-            className={`p-2 lg:hidden ${scrolled || showDarkNav ? 'text-white' : 'text-foreground'}`}
+            className={`justify-self-end p-2 xl:hidden ${scrolled || showDarkNav ? 'text-white' : 'text-foreground'}`}
           >
             {mobileOpen ? <X size={24} /> : <Menu size={24} />}
           </button>

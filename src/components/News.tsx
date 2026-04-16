@@ -17,7 +17,7 @@ type DisplayNewsItem = {
 
 const News = () => {
   const { t, lang } = useI18n();
-  const { ref, isVisible } = useScrollAnimation();
+  const { ref, getMotionProps } = useScrollAnimation();
   const [newsData, setNewsData] = useState<NewsRow[]>([]);
 
   useEffect(() => {
@@ -42,14 +42,14 @@ const News = () => {
   return (
     <section id="news" className="section-padding bg-muted/30 relative overflow-hidden" ref={ref}>
       <div className="max-w-7xl mx-auto">
-        <motion.div initial={{ opacity: 0, y: 30 }} animate={isVisible ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.6 }} className="text-center mb-16">
+        <motion.div {...getMotionProps({ distance: 30, duration: 0.6 })} className="text-center mb-16">
           <span className="text-sm font-semibold text-primary uppercase tracking-widest">{t.news.subtitle}</span>
           <h2 className="text-3xl md:text-5xl font-heading font-bold text-foreground mt-3">{t.news.title}</h2>
         </motion.div>
 
         <div className="grid md:grid-cols-3 gap-8">
           {displayNews.map((news, i) => (
-            <motion.div key={news.id} initial={{ opacity: 0, y: 30 }} animate={isVisible ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.5, delay: 0.15 * i }}>
+            <motion.div key={news.id} {...getMotionProps({ distance: 30, delay: 0.15 * i, duration: 0.5 })}>
               <Link to={`/news/${news.id}`} className="block group">
                 <article className="glass-card-light rounded-2xl overflow-hidden hover:shadow-2xl transition-shadow duration-500">
                   <div className="h-48 bg-secondary relative overflow-hidden">
@@ -71,7 +71,7 @@ const News = () => {
           ))}
         </div>
 
-        <motion.div initial={{ opacity: 0 }} animate={isVisible ? { opacity: 1 } : {}} transition={{ delay: 0.6 }} className="text-center mt-12">
+        <motion.div {...getMotionProps({ distance: 18, delay: 0.6 })} className="text-center mt-12">
           <Link to="/news" className="inline-flex items-center gap-2 text-primary font-semibold hover:gap-3 transition-all duration-300">
             {t.news.viewAll} →
           </Link>

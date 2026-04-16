@@ -6,7 +6,7 @@ import TeamShowcaseStrip from '@/components/TeamShowcaseStrip';
 
 const Team = () => {
   const { t } = useI18n();
-  const { ref, isVisible } = useScrollAnimation();
+  const { ref, getMotionProps } = useScrollAnimation();
   const { resolvedTheme } = useTheme();
   const isDark = resolvedTheme === 'dark';
 
@@ -41,9 +41,7 @@ const Team = () => {
         />
         <div className="relative z-10 mx-auto max-w-7xl px-6 md:px-12">
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={isVisible ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.6 }}
+            {...getMotionProps({ distance: 30, duration: 0.6 })}
           >
             <span
               className="mb-6 inline-flex items-center gap-2 rounded-full px-4 py-1.5 font-brand text-xs font-semibold uppercase tracking-widest"

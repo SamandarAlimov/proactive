@@ -1,6 +1,7 @@
 import PageLayout from '@/components/PageLayout';
 import { motion } from 'framer-motion';
 import { useI18n } from '@/lib/i18n';
+import { revealViewport } from '@/lib/motion';
 import {
   ArrowRight,
   BadgeCheck,
@@ -416,7 +417,7 @@ const AcademyPage = () => {
 
       <section className="bg-background py-20">
         <div className="mx-auto grid max-w-7xl gap-10 px-6 md:px-10 lg:grid-cols-[0.8fr_1.2fr]">
-          <motion.div initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
+          <motion.div initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={revealViewport}>
             <span className="text-sm font-semibold uppercase tracking-[0.32em] text-primary/80">{text.blueprintEyebrow}</span>
             <h2 className="mt-5 font-heading text-3xl font-bold leading-tight text-foreground md:text-5xl">{text.blueprintTitle}</h2>
             <p className="mt-6 text-lg leading-relaxed text-muted-foreground">{text.blueprintDescription}</p>
@@ -426,7 +427,7 @@ const AcademyPage = () => {
           <motion.div
             initial={{ opacity: 0, y: 24 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
+            viewport={revealViewport}
             className="grid gap-4 md:grid-cols-2"
           >
             {blueprintSteps.map((step, index) => (
@@ -447,7 +448,7 @@ const AcademyPage = () => {
           <motion.h2
             initial={{ opacity: 0, y: 24 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
+            viewport={revealViewport}
             className="max-w-3xl font-heading text-3xl font-bold text-foreground md:text-5xl"
           >
             {text.who}
@@ -458,7 +459,7 @@ const AcademyPage = () => {
                 key={tr(item.title)}
                 initial={{ opacity: 0, y: 22 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
+                viewport={revealViewport}
                 transition={{ delay: index * 0.06 }}
                 className="rounded-[1.75rem] border border-border/70 bg-card p-7"
               >
@@ -473,7 +474,7 @@ const AcademyPage = () => {
 
       <section id="academy-modules" className="bg-background py-20">
         <div className="mx-auto max-w-7xl px-6 md:px-10">
-          <motion.div initial={{ opacity: 0, y: 22 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
+          <motion.div initial={{ opacity: 0, y: 22 }} whileInView={{ opacity: 1, y: 0 }} viewport={revealViewport}>
             <h2 className="font-heading text-3xl font-bold text-foreground md:text-5xl">{text.directions}</h2>
           </motion.div>
           <div className="mt-12 grid gap-6 md:grid-cols-2 xl:grid-cols-3">
@@ -482,7 +483,7 @@ const AcademyPage = () => {
                 key={item.order}
                 initial={{ opacity: 0, y: 24 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
+                viewport={revealViewport}
                 transition={{ delay: index * 0.05 }}
                 className="rounded-[1.9rem] border border-border/70 bg-card p-7 shadow-[0_18px_50px_rgba(0,0,0,0.05)]"
               >
@@ -497,7 +498,7 @@ const AcademyPage = () => {
 
       <section className="bg-[#081625] py-20 text-white">
         <div className="mx-auto max-w-7xl px-6 md:px-10">
-          <motion.div initial={{ opacity: 0, y: 22 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
+          <motion.div initial={{ opacity: 0, y: 22 }} whileInView={{ opacity: 1, y: 0 }} viewport={revealViewport}>
             <h2 className="font-heading text-3xl font-bold md:text-5xl">{text.map}</h2>
             <p className="mt-5 max-w-3xl text-lg leading-relaxed text-white/72">{text.mapDescription}</p>
           </motion.div>
@@ -507,7 +508,7 @@ const AcademyPage = () => {
                 key={tr(stage.stage)}
                 initial={{ opacity: 0, y: 22 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
+                viewport={revealViewport}
                 transition={{ delay: index * 0.07 }}
                 className="rounded-[1.9rem] border border-white/10 bg-white/[0.04] p-7"
               >
@@ -528,7 +529,7 @@ const AcademyPage = () => {
 
       <section className="bg-background py-20">
         <div className="mx-auto max-w-7xl px-6 md:px-10">
-          <motion.div initial={{ opacity: 0, y: 22 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
+          <motion.div initial={{ opacity: 0, y: 22 }} whileInView={{ opacity: 1, y: 0 }} viewport={revealViewport}>
             <h2 className="font-heading text-3xl font-bold text-foreground md:text-5xl">{text.process}</h2>
             <p className="mt-5 max-w-3xl text-lg leading-relaxed text-muted-foreground">{text.processDescription}</p>
           </motion.div>
@@ -538,7 +539,7 @@ const AcademyPage = () => {
                 key={tr(item.title)}
                 initial={{ opacity: 0, y: 22 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
+                viewport={revealViewport}
                 transition={{ delay: index * 0.06 }}
                 className="rounded-[1.75rem] border border-border/70 bg-card p-6"
               >
@@ -556,12 +557,12 @@ const AcademyPage = () => {
           <motion.div
             initial={{ opacity: 0, x: -24 }}
             whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
+            viewport={revealViewport}
             className="overflow-hidden rounded-[2rem] border border-border/60 bg-card"
           >
             <img src={academySpeaker} alt="Habibullo Sa'dullayev" className="h-full w-full object-cover" />
           </motion.div>
-          <motion.div initial={{ opacity: 0, x: 24 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}>
+          <motion.div initial={{ opacity: 0, x: 24 }} whileInView={{ opacity: 1, x: 0 }} viewport={revealViewport}>
             <span className="text-sm font-semibold uppercase tracking-[0.32em] text-primary/80">{text.speakerEyebrow}</span>
             <h2 className="mt-5 font-heading text-3xl font-bold text-foreground md:text-5xl">Habibullo Sa'dullayev</h2>
             <p className="mt-3 text-sm uppercase tracking-[0.22em] text-muted-foreground">{text.speakerRole}</p>
@@ -579,7 +580,7 @@ const AcademyPage = () => {
 
       <section className="bg-background py-20">
         <div className="mx-auto max-w-7xl px-6 md:px-10">
-          <motion.div initial={{ opacity: 0, y: 22 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
+          <motion.div initial={{ opacity: 0, y: 22 }} whileInView={{ opacity: 1, y: 0 }} viewport={revealViewport}>
             <h2 className="font-heading text-3xl font-bold text-foreground md:text-5xl">{text.brands}</h2>
             <p className="mt-5 max-w-3xl text-lg leading-relaxed text-muted-foreground">{text.brandsDescription}</p>
           </motion.div>
@@ -597,7 +598,7 @@ const AcademyPage = () => {
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(116,242,216,0.08),transparent_32%),linear-gradient(180deg,rgba(255,255,255,0.02),transparent_38%)]" />
         <div className="relative mx-auto max-w-7xl px-6 md:px-10">
           <div className="grid gap-10 lg:grid-cols-[0.82fr_1.18fr] lg:items-start">
-            <motion.div initial={{ opacity: 0, y: 22 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="lg:sticky lg:top-24">
+            <motion.div initial={{ opacity: 0, y: 22 }} whileInView={{ opacity: 1, y: 0 }} viewport={revealViewport} className="lg:sticky lg:top-24">
               <h2 className="font-heading text-3xl font-bold md:text-5xl">{text.quotes}</h2>
               <p className="mt-5 max-w-2xl text-lg leading-relaxed text-white/74">{text.quotesDescription}</p>
 
@@ -627,7 +628,7 @@ const AcademyPage = () => {
                   key={quote.author}
                   initial={{ opacity: 0, y: 22 }}
                   whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
+                  viewport={revealViewport}
                   transition={{ delay: index * 0.06 }}
                   className="group rounded-[2rem] border border-white/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.06),rgba(255,255,255,0.03))] p-6 shadow-[0_22px_70px_rgba(0,0,0,0.26)] transition-transform duration-300 hover:-translate-y-1 md:p-8"
                 >
@@ -663,7 +664,7 @@ const AcademyPage = () => {
           <motion.div
             initial={{ opacity: 0, y: 22 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
+            viewport={revealViewport}
             className="rounded-[2.25rem] border border-border/70 bg-card px-8 py-14 shadow-[0_24px_80px_rgba(0,0,0,0.06)] md:px-14"
           >
             <Sparkles className="mx-auto h-8 w-8 text-primary" />

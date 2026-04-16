@@ -6,7 +6,7 @@ import { GraduationCap, BookOpen, Users, Rocket } from 'lucide-react';
 
 const Internship = () => {
   const { t, lang } = useI18n();
-  const { ref, isVisible } = useScrollAnimation();
+  const { ref, getMotionProps } = useScrollAnimation();
 
   const features = [
     {
@@ -33,9 +33,7 @@ const Internship = () => {
       <div className="max-w-7xl mx-auto">
         <div className="grid lg:grid-cols-2 gap-16 items-center">
           <motion.div
-            initial={{ opacity: 0, x: -30 }}
-            animate={isVisible ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.6 }}
+            {...getMotionProps({ axis: 'x', distance: 30, duration: 0.6 })}
           >
             <span className="text-sm font-semibold text-primary uppercase tracking-widest">{t.internship.title}</span>
             <h2 className="text-3xl md:text-5xl font-heading font-bold text-foreground mt-3 mb-6">{t.internship.subtitle}</h2>
@@ -53,9 +51,7 @@ const Internship = () => {
             {features.map((f, i) => (
               <motion.div
                 key={f.title}
-                initial={{ opacity: 0, x: 30 }}
-                animate={isVisible ? { opacity: 1, x: 0 } : {}}
-                transition={{ duration: 0.5, delay: 0.2 + i * 0.15 }}
+                {...getMotionProps({ axis: 'x', distance: 30, delay: 0.2 + i * 0.15, duration: 0.5 })}
                 whileHover={{ x: 8, rotateY: 3 }}
                 className="glass-card-light rounded-2xl p-6 flex items-start gap-5 group hover:shadow-lg transition-shadow duration-300"
                 style={{ perspective: 800 }}

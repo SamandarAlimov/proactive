@@ -40,7 +40,7 @@ const serviceOptions = [
 
 const Contact = () => {
   const { t, lang } = useI18n();
-  const { ref, isVisible } = useScrollAnimation();
+  const { ref, getMotionProps } = useScrollAnimation();
   const [formData, setFormData] = useState({
     name: '',
     phoneCountry: DEFAULT_PHONE_COUNTRY,
@@ -107,9 +107,7 @@ const Contact = () => {
 
       <div className="relative mx-auto max-w-7xl px-6">
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={isVisible ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6 }}
+          {...getMotionProps({ distance: 30, duration: 0.6 })}
           className="mb-16 text-center"
         >
           <span
@@ -131,9 +129,7 @@ const Contact = () => {
         <div className="grid items-start gap-8 lg:grid-cols-[minmax(0,1.04fr)_minmax(320px,0.88fr)] xl:gap-12">
           <motion.form
             onSubmit={handleSubmit}
-            initial={{ opacity: 0, x: -30 }}
-            animate={isVisible ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.6, delay: 0.2 }}
+            {...getMotionProps({ axis: 'x', distance: 30, duration: 0.6, delay: 0.2 })}
             className="glass-card-light space-y-6 rounded-[2rem] p-8 md:space-y-7 md:p-10 lg:p-12"
           >
             <div>
@@ -232,9 +228,7 @@ const Contact = () => {
           </motion.form>
 
           <motion.div
-            initial={{ opacity: 0, x: 30 }}
-            animate={isVisible ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.6, delay: 0.4 }}
+            {...getMotionProps({ axis: 'x', distance: 30, duration: 0.6, delay: 0.4 })}
             className="space-y-5 lg:space-y-6"
           >
             <motion.a

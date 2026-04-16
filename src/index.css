@@ -6,6 +6,8 @@
 
 @layer base {
   :root {
+    --site-header-height: 78px;
+    --site-header-offset: 78px;
     /* Brandbook: Och kulrang #F2F5F7 */
     --background: 210 28% 96%;
     /* Brandbook: To'q moviy #264F6B */
@@ -89,6 +91,7 @@
   }
   body {
     @apply bg-background text-foreground font-body antialiased;
+    overflow-x: hidden;
   }
   h1, h2, h3, h4, h5, h6 {
     @apply font-heading;
@@ -153,11 +156,25 @@
   .text-balance {
     text-wrap: balance;
   }
+
+  .hero-stage {
+    min-height: calc(100svh - var(--site-header-offset));
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+  }
+
+  @media (min-height: 860px) {
+    .hero-stage {
+      justify-content: center;
+    }
+  }
 }
 
 /* Smooth scrolling */
 html {
   scroll-behavior: smooth;
+  scroll-padding-top: var(--site-header-offset);
 }
 
 /* Custom scrollbar */

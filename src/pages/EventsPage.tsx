@@ -1,6 +1,7 @@
 import PageLayout from '@/components/PageLayout';
 import { motion } from 'framer-motion';
 import { useI18n } from '@/lib/i18n';
+import { revealViewport } from '@/lib/motion';
 import { Calendar, MapPin, Clock, Users, ArrowRight } from 'lucide-react';
 
 const EventsPage = () => {
@@ -70,7 +71,7 @@ const EventsPage = () => {
       {/* Upcoming */}
       <section className="section-padding relative overflow-hidden">
         <div className="max-w-7xl mx-auto">
-          <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="mb-12">
+          <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={revealViewport} className="mb-12">
             <h2 className="text-3xl md:text-4xl font-heading font-bold text-foreground">{t.events.upcoming}</h2>
           </motion.div>
 
@@ -80,7 +81,7 @@ const EventsPage = () => {
                 key={event.title}
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
+                viewport={revealViewport}
                 transition={{ delay: i * 0.1 }}
                 whileHover={{ y: -4 }}
                 className="glass-card-light rounded-3xl p-8 md:p-10 group hover:shadow-xl transition-all duration-500"
@@ -117,7 +118,7 @@ const EventsPage = () => {
       {/* Past events */}
       <section className="section-padding bg-muted/30 relative overflow-hidden">
         <div className="max-w-7xl mx-auto">
-          <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="mb-12">
+          <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={revealViewport} className="mb-12">
             <h2 className="text-3xl md:text-4xl font-heading font-bold text-foreground">{t.events.past}</h2>
           </motion.div>
 
@@ -127,7 +128,7 @@ const EventsPage = () => {
                 key={event.title}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
+                viewport={revealViewport}
                 transition={{ delay: i * 0.1 }}
                 className="glass-card-light rounded-2xl p-6 group"
               >

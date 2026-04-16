@@ -28,7 +28,7 @@ const Hero = () => {
   return (
     <section
       ref={sectionRef}
-      className="relative h-screen flex items-center justify-center overflow-hidden"
+      className="relative min-h-[100svh] overflow-hidden"
       style={{ position: 'sticky', top: 0, zIndex: 1 }}
     >
       <motion.div className="absolute inset-0" style={{ y: bgY, scale: bgScale }}>
@@ -54,12 +54,16 @@ const Hero = () => {
         backgroundSize: '80px 80px',
       }} />
 
-      <motion.div style={{ y: textY, opacity }} className="relative z-10 max-w-5xl mx-auto px-6 pt-20 text-center">
+      <motion.div
+        style={{ y: textY, opacity, paddingTop: 'var(--site-header-offset)' }}
+        className="relative z-10 mx-auto flex w-full max-w-5xl flex-col px-6 py-8 text-center sm:py-10 lg:py-12"
+      >
+        <div className="hero-stage">
         <motion.h1
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.9, delay: 0.5, ease: [0.25, 0.46, 0.45, 0.94] }}
-          className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-heading font-bold text-white leading-[1.12] mb-5 md:mb-8 tracking-tight"
+          className="mb-5 font-heading text-[clamp(2.7rem,5.9vw,6.15rem)] font-bold leading-[1.04] tracking-tight text-white md:mb-8"
         >
           {t.hero.title}{' '}
           <span className="relative inline-block">
@@ -79,7 +83,7 @@ const Hero = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.7 }}
-          className="text-base sm:text-lg md:text-xl text-white/50 max-w-2xl mx-auto mb-8 md:mb-14 text-balance font-normal leading-relaxed"
+          className="mx-auto mb-8 max-w-2xl text-balance text-sm font-normal leading-relaxed text-white/56 sm:text-base md:mb-12 md:text-lg xl:text-xl"
         >
           {t.hero.subtitle}
         </motion.p>
@@ -115,6 +119,7 @@ const Hero = () => {
             ))}
           </div>
         </motion.div>
+        </div>
       </motion.div>
 
       <motion.div animate={{ y: [0, 10, 0] }} transition={{ duration: 2.5, repeat: Infinity, ease: 'easeInOut' }} className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10">

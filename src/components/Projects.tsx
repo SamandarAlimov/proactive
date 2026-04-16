@@ -20,7 +20,7 @@ type FeaturedProject = {
 
 const Projects = () => {
   const { t, lang } = useI18n();
-  const { ref, isVisible } = useScrollAnimation();
+  const { ref, getMotionProps } = useScrollAnimation();
 
   const allProjects = clientList;
 
@@ -59,9 +59,7 @@ const Projects = () => {
     <section id="projects" className="relative overflow-hidden py-24 md:py-32" ref={ref}>
       <div className="relative mx-auto max-w-7xl px-6">
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={isVisible ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6 }}
+          {...getMotionProps({ distance: 30, duration: 0.6 })}
           className="mb-16 text-center"
         >
           <span
@@ -80,11 +78,17 @@ const Projects = () => {
 
         <div className="mb-16 space-y-8">
           {featured.map((project, i) => (
-            <FeaturedCard key={project.title} project={project} index={i} isVisible={isVisible} viewProjectText={t.projects.viewProject} />
+            <FeaturedCard
+              key={project.title}
+              project={project}
+              index={i}
+              motionProps={getMotionProps({ distance: 40, delay: 0.15 * i, duration: 0.6 })}
+              viewProjectText={t.projects.viewProject}
+            />
           ))}
         </div>
 
-        <motion.div initial={{ opacity: 0 }} animate={isVisible ? { opacity: 1 } : {}} transition={{ delay: 0.5 }}>
+        <motion.div {...getMotionProps({ distance: 18, delay: 0.5 })}>
           <h3 className="mb-6 text-center text-xl font-heading font-bold text-foreground">
             {lang === 'uz' ? 'Barcha loyihalar' : lang === 'ru' ? 'Все проекты' : 'All Projects'}
           </h3>
@@ -92,9 +96,7 @@ const Projects = () => {
             {allProjects.map((name, i) => (
               <motion.span
                 key={name}
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={isVisible ? { opacity: 1, scale: 1 } : {}}
-                transition={{ delay: 0.5 + i * 0.02 }}
+                {...getMotionProps({ distance: 12, delay: 0.5 + i * 0.02, scale: 0.94 })}
                 className="cursor-default rounded-full border px-4 py-2 text-sm font-medium transition-all duration-300 hover:scale-105"
                 style={{
                   borderColor: 'hsla(166, 75%, 61%, 0.15)',
@@ -108,7 +110,7 @@ const Projects = () => {
           </div>
         </motion.div>
 
-        <motion.div initial={{ opacity: 0 }} animate={isVisible ? { opacity: 1 } : {}} transition={{ delay: 0.6 }} className="mt-14 text-center">
+        <motion.div {...getMotionProps({ distance: 18, delay: 0.6 })} className="mt-14 text-center">
           <Link to="/projects" className="group inline-flex items-center gap-2 rounded-xl border border-primary/20 px-6 py-3 font-semibold text-primary transition-all duration-300 hover:bg-primary/5">
             {t.projects.viewAll}
             <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
@@ -122,12 +124,12 @@ const Projects = () => {
 const FeaturedCard = ({
   project,
   index,
-  isVisible,
+  motionProps,
   viewProjectText,
 }: {
   project: FeaturedProject;
   index: number;
-  isVisible: boolean;
+  motionProps: React.ComponentProps<typeof motion.div>;
   viewProjectText: string;
 }) => {
   const cardRef = useRef<HTMLDivElement>(null);
@@ -137,9 +139,7 @@ const FeaturedCard = ({
   return (
     <motion.div
       ref={cardRef}
-      initial={{ opacity: 0, y: 40 }}
-      animate={isVisible ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.6, delay: 0.15 * index }}
+      {...motionProps}
       className="group relative overflow-hidden rounded-3xl transition-all duration-500"
       style={{ background: project.color, border: `1px solid ${project.accent}20` }}
     >

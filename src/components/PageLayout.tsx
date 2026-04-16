@@ -12,7 +12,7 @@ const PageLayout = ({ children }: { children: React.ReactNode }) => {
       className="min-h-screen bg-background"
     >
       <Navbar />
-      <div className="pt-24">{children}</div>
+      <div style={{ paddingTop: 'var(--site-header-offset)' }}>{children}</div>
       <Footer />
     </motion.div>
   );

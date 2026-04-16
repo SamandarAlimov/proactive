@@ -17,7 +17,7 @@ import { founderProfile, type FounderLang } from '@/lib/founder-profile';
 
 const About = () => {
   const { t, lang } = useI18n();
-  const { ref, isVisible } = useScrollAnimation();
+  const { ref, getMotionProps, shouldReduceMotion } = useScrollAnimation();
   const founderLang = (lang in founderProfile.tags ? lang : 'uz') as FounderLang;
 
   const founderName = 'Habibullo Sadulloyev';
@@ -111,9 +111,7 @@ const About = () => {
 
       <div className="relative mx-auto max-w-7xl px-6">
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={isVisible ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6 }}
+          {...getMotionProps({ distance: 30, duration: 0.6 })}
           className="mb-20 text-center"
         >
           <span
@@ -135,9 +133,7 @@ const About = () => {
 
         <div className="grid items-center gap-16 lg:grid-cols-2 lg:gap-20">
           <motion.div
-            initial={{ opacity: 0, x: -40 }}
-            animate={isVisible ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.7, delay: 0.2 }}
+            {...getMotionProps({ axis: 'x', distance: 40, duration: 0.7, delay: 0.2 })}
           >
             <p className="mb-10 text-lg leading-relaxed text-muted-foreground md:text-xl">
               {t.about.description}
@@ -147,9 +143,7 @@ const About = () => {
               {capabilityCards.map((item, i) => (
                 <motion.div
                   key={item.title}
-                  initial={{ opacity: 0, y: 24 }}
-                  animate={isVisible ? { opacity: 1, y: 0 } : {}}
-                  transition={{ duration: 0.55, delay: 0.3 + i * 0.1 }}
+                  {...getMotionProps({ distance: 24, delay: 0.3 + i * 0.1 })}
                   whileHover={{ y: -6, scale: 1.015 }}
                   className="group relative overflow-hidden rounded-[1.75rem] border border-border/60 bg-card/90 p-6 shadow-[0_16px_40px_rgba(0,0,0,0.05)] backdrop-blur-sm transition-all duration-300"
                 >
@@ -174,18 +168,14 @@ const About = () => {
               ))}
 
               <motion.div
-                initial={{ opacity: 0, scale: 0.94 }}
-                animate={isVisible ? { opacity: 1, scale: 1 } : {}}
-                transition={{ duration: 0.7, delay: 0.75 }}
+                {...getMotionProps({ distance: 18, delay: 0.75, scale: 0.94 })}
                 className="pointer-events-none absolute -left-10 top-12 hidden h-24 w-24 rounded-full border border-primary/10 bg-primary/5 blur-xl lg:block"
               />
             </div>
           </motion.div>
 
           <motion.div
-            initial={{ opacity: 0, x: 40 }}
-            animate={isVisible ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.7, delay: 0.4 }}
+            {...getMotionProps({ axis: 'x', distance: 40, duration: 0.7, delay: 0.4 })}
             className="relative"
           >
             <div
@@ -196,8 +186,10 @@ const About = () => {
               }}
             >
               <motion.div
-                animate={{ rotate: 360 }}
-                transition={{ duration: 18, repeat: Infinity, ease: 'linear' }}
+                animate={shouldReduceMotion ? undefined : { rotate: 360 }}
+                transition={
+                  shouldReduceMotion ? undefined : { duration: 18, repeat: Infinity, ease: 'linear' }
+                }
                 className="absolute inset-0"
               >
                 <div className="absolute left-1/2 top-[12%] h-3 w-3 -translate-x-1/2 rounded-full bg-primary/70 shadow-[0_0_20px_rgba(82,230,200,0.55)]" />
@@ -226,8 +218,12 @@ const About = () => {
 
               <div className="relative z-10 text-center">
                 <motion.div
-                  animate={{ y: [0, -8, 0] }}
-                  transition={{ duration: 4.5, repeat: Infinity, ease: 'easeInOut' }}
+                  animate={shouldReduceMotion ? undefined : { y: [0, -8, 0] }}
+                  transition={
+                    shouldReduceMotion
+                      ? undefined
+                      : { duration: 4.5, repeat: Infinity, ease: 'easeInOut' }
+                  }
                   className="mx-auto mb-6 h-28 w-28 overflow-hidden rounded-2xl shadow-2xl ring-2 ring-white/10 md:h-36 md:w-36"
                 >
                   <img src={proactiveLogo} alt="Proactive Logo" className="h-full w-full object-cover" />
@@ -247,9 +243,7 @@ const About = () => {
         </div>
 
         <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          animate={isVisible ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.7, delay: 0.6 }}
+          {...getMotionProps({ distance: 40, duration: 0.7, delay: 0.6 })}
           className="mt-20 md:mt-28"
         >
           <div

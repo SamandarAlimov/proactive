@@ -5,7 +5,7 @@ import { clientList } from '@/lib/client-list';
 
 const Clients = () => {
   const { t } = useI18n();
-  const { ref, isVisible } = useScrollAnimation();
+  const { ref, getMotionProps } = useScrollAnimation();
 
   return (
     <section id="clients" className="relative py-24 md:py-32 overflow-hidden" ref={ref}>
@@ -16,9 +16,7 @@ const Clients = () => {
 
       <div className="max-w-7xl mx-auto px-6 relative">
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={isVisible ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6 }}
+          {...getMotionProps({ distance: 30, duration: 0.6 })}
           className="text-center mb-16"
         >
           <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-semibold uppercase tracking-widest"

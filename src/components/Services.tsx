@@ -6,7 +6,13 @@ import { useI18n } from '@/lib/i18n';
 import { serviceGradientColors, serviceIcons, serviceKeys, type ServiceContent } from '@/lib/service-config';
 import { useScrollAnimation } from '@/hooks/useScrollAnimation';
 
-const Card3D = ({ children, delay, isVisible }: { children: React.ReactNode; delay: number; isVisible: boolean }) => {
+const Card3D = ({
+  children,
+  motionProps,
+}: {
+  children: React.ReactNode;
+  motionProps: React.ComponentProps<typeof motion.div>;
+}) => {
   const [rotateX, setRotateX] = useState(0);
   const [rotateY, setRotateY] = useState(0);
 
@@ -20,9 +26,7 @@ const Card3D = ({ children, delay, isVisible }: { children: React.ReactNode; del
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 30 }}
-      animate={isVisible ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.5, delay }}
+      {...motionProps}
       onMouseMove={handleMouseMove}
       onMouseLeave={() => {
         setRotateX(0);
@@ -42,7 +46,7 @@ const Card3D = ({ children, delay, isVisible }: { children: React.ReactNode; del
 
 const Services = () => {
   const { t } = useI18n();
-  const { ref, isVisible } = useScrollAnimation();
+  const { ref, getMotionProps } = useScrollAnimation();
 
   return (
     <section id="services" className="relative overflow-hidden py-24 md:py-32" ref={ref}>
@@ -55,9 +59,7 @@ const Services = () => {
 
       <div className="relative mx-auto max-w-7xl px-6">
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={isVisible ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6 }}
+          {...getMotionProps({ distance: 30, duration: 0.6 })}
           className="mb-20 text-center"
         >
           <span
@@ -83,7 +85,7 @@ const Services = () => {
             const colors = serviceGradientColors[key];
 
             return (
-              <Card3D key={key} delay={0.1 * index} isVisible={isVisible}>
+              <Card3D key={key} motionProps={getMotionProps({ distance: 30, delay: 0.1 * index, duration: 0.5 })}>
                 <Link to={`/services/${key}`} className="block h-full">
                   <div
                     className="group relative h-full overflow-hidden rounded-2xl p-8 transition-all duration-500 hover:shadow-2xl"
@@ -124,9 +126,7 @@ const Services = () => {
         </div>
 
         <motion.div
-          initial={{ opacity: 0 }}
-          animate={isVisible ? { opacity: 1 } : {}}
-          transition={{ delay: 0.8 }}
+          {...getMotionProps({ distance: 18, delay: 0.8 })}
           className="mt-14 text-center"
         >
           <Link

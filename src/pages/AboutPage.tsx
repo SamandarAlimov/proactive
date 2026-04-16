@@ -13,6 +13,7 @@ import FounderSpecialtyChips from '@/components/FounderSpecialtyChips';
 import founderHabibullo from '@/assets/founder-habibullo.png';
 import { founderProfile, type FounderLang } from '@/lib/founder-profile';
 import { useI18n } from '@/lib/i18n';
+import { premiumRevealTransition, revealViewport } from '@/lib/motion';
 
 type PageLang = 'uz' | 'en' | 'ru';
 
@@ -145,8 +146,8 @@ const aboutPageContent: Record<
 const surfaceMotion = {
   initial: { opacity: 0, y: 24 },
   whileInView: { opacity: 1, y: 0 },
-  viewport: { once: true, amount: 0.2 },
-  transition: { duration: 0.6, ease: 'easeOut' },
+  viewport: revealViewport,
+  transition: premiumRevealTransition,
 } as const;
 
 const AboutPage = () => {

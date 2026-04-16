@@ -1,6 +1,7 @@
 import PageLayout from '@/components/PageLayout';
 import { motion } from 'framer-motion';
 import { useI18n } from '@/lib/i18n';
+import { revealViewport } from '@/lib/motion';
 import { Briefcase, Users, ArrowRight, MapPin, Clock, Handshake, Star, Zap } from 'lucide-react';
 
 const CareersPage = () => {
@@ -79,7 +80,7 @@ const CareersPage = () => {
       {/* Open Positions */}
       <section className="section-padding relative overflow-hidden">
         <div className="max-w-7xl mx-auto">
-          <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="mb-12">
+          <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={revealViewport} className="mb-12">
             <h2 className="text-3xl md:text-4xl font-heading font-bold text-foreground flex items-center gap-3">
               <Briefcase className="w-8 h-8 text-primary" />
               {t.careers.openPositions}
@@ -92,7 +93,7 @@ const CareersPage = () => {
                 key={pos.title}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
+                viewport={revealViewport}
                 transition={{ delay: i * 0.1 }}
                 whileHover={{ y: -4 }}
                 className="glass-card-light rounded-2xl p-8 group hover:shadow-xl transition-all duration-500"
@@ -119,12 +120,12 @@ const CareersPage = () => {
       {/* Perks */}
       <section className="section-padding bg-muted/30">
         <div className="max-w-7xl mx-auto">
-          <motion.h2 initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-3xl md:text-4xl font-heading font-bold text-foreground text-center mb-12">
+          <motion.h2 initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={revealViewport} className="text-3xl md:text-4xl font-heading font-bold text-foreground text-center mb-12">
             {lang === 'uz' ? 'Afzalliklar' : lang === 'ru' ? 'Преимущества' : 'Perks & Benefits'}
           </motion.h2>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {perks.map((perk, i) => (
-              <motion.div key={i} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.08 }}
+              <motion.div key={i} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={revealViewport} transition={{ delay: i * 0.08 }}
                 className="glass-card-light rounded-2xl p-6 text-center hover:shadow-lg transition-all duration-300">
                 <span className="text-foreground font-medium">{perk}</span>
               </motion.div>
@@ -136,7 +137,7 @@ const CareersPage = () => {
       {/* Partnership */}
       <section className="section-padding relative overflow-hidden">
         <div className="max-w-7xl mx-auto">
-          <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="mb-12">
+          <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={revealViewport} className="mb-12">
             <h2 className="text-3xl md:text-4xl font-heading font-bold text-foreground flex items-center gap-3">
               <Handshake className="w-8 h-8 text-primary" />
               {t.careers.partnership}
@@ -149,7 +150,7 @@ const CareersPage = () => {
                 key={pt.title}
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
+                viewport={revealViewport}
                 transition={{ delay: i * 0.1 }}
                 whileHover={{ y: -8 }}
                 className="glass-card-light rounded-3xl p-8 text-center group hover:shadow-xl transition-all duration-500"

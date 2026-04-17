@@ -4,6 +4,7 @@ import { supabase } from '@/integrations/supabase/client';
 import { toast } from 'sonner';
 import { Lock, Eye, EyeOff } from 'lucide-react';
 import { ThemeToggle } from '@/components/ThemeToggle';
+import SEO from '@/components/SEO';
 
 const AdminLogin = () => {
   const [email, setEmail] = useState('');
@@ -26,6 +27,13 @@ const AdminLogin = () => {
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-background px-6 relative overflow-hidden">
+      <SEO
+        title="Admin login"
+        description="Administrative login for Proactive."
+        lang="uz"
+        path="/admin/login"
+        noindex
+      />
       <div className="absolute top-4 right-4 z-20">
         <ThemeToggle />
       </div>

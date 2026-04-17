@@ -3,14 +3,34 @@ import { useTheme } from 'next-themes';
 import { useI18n } from '@/lib/i18n';
 import PageLayout from '@/components/PageLayout';
 import TeamShowcaseStrip from '@/components/TeamShowcaseStrip';
+import SEO from '@/components/SEO';
+import { createBreadcrumbSchema, createWebPageSchema } from '@/lib/seo';
 
 const TeamPage = () => {
-  const { t } = useI18n();
+  const { t, lang } = useI18n();
   const { resolvedTheme } = useTheme();
   const isDark = resolvedTheme === 'dark';
 
   return (
     <PageLayout>
+      <SEO
+        title={t.team.title}
+        description={t.team.description}
+        lang={lang}
+        path="/team"
+        structuredData={[
+          createWebPageSchema({
+            title: t.team.title,
+            description: t.team.description,
+            lang,
+            path: '/team',
+          }),
+          createBreadcrumbSchema([
+            { name: 'Proactive', path: '/' },
+            { name: t.team.title, path: '/team' },
+          ]),
+        ]}
+      />
       <div
         className="pb-12 pt-28"
         style={

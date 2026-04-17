@@ -3,9 +3,12 @@ import { useI18n } from '@/lib/i18n';
 import { GraduationCap, BookOpen, Users, Rocket } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import PageLayout from '@/components/PageLayout';
+import SEO from '@/components/SEO';
+import { createBreadcrumbSchema, createWebPageSchema } from '@/lib/seo';
 
 const InternshipPage = () => {
   const { t, lang } = useI18n();
+  const seoDescription = t.internship.description;
 
   const features = [
     { icon: BookOpen, title: lang === 'uz' ? 'Amaliy bilimlar' : lang === 'ru' ? 'Практические знания' : 'Practical Knowledge', desc: lang === 'uz' ? 'Real loyihalarda ishlash tajribasi' : lang === 'ru' ? 'Опыт работы на реальных проектах' : 'Experience on real projects' },
@@ -15,6 +18,24 @@ const InternshipPage = () => {
 
   return (
     <PageLayout>
+      <SEO
+        title={t.internship.title}
+        description={seoDescription}
+        lang={lang}
+        path="/internship"
+        structuredData={[
+          createWebPageSchema({
+            title: t.internship.title,
+            description: seoDescription,
+            lang,
+            path: '/internship',
+          }),
+          createBreadcrumbSchema([
+            { name: 'Proactive', path: '/' },
+            { name: t.internship.title, path: '/internship' },
+          ]),
+        ]}
+      />
       <section className="section-padding bg-secondary text-secondary-foreground">
         <div className="max-w-7xl mx-auto text-center">
           <motion.span initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="text-sm font-semibold text-primary uppercase tracking-widest">{t.internship.title}</motion.span>

@@ -1,57 +1,116 @@
-import { useEffect, useRef, useState } from 'react';
+import { useSyncExternalStore } from 'react';
 
 export type ScrollDirection = 'up' | 'down';
 
-export const useScrollDirection = (threshold = 10) => {
-  const [direction, setDirection] = useState<ScrollDirection>('down');
-  const lastYRef = useRef(0);
-  const tickingRef = useRef(false);
-  const directionRef = useRef<ScrollDirection>('down');
+type DirectionStore = {
+  getSnapshot: () => ScrollDirection;
+  subscribe: (listener: () => void) => () => void;
+};
 
-  useEffect(() => {
+const stores = new Map<number, DirectionStore>();
+
+const createDirectionStore = (threshold: number): DirectionStore => {
+  let direction: ScrollDirection = 'down';
+  let lastY = 0;
+  let ticking = false;
+  let rafId = 0;
+  let listening = false;
+
+  const listeners = new Set<() => void>();
+
+  const notify = () => {
+    listeners.forEach((listener) => listener());
+  };
+
+  const updateDirection = () => {
+    ticking = false;
+
     if (typeof window === 'undefined') {
-      return undefined;
+      return;
     }
 
-    lastYRef.current = window.scrollY;
+    const nextY = window.scrollY;
+    const delta = nextY - lastY;
 
-    const updateDirection = () => {
-      tickingRef.current = false;
+    if (Math.abs(delta) < threshold) {
+      return;
+    }
 
-      const nextY = window.scrollY;
-      const delta = nextY - lastYRef.current;
+    lastY = nextY;
 
-      if (Math.abs(delta) < threshold) {
-        return;
-      }
+    const nextDirection: ScrollDirection = delta > 0 ? 'down' : 'up';
 
-      const nextDirection: ScrollDirection = delta > 0 ? 'down' : 'up';
+    if (nextDirection === direction) {
+      return;
+    }
 
-      lastYRef.current = nextY;
+    direction = nextDirection;
+    notify();
+  };
 
-      if (nextDirection === directionRef.current) {
-        return;
-      }
+  const handleScroll = () => {
+    if (typeof window === 'undefined' || ticking) {
+      return;
+    }
 
-      directionRef.current = nextDirection;
-      setDirection(nextDirection);
-    };
+    ticking = true;
+    rafId = window.requestAnimationFrame(updateDirection);
+  };
 
-    const handleScroll = () => {
-      if (tickingRef.current) {
-        return;
-      }
+  const start = () => {
+    if (typeof window === 'undefined' || listening) {
+      return;
+    }
 
-      tickingRef.current = true;
-      window.requestAnimationFrame(updateDirection);
-    };
-
+    listening = true;
+    lastY = window.scrollY;
     window.addEventListener('scroll', handleScroll, { passive: true });
+  };
 
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
-  }, [threshold]);
+  const stop = () => {
+    if (typeof window === 'undefined' || !listening) {
+      return;
+    }
 
-  return direction;
+    listening = false;
+    window.removeEventListener('scroll', handleScroll);
+    window.cancelAnimationFrame(rafId);
+    ticking = false;
+  };
+
+  return {
+    getSnapshot: () => direction,
+    subscribe: (listener) => {
+      listeners.add(listener);
+      start();
+
+      return () => {
+        listeners.delete(listener);
+
+        if (listeners.size === 0) {
+          stop();
+        }
+      };
+    },
+  };
+};
+
+const getDirectionStore = (threshold: number) => {
+  const key = Math.max(1, Math.round(threshold));
+
+  if (!stores.has(key)) {
+    stores.set(key, createDirectionStore(key));
+  }
+
+  return stores.get(key)!;
+};
+
+export const useScrollDirection = (threshold = 10) => {
+  const store = getDirectionStore(threshold);
+
+  return useSyncExternalStore(
+    store.subscribe,
+    store.getSnapshot,
+    () => 'down' satisfies ScrollDirection,
+  );
 };

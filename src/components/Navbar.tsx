@@ -22,9 +22,43 @@ const Navbar = () => {
   const isHome = location.pathname === '/';
 
   useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 50);
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    if (typeof window === 'undefined') {
+      return undefined;
+    }
+
+    let ticking = false;
+    let rafId = 0;
+    let currentValue = window.scrollY > 50;
+
+    setScrolled(currentValue);
+
+    const updateScrolled = () => {
+      ticking = false;
+      const nextValue = window.scrollY > 50;
+
+      if (nextValue === currentValue) {
+        return;
+      }
+
+      currentValue = nextValue;
+      setScrolled(nextValue);
+    };
+
+    const handleScroll = () => {
+      if (ticking) {
+        return;
+      }
+
+      ticking = true;
+      rafId = window.requestAnimationFrame(updateScrolled);
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+
+    return () => {
+      window.cancelAnimationFrame(rafId);
+      window.removeEventListener('scroll', handleScroll);
+    };
   }, []);
 
   useEffect(() => {

@@ -4,14 +4,27 @@ import { Link, useParams } from 'react-router-dom';
 import PageLayout from '@/components/PageLayout';
 import { useI18n } from '@/lib/i18n';
 import { isServiceKey, serviceIcons, type ServiceContent } from '@/lib/service-config';
+import SEO from '@/components/SEO';
+import {
+  createBreadcrumbSchema,
+  createServiceSchema,
+  createWebPageSchema,
+} from '@/lib/seo';
 
 const ServiceDetailPage = () => {
   const { slug } = useParams<{ slug: string }>();
-  const { t } = useI18n();
+  const { t, lang } = useI18n();
 
   if (!slug || !isServiceKey(slug)) {
     return (
       <PageLayout>
+        <SEO
+          title="Service not found"
+          description="The requested service page could not be found."
+          lang={lang}
+          noindex
+          path={slug ? `/services/${slug}` : '/services'}
+        />
         <div className="section-padding text-center">
           <h1 className="text-3xl font-heading font-bold text-foreground">404</h1>
         </div>
@@ -24,6 +37,31 @@ const ServiceDetailPage = () => {
 
   return (
     <PageLayout>
+      <SEO
+        title={service.title}
+        description={service.fullDescription}
+        lang={lang}
+        path={`/services/${slug}`}
+        structuredData={[
+          createWebPageSchema({
+            title: service.title,
+            description: service.fullDescription,
+            lang,
+            path: `/services/${slug}`,
+          }),
+          createServiceSchema({
+            name: service.title,
+            description: service.fullDescription,
+            lang,
+            path: `/services/${slug}`,
+          }),
+          createBreadcrumbSchema([
+            { name: 'Proactive', path: '/' },
+            { name: t.services.title, path: '/services' },
+            { name: service.title, path: `/services/${slug}` },
+          ]),
+        ]}
+      />
       <section className="section-padding bg-secondary text-secondary-foreground">
         <div className="mx-auto max-w-7xl">
           <Link

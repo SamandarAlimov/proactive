@@ -1,4 +1,4 @@
-import { motion, useScroll, useTransform } from 'framer-motion';
+import { motion, useReducedMotion, useScroll, useTransform } from 'framer-motion';
 import { useI18n } from '@/lib/i18n';
 import { ArrowRight, Play } from 'lucide-react';
 import { useRef } from 'react';
@@ -14,24 +14,21 @@ const clientNames = [
 
 const Hero = () => {
   const { t } = useI18n();
+  const shouldReduceMotion = useReducedMotion();
   const sectionRef = useRef<HTMLElement>(null);
   const { scrollYProgress } = useScroll({
     target: sectionRef,
     offset: ['start start', 'end start'],
   });
 
-  const bgY = useTransform(scrollYProgress, [0, 1], ['0%', '40%']);
-  const bgScale = useTransform(scrollYProgress, [0, 1], [1.05, 1.25]);
-  const textY = useTransform(scrollYProgress, [0, 1], ['0%', '80%']);
-  const opacity = useTransform(scrollYProgress, [0, 0.6], [1, 0]);
+  const bgY = useTransform(scrollYProgress, [0, 1], ['0%', shouldReduceMotion ? '0%' : '16%']);
 
   return (
     <section
       ref={sectionRef}
       className="relative min-h-[100svh] overflow-hidden"
-      style={{ position: 'sticky', top: 0, zIndex: 1 }}
     >
-      <motion.div className="absolute inset-0" style={{ y: bgY, scale: bgScale }}>
+      <motion.div className="absolute inset-0 will-change-transform" style={{ y: bgY }}>
         <img src={heroBg} alt="" className="w-full h-full object-cover" />
       </motion.div>
 
@@ -54,9 +51,12 @@ const Hero = () => {
         backgroundSize: '80px 80px',
       }} />
 
-      <motion.div
-        style={{ y: textY, opacity, paddingTop: 'var(--site-header-offset)' }}
-        className="relative z-10 mx-auto flex w-full max-w-5xl flex-col px-6 py-8 text-center sm:py-10 lg:py-12"
+      <div
+        style={{
+          minHeight: '100svh',
+          paddingTop: 'calc(var(--site-header-offset) + clamp(1.25rem, 2.8vw, 2.75rem))',
+        }}
+        className="relative z-10 mx-auto flex w-full max-w-5xl flex-col px-6 pb-8 text-center sm:pb-10 lg:pb-12"
       >
         <div className="hero-stage">
         <motion.h1
@@ -107,12 +107,12 @@ const Hero = () => {
           </a>
         </motion.div>
 
-        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 1, delay: 1.4 }} className="mt-12 md:mt-24">
-          <p className="text-white/25 text-xs mb-4 md:mb-6 uppercase tracking-[0.2em]">{t.hero.trustedBy}</p>
+        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 1, delay: 1.4 }} className="mt-10 md:mt-14 lg:mt-16">
+          <p className="mb-4 text-xs uppercase tracking-[0.2em] text-white/38 md:mb-5">{t.hero.trustedBy}</p>
           <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 md:gap-x-8 md:gap-y-3">
             {clientNames.map((name, i) => (
               <motion.span key={name} initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1.6 + i * 0.03 }}
-                className="text-white/20 text-[10px] md:text-xs font-heading font-bold tracking-wider hover:text-primary/50 transition-colors duration-300 cursor-default"
+                className="cursor-default text-[10px] font-heading font-bold tracking-wider text-white/48 transition-colors duration-300 hover:text-primary/75 md:text-xs"
               >
                 {name}
               </motion.span>
@@ -120,11 +120,27 @@ const Hero = () => {
           </div>
         </motion.div>
         </div>
-      </motion.div>
+      </div>
 
-      <motion.div animate={{ y: [0, 10, 0] }} transition={{ duration: 2.5, repeat: Infinity, ease: 'easeInOut' }} className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10">
+      <motion.div
+        animate={shouldReduceMotion ? undefined : { y: [0, 10, 0] }}
+        transition={
+          shouldReduceMotion
+            ? undefined
+            : { duration: 2.5, repeat: Infinity, ease: 'easeInOut' }
+        }
+        className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10"
+      >
         <div className="w-5 h-9 rounded-full border border-white/15 flex items-start justify-center p-1.5">
-          <motion.div animate={{ y: [0, 14, 0], opacity: [1, 0.2, 1] }} transition={{ duration: 2.5, repeat: Infinity, ease: 'easeInOut' }} className="w-1 h-1 rounded-full bg-primary" />
+          <motion.div
+            animate={shouldReduceMotion ? undefined : { y: [0, 14, 0], opacity: [1, 0.2, 1] }}
+            transition={
+              shouldReduceMotion
+                ? undefined
+                : { duration: 2.5, repeat: Infinity, ease: 'easeInOut' }
+            }
+            className="w-1 h-1 rounded-full bg-primary"
+          />
         </div>
       </motion.div>
     </section>

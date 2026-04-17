@@ -3,6 +3,8 @@ import { motion } from 'framer-motion';
 import { ArrowLeft, ArrowRight } from 'lucide-react';
 import { useI18n } from '@/lib/i18n';
 import PageLayout from '@/components/PageLayout';
+import SEO from '@/components/SEO';
+import { createBreadcrumbSchema, createCreativeWorkSchema, createWebPageSchema } from '@/lib/seo';
 import marfImg from '@/assets/marf-project.png';
 import aurusHero from '@/assets/projects/aurus/aurus-hero.webp';
 import aurusGallery01 from '@/assets/projects/aurus/aurus-gallery-01.webp';
@@ -463,6 +465,13 @@ const ProjectDetailPage = () => {
   if (!project && !genericTitle) {
     return (
       <PageLayout>
+        <SEO
+          title="Project not found"
+          description="The requested project page could not be found."
+          lang={currentLang}
+          noindex
+          path={slug ? `/projects/${slug}` : '/projects'}
+        />
         <div className="section-padding text-center">
           <h1 className="text-3xl font-heading font-bold text-foreground">
             {currentLang === 'uz' ? 'Loyiha topilmadi' : currentLang === 'ru' ? 'Проект не найден' : 'Project not found'}
@@ -523,6 +532,32 @@ const ProjectDetailPage = () => {
 
   return (
     <PageLayout>
+      <SEO
+        title={title}
+        description={description}
+        lang={currentLang}
+        path={`/projects/${slug}`}
+        image={image || undefined}
+        structuredData={[
+          createWebPageSchema({
+            title,
+            description,
+            lang: currentLang,
+            path: `/projects/${slug}`,
+          }),
+          createCreativeWorkSchema({
+            name: title,
+            description,
+            lang: currentLang,
+            path: `/projects/${slug}`,
+          }),
+          createBreadcrumbSchema([
+            { name: 'Proactive', path: '/' },
+            { name: t.projects.title, path: '/projects' },
+            { name: title, path: `/projects/${slug}` },
+          ]),
+        ]}
+      />
       <section
         className="relative overflow-hidden"
         style={{

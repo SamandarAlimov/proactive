@@ -158,7 +158,7 @@
   }
 
   .hero-stage {
-    min-height: calc(100svh - var(--site-header-offset));
+    flex: 1 1 auto;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;

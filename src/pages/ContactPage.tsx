@@ -11,6 +11,7 @@ import {
 } from '@/components/contact/contactFieldStyles';
 import { ContactEmailInput, ContactPhoneInput } from '@/components/contact/ContactFormFields';
 import PageLayout from '@/components/PageLayout';
+import SEO from '@/components/SEO';
 import {
   contactAddressCity,
   contactAddressFull,
@@ -25,6 +26,11 @@ import {
 import { supabase } from '@/integrations/supabase/client';
 import { buildPhoneNumber, DEFAULT_PHONE_COUNTRY } from '@/lib/contact-form';
 import { useI18n } from '@/lib/i18n';
+import {
+  createBreadcrumbSchema,
+  createOrganizationSchema,
+  createWebPageSchema,
+} from '@/lib/seo';
 import { cn } from '@/lib/utils';
 
 const serviceOptions = [
@@ -93,9 +99,31 @@ const ContactPage = () => {
       : lang === 'ru'
         ? 'Выберите тип услуги'
         : 'Select service type';
+  const seoDescription = `${t.contact.subtitle}. ${contactAddressLine}, ${contactAddressCity}. Email: ${contactEmail}.`;
 
   return (
     <PageLayout>
+      <SEO
+        title={t.contact.title}
+        description={seoDescription}
+        lang={lang}
+        path="/contact"
+        type="ContactPage"
+        structuredData={[
+          createOrganizationSchema(lang),
+          createWebPageSchema({
+            title: t.contact.title,
+            description: seoDescription,
+            lang,
+            path: '/contact',
+            type: 'ContactPage',
+          }),
+          createBreadcrumbSchema([
+            { name: 'Proactive', path: '/' },
+            { name: t.contact.title, path: '/contact' },
+          ]),
+        ]}
+      />
       <section className="section-padding bg-secondary text-secondary-foreground">
         <div className="mx-auto max-w-7xl text-center">
           <motion.span

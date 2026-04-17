@@ -10,6 +10,7 @@ import {
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ThemeToggle } from '@/components/ThemeToggle';
+import SEO from '@/components/SEO';
 
 type Tab = 'contacts' | 'news' | 'settings';
 type ContactStatus = 'all' | 'new' | 'in_progress' | 'done';
@@ -216,6 +217,13 @@ const Admin = () => {
 
   return (
     <div className="min-h-screen bg-background text-foreground">
+      <SEO
+        title="Admin panel"
+        description="Administrative interface for Proactive."
+        lang="uz"
+        path="/admin"
+        noindex
+      />
       {/* Header */}
       <header className="sticky top-0 z-50 glass-card-light border-b border-border">
         <div className="max-w-[1600px] mx-auto px-6 py-3 flex items-center justify-between">

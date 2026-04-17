@@ -4,12 +4,36 @@ import { Link } from 'react-router-dom';
 import { useI18n } from '@/lib/i18n';
 import { serviceAccentClasses, serviceIcons, serviceKeys, type ServiceContent } from '@/lib/service-config';
 import PageLayout from '@/components/PageLayout';
+import SEO from '@/components/SEO';
+import { createBreadcrumbSchema, createWebPageSchema } from '@/lib/seo';
 
 const ServicesPage = () => {
-  const { t } = useI18n();
+  const { t, lang } = useI18n();
+  const strategyService = t.services['marketing-strategy'] as ServiceContent;
+  const brandService = t.services['brand-platform'] as ServiceContent;
+  const seoDescription = `${strategyService.description} ${brandService.description}`;
 
   return (
     <PageLayout>
+      <SEO
+        title={t.services.title}
+        description={seoDescription}
+        lang={lang}
+        path="/services"
+        structuredData={[
+          createWebPageSchema({
+            title: t.services.title,
+            description: seoDescription,
+            lang,
+            path: '/services',
+            type: 'CollectionPage',
+          }),
+          createBreadcrumbSchema([
+            { name: 'Proactive', path: '/' },
+            { name: t.services.title, path: '/services' },
+          ]),
+        ]}
+      />
       <section className="section-padding bg-secondary text-secondary-foreground">
         <div className="mx-auto max-w-7xl text-center">
           <motion.span

@@ -1,7 +1,13 @@
 import PageLayout from '@/components/PageLayout';
+import SEO from '@/components/SEO';
 import { motion } from 'framer-motion';
 import { useI18n } from '@/lib/i18n';
 import { revealViewport } from '@/lib/motion';
+import {
+  createBreadcrumbSchema,
+  createCourseSchema,
+  createWebPageSchema,
+} from '@/lib/seo';
 import {
   ArrowRight,
   BadgeCheck,
@@ -369,9 +375,34 @@ const AcademyPage = () => {
   const currentLang = (lang in pageCopy ? lang : 'uz') as LangKey;
   const text = pageCopy[currentLang];
   const tr = (value: Localized) => value[currentLang];
+  const seoDescription = `${text.description} ${text.processDescription}`;
 
   return (
     <PageLayout>
+      <SEO
+        title={text.eyebrow}
+        description={seoDescription}
+        lang={currentLang}
+        path="/academy"
+        structuredData={[
+          createWebPageSchema({
+            title: text.eyebrow,
+            description: seoDescription,
+            lang: currentLang,
+            path: '/academy',
+          }),
+          createCourseSchema({
+            name: text.eyebrow,
+            description: seoDescription,
+            lang: currentLang,
+            path: '/academy',
+          }),
+          createBreadcrumbSchema([
+            { name: 'Proactive', path: '/' },
+            { name: text.eyebrow, path: '/academy' },
+          ]),
+        ]}
+      />
       <section className="relative overflow-hidden bg-[#081625] text-white">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(103,248,214,0.18),transparent_34%),radial-gradient(circle_at_bottom_left,rgba(103,248,214,0.12),transparent_28%)]" />
         <div className="relative mx-auto max-w-7xl px-6 py-20 md:px-10 md:py-24">

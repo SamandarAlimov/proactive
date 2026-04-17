@@ -1,11 +1,14 @@
 import PageLayout from '@/components/PageLayout';
+import SEO from '@/components/SEO';
 import { motion } from 'framer-motion';
 import { useI18n } from '@/lib/i18n';
 import { revealViewport } from '@/lib/motion';
 import { Briefcase, Users, ArrowRight, MapPin, Clock, Handshake, Star, Zap } from 'lucide-react';
+import { createBreadcrumbSchema, createWebPageSchema } from '@/lib/seo';
 
 const CareersPage = () => {
   const { t, lang } = useI18n();
+  const seoDescription = t.careers.description;
 
   const positions = [
     {
@@ -63,6 +66,25 @@ const CareersPage = () => {
 
   return (
     <PageLayout>
+      <SEO
+        title={t.careers.title}
+        description={seoDescription}
+        lang={lang}
+        path="/careers"
+        structuredData={[
+          createWebPageSchema({
+            title: t.careers.title,
+            description: seoDescription,
+            lang,
+            path: '/careers',
+            type: 'CollectionPage',
+          }),
+          createBreadcrumbSchema([
+            { name: 'Proactive', path: '/' },
+            { name: t.careers.title, path: '/careers' },
+          ]),
+        ]}
+      />
       {/* Hero */}
       <section className="section-padding bg-secondary text-secondary-foreground relative overflow-hidden">
         <div className="absolute inset-0 opacity-5">

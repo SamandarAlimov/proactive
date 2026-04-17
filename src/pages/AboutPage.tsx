@@ -10,10 +10,16 @@ import {
 
 import PageLayout from '@/components/PageLayout';
 import FounderSpecialtyChips from '@/components/FounderSpecialtyChips';
+import SEO from '@/components/SEO';
 import founderHabibullo from '@/assets/founder-habibullo.png';
 import { founderProfile, type FounderLang } from '@/lib/founder-profile';
 import { useI18n } from '@/lib/i18n';
 import { premiumRevealTransition, revealViewport } from '@/lib/motion';
+import {
+  createBreadcrumbSchema,
+  createOrganizationSchema,
+  createWebPageSchema,
+} from '@/lib/seo';
 
 type PageLang = 'uz' | 'en' | 'ru';
 
@@ -161,9 +167,30 @@ const AboutPage = () => {
     { label: content.approachLabel, value: content.approachValue, icon: Compass },
     { label: content.partnerLabel, value: content.partnerValue, icon: ArrowUpRight },
   ];
+  const seoDescription = content.heroStatement;
 
   return (
     <PageLayout>
+      <SEO
+        title={t.about.title}
+        description={seoDescription}
+        lang={lang}
+        path="/about"
+        structuredData={[
+          createOrganizationSchema(lang),
+          createWebPageSchema({
+            title: t.about.title,
+            description: seoDescription,
+            lang,
+            path: '/about',
+            type: 'AboutPage',
+          }),
+          createBreadcrumbSchema([
+            { name: 'Proactive', path: '/' },
+            { name: t.about.title, path: '/about' },
+          ]),
+        ]}
+      />
       <section className="relative overflow-hidden bg-secondary text-secondary-foreground">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(82,230,200,0.18),transparent_35%),radial-gradient(circle_at_bottom_left,rgba(82,230,200,0.08),transparent_28%)]" />
         <div className="relative mx-auto max-w-7xl px-6 py-24 md:px-12 md:py-28">

@@ -1,4 +1,4 @@
-import { motion, useScroll, useTransform } from 'framer-motion';
+import { motion, useReducedMotion, useScroll, useTransform } from 'framer-motion';
 import { ExternalLink, ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useRef } from 'react';
@@ -133,8 +133,9 @@ const FeaturedCard = ({
   viewProjectText: string;
 }) => {
   const cardRef = useRef<HTMLDivElement>(null);
+  const shouldReduceMotion = useReducedMotion();
   const { scrollYProgress } = useScroll({ target: cardRef, offset: ['start end', 'end start'] });
-  const parallaxY = useTransform(scrollYProgress, [0, 1], [30, -30]);
+  const parallaxY = useTransform(scrollYProgress, [0, 1], [shouldReduceMotion ? 0 : 12, shouldReduceMotion ? 0 : -12]);
 
   return (
     <motion.div
@@ -145,7 +146,7 @@ const FeaturedCard = ({
     >
       <div className={`grid gap-0 lg:grid-cols-2 ${index % 2 === 1 ? 'lg:[direction:rtl]' : ''}`}>
         <div className="relative overflow-hidden">
-          <motion.div className="relative h-full min-h-[280px] md:min-h-[360px]" style={{ y: parallaxY }}>
+          <motion.div className="relative h-full min-h-[280px] will-change-transform md:min-h-[360px]" style={{ y: parallaxY }}>
             <img src={project.image} alt={project.title} className="h-full w-full object-cover" />
           </motion.div>
         </div>

@@ -1,11 +1,14 @@
 import PageLayout from '@/components/PageLayout';
+import SEO from '@/components/SEO';
 import { motion } from 'framer-motion';
 import { useI18n } from '@/lib/i18n';
 import { revealViewport } from '@/lib/motion';
 import { Calendar, MapPin, Clock, Users, ArrowRight } from 'lucide-react';
+import { createBreadcrumbSchema, createWebPageSchema } from '@/lib/seo';
 
 const EventsPage = () => {
   const { t, lang } = useI18n();
+  const seoDescription = t.events.description;
 
   const upcomingEvents = [
     {
@@ -54,6 +57,25 @@ const EventsPage = () => {
 
   return (
     <PageLayout>
+      <SEO
+        title={t.events.title}
+        description={seoDescription}
+        lang={lang}
+        path="/events"
+        structuredData={[
+          createWebPageSchema({
+            title: t.events.title,
+            description: seoDescription,
+            lang,
+            path: '/events',
+            type: 'CollectionPage',
+          }),
+          createBreadcrumbSchema([
+            { name: 'Proactive', path: '/' },
+            { name: t.events.title, path: '/events' },
+          ]),
+        ]}
+      />
       {/* Hero */}
       <section className="section-padding bg-secondary text-secondary-foreground relative overflow-hidden">
         <div className="absolute inset-0 opacity-5">

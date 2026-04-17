@@ -3,12 +3,20 @@ import { ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useI18n } from '@/lib/i18n';
 import PageLayout from '@/components/PageLayout';
+import SEO from '@/components/SEO';
+import { createBreadcrumbSchema, createWebPageSchema } from '@/lib/seo';
 import marfImg from '@/assets/marf-project.png';
 import aurusHero from '@/assets/projects/aurus/aurus-hero.webp';
 import milestoneHero from '@/assets/projects/milestone/milestone-hero.webp';
 
 const ProjectsPage = () => {
   const { t, lang } = useI18n();
+  const seoDescription =
+    lang === 'uz'
+      ? "Proactive portfolio sahifasi: brend platformasi, marketing strategiyasi, go-to-market va tizimli o'sish case study'lari."
+      : lang === 'ru'
+        ? 'Portfolio Proactive: keisy po brand-platforme, marketingovoy strategii, go-to-market i sistemnomu rostu biznesa.'
+        : 'The Proactive portfolio featuring brand platform, marketing strategy, go-to-market, and business growth case studies.';
 
   const projects = [
     {
@@ -72,6 +80,25 @@ const ProjectsPage = () => {
 
   return (
     <PageLayout>
+      <SEO
+        title={t.projects.title}
+        description={seoDescription}
+        lang={lang}
+        path="/projects"
+        structuredData={[
+          createWebPageSchema({
+            title: t.projects.title,
+            description: seoDescription,
+            lang,
+            path: '/projects',
+            type: 'CollectionPage',
+          }),
+          createBreadcrumbSchema([
+            { name: 'Proactive', path: '/' },
+            { name: t.projects.title, path: '/projects' },
+          ]),
+        ]}
+      />
       <section className="section-padding bg-secondary text-secondary-foreground">
         <div className="mx-auto max-w-7xl text-center">
           <motion.span initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="text-sm font-semibold uppercase tracking-widest text-primary">

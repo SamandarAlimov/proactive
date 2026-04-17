@@ -27,7 +27,7 @@ const Internship = () => {
   ];
 
   return (
-    <section id="internship" className="section-padding relative overflow-hidden" ref={ref}>
+    <section id="internship" className="section-padding section-deferred relative overflow-hidden" ref={ref}>
       <div className="absolute top-0 left-0 w-full h-1 bg-primary" />
 
       <div className="max-w-7xl mx-auto">
@@ -52,9 +52,8 @@ const Internship = () => {
               <motion.div
                 key={f.title}
                 {...getMotionProps({ axis: 'x', distance: 30, delay: 0.2 + i * 0.15, duration: 0.5 })}
-                whileHover={{ x: 8, rotateY: 3 }}
-                className="glass-card-light rounded-2xl p-6 flex items-start gap-5 group hover:shadow-lg transition-shadow duration-300"
-                style={{ perspective: 800 }}
+                whileHover={{ x: 6 }}
+                className="glass-card-light group flex items-start gap-5 rounded-2xl p-6 transition-shadow duration-300 hover:shadow-lg"
               >
                 <div className="w-12 h-12 rounded-xl bg-secondary flex items-center justify-center flex-shrink-0 transition-transform duration-300 group-hover:scale-110">
                   <f.icon className="w-6 h-6 text-secondary-foreground" />

@@ -12,7 +12,7 @@ type DirectionalRevealOptions = {
 };
 
 export const premiumRevealTransition: Transition = {
-  duration: 0.42,
+  duration: 0.36,
   ease: [0.22, 1, 0.36, 1],
 };
 
@@ -24,9 +24,9 @@ export const createDirectionalRevealVariants = ({
   axis = 'y',
   blur = 0,
   direction = 'down',
-  distance = 22,
+  distance = 18,
   reducedMotion = false,
-  scale = 0.995,
+  scale = 0.998,
 }: DirectionalRevealOptions = {}): Variants => {
   const hiddenOffset = direction === 'up' ? -distance : distance;
 

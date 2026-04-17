@@ -58,11 +58,11 @@ export const useRevealOnScroll = ({
     () =>
       ({
         axis = 'y',
-        blur = 6,
+        blur = 0,
         delay = 0,
-        distance = 28,
-        duration = premiumRevealTransition.duration ?? 0.55,
-        scale = 0.985,
+        distance = 22,
+        duration = premiumRevealTransition.duration ?? 0.36,
+        scale = 0.994,
       }: RevealMotionOptions = {}) => ({
         initial: 'hidden' as const,
         animate: isVisible ? ('visible' as const) : ('hidden' as const),

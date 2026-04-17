@@ -1,7 +1,6 @@
-import { motion, useReducedMotion, useScroll, useTransform } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { ExternalLink, ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import { useRef } from 'react';
 import { useI18n } from '@/lib/i18n';
 import { useScrollAnimation } from '@/hooks/useScrollAnimation';
 import marfImg from '@/assets/marf-project.png';
@@ -56,7 +55,7 @@ const Projects = () => {
   ];
 
   return (
-    <section id="projects" className="relative overflow-hidden py-24 md:py-32" ref={ref}>
+    <section id="projects" className="section-deferred relative overflow-hidden py-24 md:py-32" ref={ref}>
       <div className="relative mx-auto max-w-7xl px-6">
         <motion.div
           {...getMotionProps({ distance: 30, duration: 0.6 })}
@@ -132,23 +131,23 @@ const FeaturedCard = ({
   motionProps: React.ComponentProps<typeof motion.div>;
   viewProjectText: string;
 }) => {
-  const cardRef = useRef<HTMLDivElement>(null);
-  const shouldReduceMotion = useReducedMotion();
-  const { scrollYProgress } = useScroll({ target: cardRef, offset: ['start end', 'end start'] });
-  const parallaxY = useTransform(scrollYProgress, [0, 1], [shouldReduceMotion ? 0 : 12, shouldReduceMotion ? 0 : -12]);
-
   return (
     <motion.div
-      ref={cardRef}
       {...motionProps}
       className="group relative overflow-hidden rounded-3xl transition-all duration-500"
       style={{ background: project.color, border: `1px solid ${project.accent}20` }}
     >
       <div className={`grid gap-0 lg:grid-cols-2 ${index % 2 === 1 ? 'lg:[direction:rtl]' : ''}`}>
         <div className="relative overflow-hidden">
-          <motion.div className="relative h-full min-h-[280px] will-change-transform md:min-h-[360px]" style={{ y: parallaxY }}>
-            <img src={project.image} alt={project.title} className="h-full w-full object-cover" />
-          </motion.div>
+          <div className="relative h-full min-h-[280px] overflow-hidden md:min-h-[360px]">
+            <img
+              src={project.image}
+              alt={project.title}
+              loading="lazy"
+              decoding="async"
+              className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+            />
+          </div>
         </div>
 
         <div className={`flex flex-col justify-center p-8 lg:p-12 ${index % 2 === 1 ? 'lg:[direction:ltr]' : ''}`}>

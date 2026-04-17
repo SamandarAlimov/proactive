@@ -1,7 +1,6 @@
-import { motion, useReducedMotion, useScroll, useTransform } from 'framer-motion';
+import { motion, useReducedMotion } from 'framer-motion';
 import { useI18n } from '@/lib/i18n';
 import { ArrowRight, Play } from 'lucide-react';
-import { useRef } from 'react';
 import heroBg from '@/assets/hero-bg.jpg';
 
 const clientNames = [
@@ -15,35 +14,23 @@ const clientNames = [
 const Hero = () => {
   const { t } = useI18n();
   const shouldReduceMotion = useReducedMotion();
-  const sectionRef = useRef<HTMLElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: sectionRef,
-    offset: ['start start', 'end start'],
-  });
-
-  const bgY = useTransform(scrollYProgress, [0, 1], ['0%', shouldReduceMotion ? '0%' : '16%']);
 
   return (
-    <section
-      ref={sectionRef}
-      className="relative min-h-[100svh] overflow-hidden"
-    >
-      <motion.div className="absolute inset-0 will-change-transform" style={{ y: bgY }}>
+    <section className="relative min-h-[100svh] overflow-hidden">
+      <div className="absolute inset-0">
         <img src={heroBg} alt="" className="w-full h-full object-cover" />
-      </motion.div>
+      </div>
 
       <div className="absolute inset-0" style={{
         background: `linear-gradient(160deg, hsla(259, 43%, 51%, 0.85) 0%, hsla(202, 100%, 11%, 0.92) 40%, hsla(204, 47%, 28%, 0.95) 70%, hsla(202, 100%, 11%, 0.98) 100%)`,
       }} />
 
-      <div className="absolute -top-20 -right-20 w-[600px] h-[600px] pointer-events-none" style={{
-        background: 'radial-gradient(circle, hsla(166, 75%, 61%, 0.15) 0%, transparent 70%)',
-        filter: 'blur(80px)',
+      <div className="absolute -top-24 -right-24 h-[520px] w-[520px] pointer-events-none opacity-80" style={{
+        background: 'radial-gradient(circle, hsla(166, 75%, 61%, 0.14) 0%, transparent 62%)',
       }} />
 
-      <div className="absolute -bottom-32 -left-32 w-[500px] h-[500px] pointer-events-none" style={{
-        background: 'radial-gradient(circle, hsla(181, 100%, 50%, 0.08) 0%, transparent 70%)',
-        filter: 'blur(60px)',
+      <div className="absolute -bottom-32 -left-32 h-[420px] w-[420px] pointer-events-none opacity-75" style={{
+        background: 'radial-gradient(circle, hsla(181, 100%, 50%, 0.08) 0%, transparent 60%)',
       }} />
 
       <div className="absolute inset-0 opacity-[0.03]" style={{
@@ -107,15 +94,16 @@ const Hero = () => {
           </a>
         </motion.div>
 
-        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 1, delay: 1.4 }} className="mt-10 md:mt-14 lg:mt-16">
+        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.7, delay: 1.1 }} className="mt-10 md:mt-14 lg:mt-16">
           <p className="mb-4 text-xs uppercase tracking-[0.2em] text-white/38 md:mb-5">{t.hero.trustedBy}</p>
           <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 md:gap-x-8 md:gap-y-3">
-            {clientNames.map((name, i) => (
-              <motion.span key={name} initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1.6 + i * 0.03 }}
+            {clientNames.map((name) => (
+              <span
+                key={name}
                 className="cursor-default text-[10px] font-heading font-bold tracking-wider text-white/48 transition-colors duration-300 hover:text-primary/75 md:text-xs"
               >
                 {name}
-              </motion.span>
+              </span>
             ))}
           </div>
         </motion.div>

@@ -100,12 +100,11 @@ const About = () => {
           ];
 
   return (
-    <section id="about" className="relative overflow-hidden py-24 md:py-32" ref={ref}>
+    <section id="about" className="section-deferred relative overflow-hidden py-24 md:py-32" ref={ref}>
       <div
         className="pointer-events-none absolute right-0 top-0 h-[500px] w-[500px]"
         style={{
-          background: 'radial-gradient(circle, hsla(166, 75%, 61%, 0.06) 0%, transparent 70%)',
-          filter: 'blur(80px)',
+          background: 'radial-gradient(circle, hsla(166, 75%, 61%, 0.06) 0%, transparent 64%)',
         }}
       />
 

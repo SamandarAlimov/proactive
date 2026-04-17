@@ -11,7 +11,7 @@ const Team = () => {
   const isDark = resolvedTheme === 'dark';
 
   return (
-    <section id="team" className="relative overflow-hidden" ref={ref}>
+    <section id="team" className="section-deferred relative overflow-hidden" ref={ref}>
       <div
         className="relative py-20 md:py-24"
         style={

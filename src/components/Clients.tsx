@@ -1,4 +1,4 @@
-import { motion } from 'framer-motion';
+import { motion, useReducedMotion } from 'framer-motion';
 import { useI18n } from '@/lib/i18n';
 import { useScrollAnimation } from '@/hooks/useScrollAnimation';
 import { clientList } from '@/lib/client-list';
@@ -6,9 +6,10 @@ import { clientList } from '@/lib/client-list';
 const Clients = () => {
   const { t } = useI18n();
   const { ref, getMotionProps } = useScrollAnimation();
+  const shouldReduceMotion = useReducedMotion();
 
   return (
-    <section id="clients" className="relative py-24 md:py-32 overflow-hidden" ref={ref}>
+    <section id="clients" className="section-deferred relative overflow-hidden py-24 md:py-32" ref={ref}>
       {/* Subtle background accent */}
       <div className="absolute inset-0 pointer-events-none" style={{
         background: 'linear-gradient(180deg, hsla(166, 75%, 61%, 0.02) 0%, transparent 40%, hsla(259, 43%, 51%, 0.02) 100%)',
@@ -32,26 +33,23 @@ const Clients = () => {
           <h2 className="text-3xl md:text-5xl font-heading font-bold text-foreground mt-6 tracking-tight">{t.clients.title}</h2>
         </motion.div>
 
-        {/* Marquee-style infinite scroll row */}
         <div className="relative overflow-hidden">
           <div className="absolute left-0 top-0 bottom-0 w-20 z-10 bg-gradient-to-r from-background to-transparent" />
           <div className="absolute right-0 top-0 bottom-0 w-20 z-10 bg-gradient-to-l from-background to-transparent" />
-          <motion.div
-            animate={{ x: ['0%', '-50%'] }}
-            transition={{ duration: 46, repeat: Infinity, ease: 'linear' }}
-            className="flex gap-6 w-max"
+          <div
+            className={shouldReduceMotion ? 'flex flex-wrap justify-center gap-4' : 'brand-marquee-track flex w-max gap-6 will-change-transform'}
           >
             {[...clientList, ...clientList].map((client, i) => (
               <div
                 key={`${client}-${i}`}
-                className="glass-card-light group flex min-w-[220px] flex-shrink-0 items-center justify-center rounded-2xl px-8 py-5 transition-all duration-300 hover:border-primary/20"
+                className="group flex min-w-[220px] flex-shrink-0 items-center justify-center rounded-2xl border border-border/70 bg-card/88 px-8 py-5 shadow-[0_6px_18px_rgba(38,79,107,0.05)] transition-colors duration-300 hover:border-primary/20"
               >
                 <span className="text-center font-heading text-sm font-bold whitespace-nowrap text-foreground/60 transition-colors duration-300 group-hover:text-primary">
                   {client}
                 </span>
               </div>
             ))}
-          </motion.div>
+          </div>
         </div>
       </div>
     </section>

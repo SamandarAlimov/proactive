@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
@@ -6,50 +5,12 @@ import { useI18n } from '@/lib/i18n';
 import { serviceGradientColors, serviceIcons, serviceKeys, type ServiceContent } from '@/lib/service-config';
 import { useScrollAnimation } from '@/hooks/useScrollAnimation';
 
-const Card3D = ({
-  children,
-  motionProps,
-}: {
-  children: React.ReactNode;
-  motionProps: React.ComponentProps<typeof motion.div>;
-}) => {
-  const [rotateX, setRotateX] = useState(0);
-  const [rotateY, setRotateY] = useState(0);
-
-  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    const rect = e.currentTarget.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
-    setRotateX((y - rect.height / 2) / 20);
-    setRotateY((rect.width / 2 - x) / 20);
-  };
-
-  return (
-    <motion.div
-      {...motionProps}
-      onMouseMove={handleMouseMove}
-      onMouseLeave={() => {
-        setRotateX(0);
-        setRotateY(0);
-      }}
-      style={{
-        transform: `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`,
-        transformStyle: 'preserve-3d',
-        transition: 'transform 0.15s ease-out',
-      }}
-      className="h-full"
-    >
-      {children}
-    </motion.div>
-  );
-};
-
 const Services = () => {
   const { t } = useI18n();
   const { ref, getMotionProps } = useScrollAnimation();
 
   return (
-    <section id="services" className="relative overflow-hidden py-24 md:py-32" ref={ref}>
+    <section id="services" className="section-deferred relative overflow-hidden py-24 md:py-32" ref={ref}>
       <div
         className="absolute inset-0"
         style={{
@@ -85,10 +46,15 @@ const Services = () => {
             const colors = serviceGradientColors[key];
 
             return (
-              <Card3D key={key} motionProps={getMotionProps({ distance: 30, delay: 0.1 * index, duration: 0.5 })}>
+              <motion.div
+                key={key}
+                {...getMotionProps({ distance: 24, delay: 0.08 * index, duration: 0.42 })}
+                whileHover={{ y: -6, scale: 1.01 }}
+                className="h-full"
+              >
                 <Link to={`/services/${key}`} className="block h-full">
                   <div
-                    className="group relative h-full overflow-hidden rounded-2xl p-8 transition-all duration-500 hover:shadow-2xl"
+                    className="group relative h-full overflow-hidden rounded-2xl p-8 transition-all duration-300 hover:shadow-xl"
                     style={{
                       background: 'hsl(var(--background))',
                       border: '1px solid hsla(166, 75%, 61%, 0.08)',
@@ -102,7 +68,7 @@ const Services = () => {
                       }}
                     />
                     <div
-                      className="relative z-10 mb-6 flex h-14 w-14 items-center justify-center rounded-xl transition-all duration-300 group-hover:scale-110 group-hover:rotate-3"
+                      className="relative z-10 mb-6 flex h-14 w-14 items-center justify-center rounded-xl transition-all duration-300 group-hover:scale-105"
                       style={{
                         background: `linear-gradient(135deg, ${colors.from}, ${colors.to})`,
                         boxShadow: `0 8px 24px ${colors.from}30`,
@@ -120,7 +86,7 @@ const Services = () => {
                     />
                   </div>
                 </Link>
-              </Card3D>
+              </motion.div>
             );
           })}
         </div>

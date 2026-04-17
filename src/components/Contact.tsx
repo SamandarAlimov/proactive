@@ -96,12 +96,11 @@ const Contact = () => {
         : 'Select service type';
 
   return (
-    <section id="contact" className="relative overflow-hidden py-24 md:py-32" ref={ref}>
+    <section id="contact" className="section-deferred relative overflow-hidden py-24 md:py-32" ref={ref}>
       <div
         className="pointer-events-none absolute bottom-0 right-0 h-96 w-96"
         style={{
-          background: 'radial-gradient(circle, hsla(166, 75%, 61%, 0.06) 0%, transparent 70%)',
-          filter: 'blur(80px)',
+          background: 'radial-gradient(circle, hsla(166, 75%, 61%, 0.06) 0%, transparent 64%)',
         }}
       />
 

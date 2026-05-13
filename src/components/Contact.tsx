@@ -24,19 +24,15 @@ import {
 } from '@/lib/contact-details';
 import { supabase } from '@/integrations/supabase/client';
 import { buildPhoneNumber, DEFAULT_PHONE_COUNTRY } from '@/lib/contact-form';
+import { services } from '@/data/services';
 import { useI18n } from '@/lib/i18n';
 import { cn } from '@/lib/utils';
 
-const serviceOptions = [
-  { uz: 'Marketing strategiyasi', en: 'Marketing Strategy', ru: 'Маркетинговая стратегия' },
-  { uz: 'Brend platformasi', en: 'Brand Platform', ru: 'Бренд-платформа' },
-  { uz: 'Mahsulot strategiyasi', en: 'Product Strategy', ru: 'Продуктовая стратегия' },
-  { uz: 'Kommunikatsiya', en: 'Communication', ru: 'Коммуникация' },
-  { uz: "Marketing bo'limini qurish", en: 'Marketing Team Building', ru: 'Построение отдела маркетинга' },
-  { uz: 'Konsultatsiya', en: 'Consulting', ru: 'Консультация' },
-  { uz: 'Tahlil va audit', en: 'Analysis & Audit', ru: 'Анализ и аудит' },
-  { uz: 'Marketing Maximum kursi', en: 'Marketing Maximum Course', ru: 'Курс Marketing Maximum' },
-];
+const marketingCourseOption = {
+  uz: 'Marketing Maximum kursi',
+  en: 'Marketing Maximum Course',
+  ru: 'Курс Marketing Maximum',
+};
 
 const Contact = () => {
   const { t, lang } = useI18n();
@@ -94,6 +90,10 @@ const Contact = () => {
       : lang === 'ru'
         ? 'Выберите тип услуги'
         : 'Select service type';
+  const serviceOptions = [
+    ...services.map((service) => service.content[lang].title),
+    marketingCourseOption[lang],
+  ];
 
   return (
     <section id="contact" className="section-deferred relative overflow-hidden py-24 md:py-32" ref={ref}>
@@ -143,9 +143,9 @@ const Contact = () => {
                   className={cn(contactSelectClass, 'pr-12')}
                 >
                   <option value="">-</option>
-                  {serviceOptions.map((opt) => (
-                    <option key={opt.en} value={opt[lang]}>
-                      {opt[lang]}
+                  {serviceOptions.map((option) => (
+                    <option key={option} value={option}>
+                      {option}
                     </option>
                   ))}
                 </select>

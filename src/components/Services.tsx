@@ -1,12 +1,12 @@
 import { motion } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { services } from '@/data/services';
 import { useI18n } from '@/lib/i18n';
-import { serviceGradientColors, serviceIcons, serviceKeys, type ServiceContent } from '@/lib/service-config';
 import { useScrollAnimation } from '@/hooks/useScrollAnimation';
 
 const Services = () => {
-  const { t } = useI18n();
+  const { t, lang } = useI18n();
   const { ref, getMotionProps } = useScrollAnimation();
 
   return (
@@ -40,19 +40,18 @@ const Services = () => {
         </motion.div>
 
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {serviceKeys.map((key, index) => {
-            const service = t.services[key] as ServiceContent;
-            const Icon = serviceIcons[key];
-            const colors = serviceGradientColors[key];
+          {services.map((service, index) => {
+            const content = service.content[lang];
+            const Icon = service.icon;
 
             return (
               <motion.div
-                key={key}
+                key={service.slug}
                 {...getMotionProps({ distance: 24, delay: 0.08 * index, duration: 0.42 })}
                 whileHover={{ y: -6, scale: 1.01 }}
                 className="h-full"
               >
-                <Link to={`/services/${key}`} className="block h-full">
+                <Link to={`/services/${service.slug}`} className="block h-full">
                   <div
                     className="group relative h-full overflow-hidden rounded-2xl p-8 transition-all duration-300 hover:shadow-xl"
                     style={{
@@ -61,28 +60,32 @@ const Services = () => {
                       boxShadow: '0 4px 24px hsla(202, 100%, 11%, 0.04)',
                     }}
                   >
+                    <span className="absolute right-6 top-5 font-heading text-5xl font-bold text-secondary/5 transition-colors duration-300 group-hover:text-primary/15 dark:text-white/5">
+                      {service.number}
+                    </span>
                     <div
                       className="absolute inset-0 rounded-2xl opacity-0 transition-opacity duration-500 group-hover:opacity-100"
                       style={{
-                        background: `linear-gradient(135deg, ${colors.from}08 0%, ${colors.to}05 100%)`,
+                        background: `linear-gradient(135deg, ${service.accent.from}08 0%, ${service.accent.to}05 100%)`,
                       }}
                     />
                     <div
                       className="relative z-10 mb-6 flex h-14 w-14 items-center justify-center rounded-xl transition-all duration-300 group-hover:scale-105"
                       style={{
-                        background: `linear-gradient(135deg, ${colors.from}, ${colors.to})`,
-                        boxShadow: `0 8px 24px ${colors.from}30`,
+                        background: `linear-gradient(135deg, ${service.accent.from}, ${service.accent.to})`,
+                        boxShadow: `0 8px 24px ${service.accent.from}30`,
                       }}
                     >
                       <Icon className="h-7 w-7 text-white" />
                     </div>
+                    <div className="relative z-10 mb-3 text-sm font-semibold text-primary">{service.number}</div>
                     <h3 className="relative z-10 mb-3 text-xl font-heading font-bold text-foreground transition-colors duration-300 group-hover:text-primary">
-                      {service.title}
+                      {content.title}
                     </h3>
-                    <p className="relative z-10 leading-relaxed text-muted-foreground">{service.description}</p>
+                    <p className="relative z-10 leading-relaxed text-muted-foreground">{content.shortDescription}</p>
                     <div
                       className="absolute bottom-0 left-0 right-0 h-[2px] origin-left scale-x-0 transition-transform duration-500 group-hover:scale-x-100"
-                      style={{ background: `linear-gradient(90deg, ${colors.from}, ${colors.to})` }}
+                      style={{ background: `linear-gradient(90deg, ${service.accent.from}, ${service.accent.to})` }}
                     />
                   </div>
                 </Link>

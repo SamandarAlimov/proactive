@@ -43,7 +43,7 @@ export const localizedSiteKeywords: Record<Language, string[]> = {
     'strategik marketing',
     'brend platformasi',
     'mahsulot strategiyasi',
-    'marketing konsultatsiya',
+    'strategik hamkorlik',
     'Toshkent marketing agentligi',
   ],
   en: [
@@ -52,7 +52,7 @@ export const localizedSiteKeywords: Record<Language, string[]> = {
     'strategic marketing',
     'brand platform',
     'product strategy',
-    'marketing consulting',
+    'strategic marketing partnership',
     'Tashkent marketing agency',
   ],
   ru: [
@@ -61,7 +61,7 @@ export const localizedSiteKeywords: Record<Language, string[]> = {
     'strategic marketing',
     'brand platform',
     'product strategy',
-    'marketing consulting',
+    'strategic marketing partnership',
     'Tashkent agency',
   ],
 };

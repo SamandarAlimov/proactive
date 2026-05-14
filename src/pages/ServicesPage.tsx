@@ -1,9 +1,9 @@
-import { motion } from 'framer-motion';
-import { ArrowUpRight } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { useState } from 'react';
+import { AnimatePresence, motion } from 'framer-motion';
+import { Minus, Plus } from 'lucide-react';
 import PageLayout from '@/components/PageLayout';
 import SEO from '@/components/SEO';
-import { services } from '@/data/services';
+import { services, type ServiceSlug } from '@/data/services';
 import { useI18n } from '@/lib/i18n';
 import { createBreadcrumbSchema, createWebPageSchema } from '@/lib/seo';
 
@@ -14,6 +14,13 @@ const sectionLabels = {
     intro:
       'Marketing faqat reklama, kontent yoki kampaniya bilan cheklanmaydi. U mahsulot, bozor, brend, jamoa va qarorlar tizimi bilan bog‘liq. Proactive biznesga shu tizimni bosqichma-bosqich qurishda yordam beradi.',
     cta: 'Batafsil',
+    less: 'Kamroq',
+    sections: {
+      when: 'Qachon kerak?',
+      what: 'Nima qilamiz?',
+      result: 'Siz nima olasiz?',
+      value: 'Biznesga qiymati',
+    },
   },
   en: {
     eyebrow: 'Services',
@@ -21,6 +28,13 @@ const sectionLabels = {
     intro:
       'Marketing is not limited to ads, content or campaigns. It is connected to product, market, brand, team and a system of decisions. Proactive helps build this system step by step.',
     cta: 'Read more',
+    less: 'Show less',
+    sections: {
+      when: 'When is it needed?',
+      what: 'What we do',
+      result: 'What you receive',
+      value: 'Value to business',
+    },
   },
   ru: {
     eyebrow: 'Услуги',
@@ -28,12 +42,22 @@ const sectionLabels = {
     intro:
       'Маркетинг не ограничивается рекламой, контентом или кампаниями. Он связан с продуктом, рынком, брендом, командой и системой решений. Proactive помогает выстраивать эту систему шаг за шагом.',
     cta: 'Подробнее',
+    less: 'Свернуть',
+    sections: {
+      when: 'Когда нужно?',
+      what: 'Что мы делаем',
+      result: 'Что вы получаете',
+      value: 'Ценность для бизнеса',
+    },
   },
 };
+
+const getPreviewSentence = (text: string) => text.match(/^[^.!?]+[.!?]/)?.[0] ?? text;
 
 const ServicesPage = () => {
   const { lang } = useI18n();
   const labels = sectionLabels[lang];
+  const [expandedService, setExpandedService] = useState<ServiceSlug | null>(null);
 
   return (
     <PageLayout>
@@ -103,6 +127,14 @@ const ServicesPage = () => {
           {services.map((service, index) => {
             const content = service.content[lang];
             const Icon = service.icon;
+            const isOpen = expandedService === service.slug;
+            const previewSentence = getPreviewSentence(content.intro);
+            const detailBlocks = [
+              { title: labels.sections.when, text: content.when },
+              { title: labels.sections.what, text: content.what },
+              { title: labels.sections.result, text: content.result },
+              { title: labels.sections.value, text: content.value },
+            ];
 
             return (
               <motion.div
@@ -112,83 +144,175 @@ const ServicesPage = () => {
                 viewport={{ once: true, margin: '-50px' }}
                 transition={{ duration: 0.5, delay: index * 0.05 }}
               >
-                <Link to={`/services/${service.slug}`} className="group block">
+                <div
+                  className="group relative overflow-hidden rounded-3xl p-6 transition-all duration-500 hover:shadow-2xl md:p-10"
+                  style={{
+                    background: 'hsl(var(--background))',
+                    border: '1px solid hsla(202, 100%, 11%, 0.08)',
+                    boxShadow: '0 4px 24px hsla(202, 100%, 11%, 0.04)',
+                  }}
+                >
                   <div
-                    className="relative overflow-hidden rounded-3xl p-6 transition-all duration-500 hover:shadow-2xl md:p-10"
+                    className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-700 group-hover:opacity-100"
                     style={{
-                      background: 'hsl(var(--background))',
-                      border: '1px solid hsla(202, 100%, 11%, 0.08)',
-                      boxShadow: '0 4px 24px hsla(202, 100%, 11%, 0.04)',
+                      background: `linear-gradient(120deg, ${service.accent.from}06 0%, ${service.accent.to}03 100%)`,
                     }}
-                  >
-                    <div
-                      className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-700 group-hover:opacity-100"
-                      style={{
-                        background: `linear-gradient(120deg, ${service.accent.from}06 0%, ${service.accent.to}03 100%)`,
-                      }}
-                    />
-                    <div
-                      className="absolute bottom-0 left-0 top-0 w-[3px] origin-top scale-y-0 transition-transform duration-500 group-hover:scale-y-100"
-                      style={{
-                        background: `linear-gradient(180deg, ${service.accent.from}, ${service.accent.to})`,
-                      }}
-                    />
+                  />
+                  <div
+                    className="absolute bottom-0 left-0 top-0 w-[3px] origin-top scale-y-0 transition-transform duration-500 group-hover:scale-y-100"
+                    style={{
+                      background: `linear-gradient(180deg, ${service.accent.from}, ${service.accent.to})`,
+                    }}
+                  />
 
-                    <div className="relative grid items-start gap-6 md:grid-cols-[auto_auto_1fr_auto] md:items-center md:gap-8">
-                      <div
-                        className="font-heading text-5xl font-bold leading-none tabular-nums transition-colors duration-500 md:text-7xl"
-                        style={{ color: 'hsla(202, 100%, 11%, 0.08)' }}
-                      >
-                        <span className="group-hover:hidden">{service.number}</span>
-                        <span
-                          className="hidden group-hover:inline"
-                          style={{
-                            background: `linear-gradient(135deg, ${service.accent.from}, ${service.accent.to})`,
-                            WebkitBackgroundClip: 'text',
-                            WebkitTextFillColor: 'transparent',
-                          }}
-                        >
-                          {service.number}
-                        </span>
-                      </div>
+                  <div className="relative grid items-start gap-6 md:grid-cols-[auto_auto_1fr_auto] md:items-center md:gap-8">
+                    <div
+                      className="font-heading text-5xl font-bold leading-none tabular-nums transition-colors duration-500 md:text-7xl"
+                      style={{ color: isOpen ? service.accent.from : 'hsla(202, 100%, 11%, 0.08)' }}
+                    >
+                      {service.number}
+                    </div>
 
-                      <div
-                        className="flex h-14 w-14 items-center justify-center rounded-2xl transition-all duration-500 group-hover:scale-110 group-hover:rotate-3 md:h-16 md:w-16"
+                    <div
+                      className="flex h-14 w-14 items-center justify-center rounded-2xl transition-all duration-500 group-hover:scale-110 group-hover:rotate-3 md:h-16 md:w-16"
+                      style={{
+                        background: `linear-gradient(135deg, ${service.accent.from}, ${service.accent.to})`,
+                        boxShadow: `0 8px 24px ${service.accent.from}30`,
+                      }}
+                    >
+                      <Icon className="h-7 w-7 text-white md:h-8 md:w-8" />
+                    </div>
+
+                    <div className="min-w-0">
+                      <h3 className="font-heading text-xl font-bold tracking-tight text-foreground transition-colors duration-300 group-hover:text-primary md:text-2xl lg:text-3xl">
+                        {content.title}
+                      </h3>
+                      <p className="mt-2 max-w-2xl text-sm leading-relaxed text-muted-foreground md:text-base">
+                        {content.shortDescription}
+                      </p>
+                      <p className="mt-2 max-w-2xl text-sm leading-relaxed text-foreground/70 md:text-[15px]">
+                        {previewSentence}
+                      </p>
+                    </div>
+
+                    <button
+                      type="button"
+                      aria-expanded={isOpen}
+                      aria-controls={`service-panel-${service.slug}`}
+                      onClick={() => setExpandedService(isOpen ? null : service.slug)}
+                      className="flex items-center gap-2 whitespace-nowrap rounded-full px-1 text-sm font-semibold transition-all duration-300 hover:gap-3 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+                      style={{ color: 'hsl(166, 75%, 40%)' }}
+                    >
+                      {isOpen ? labels.less : labels.cta}
+                      <motion.span
+                        animate={{ rotate: isOpen ? 180 : 0 }}
+                        transition={{ duration: 0.25, ease: 'easeOut' }}
+                        className="relative flex h-9 w-9 items-center justify-center rounded-full"
                         style={{
-                          background: `linear-gradient(135deg, ${service.accent.from}, ${service.accent.to})`,
-                          boxShadow: `0 8px 24px ${service.accent.from}30`,
+                          background: `linear-gradient(135deg, ${service.accent.from}15, ${service.accent.to}10)`,
+                          border: `1px solid ${service.accent.from}25`,
                         }}
                       >
-                        <Icon className="h-7 w-7 text-white md:h-8 md:w-8" />
-                      </div>
-
-                      <div className="min-w-0">
-                        <h3 className="font-heading text-xl font-bold tracking-tight text-foreground transition-colors duration-300 group-hover:text-primary md:text-2xl lg:text-3xl">
-                          {content.title}
-                        </h3>
-                        <p className="mt-2 max-w-2xl text-sm leading-relaxed text-muted-foreground md:text-base">
-                          {content.shortDescription}
-                        </p>
-                      </div>
-
-                      <div
-                        className="flex items-center gap-2 whitespace-nowrap text-sm font-semibold transition-all duration-300 group-hover:gap-3"
-                        style={{ color: 'hsl(166, 75%, 40%)' }}
-                      >
-                        {labels.cta}
-                        <span
-                          className="flex h-9 w-9 items-center justify-center rounded-full transition-all duration-500 group-hover:rotate-45"
-                          style={{
-                            background: `linear-gradient(135deg, ${service.accent.from}15, ${service.accent.to}10)`,
-                            border: `1px solid ${service.accent.from}25`,
-                          }}
-                        >
-                          <ArrowUpRight className="h-4 w-4" />
-                        </span>
-                      </div>
-                    </div>
+                        <AnimatePresence mode="wait" initial={false}>
+                          {isOpen ? (
+                            <motion.span
+                              key="minus"
+                              initial={{ opacity: 0, scale: 0.65, rotate: -90 }}
+                              animate={{ opacity: 1, scale: 1, rotate: 0 }}
+                              exit={{ opacity: 0, scale: 0.65, rotate: 90 }}
+                              transition={{ duration: 0.18 }}
+                            >
+                              <Minus className="h-4 w-4" />
+                            </motion.span>
+                          ) : (
+                            <motion.span
+                              key="plus"
+                              initial={{ opacity: 0, scale: 0.65, rotate: 90 }}
+                              animate={{ opacity: 1, scale: 1, rotate: 0 }}
+                              exit={{ opacity: 0, scale: 0.65, rotate: -90 }}
+                              transition={{ duration: 0.18 }}
+                            >
+                              <Plus className="h-4 w-4" />
+                            </motion.span>
+                          )}
+                        </AnimatePresence>
+                      </motion.span>
+                    </button>
                   </div>
-                </Link>
+
+                  <AnimatePresence initial={false}>
+                    {isOpen && (
+                      <motion.div
+                        id={`service-panel-${service.slug}`}
+                        initial={{ height: 0, opacity: 0 }}
+                        animate={{ height: 'auto', opacity: 1 }}
+                        exit={{ height: 0, opacity: 0 }}
+                        transition={{ duration: 0.38, ease: [0.22, 1, 0.36, 1] }}
+                        className="relative overflow-hidden"
+                      >
+                        <div className="mt-8 grid gap-6 border-t border-secondary/10 pt-7 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)]">
+                          <div
+                            className="rounded-2xl p-5"
+                            style={{
+                              background: `linear-gradient(135deg, ${service.accent.from}10, ${service.accent.to}06)`,
+                              border: `1px solid ${service.accent.from}18`,
+                            }}
+                          >
+                            <p className="text-[15px] leading-relaxed text-foreground/80 md:text-base">
+                              {content.intro}
+                            </p>
+                          </div>
+
+                          <div className="grid gap-4">
+                            {detailBlocks.map((block, blockIndex) => (
+                              <motion.div
+                                key={block.title}
+                                initial={{ opacity: 0, y: 10 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                transition={{ delay: 0.06 * blockIndex }}
+                                className="rounded-2xl bg-background/70 p-5"
+                                style={{
+                                  border: '1px solid hsla(202, 100%, 11%, 0.07)',
+                                  boxShadow: '0 3px 16px hsla(202, 100%, 11%, 0.03)',
+                                }}
+                              >
+                                <h4 className="font-heading text-base font-bold text-foreground md:text-lg">
+                                  {block.title}
+                                </h4>
+                                <p className="mt-2 text-sm leading-relaxed text-muted-foreground md:text-[15px]">
+                                  {block.text}
+                                </p>
+                              </motion.div>
+                            ))}
+                          </div>
+                        </div>
+
+                        <div className="mt-6 flex justify-end">
+                          <button
+                            type="button"
+                            onClick={() => setExpandedService(null)}
+                            className="inline-flex items-center gap-2 rounded-full px-4 py-2 text-sm font-semibold transition-all duration-300 hover:-translate-y-0.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+                            style={{
+                              color: 'hsl(166, 75%, 40%)',
+                              background: `linear-gradient(135deg, ${service.accent.from}12, ${service.accent.to}08)`,
+                              border: `1px solid ${service.accent.from}20`,
+                            }}
+                          >
+                            {labels.less}
+                            <motion.span
+                              initial={false}
+                              animate={{ rotate: 180 }}
+                              className="flex h-6 w-6 items-center justify-center rounded-full"
+                              style={{ background: `${service.accent.from}18` }}
+                            >
+                              <Minus className="h-3.5 w-3.5" />
+                            </motion.span>
+                          </button>
+                        </div>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </div>
               </motion.div>
             );
           })}

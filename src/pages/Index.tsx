@@ -3,6 +3,7 @@ import Navbar from '@/components/Navbar';
 import Hero from '@/components/Hero';
 import About from '@/components/About';
 import Services from '@/components/Services';
+import MarketingMaximum from '@/components/MarketingMaximum';
 import Clients from '@/components/Clients';
 import Projects from '@/components/Projects';
 import Team from '@/components/Team';
@@ -71,6 +72,7 @@ const Index = () => {
         <div className="relative z-10 bg-background">
           <About />
           <Services />
+          <MarketingMaximum />
           <Clients />
           <Projects />
           <Team />

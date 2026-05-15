@@ -18,6 +18,7 @@ export const premiumRevealTransition: Transition = {
 
 export const revealViewport = {
   amount: 0.22,
+  once: false,
 };
 
 export const createDirectionalRevealVariants = ({

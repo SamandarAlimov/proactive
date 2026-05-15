@@ -421,7 +421,7 @@ const AcademyPage = () => {
               </Link>
               <a
                 href="#academy-modules"
-                className="inline-flex items-center gap-2 rounded-2xl border border-white/14 bg-white/5 px-6 py-3 text-sm font-semibold text-white transition-colors duration-300 hover:bg-white/10"
+                className="inline-flex items-center gap-2 rounded-2xl border border-white/15 bg-white/5 px-6 py-3 text-sm font-semibold text-white transition-colors duration-300 hover:bg-white/10"
               >
                 <ArrowRight className="h-4 w-4" />
                 {text.modules}
@@ -519,7 +519,7 @@ const AcademyPage = () => {
                 transition={{ delay: index * 0.05 }}
                 className="rounded-[1.9rem] border border-border/70 bg-card p-7 shadow-[0_18px_50px_rgba(0,0,0,0.05)]"
               >
-                <div className="text-[3.25rem] font-heading font-bold leading-none tracking-[-0.08em] text-primary/85">{item.order}</div>
+                <div className="text-[3.25rem] font-heading font-bold leading-none tracking-[-0.08em] text-primary/90">{item.order}</div>
                 <h3 className="mt-5 font-heading text-2xl font-bold text-foreground">{tr(item.title)}</h3>
                 <p className="mt-4 text-base leading-relaxed text-muted-foreground">{tr(item.description)}</p>
               </motion.div>
@@ -547,7 +547,7 @@ const AcademyPage = () => {
                 <span className="text-xs font-semibold uppercase tracking-[0.24em] text-[#74f2d8]">{tr(stage.stage)}</span>
                 <div className="mt-6 space-y-3">
                   {stage.modules.map((module) => (
-                    <div key={tr(module)} className="flex items-start gap-3 rounded-2xl border border-white/8 bg-black/10 px-4 py-3">
+                    <div key={tr(module)} className="flex items-start gap-3 rounded-2xl border border-white/10 bg-black/10 px-4 py-3">
                       <CheckCircle2 className="mt-0.5 h-4 w-4 flex-shrink-0 text-[#74f2d8]" />
                       <span className="text-sm leading-relaxed text-white/86">{tr(module)}</span>
                     </div>
@@ -640,11 +640,11 @@ const AcademyPage = () => {
                   <span className="text-xs font-semibold uppercase tracking-[0.28em] text-white/60">{tr(quotePanel.label)}</span>
                 </div>
                 <h3 className="mt-5 font-heading text-2xl font-bold text-white">{tr(quotePanel.title)}</h3>
-                <p className="mt-4 text-base leading-relaxed text-white/68">{tr(quotePanel.description)}</p>
+                <p className="mt-4 text-base leading-relaxed text-white/70">{tr(quotePanel.description)}</p>
 
                 <div className="mt-7 space-y-4">
                   {quoteThemes.map((theme, index) => (
-                    <div key={tr(theme.title)} className="rounded-[1.5rem] border border-white/8 bg-black/10 px-4 py-4">
+                    <div key={tr(theme.title)} className="rounded-[1.5rem] border border-white/10 bg-black/10 px-4 py-4">
                       <div className="text-[11px] font-semibold uppercase tracking-[0.28em] text-[#74f2d8]">0{index + 1}</div>
                       <h4 className="mt-3 text-lg font-semibold text-white">{tr(theme.title)}</h4>
                       <p className="mt-2 text-sm leading-relaxed text-white/62">{tr(theme.description)}</p>

@@ -213,7 +213,7 @@ const About = () => {
               />
 
               <div className="absolute inset-[14%] rounded-full border border-white/10" />
-              <div className="absolute inset-[24%] rounded-full border border-white/8" />
+              <div className="absolute inset-[24%] rounded-full border border-white/10" />
 
               <div className="relative z-10 text-center">
                 <motion.div

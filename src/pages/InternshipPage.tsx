@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import PageLayout from '@/components/PageLayout';
 import SEO from '@/components/SEO';
 import { createBreadcrumbSchema, createWebPageSchema } from '@/lib/seo';
+import { revealViewport } from '@/lib/motion';
 
 const InternshipPage = () => {
   const { t, lang } = useI18n();
@@ -46,7 +47,12 @@ const InternshipPage = () => {
       <section className="section-padding">
         <div className="max-w-7xl mx-auto">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
-            <motion.div initial={{ opacity: 0, x: -30 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.2 }}>
+            <motion.div
+              initial={{ opacity: 0, x: -30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={revealViewport}
+              transition={{ delay: 0.2 }}
+            >
               <p className="text-lg text-muted-foreground leading-relaxed mb-8">{t.internship.description}</p>
               <Link
                 to="/contact"
@@ -62,7 +68,8 @@ const InternshipPage = () => {
                 <motion.div
                   key={f.title}
                   initial={{ opacity: 0, x: 30 }}
-                  animate={{ opacity: 1, x: 0 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={revealViewport}
                   transition={{ delay: 0.3 + i * 0.15 }}
                   whileHover={{ x: 8 }}
                   className="glass-card-light rounded-2xl p-6 flex items-start gap-5 group hover:shadow-lg transition-shadow duration-300"

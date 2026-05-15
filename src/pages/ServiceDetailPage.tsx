@@ -201,7 +201,7 @@ const ServiceDetailPage = () => {
                 key={block.label}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
+                viewport={{ once: false }}
                 transition={{ duration: 0.5, delay: blockIndex * 0.1 }}
                 className="rounded-3xl p-7 transition-all duration-500 hover:shadow-xl md:p-9"
                 style={{

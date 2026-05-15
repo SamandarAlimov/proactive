@@ -70,7 +70,7 @@ const Hero = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.7 }}
-          className="mx-auto mb-8 max-w-2xl text-balance text-sm font-normal leading-relaxed text-white/82 sm:text-base md:mb-12 md:text-lg xl:text-xl"
+          className="mx-auto mb-8 max-w-2xl text-balance text-sm font-medium leading-relaxed text-white drop-shadow-[0_2px_12px_rgba(0,0,0,0.22)] sm:text-base md:mb-12 md:text-lg xl:text-xl"
         >
           {t.hero.subtitle}
         </motion.p>
@@ -95,12 +95,12 @@ const Hero = () => {
         </motion.div>
 
         <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.7, delay: 1.1 }} className="mt-10 md:mt-14 lg:mt-16">
-          <p className="mb-4 text-xs uppercase tracking-[0.2em] text-white/58 md:mb-5">{t.hero.trustedBy}</p>
+          <p className="mb-4 text-xs font-semibold uppercase tracking-[0.2em] text-white/80 md:mb-5">{t.hero.trustedBy}</p>
           <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 md:gap-x-8 md:gap-y-3">
             {clientNames.map((name) => (
               <span
                 key={name}
-                className="cursor-default text-[10px] font-heading font-bold tracking-wider text-white/68 transition-colors duration-300 hover:text-primary/90 md:text-xs"
+                className="cursor-default text-[10px] font-heading font-bold tracking-wider text-white/90 transition-colors duration-300 hover:text-primary md:text-xs"
               >
                 {name}
               </span>

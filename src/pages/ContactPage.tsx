@@ -34,6 +34,7 @@ import {
   createWebPageSchema,
 } from '@/lib/seo';
 import { cn } from '@/lib/utils';
+import { revealViewport } from '@/lib/motion';
 
 const marketingCourseOption = {
   uz: 'Marketing Maximum kursi',
@@ -149,7 +150,8 @@ const ContactPage = () => {
           <motion.form
             onSubmit={handleSubmit}
             initial={{ opacity: 0, x: -30 }}
-            animate={{ opacity: 1, x: 0 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={revealViewport}
             transition={{ delay: 0.2 }}
             className="glass-card-light h-full space-y-6 rounded-[2rem] p-8 md:space-y-7 md:p-10 lg:p-12"
           >
@@ -250,7 +252,8 @@ const ContactPage = () => {
 
           <motion.div
             initial={{ opacity: 0, x: 30 }}
-            animate={{ opacity: 1, x: 0 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={revealViewport}
             transition={{ delay: 0.3 }}
             className="flex h-full flex-col gap-5 lg:gap-6"
           >

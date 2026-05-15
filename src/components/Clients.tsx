@@ -42,7 +42,7 @@ const Clients = () => {
             {[...clientList, ...clientList].map((client, i) => (
               <div
                 key={`${client}-${i}`}
-                className="group flex min-w-[220px] flex-shrink-0 items-center justify-center rounded-2xl border border-border/70 bg-card/88 px-8 py-5 shadow-[0_6px_18px_rgba(38,79,107,0.05)] transition-colors duration-300 hover:border-primary/20"
+                className="group flex min-w-[220px] flex-shrink-0 items-center justify-center rounded-2xl border border-border/70 bg-card/90 px-8 py-5 shadow-[0_6px_18px_rgba(38,79,107,0.05)] transition-colors duration-300 hover:border-primary/20"
               >
                 <span className="text-center font-heading text-sm font-bold whitespace-nowrap text-foreground/60 transition-colors duration-300 group-hover:text-primary">
                   {client}

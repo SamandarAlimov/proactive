@@ -5,6 +5,7 @@ import { useI18n } from '@/lib/i18n';
 import PageLayout from '@/components/PageLayout';
 import SEO from '@/components/SEO';
 import { createBreadcrumbSchema, createCreativeWorkSchema, createWebPageSchema } from '@/lib/seo';
+import { revealViewport } from '@/lib/motion';
 import marfImg from '@/assets/marf-project.png';
 import proactiveLogo from '@/assets/proactive-logo.jpg';
 import aurusHero from '@/assets/projects/aurus/aurus-hero.webp';
@@ -680,7 +681,8 @@ const ProjectDetailPage = () => {
           {image && (
             <motion.div
               initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={revealViewport}
               className="mb-12 overflow-hidden rounded-3xl bg-muted/30 shadow-xl"
             >
               <img src={image} alt={title} decoding="async" className="max-h-[68vh] w-full object-contain md:max-h-[640px]" />
@@ -763,7 +765,8 @@ const ProjectDetailPage = () => {
                   <motion.figure
                     key={`${item.src}-${index}`}
                     initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={revealViewport}
                     transition={{ delay: 0.05 * index }}
                     className={`overflow-hidden rounded-[1.75rem] border border-border/70 bg-card shadow-[0_18px_50px_rgba(0,0,0,0.05)] ${
                       gallery.length % 2 === 1 && index === gallery.length - 1 ? 'md:col-span-2' : ''
@@ -831,7 +834,7 @@ const ProjectDetailPage = () => {
                   key={item.slug}
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, margin: '-60px' }}
+                  viewport={{ once: false, margin: '-60px' }}
                   transition={{ delay: index * 0.08 }}
                   className="group"
                 >

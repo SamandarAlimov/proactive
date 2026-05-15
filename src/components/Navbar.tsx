@@ -118,7 +118,7 @@ const Navbar = () => {
 
   const otherLangs = (['uz', 'en', 'ru'] as Language[]).filter((currentLang) => currentLang !== lang);
   const showDarkNav = !scrolled && (isHome || location.pathname === '/team');
-  const navTextClass = 'text-white/78 hover:text-primary';
+  const navTextClass = 'text-white hover:text-primary';
   const brandTextClass = 'text-white';
 
   return (
@@ -170,7 +170,7 @@ const Navbar = () => {
                 key={item.href}
                 to={item.href}
                 className={`group relative text-xs font-medium transition-colors duration-300 ${
-                  location.pathname === item.href ? 'text-primary' : navTextClass
+                  location.pathname === item.href ? 'text-white' : navTextClass
                 } whitespace-nowrap xl:text-[13px] 2xl:text-sm`}
               >
                 {item.label}
@@ -201,7 +201,7 @@ const Navbar = () => {
                 </a>
                 <a
                   href={`tel:${headerSecondaryPhone.replace(/\s+/g, '')}`}
-                  className="block whitespace-nowrap text-[11px] text-white/68 transition-colors duration-300 hover:text-white"
+                  className="block whitespace-nowrap text-[11px] text-white/80 transition-colors duration-300 hover:text-white"
                 >
                   {headerSecondaryPhone}
                 </a>
@@ -232,7 +232,7 @@ const Navbar = () => {
                 className={`flex items-center gap-1 rounded-lg border px-3 py-1.5 text-xs font-semibold transition-all duration-300 ${
                   langOpen
                     ? 'border-primary bg-primary text-secondary'
-                    : 'border-white/20 text-white/80 hover:border-primary hover:text-primary'
+                    : 'border-white/30 text-white hover:border-primary hover:text-primary'
                 }`}
               >
                 {langLabels[lang]}

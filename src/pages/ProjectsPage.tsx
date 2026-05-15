@@ -5,6 +5,7 @@ import { useI18n } from '@/lib/i18n';
 import PageLayout from '@/components/PageLayout';
 import SEO from '@/components/SEO';
 import { createBreadcrumbSchema, createWebPageSchema } from '@/lib/seo';
+import { revealViewport } from '@/lib/motion';
 import marfImg from '@/assets/marf-project.png';
 import proactiveLogo from '@/assets/proactive-logo.jpg';
 import aurusHero from '@/assets/projects/aurus/aurus-hero.webp';
@@ -133,7 +134,14 @@ const ProjectsPage = () => {
       <section className="section-padding">
         <div className="mx-auto grid max-w-7xl gap-6 md:grid-cols-2 lg:grid-cols-3">
           {projects.map((project, i) => (
-            <motion.div key={project.slug} initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.05 * i }} className="group">
+            <motion.div
+              key={project.slug}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={revealViewport}
+              transition={{ delay: 0.05 * i }}
+              className="group"
+            >
               <Link to={`/projects/${project.slug}`} state={projectDetailState} className="block">
                 <div className="overflow-hidden rounded-2xl glass-card-light transition-all duration-500 hover:shadow-xl">
                   <div className="relative h-48 overflow-hidden">
@@ -163,7 +171,7 @@ const ProjectsPage = () => {
                             decoding="async"
                             className="h-16 w-16 rounded-2xl object-cover opacity-90 shadow-[0_14px_34px_rgba(0,0,0,0.18)]"
                           />
-                          <span className="max-w-[13rem] text-sm font-heading font-semibold tracking-wide text-white/78">
+                          <span className="max-w-[13rem] text-sm font-heading font-semibold tracking-wide text-white/90">
                             {project.title}
                           </span>
                         </div>

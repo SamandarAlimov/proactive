@@ -109,7 +109,7 @@ const MarketingMaximum = () => {
                     <Icon className="h-5 w-5" />
                   </div>
                   <h3 className="font-heading text-lg font-bold">{item.title[lang]}</h3>
-                  <p className="mt-2 text-sm leading-relaxed text-white/68">{item.text[lang]}</p>
+                  <p className="mt-2 text-sm leading-relaxed text-white/70">{item.text[lang]}</p>
                 </div>
               );
             })}
@@ -128,7 +128,7 @@ const MarketingMaximum = () => {
             </Link>
             <Link
               to="/contact"
-              className="inline-flex items-center justify-center rounded-xl border border-white/14 px-6 py-3 font-semibold text-white/82 transition-all duration-300 hover:border-primary/60 hover:text-primary"
+              className="inline-flex items-center justify-center rounded-xl border border-white/20 px-6 py-3 font-semibold text-white/90 transition-all duration-300 hover:border-primary/60 hover:text-primary"
             >
               {text.secondary}
             </Link>

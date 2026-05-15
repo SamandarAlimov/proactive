@@ -3,11 +3,14 @@ import { Link, useLocation } from 'react-router-dom';
 import { services } from '@/data/services';
 import { useI18n } from '@/lib/i18n';
 import { useScrollAnimation } from '@/hooks/useScrollAnimation';
+import { createMainSectionState, readMoreLabel } from '@/lib/source-navigation';
+import { ArrowRight } from 'lucide-react';
 
 const Services = () => {
   const { t, lang } = useI18n();
   const { ref, getMotionProps } = useScrollAnimation();
   const location = useLocation();
+  const servicesPageState = createMainSectionState('services', lang);
   const serviceDetailState = {
     from: `${location.pathname}${location.search}#services`,
     fromLabel: lang === 'uz' ? 'Asosiy sahifa' : lang === 'ru' ? 'Главная страница' : 'Home page',
@@ -52,7 +55,7 @@ const Services = () => {
               <motion.div
                 key={service.slug}
                 {...getMotionProps({ distance: 24, delay: 0.08 * index, duration: 0.42 })}
-                whileHover={{ y: -6, scale: 1.01 }}
+                whileHover={{ y: -4, scale: 1.004 }}
                 className="h-full"
               >
                 <Link to={`/services/${service.slug}`} state={serviceDetailState} className="block h-full">
@@ -97,6 +100,17 @@ const Services = () => {
             );
           })}
         </div>
+
+        <motion.div {...getMotionProps({ distance: 18, delay: 0.45 })} className="mt-12 text-center">
+          <Link
+            to="/services"
+            state={servicesPageState}
+            className="group inline-flex items-center gap-2 rounded-xl border border-primary/20 px-6 py-3 font-semibold text-primary transition-all duration-300 hover:-translate-y-0.5 hover:bg-primary/5"
+          >
+            {readMoreLabel(lang)}
+            <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
+          </Link>
+        </motion.div>
       </div>
     </section>
   );

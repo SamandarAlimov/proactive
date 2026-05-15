@@ -4,6 +4,7 @@ import { Link, useLocation } from 'react-router-dom';
 import { useI18n } from '@/lib/i18n';
 import PageLayout from '@/components/PageLayout';
 import SEO from '@/components/SEO';
+import SourceBackLink from '@/components/SourceBackLink';
 import { createBreadcrumbSchema, createWebPageSchema } from '@/lib/seo';
 import { revealViewport } from '@/lib/motion';
 import marfImg from '@/assets/marf-project.png';
@@ -116,7 +117,9 @@ const ProjectsPage = () => {
         ]}
       />
       <section className="section-padding bg-secondary text-secondary-foreground">
-        <div className="mx-auto max-w-7xl text-center">
+        <div className="mx-auto max-w-7xl">
+          <SourceBackLink variant="dark" />
+          <div className="text-center">
           <motion.span initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="text-sm font-semibold uppercase tracking-widest text-primary">
             {t.projects.subtitle}
           </motion.span>
@@ -128,6 +131,7 @@ const ProjectsPage = () => {
           >
             {t.projects.title}
           </motion.h1>
+          </div>
         </div>
       </section>
 
@@ -151,7 +155,7 @@ const ProjectsPage = () => {
                         alt={project.title}
                         loading="lazy"
                         decoding="async"
-                        className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                        className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.025]"
                       />
                     ) : (
                       <div

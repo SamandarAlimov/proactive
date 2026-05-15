@@ -1,24 +1,27 @@
 import { motion } from 'framer-motion';
 import {
+  ArrowRight,
   Compass,
   Layers3,
   Lightbulb,
   Send,
   Sparkles,
-  Target,
   Workflow,
 } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import { useI18n } from '@/lib/i18n';
 import { useScrollAnimation } from '@/hooks/useScrollAnimation';
 import proactiveLogo from '@/assets/proactive-logo.jpg';
 import founderPhoto from '@/assets/founder-photo.jpg';
 import FounderSpecialtyChips from '@/components/FounderSpecialtyChips';
 import { founderProfile, type FounderLang } from '@/lib/founder-profile';
+import { createMainSectionState, readMoreLabel } from '@/lib/source-navigation';
 
 const About = () => {
   const { t, lang } = useI18n();
   const { ref, getMotionProps, shouldReduceMotion } = useScrollAnimation();
   const founderLang = (lang in founderProfile.tags ? lang : 'uz') as FounderLang;
+  const aboutPageState = createMainSectionState('about', lang);
 
   const founderName = 'Habibullo Sadulloyev';
   const founderRole = lang === 'uz' ? 'Asoschi' : lang === 'ru' ? 'Основатель' : 'Founder';
@@ -138,12 +141,21 @@ const About = () => {
               {t.about.description}
             </p>
 
+            <Link
+              to="/about"
+              state={aboutPageState}
+              className="group mb-10 inline-flex items-center gap-2 rounded-xl border border-primary/20 px-5 py-3 font-semibold text-primary transition-all duration-300 hover:-translate-y-0.5 hover:bg-primary/5"
+            >
+              {readMoreLabel(lang)}
+              <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
+            </Link>
+
             <div className="relative grid gap-4 sm:grid-cols-2">
               {capabilityCards.map((item, i) => (
                 <motion.div
                   key={item.title}
                   {...getMotionProps({ distance: 24, delay: 0.3 + i * 0.1 })}
-                  whileHover={{ y: -6, scale: 1.015 }}
+                  whileHover={{ y: -4, scale: 1.006 }}
                   className="group relative overflow-hidden rounded-[1.75rem] border border-border/60 bg-card/90 p-6 shadow-[0_16px_40px_rgba(0,0,0,0.05)] backdrop-blur-sm transition-all duration-300"
                 >
                   <div className="absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
@@ -194,7 +206,7 @@ const About = () => {
                 <div className="absolute left-1/2 top-[12%] h-3 w-3 -translate-x-1/2 rounded-full bg-primary/70 shadow-[0_0_20px_rgba(82,230,200,0.55)]" />
                 <div className="absolute right-[14%] top-1/2 h-2.5 w-2.5 -translate-y-1/2 rounded-full bg-white/50" />
                 <div className="absolute bottom-[14%] left-1/2 h-2.5 w-2.5 -translate-x-1/2 rounded-full bg-primary/40" />
-                <div className="absolute left-[14%] top-1/2 h-2 w-2 -translate-y-1/2 rounded-full bg-white/35" />
+                <div className="absolute left-[14%] top-1/2 h-2 w-2 -translate-y-1/2 rounded-full bg-white/30" />
               </motion.div>
 
               <div

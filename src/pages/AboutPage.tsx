@@ -11,6 +11,7 @@ import {
 import PageLayout from '@/components/PageLayout';
 import FounderSpecialtyChips from '@/components/FounderSpecialtyChips';
 import SEO from '@/components/SEO';
+import SourceBackLink from '@/components/SourceBackLink';
 import founderHabibullo from '@/assets/founder-habibullo.png';
 import { founderProfile, type FounderLang } from '@/lib/founder-profile';
 import { useI18n } from '@/lib/i18n';
@@ -194,13 +195,14 @@ const AboutPage = () => {
       <section className="relative overflow-hidden bg-secondary text-secondary-foreground">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(82,230,200,0.18),transparent_35%),radial-gradient(circle_at_bottom_left,rgba(82,230,200,0.08),transparent_28%)]" />
         <div className="relative mx-auto max-w-7xl px-6 py-24 md:px-12 md:py-28">
+          <SourceBackLink variant="dark" />
           <div className="grid gap-14 lg:grid-cols-[1.15fr_0.85fr] lg:items-end">
             <motion.div
               initial={{ opacity: 0, y: 18 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
             >
-              <span className="inline-flex rounded-full border border-white/12 bg-white/5 px-4 py-2 font-brand text-[11px] font-semibold uppercase tracking-[0.28em] text-primary">
+              <span className="inline-flex rounded-full border border-white/10 bg-white/5 px-4 py-2 font-brand text-[11px] font-semibold uppercase tracking-[0.28em] text-primary">
                 {content.eyebrow}
               </span>
 
@@ -229,7 +231,7 @@ const AboutPage = () => {
                   className="rounded-[1.75rem] border border-white/10 bg-white/[0.06] p-5 backdrop-blur-xl"
                 >
                   <div className="flex items-center gap-4">
-                    <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-primary/12 text-primary">
+                    <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-primary/10 text-primary">
                       <fact.icon className="h-5 w-5" />
                     </div>
 

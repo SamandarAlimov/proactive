@@ -12,6 +12,7 @@ import {
 import { ContactEmailInput, ContactPhoneInput } from '@/components/contact/ContactFormFields';
 import PageLayout from '@/components/PageLayout';
 import SEO from '@/components/SEO';
+import SourceBackLink from '@/components/SourceBackLink';
 import {
   contactAddressCity,
   contactAddressFull,
@@ -126,7 +127,9 @@ const ContactPage = () => {
         ]}
       />
       <section className="section-padding bg-secondary text-secondary-foreground">
-        <div className="mx-auto max-w-7xl text-center">
+        <div className="mx-auto max-w-7xl">
+          <SourceBackLink variant="dark" />
+          <div className="text-center">
           <motion.span
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -142,6 +145,7 @@ const ContactPage = () => {
           >
             {t.contact.subtitle}
           </motion.h1>
+          </div>
         </div>
       </section>
 
@@ -273,11 +277,11 @@ const ContactPage = () => {
                   className="h-full w-full border-0"
                 />
                 <div className="pointer-events-none absolute inset-x-0 bottom-0 bg-gradient-to-t from-secondary/90 via-secondary/45 to-transparent p-5">
-                  <p className="font-brand text-[10px] font-semibold uppercase tracking-[0.22em] text-white/72">
+                  <p className="font-brand text-[10px] font-semibold uppercase tracking-[0.22em] text-white/70">
                     Office address
                   </p>
                   <p className="mt-2 font-heading text-xl font-bold text-white">{contactAddressLine}</p>
-                  <p className="text-sm text-white/76">{contactAddressCity}</p>
+                  <p className="text-sm text-white/75">{contactAddressCity}</p>
                 </div>
               </div>
             </motion.a>
@@ -288,7 +292,7 @@ const ContactPage = () => {
                 className="glass-card-light group flex min-h-[86px] items-center gap-4 rounded-[1.75rem] p-5 transition-all duration-300 hover:shadow-lg md:p-6"
               >
                 <div
-                  className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-[1rem] transition-transform duration-300 group-hover:scale-110"
+                  className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-[1rem] transition-transform duration-300 group-hover:scale-105"
                   style={{
                     background: 'linear-gradient(135deg, hsl(166, 75%, 61%), hsl(181, 100%, 50%))',
                   }}
@@ -309,7 +313,7 @@ const ContactPage = () => {
               className="glass-card-light group block min-h-[86px] rounded-[1.75rem] p-5 transition-all duration-300 hover:shadow-lg md:p-6"
             >
               <div className="flex items-center gap-4">
-                <div className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-[1rem] bg-secondary transition-transform duration-300 group-hover:scale-110">
+                <div className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-[1rem] bg-secondary transition-transform duration-300 group-hover:scale-105">
                   <Instagram className="h-6 w-6 text-secondary-foreground" />
                 </div>
                 <div>

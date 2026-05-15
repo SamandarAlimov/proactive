@@ -3,6 +3,7 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { Minus, Plus } from 'lucide-react';
 import PageLayout from '@/components/PageLayout';
 import SEO from '@/components/SEO';
+import SourceBackLink from '@/components/SourceBackLink';
 import { services, type ServiceSlug } from '@/data/services';
 import { useI18n } from '@/lib/i18n';
 import { createBreadcrumbSchema, createWebPageSchema } from '@/lib/seo';
@@ -89,7 +90,9 @@ const ServicesPage = () => {
               'radial-gradient(ellipse 60% 50% at 50% 0%, hsla(166, 75%, 61%, 0.08) 0%, transparent 70%)',
           }}
         />
-        <div className="mx-auto max-w-5xl px-6 text-center">
+        <div className="mx-auto max-w-5xl px-6">
+          <SourceBackLink className="mb-8" />
+          <div className="text-center">
           <motion.span
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
@@ -119,6 +122,7 @@ const ServicesPage = () => {
           >
             {labels.intro}
           </motion.p>
+          </div>
         </div>
       </section>
 
@@ -174,7 +178,7 @@ const ServicesPage = () => {
                     </div>
 
                     <div
-                      className="flex h-14 w-14 items-center justify-center rounded-2xl transition-all duration-500 group-hover:scale-110 group-hover:rotate-3 md:h-16 md:w-16"
+                      className="flex h-14 w-14 items-center justify-center rounded-2xl transition-all duration-500 group-hover:scale-105 md:h-16 md:w-16"
                       style={{
                         background: `linear-gradient(135deg, ${service.accent.from}, ${service.accent.to})`,
                         boxShadow: `0 8px 24px ${service.accent.from}30`,

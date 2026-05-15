@@ -4,6 +4,7 @@ import { useI18n } from '@/lib/i18n';
 import PageLayout from '@/components/PageLayout';
 import TeamShowcaseStrip from '@/components/TeamShowcaseStrip';
 import SEO from '@/components/SEO';
+import SourceBackLink from '@/components/SourceBackLink';
 import { createBreadcrumbSchema, createWebPageSchema } from '@/lib/seo';
 
 const TeamPage = () => {
@@ -52,6 +53,10 @@ const TeamPage = () => {
         }
       >
         <div className="mx-auto max-w-7xl px-6 md:px-12">
+          <SourceBackLink
+            variant={isDark ? 'dark' : 'light'}
+            className={isDark ? undefined : 'text-secondary/75 hover:text-primary'}
+          />
           <motion.span
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}

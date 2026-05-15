@@ -12,12 +12,12 @@ type DirectionalRevealOptions = {
 };
 
 export const premiumRevealTransition: Transition = {
-  duration: 0.36,
-  ease: [0.22, 1, 0.36, 1],
+  duration: 0.52,
+  ease: [0.16, 1, 0.3, 1],
 };
 
 export const revealViewport = {
-  amount: 0.22,
+  amount: 0.18,
   once: false,
 };
 
@@ -43,6 +43,7 @@ export const createDirectionalRevealVariants = ({
       opacity: 0,
       scale,
       [axis]: hiddenOffset,
+      willChange: 'opacity, transform, filter',
       ...(blur > 0 ? { filter: `blur(${blur}px)` } : {}),
     },
     visible: {
@@ -50,6 +51,7 @@ export const createDirectionalRevealVariants = ({
       x: 0,
       y: 0,
       scale: 1,
+      willChange: 'auto',
       ...(blur > 0 ? { filter: 'blur(0px)' } : {}),
     },
   };

@@ -1,5 +1,6 @@
 import PageLayout from '@/components/PageLayout';
 import SEO from '@/components/SEO';
+import SourceBackLink from '@/components/SourceBackLink';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { useI18n } from '@/lib/i18n';
@@ -407,10 +408,11 @@ const AcademyPage = () => {
       <section className="relative overflow-hidden bg-[#081625] text-white">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(103,248,214,0.18),transparent_34%),radial-gradient(circle_at_bottom_left,rgba(103,248,214,0.12),transparent_28%)]" />
         <div className="relative mx-auto max-w-7xl px-6 py-20 md:px-10 md:py-24">
+          <SourceBackLink variant="dark" />
           <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.55 }}>
             <span className="text-sm font-semibold uppercase tracking-[0.32em] text-[#74f2d8]">{text.eyebrow}</span>
             <h1 className="mt-5 max-w-5xl font-heading text-4xl font-bold leading-tight md:text-6xl lg:text-7xl">{text.title}</h1>
-            <p className="mt-6 max-w-3xl text-lg leading-relaxed text-white/76 md:text-xl">{text.description}</p>
+            <p className="mt-6 max-w-3xl text-lg leading-relaxed text-white/75 md:text-xl">{text.description}</p>
             <div className="mt-10 flex flex-wrap gap-4">
               <Link
                 to="/contact"
@@ -532,7 +534,7 @@ const AcademyPage = () => {
         <div className="mx-auto max-w-7xl px-6 md:px-10">
           <motion.div initial={{ opacity: 0, y: 22 }} whileInView={{ opacity: 1, y: 0 }} viewport={revealViewport}>
             <h2 className="font-heading text-3xl font-bold md:text-5xl">{text.map}</h2>
-            <p className="mt-5 max-w-3xl text-lg leading-relaxed text-white/72">{text.mapDescription}</p>
+            <p className="mt-5 max-w-3xl text-lg leading-relaxed text-white/70">{text.mapDescription}</p>
           </motion.div>
           <div className="mt-12 grid gap-6 lg:grid-cols-3">
             {stageItems.map((stage, index) => (
@@ -632,7 +634,7 @@ const AcademyPage = () => {
           <div className="grid gap-10 lg:grid-cols-[0.82fr_1.18fr] lg:items-start">
             <motion.div initial={{ opacity: 0, y: 22 }} whileInView={{ opacity: 1, y: 0 }} viewport={revealViewport} className="lg:sticky lg:top-24">
               <h2 className="font-heading text-3xl font-bold md:text-5xl">{text.quotes}</h2>
-              <p className="mt-5 max-w-2xl text-lg leading-relaxed text-white/74">{text.quotesDescription}</p>
+              <p className="mt-5 max-w-2xl text-lg leading-relaxed text-white/75">{text.quotesDescription}</p>
 
               <div className="mt-8 rounded-[2rem] border border-white/10 bg-white/[0.04] p-6 shadow-[0_18px_60px_rgba(0,0,0,0.24)]">
                 <div className="flex items-center gap-3 text-[#74f2d8]">
@@ -647,7 +649,7 @@ const AcademyPage = () => {
                     <div key={tr(theme.title)} className="rounded-[1.5rem] border border-white/10 bg-black/10 px-4 py-4">
                       <div className="text-[11px] font-semibold uppercase tracking-[0.28em] text-[#74f2d8]">0{index + 1}</div>
                       <h4 className="mt-3 text-lg font-semibold text-white">{tr(theme.title)}</h4>
-                      <p className="mt-2 text-sm leading-relaxed text-white/62">{tr(theme.description)}</p>
+                      <p className="mt-2 text-sm leading-relaxed text-white/60">{tr(theme.description)}</p>
                     </div>
                   ))}
                 </div>
@@ -665,7 +667,7 @@ const AcademyPage = () => {
                   className="group rounded-[2rem] border border-white/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.06),rgba(255,255,255,0.03))] p-6 shadow-[0_22px_70px_rgba(0,0,0,0.26)] transition-transform duration-300 hover:-translate-y-1 md:p-8"
                 >
                   <div className="flex items-start justify-between gap-5">
-                    <div className="inline-flex rounded-full border border-white/12 bg-white/5 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.28em] text-white/62">
+                    <div className="inline-flex rounded-full border border-white/10 bg-white/5 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.28em] text-white/60">
                       0{index + 1}
                     </div>
                     <Quote className="h-9 w-9 text-[#74f2d8]" />

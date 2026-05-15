@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import academySpeaker from '@/assets/academy-speaker.jpg';
 import { useScrollAnimation } from '@/hooks/useScrollAnimation';
 import { useI18n, type Language } from '@/lib/i18n';
+import { createMainSectionState } from '@/lib/source-navigation';
 
 const copy = {
   uz: {
@@ -67,6 +68,7 @@ const MarketingMaximum = () => {
   const { lang } = useI18n();
   const { ref, getMotionProps } = useScrollAnimation();
   const text = copy[lang];
+  const academyPageState = createMainSectionState('marketing-maximum', lang);
 
   return (
     <section id="marketing-maximum" className="section-deferred relative overflow-hidden bg-secondary py-24 text-secondary-foreground md:py-32" ref={ref}>
@@ -95,7 +97,7 @@ const MarketingMaximum = () => {
           <h2 className="mt-6 max-w-4xl font-heading text-3xl font-bold leading-tight tracking-tight md:text-5xl lg:text-6xl">
             {text.title}
           </h2>
-          <p className="mt-6 max-w-2xl text-base leading-relaxed text-white/72 md:text-lg">
+          <p className="mt-6 max-w-2xl text-base leading-relaxed text-white/70 md:text-lg">
             {text.description}
           </p>
 
@@ -118,6 +120,7 @@ const MarketingMaximum = () => {
           <div className="mt-9 flex flex-col gap-3 sm:flex-row">
             <Link
               to="/academy"
+              state={academyPageState}
               className="inline-flex items-center justify-center gap-2 rounded-xl px-6 py-3 font-semibold transition-all duration-300 hover:gap-3 hover:shadow-lg"
               style={{
                 background: 'linear-gradient(135deg, hsl(166, 75%, 61%), hsl(181, 100%, 50%))',
@@ -147,7 +150,7 @@ const MarketingMaximum = () => {
                 <div key={item.value} className="rounded-2xl border border-white/10 bg-white/[0.05] p-4 backdrop-blur-md">
                   <Icon className="mb-3 h-5 w-5 text-primary" />
                   <div className="font-heading text-2xl font-bold">{item.value}</div>
-                  <div className="mt-1 text-xs font-semibold uppercase tracking-wider text-white/56">{item.label[lang]}</div>
+                  <div className="mt-1 text-xs font-semibold uppercase tracking-wider text-white/60">{item.label[lang]}</div>
                 </div>
               );
             })}

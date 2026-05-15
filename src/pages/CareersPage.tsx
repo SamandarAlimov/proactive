@@ -132,7 +132,7 @@ const CareersPage = () => {
               </div>
               <Link
                 to="/contact"
-                className="inline-flex flex-shrink-0 items-center justify-center gap-2 rounded-xl bg-primary px-6 py-3 font-semibold text-primary-foreground transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-primary/30"
+                className="inline-flex flex-shrink-0 items-center justify-center gap-2 rounded-xl bg-primary px-6 py-3 font-semibold text-primary-foreground transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-primary/30"
               >
                 {openPositionCopy.cta} <ArrowRight className="w-4 h-4" />
               </Link>
@@ -176,10 +176,10 @@ const CareersPage = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={revealViewport}
                 transition={{ delay: i * 0.1 }}
-                whileHover={{ y: -8 }}
+                whileHover={{ y: -4 }}
                 className="glass-card-light rounded-3xl p-8 text-center group hover:shadow-xl transition-all duration-500"
               >
-                <div className="w-14 h-14 rounded-xl bg-primary flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300">
+                <div className="w-14 h-14 rounded-xl bg-primary flex items-center justify-center mx-auto mb-6 group-hover:scale-105 transition-transform duration-300">
                   <pt.icon className="w-7 h-7 text-primary-foreground" />
                 </div>
                 <h3 className="text-xl font-heading font-bold text-foreground group-hover:text-primary transition-colors duration-300">{pt.title}</h3>

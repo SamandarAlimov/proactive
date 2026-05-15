@@ -807,7 +807,7 @@ const ProjectDetailPage = () => {
             </p>
             <Link
               to="/contact"
-              className="inline-flex items-center gap-2 rounded-xl px-6 py-3 font-semibold transition-all hover:scale-[1.03]"
+              className="inline-flex items-center gap-2 rounded-xl px-6 py-3 font-semibold transition-all hover:-translate-y-0.5"
               style={{ background: 'linear-gradient(135deg, hsl(166, 75%, 61%), hsl(181, 100%, 50%))', color: 'hsl(202, 100%, 11%)' }}
             >
               {t.contact.title} <ArrowRight className="h-4 w-4" />
@@ -847,7 +847,7 @@ const ProjectDetailPage = () => {
                             alt={item.title}
                             loading="lazy"
                             decoding="async"
-                            className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                            className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.025]"
                           />
                         ) : (
                           <div

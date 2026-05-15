@@ -6,6 +6,7 @@ import { useScrollAnimation } from '@/hooks/useScrollAnimation';
 import marfImg from '@/assets/marf-project.png';
 import milestoneHero from '@/assets/projects/milestone/milestone-hero.webp';
 import { clientList } from '@/lib/client-list';
+import { createMainSectionState } from '@/lib/source-navigation';
 
 type FeaturedProject = {
   title: string;
@@ -23,6 +24,7 @@ const Projects = () => {
   const location = useLocation();
 
   const allProjects = clientList;
+  const projectsPageState = createMainSectionState('projects', lang);
   const projectDetailState = {
     from: `${location.pathname}${location.search}#projects`,
     fromLabel: lang === 'uz' ? 'Asosiy sahifa' : lang === 'ru' ? 'Главная страница' : 'Home page',
@@ -102,7 +104,7 @@ const Projects = () => {
               <motion.span
                 key={name}
                 {...getMotionProps({ distance: 12, delay: 0.5 + i * 0.02, scale: 0.94 })}
-                className="cursor-default rounded-full border px-4 py-2 text-sm font-medium transition-all duration-300 hover:scale-105"
+                className="cursor-default rounded-full border px-4 py-2 text-sm font-medium transition-all duration-300 hover:-translate-y-0.5"
                 style={{
                   borderColor: 'hsla(166, 75%, 61%, 0.15)',
                   background: 'hsla(166, 75%, 61%, 0.04)',
@@ -116,7 +118,11 @@ const Projects = () => {
         </motion.div>
 
         <motion.div {...getMotionProps({ distance: 18, delay: 0.6 })} className="mt-14 text-center">
-          <Link to="/projects" className="group inline-flex items-center gap-2 rounded-xl border border-primary/20 px-6 py-3 font-semibold text-primary transition-all duration-300 hover:bg-primary/5">
+          <Link
+            to="/projects"
+            state={projectsPageState}
+            className="group inline-flex items-center gap-2 rounded-xl border border-primary/20 px-6 py-3 font-semibold text-primary transition-all duration-300 hover:bg-primary/5"
+          >
             {t.projects.viewAll}
             <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
           </Link>
@@ -153,7 +159,7 @@ const FeaturedCard = ({
               alt={project.title}
               loading="lazy"
               decoding="async"
-              className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+              className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.025]"
             />
           </div>
         </div>

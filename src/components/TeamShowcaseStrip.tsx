@@ -79,14 +79,14 @@ const TeamShowcaseStrip = ({ className = '' }: { className?: string }) => {
         : 'grayscale(1) saturate(0) brightness(0.74) contrast(1.02)',
       activeFilter: 'grayscale(0) saturate(1.02) brightness(1) contrast(1.02)',
       tooltipClass: isDark
-        ? 'border-white/12 bg-[#101114]/94 text-white shadow-[0_32px_80px_rgba(0,0,0,0.45)]'
+        ? 'border-white/10 bg-[#101114]/95 text-white shadow-[0_32px_80px_rgba(0,0,0,0.45)]'
         : 'border-[#264F6B]/10 bg-white/95 text-secondary shadow-[0_24px_72px_rgba(38,79,107,0.16)]',
       eyebrowClass: isDark ? 'text-primary/90' : 'text-secondary/60',
       nameClass: isDark ? 'text-white' : 'text-secondary',
       dividerClass: isDark ? 'bg-white/15' : 'bg-secondary/10',
       roleLabelClass: isDark ? 'text-white/46' : 'text-secondary/45',
       roleClass: isDark ? 'text-primary/90' : 'text-secondary',
-      bioClass: isDark ? 'text-white/72' : 'text-secondary/72',
+      bioClass: isDark ? 'text-white/70' : 'text-secondary/70',
       idleOpacity: isDark ? 0.94 : 0.96,
       mutedOpacity: isDark ? 0.72 : 0.68,
     }),

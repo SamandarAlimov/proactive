@@ -84,7 +84,7 @@ const EventsPage = () => {
             <p className="mx-auto mt-4 max-w-2xl leading-relaxed text-muted-foreground">{copy.description}</p>
             <Link
               to="/contact"
-              className="mt-8 inline-flex items-center gap-2 rounded-xl bg-primary px-6 py-3 font-semibold text-primary-foreground transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-primary/30"
+              className="mt-8 inline-flex items-center gap-2 rounded-xl bg-primary px-6 py-3 font-semibold text-primary-foreground transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-primary/30"
             >
               {copy.cta} <ArrowRight className="h-4 w-4" />
             </Link>

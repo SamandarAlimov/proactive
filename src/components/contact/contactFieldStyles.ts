@@ -1,5 +1,5 @@
 export const contactLabelClass =
-  'mb-2.5 block px-1 font-brand text-[11px] font-semibold uppercase tracking-[0.24em] text-secondary/72 dark:text-secondary-foreground/72';
+  'mb-2.5 block px-1 font-brand text-[11px] font-semibold uppercase tracking-[0.24em] text-secondary/70 dark:text-secondary-foreground/70';
 
 export const contactFieldShellClass =
   'rounded-[1.35rem] border border-border/80 bg-background/95 shadow-[0_20px_48px_-34px_rgba(15,23,42,0.28)] transition-all duration-300 dark:border-white/10 dark:bg-secondary/20';

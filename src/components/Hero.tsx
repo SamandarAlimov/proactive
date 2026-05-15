@@ -81,15 +81,15 @@ const Hero = () => {
           transition={{ duration: 0.7, delay: 0.9 }}
           className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center px-4 sm:px-0"
         >
-          <a href="#contact" className="group relative inline-flex items-center justify-center gap-3 px-6 sm:px-8 py-3.5 sm:py-4 rounded-xl font-semibold text-base sm:text-lg overflow-hidden transition-all duration-400 hover:scale-[1.03] hover:shadow-[0_0_50px_hsla(166,75%,61%,0.35)]"
+          <a href="#contact" className="group relative inline-flex items-center justify-center gap-3 px-6 sm:px-8 py-3.5 sm:py-4 rounded-xl font-semibold text-base sm:text-lg overflow-hidden transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_0_50px_hsla(166,75%,61%,0.28)]"
             style={{ background: 'linear-gradient(135deg, hsl(166, 75%, 61%), hsl(181, 100%, 50%))', color: 'hsl(202, 100%, 11%)' }}
           >
             <span className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-500" />
             <span className="relative">{t.hero.cta}</span>
             <ArrowRight className="relative w-5 h-5 transition-transform duration-300 group-hover:translate-x-1" />
           </a>
-          <a href="#about" className="group inline-flex items-center justify-center gap-3 px-6 sm:px-8 py-3.5 sm:py-4 rounded-xl border border-white/24 bg-white/[0.08] backdrop-blur-sm text-white font-semibold text-base sm:text-lg transition-all duration-400 hover:border-primary/50 hover:bg-white/[0.12] hover:scale-[1.03]">
-            <Play className="w-5 h-5 transition-transform duration-300 group-hover:scale-110" />
+          <a href="#about" className="group inline-flex items-center justify-center gap-3 px-6 sm:px-8 py-3.5 sm:py-4 rounded-xl border border-white/25 bg-white/[0.08] backdrop-blur-sm text-white font-semibold text-base sm:text-lg transition-all duration-300 hover:-translate-y-0.5 hover:border-primary/50 hover:bg-white/[0.12]">
+            <Play className="w-5 h-5 transition-transform duration-300 group-hover:scale-105" />
             {t.hero.ctaSecondary}
           </a>
         </motion.div>

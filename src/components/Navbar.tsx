@@ -157,7 +157,7 @@ const Navbar = () => {
             <img
               src={proactiveLogo}
               alt="Proactive Logo"
-              className="h-10 w-10 rounded-lg object-cover transition-transform duration-300 group-hover:scale-110"
+              className="h-10 w-10 rounded-lg object-cover transition-transform duration-300 group-hover:scale-105"
             />
             <span className={`font-heading text-xl font-bold transition-colors duration-300 ${brandTextClass}`}>
               Proactive

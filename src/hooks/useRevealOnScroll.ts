@@ -22,8 +22,8 @@ type RevealMotionOptions = {
 };
 
 export const useRevealOnScroll = ({
-  rootMargin = '0px 0px -8% 0px',
-  threshold = 0.15,
+  rootMargin = '0px 0px -10% 0px',
+  threshold = 0.18,
 }: RevealOnScrollOptions = {}) => {
   const ref = useRef<HTMLElement | null>(null);
   const [isVisible, setIsVisible] = useState(false);
@@ -58,11 +58,11 @@ export const useRevealOnScroll = ({
     () =>
       ({
         axis = 'y',
-        blur = 0,
+        blur = 3,
         delay = 0,
-        distance = 22,
-        duration = premiumRevealTransition.duration ?? 0.36,
-        scale = 0.994,
+        distance = 18,
+        duration = premiumRevealTransition.duration ?? 0.52,
+        scale = 0.985,
       }: RevealMotionOptions = {}) => ({
         initial: 'hidden' as const,
         animate: isVisible ? ('visible' as const) : ('hidden' as const),

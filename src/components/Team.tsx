@@ -1,14 +1,18 @@
 import { motion } from 'framer-motion';
 import { useTheme } from 'next-themes';
+import { ArrowRight } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import { useI18n } from '@/lib/i18n';
 import { useScrollAnimation } from '@/hooks/useScrollAnimation';
 import TeamShowcaseStrip from '@/components/TeamShowcaseStrip';
+import { createMainSectionState, readMoreLabel } from '@/lib/source-navigation';
 
 const Team = () => {
   const { t, lang } = useI18n();
   const { ref, getMotionProps } = useScrollAnimation();
   const { resolvedTheme } = useTheme();
   const isDark = resolvedTheme === 'dark';
+  const teamPageState = createMainSectionState('team', lang);
   const heading =
     lang === 'uz'
       ? { first: 'Proactive', second: 'jamoasi' }
@@ -79,11 +83,23 @@ const Team = () => {
             </h2>
             <p
               className={`mt-4 max-w-2xl text-base leading-relaxed md:text-lg ${
-                isDark ? 'text-white/74' : 'text-secondary/72'
+                isDark ? 'text-white/75' : 'text-secondary/70'
               }`}
             >
               {t.team.description}
             </p>
+            <Link
+              to="/team"
+              state={teamPageState}
+              className={`group mt-7 inline-flex items-center gap-2 rounded-xl border px-5 py-3 font-semibold transition-all duration-300 hover:-translate-y-0.5 ${
+                isDark
+                  ? 'border-white/15 text-white hover:border-primary/50 hover:text-primary'
+                  : 'border-primary/20 text-primary hover:bg-primary/5'
+              }`}
+            >
+              {readMoreLabel(lang)}
+              <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
+            </Link>
           </motion.div>
         </div>
       </div>

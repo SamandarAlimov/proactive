@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { ChevronDown, Instagram, Mail, MapPin, Phone, Send } from 'lucide-react';
+import { ArrowRight, ChevronDown, Instagram, Mail, MapPin, Phone, Send } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import { toast } from 'sonner';
 
 import {
@@ -28,6 +29,7 @@ import { buildPhoneNumber, DEFAULT_PHONE_COUNTRY } from '@/lib/contact-form';
 import { services } from '@/data/services';
 import { useI18n } from '@/lib/i18n';
 import { cn } from '@/lib/utils';
+import { createMainSectionState, readMoreLabel } from '@/lib/source-navigation';
 
 const marketingCourseOption = {
   uz: 'Marketing Maximum kursi',
@@ -38,6 +40,7 @@ const marketingCourseOption = {
 const Contact = () => {
   const { t, lang } = useI18n();
   const { ref, getMotionProps } = useScrollAnimation();
+  const contactPageState = createMainSectionState('contact', lang);
   const [formData, setFormData] = useState({
     name: '',
     phoneCountry: DEFAULT_PHONE_COUNTRY,
@@ -124,6 +127,14 @@ const Contact = () => {
           <h2 className="mt-6 font-heading text-3xl font-bold text-foreground md:text-5xl">
             {t.contact.subtitle}
           </h2>
+          <Link
+            to="/contact"
+            state={contactPageState}
+            className="group mt-7 inline-flex items-center gap-2 rounded-xl border border-primary/20 px-5 py-3 font-semibold text-primary transition-all duration-300 hover:-translate-y-0.5 hover:bg-primary/5"
+          >
+            {readMoreLabel(lang)}
+            <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
+          </Link>
         </motion.div>
 
         <div className="grid items-stretch gap-8 lg:grid-cols-[minmax(0,1.04fr)_minmax(320px,0.88fr)] xl:gap-12">
@@ -247,11 +258,11 @@ const Contact = () => {
                   className="h-full w-full border-0"
                 />
                 <div className="pointer-events-none absolute inset-x-0 bottom-0 bg-gradient-to-t from-secondary/90 via-secondary/45 to-transparent p-5">
-                  <p className="font-brand text-[10px] font-semibold uppercase tracking-[0.22em] text-white/72">
+                  <p className="font-brand text-[10px] font-semibold uppercase tracking-[0.22em] text-white/70">
                     Office address
                   </p>
                   <p className="mt-2 font-heading text-xl font-bold text-white">{contactAddressLine}</p>
-                  <p className="text-sm text-white/76">{contactAddressCity}</p>
+                  <p className="text-sm text-white/75">{contactAddressCity}</p>
                 </div>
               </div>
             </motion.a>
@@ -263,7 +274,7 @@ const Contact = () => {
                 className="glass-card-light group flex min-h-[86px] items-center gap-4 rounded-[1.75rem] p-5 transition-all duration-300 hover:shadow-lg md:p-6"
               >
                 <div
-                  className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-[1rem] transition-transform duration-300 group-hover:scale-110"
+                  className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-[1rem] transition-transform duration-300 group-hover:scale-105"
                   style={{
                     background: 'linear-gradient(135deg, hsl(166, 75%, 61%), hsl(181, 100%, 50%))',
                   }}
@@ -285,7 +296,7 @@ const Contact = () => {
               className="glass-card-light group block min-h-[86px] rounded-[1.75rem] p-5 transition-all duration-300 hover:shadow-lg md:p-6"
             >
               <div className="flex items-center gap-4">
-                <div className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-[1rem] bg-secondary transition-transform duration-300 group-hover:scale-110">
+                <div className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-[1rem] bg-secondary transition-transform duration-300 group-hover:scale-105">
                   <Instagram className="h-6 w-6 text-secondary-foreground" />
                 </div>
                 <div>

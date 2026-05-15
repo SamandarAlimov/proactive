@@ -2,11 +2,13 @@ import { motion } from 'framer-motion';
 import { useI18n } from '@/lib/i18n';
 import { useScrollAnimation } from '@/hooks/useScrollAnimation';
 import { Link } from 'react-router-dom';
-import { GraduationCap, BookOpen, Users, Rocket } from 'lucide-react';
+import { ArrowRight, GraduationCap, BookOpen, Users, Rocket } from 'lucide-react';
+import { createMainSectionState, readMoreLabel } from '@/lib/source-navigation';
 
 const Internship = () => {
   const { t, lang } = useI18n();
   const { ref, getMotionProps } = useScrollAnimation();
+  const internshipPageState = createMainSectionState('internship', lang);
 
   const features = [
     {
@@ -38,13 +40,23 @@ const Internship = () => {
             <span className="text-sm font-semibold text-primary uppercase tracking-widest">{t.internship.title}</span>
             <h2 className="text-3xl md:text-5xl font-heading font-bold text-foreground mt-3 mb-6">{t.internship.subtitle}</h2>
             <p className="text-muted-foreground leading-relaxed mb-8">{t.internship.description}</p>
-            <Link
-              to="/contact"
-              className="inline-flex items-center gap-2 px-8 py-4 rounded-xl bg-primary text-primary-foreground font-semibold transition-all duration-300 hover:shadow-lg hover:shadow-primary/30 hover:scale-105"
-            >
-              <GraduationCap className="w-5 h-5" />
-              {t.internship.cta}
-            </Link>
+            <div className="flex flex-col gap-3 sm:flex-row">
+              <Link
+                to="/internship"
+                state={internshipPageState}
+                className="group inline-flex items-center justify-center gap-2 rounded-xl border border-primary/20 px-8 py-4 font-semibold text-primary transition-all duration-300 hover:-translate-y-0.5 hover:bg-primary/5"
+              >
+                {readMoreLabel(lang)}
+                <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
+              </Link>
+              <Link
+                to="/contact"
+                className="inline-flex items-center gap-2 px-8 py-4 rounded-xl bg-primary text-primary-foreground font-semibold transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-primary/30"
+              >
+                <GraduationCap className="w-5 h-5" />
+                {t.internship.cta}
+              </Link>
+            </div>
           </motion.div>
 
           <div className="space-y-6">
@@ -55,7 +67,7 @@ const Internship = () => {
                 whileHover={{ x: 6 }}
                 className="glass-card-light group flex items-start gap-5 rounded-2xl p-6 transition-shadow duration-300 hover:shadow-lg"
               >
-                <div className="w-12 h-12 rounded-xl bg-secondary flex items-center justify-center flex-shrink-0 transition-transform duration-300 group-hover:scale-110">
+                <div className="w-12 h-12 rounded-xl bg-secondary flex items-center justify-center flex-shrink-0 transition-transform duration-300 group-hover:scale-105">
                   <f.icon className="w-6 h-6 text-secondary-foreground" />
                 </div>
                 <div>

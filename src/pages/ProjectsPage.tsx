@@ -1,16 +1,18 @@
 import { motion } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { useI18n } from '@/lib/i18n';
 import PageLayout from '@/components/PageLayout';
 import SEO from '@/components/SEO';
 import { createBreadcrumbSchema, createWebPageSchema } from '@/lib/seo';
 import marfImg from '@/assets/marf-project.png';
+import proactiveLogo from '@/assets/proactive-logo.jpg';
 import aurusHero from '@/assets/projects/aurus/aurus-hero.webp';
 import milestoneHero from '@/assets/projects/milestone/milestone-hero.webp';
 
 const ProjectsPage = () => {
   const { t, lang } = useI18n();
+  const location = useLocation();
   const seoDescription =
     lang === 'uz'
       ? "Proactive portfolio sahifasi: brend platformasi, marketing strategiyasi, go-to-market va tizimli o'sish case study'lari."
@@ -77,6 +79,10 @@ const ProjectsPage = () => {
     { slug: 'tima', title: 'Tima', category: 'Brending', image: null, tags: ['Branding'] },
     { slug: 'zafaron', title: "Za'faron", category: 'Marketing', image: null, tags: ['Marketing', 'Strategy'] },
   ];
+  const projectDetailState = {
+    from: `${location.pathname}${location.search}${location.hash}`,
+    fromLabel: t.projects.viewAll,
+  };
 
   return (
     <PageLayout>
@@ -85,6 +91,15 @@ const ProjectsPage = () => {
         description={seoDescription}
         lang={lang}
         path="/projects"
+        keywords={[
+          'Proactive portfolio',
+          'marketing case studies',
+          'brand platform',
+          'marketing strategy',
+          'go-to-market',
+          'Tashkent marketing agency',
+          t.projects.title,
+        ]}
         structuredData={[
           createWebPageSchema({
             title: t.projects.title,
@@ -119,19 +134,39 @@ const ProjectsPage = () => {
         <div className="mx-auto grid max-w-7xl gap-6 md:grid-cols-2 lg:grid-cols-3">
           {projects.map((project, i) => (
             <motion.div key={project.slug} initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.05 * i }} className="group">
-              <Link to={`/projects/${project.slug}`} className="block">
+              <Link to={`/projects/${project.slug}`} state={projectDetailState} className="block">
                 <div className="overflow-hidden rounded-2xl glass-card-light transition-all duration-500 hover:shadow-xl">
                   <div className="relative h-48 overflow-hidden">
                     {project.image ? (
-                      <img src={project.image} alt={project.title} className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" />
+                      <img
+                        src={project.image}
+                        alt={project.title}
+                        loading="lazy"
+                        decoding="async"
+                        className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                      />
                     ) : (
                       <div
-                        className="flex h-full w-full items-center justify-center"
+                        className="relative flex h-full w-full items-center justify-center overflow-hidden"
                         style={{
-                          background: 'linear-gradient(135deg, hsla(204, 47%, 28%, 0.9) 0%, hsla(202, 100%, 11%, 0.95) 100%)',
+                          background:
+                            'linear-gradient(135deg, hsla(204, 47%, 28%, 0.94) 0%, hsla(202, 100%, 11%, 0.98) 100%)',
                         }}
                       >
-                        <span className="text-5xl font-heading font-bold text-primary/20">{project.title[0]}</span>
+                        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_30%,rgba(82,230,200,0.18),transparent_48%)]" />
+                        <div className="relative flex flex-col items-center gap-3 text-center">
+                          <img
+                            src={proactiveLogo}
+                            alt=""
+                            aria-hidden="true"
+                            loading="lazy"
+                            decoding="async"
+                            className="h-16 w-16 rounded-2xl object-cover opacity-90 shadow-[0_14px_34px_rgba(0,0,0,0.18)]"
+                          />
+                          <span className="max-w-[13rem] text-sm font-heading font-semibold tracking-wide text-white/78">
+                            {project.title}
+                          </span>
+                        </div>
                       </div>
                     )}
                   </div>

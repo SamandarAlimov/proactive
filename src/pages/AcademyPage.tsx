@@ -1,6 +1,7 @@
 import PageLayout from '@/components/PageLayout';
 import SEO from '@/components/SEO';
 import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
 import { useI18n } from '@/lib/i18n';
 import { revealViewport } from '@/lib/motion';
 import {
@@ -411,13 +412,13 @@ const AcademyPage = () => {
             <h1 className="mt-5 max-w-5xl font-heading text-4xl font-bold leading-tight md:text-6xl lg:text-7xl">{text.title}</h1>
             <p className="mt-6 max-w-3xl text-lg leading-relaxed text-white/76 md:text-xl">{text.description}</p>
             <div className="mt-10 flex flex-wrap gap-4">
-              <a
-                href="/contact"
+              <Link
+                to="/contact"
                 className="inline-flex items-center gap-2 rounded-2xl bg-[#74f2d8] px-6 py-3 text-sm font-semibold text-[#082233] transition-transform duration-300 hover:-translate-y-0.5"
               >
                 <Send className="h-4 w-4" />
                 {text.apply}
-              </a>
+              </Link>
               <a
                 href="#academy-modules"
                 className="inline-flex items-center gap-2 rounded-2xl border border-white/14 bg-white/5 px-6 py-3 text-sm font-semibold text-white transition-colors duration-300 hover:bg-white/10"
@@ -701,13 +702,13 @@ const AcademyPage = () => {
             <Sparkles className="mx-auto h-8 w-8 text-primary" />
             <h2 className="mt-6 font-heading text-3xl font-bold text-foreground md:text-5xl">{text.finalTitle}</h2>
             <p className="mx-auto mt-6 max-w-3xl text-lg leading-relaxed text-muted-foreground">{text.finalDescription}</p>
-            <a
-              href="/contact"
+            <Link
+              to="/contact"
               className="mt-10 inline-flex items-center gap-2 rounded-2xl bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground transition-transform duration-300 hover:-translate-y-0.5"
             >
               <Send className="h-4 w-4" />
               {text.finalCta}
-            </a>
+            </Link>
           </motion.div>
         </div>
       </section>

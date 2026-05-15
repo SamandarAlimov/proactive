@@ -1,4 +1,6 @@
-export const contactPhone = '+998 90 123 45 67';
+export const contactPhone = '+998 88 664 05 55';
+export const contactSecondaryPhone = '+998 78 113 81 80';
+export const contactPhones = [contactPhone, contactSecondaryPhone];
 export const contactEmail = 'proactive.agency.uz@gmail.com';
 export const contactInstagram = 'https://www.instagram.com/proactive.agencyuz/';
 export const contactInstagramHandle = '@proactive.agencyuz';

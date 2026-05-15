@@ -1,67 +1,77 @@
 import PageLayout from '@/components/PageLayout';
 import SEO from '@/components/SEO';
 import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
 import { useI18n } from '@/lib/i18n';
 import { revealViewport } from '@/lib/motion';
-import { Briefcase, Users, ArrowRight, MapPin, Clock, Handshake, Star, Zap } from 'lucide-react';
+import { Briefcase, Users, ArrowRight, Handshake } from 'lucide-react';
 import { createBreadcrumbSchema, createWebPageSchema } from '@/lib/seo';
 
 const CareersPage = () => {
   const { t, lang } = useI18n();
   const seoDescription = t.careers.description;
 
-  const positions = [
-    {
-      title: lang === 'uz' ? 'Marketing menejer' : lang === 'ru' ? 'Маркетинг-менеджер' : 'Marketing Manager',
-      type: lang === 'uz' ? 'To\'liq ish kuni' : lang === 'ru' ? 'Полная занятость' : 'Full-time',
-      location: 'Toshkent',
-      desc: lang === 'uz' ? 'Marketing strategiyalarni ishlab chiqish va amalga oshirish. Mijozlar bilan ishlash va jamoani boshqarish.' : lang === 'ru' ? 'Разработка и реализация маркетинговых стратегий.' : 'Developing and implementing marketing strategies.',
-    },
-    {
-      title: lang === 'uz' ? 'SMM mutaxassisi' : lang === 'ru' ? 'SMM-специалист' : 'SMM Specialist',
-      type: lang === 'uz' ? 'To\'liq ish kuni' : lang === 'ru' ? 'Полная занятость' : 'Full-time',
-      location: 'Toshkent',
-      desc: lang === 'uz' ? 'Ijtimoiy tarmoqlarda kontent yaratish va auditoriyani boshqarish.' : lang === 'ru' ? 'Создание контента и управление аудиторией в соцсетях.' : 'Content creation and audience management on social media.',
-    },
-    {
-      title: lang === 'uz' ? 'Grafik dizayner' : lang === 'ru' ? 'Графический дизайнер' : 'Graphic Designer',
-      type: lang === 'uz' ? 'To\'liq ish kuni' : lang === 'ru' ? 'Полная занятость' : 'Full-time',
-      location: 'Toshkent / Remote',
-      desc: lang === 'uz' ? 'Kreativ dizayn yechimlari yaratish — logotiplar, bannerlar, brend materiallari.' : lang === 'ru' ? 'Создание креативных дизайн-решений.' : 'Creating creative design solutions — logos, banners, brand materials.',
-    },
-    {
-      title: lang === 'uz' ? 'Video operator / Editor' : lang === 'ru' ? 'Видеооператор / Монтажёр' : 'Videographer / Editor',
-      type: lang === 'uz' ? 'To\'liq ish kuni' : lang === 'ru' ? 'Полная занятость' : 'Full-time',
-      location: 'Toshkent',
-      desc: lang === 'uz' ? 'Professional video kontentlar yaratish va montaj qilish.' : lang === 'ru' ? 'Создание и монтаж профессионального видеоконтента.' : 'Creating and editing professional video content.',
-    },
-  ];
+  const openPositionCopy = {
+    title:
+      lang === 'uz'
+        ? 'Hozircha ochiq vakansiyalar e’lon qilinmagan'
+        : lang === 'ru'
+          ? 'Сейчас открытые вакансии не опубликованы'
+          : 'No open vacancies are currently published',
+    desc:
+      lang === 'uz'
+        ? 'Yangi pozitsiyalar ochilganda shu sahifada e’lon qilamiz. Agar Proactive bilan ishlash yoki hamkorlik qilishni xohlasangiz, qisqa ma’lumot va portfolio yuborishingiz mumkin.'
+        : lang === 'ru'
+          ? 'Когда появятся новые позиции, мы опубликуем их на этой странице. Если вы хотите работать или сотрудничать с Proactive, отправьте краткую информацию и портфолио.'
+          : 'When new roles open, we will publish them on this page. If you want to work or collaborate with Proactive, you can send a short profile and portfolio.',
+    cta:
+      lang === 'uz'
+        ? 'Ma’lumot yuborish'
+        : lang === 'ru'
+          ? 'Отправить информацию'
+          : 'Send details',
+  };
 
   const partnershipTypes = [
     {
-      title: lang === 'uz' ? 'Biznes hamkorlik' : lang === 'ru' ? 'Бизнес-партнёрство' : 'Business Partnership',
-      desc: lang === 'uz' ? 'Birgalikda loyihalar ustida ishlash va o\'zaro foyda olish.' : lang === 'ru' ? 'Совместная работа над проектами.' : 'Working together on projects for mutual benefit.',
+      title: lang === 'uz' ? 'Strategik hamkorlik' : lang === 'ru' ? 'Стратегическое партнёрство' : 'Strategic Partnership',
+      desc:
+        lang === 'uz'
+          ? "Biznes egasi yoki marketing jamoasi bilan strategik qarorlar va ijro yo'nalishida hamkorlik qilamiz."
+          : lang === 'ru'
+            ? 'Работаем с собственником или маркетинговой командой над стратегическими решениями и исполнением.'
+            : 'We work with owners or marketing teams on strategic decisions and execution.',
       icon: Handshake,
     },
     {
-      title: lang === 'uz' ? 'Referral dasturi' : lang === 'ru' ? 'Реферальная программа' : 'Referral Program',
-      desc: lang === 'uz' ? 'Mijozlarni tavsiya eting va komissiya oling.' : lang === 'ru' ? 'Рекомендуйте клиентов и получайте комиссию.' : 'Refer clients and earn commission.',
-      icon: Star,
+      title: lang === 'uz' ? 'Pudratchi hamkorlik' : lang === 'ru' ? 'Подрядное сотрудничество' : 'Contractor Collaboration',
+      desc:
+        lang === 'uz'
+          ? 'Dizayn, kontent, video, performance va ishlab chiqish yo‘nalishlarida kuchli mutaxassislar bilan ishlashga ochiqmiz.'
+          : lang === 'ru'
+            ? 'Открыты к работе с сильными специалистами в дизайне, контенте, видео, performance и разработке.'
+            : 'We are open to strong specialists in design, content, video, performance, and development.',
+      icon: Users,
     },
     {
-      title: lang === 'uz' ? 'Freelancer hamkorlik' : lang === 'ru' ? 'Фриланс партнёрство' : 'Freelancer Partnership',
-      desc: lang === 'uz' ? 'Freelancer sifatida loyihalarni birgalikda bajaring.' : lang === 'ru' ? 'Выполняйте проекты совместно как фрилансер.' : 'Work on projects together as a freelancer.',
-      icon: Zap,
+      title: lang === 'uz' ? 'Loyiha hamkorligi' : lang === 'ru' ? 'Проектное сотрудничество' : 'Project Collaboration',
+      desc:
+        lang === 'uz'
+          ? 'Mos keladigan loyihalarda agentliklar, studiyalar va ekspertlar bilan birgalikda qiymat yaratamiz.'
+          : lang === 'ru'
+            ? 'В подходящих проектах создаём ценность вместе с агентствами, студиями и экспертами.'
+            : 'For relevant projects, we create value together with agencies, studios, and experts.',
+      icon: Briefcase,
     },
   ];
 
   const perks = [
-    lang === 'uz' ? 'Raqobatbardosh maosh' : lang === 'ru' ? 'Конкурентная зарплата' : 'Competitive salary',
-    lang === 'uz' ? 'Zamonaviy ofis' : lang === 'ru' ? 'Современный офис' : 'Modern office',
-    lang === 'uz' ? 'Professional rivojlanish' : lang === 'ru' ? 'Профессиональное развитие' : 'Professional development',
-    lang === 'uz' ? 'Moslashuvchan ish jadvali' : lang === 'ru' ? 'Гибкий график' : 'Flexible schedule',
-    lang === 'uz' ? 'Jamoa tadbirlari' : lang === 'ru' ? 'Командные мероприятия' : 'Team events',
-    lang === 'uz' ? 'Kreativ muhit' : lang === 'ru' ? 'Креативная среда' : 'Creative environment',
+    lang === 'uz' ? 'Aniq vazifa va mas’uliyat chegarasi' : lang === 'ru' ? 'Чёткие задачи и зоны ответственности' : 'Clear scope and responsibility',
+    lang === 'uz' ? 'Strategik fikrlashga tayangan jarayon' : lang === 'ru' ? 'Процесс, основанный на стратегическом мышлении' : 'A process grounded in strategic thinking',
+    lang === 'uz' ? 'Natija va sifat mezonlari' : lang === 'ru' ? 'Критерии результата и качества' : 'Result and quality criteria',
+    lang === 'uz' ? 'Mutaxassislik bo‘yicha rivojlanish' : lang === 'ru' ? 'Профессиональное развитие' : 'Professional development',
+    lang === 'uz' ? 'Hurmatli va ochiq muloqot' : lang === 'ru' ? 'Уважительная и открытая коммуникация' : 'Respectful and open communication',
+    lang === 'uz' ? 'Moslashuvchan hamkorlik formati' : lang === 'ru' ? 'Гибкий формат сотрудничества' : 'Flexible collaboration format',
   ];
 
   return (
@@ -109,33 +119,25 @@ const CareersPage = () => {
             </h2>
           </motion.div>
 
-          <div className="space-y-6">
-            {positions.map((pos, i) => (
-              <motion.div
-                key={pos.title}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={revealViewport}
-                transition={{ delay: i * 0.1 }}
-                whileHover={{ y: -4 }}
-                className="glass-card-light rounded-2xl p-8 group hover:shadow-xl transition-all duration-500"
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={revealViewport}
+            className="glass-card-light rounded-3xl p-8 transition-all duration-500 hover:shadow-xl"
+          >
+            <div className="flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
+              <div className="max-w-3xl">
+                <h3 className="text-xl font-heading font-bold text-foreground">{openPositionCopy.title}</h3>
+                <p className="mt-3 leading-relaxed text-muted-foreground">{openPositionCopy.desc}</p>
+              </div>
+              <Link
+                to="/contact"
+                className="inline-flex flex-shrink-0 items-center justify-center gap-2 rounded-xl bg-primary px-6 py-3 font-semibold text-primary-foreground transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-primary/30"
               >
-                <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
-                  <div>
-                    <h3 className="text-xl font-heading font-bold text-foreground group-hover:text-primary transition-colors duration-300">{pos.title}</h3>
-                    <p className="text-muted-foreground mt-2">{pos.desc}</p>
-                    <div className="flex items-center gap-4 mt-3">
-                      <span className="flex items-center gap-1.5 text-sm text-muted-foreground"><Clock className="w-4 h-4" /> {pos.type}</span>
-                      <span className="flex items-center gap-1.5 text-sm text-muted-foreground"><MapPin className="w-4 h-4" /> {pos.location}</span>
-                    </div>
-                  </div>
-                  <a href="/contact" className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-primary text-primary-foreground font-semibold transition-all duration-300 hover:shadow-lg hover:shadow-primary/30 hover:scale-105 flex-shrink-0">
-                    {t.careers.apply} <ArrowRight className="w-4 h-4" />
-                  </a>
-                </div>
-              </motion.div>
-            ))}
-          </div>
+                {openPositionCopy.cta} <ArrowRight className="w-4 h-4" />
+              </Link>
+            </div>
+          </motion.div>
         </div>
       </section>
 
@@ -143,7 +145,7 @@ const CareersPage = () => {
       <section className="section-padding bg-muted/30">
         <div className="max-w-7xl mx-auto">
           <motion.h2 initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={revealViewport} className="text-3xl md:text-4xl font-heading font-bold text-foreground text-center mb-12">
-            {lang === 'uz' ? 'Afzalliklar' : lang === 'ru' ? 'Преимущества' : 'Perks & Benefits'}
+            {lang === 'uz' ? 'Ishlash tamoyillarimiz' : lang === 'ru' ? 'Принципы работы' : 'How We Work'}
           </motion.h2>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {perks.map((perk, i) => (

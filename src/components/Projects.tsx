@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
 import { ExternalLink, ArrowRight } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { useI18n } from '@/lib/i18n';
 import { useScrollAnimation } from '@/hooks/useScrollAnimation';
 import marfImg from '@/assets/marf-project.png';
@@ -20,8 +20,13 @@ type FeaturedProject = {
 const Projects = () => {
   const { t, lang } = useI18n();
   const { ref, getMotionProps } = useScrollAnimation();
+  const location = useLocation();
 
   const allProjects = clientList;
+  const projectDetailState = {
+    from: `${location.pathname}${location.search}#projects`,
+    fromLabel: lang === 'uz' ? 'Asosiy sahifa' : lang === 'ru' ? 'Главная страница' : 'Home page',
+  };
 
   const featured: FeaturedProject[] = [
     {
@@ -55,7 +60,7 @@ const Projects = () => {
   ];
 
   return (
-    <section id="projects" className="section-deferred relative overflow-hidden py-24 md:py-32" ref={ref}>
+    <section id="projects" className="section-deferred relative scroll-mt-24 overflow-hidden py-24 md:py-32" ref={ref}>
       <div className="relative mx-auto max-w-7xl px-6">
         <motion.div
           {...getMotionProps({ distance: 30, duration: 0.6 })}
@@ -82,6 +87,7 @@ const Projects = () => {
               project={project}
               index={i}
               motionProps={getMotionProps({ distance: 40, delay: 0.15 * i, duration: 0.6 })}
+              state={projectDetailState}
               viewProjectText={t.projects.viewProject}
             />
           ))}
@@ -124,11 +130,13 @@ const FeaturedCard = ({
   project,
   index,
   motionProps,
+  state,
   viewProjectText,
 }: {
   project: FeaturedProject;
   index: number;
   motionProps: React.ComponentProps<typeof motion.div>;
+  state: { from: string; fromLabel: string };
   viewProjectText: string;
 }) => {
   return (
@@ -161,7 +169,11 @@ const FeaturedCard = ({
               </span>
             ))}
           </div>
-          <Link to={`/projects/${project.title === 'MARF' ? 'marf' : 'milestone-is'}`} className="group/btn inline-flex items-center gap-2 font-semibold text-primary transition-all duration-300 hover:gap-3">
+          <Link
+            to={`/projects/${project.title === 'MARF' ? 'marf' : 'milestone-is'}`}
+            state={state}
+            className="group/btn inline-flex items-center gap-2 font-semibold text-primary transition-all duration-300 hover:gap-3"
+          >
             {viewProjectText}
             <ExternalLink className="h-4 w-4 transition-transform duration-300 group-hover/btn:translate-x-1" />
           </Link>

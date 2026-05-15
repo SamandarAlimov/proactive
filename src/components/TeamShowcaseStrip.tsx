@@ -107,10 +107,8 @@ const TeamShowcaseStrip = ({ className = '' }: { className?: string }) => {
         }}
       />
 
-      <div className="relative overflow-x-auto scrollbar-hide" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
-        <style>{`.scrollbar-hide::-webkit-scrollbar { display: none; }`}</style>
-
-        <div className="flex min-w-max items-end px-6 pb-0 pt-8 md:px-12" style={{ gap: '1.5rem' }}>
+      <div className="relative overflow-x-auto pb-4" style={{ scrollbarWidth: 'thin', scrollbarColor: '#52E6C8 transparent' }}>
+        <div className="flex min-w-max items-end px-6 pb-0 pt-8 pr-[22rem] md:px-12 md:pr-[24rem]" style={{ gap: '1.5rem' }}>
           {teamMembers.map((member) => {
             const visual = getTeamMemberVisualConfig(member.id);
             const isActive = activeId === member.id;

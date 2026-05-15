@@ -18,6 +18,7 @@ type SEOProps = {
   lang: Language;
   path?: string;
   image?: string;
+  imageAlt?: string;
   type?: 'website' | 'article';
   keywords?: string[];
   noindex?: boolean;
@@ -91,6 +92,7 @@ const removeSeoScripts = () => {
 const SEO = ({
   description,
   image,
+  imageAlt,
   keywords,
   lang,
   noindex = false,
@@ -115,6 +117,7 @@ const SEO = ({
   }, [image]);
 
   const resolvedTitle = withSiteName(title);
+  const resolvedImageAlt = imageAlt || resolvedTitle;
   const keywordsContent = (keywords?.length ? keywords : localizedSiteKeywords[lang]).join(
     ', ',
   );
@@ -146,6 +149,7 @@ const SEO = ({
     upsertMetaTag({ property: 'og:type', content: type });
     upsertMetaTag({ property: 'og:url', content: canonicalUrl });
     upsertMetaTag({ property: 'og:image', content: imageUrl });
+    upsertMetaTag({ property: 'og:image:alt', content: resolvedImageAlt });
     upsertMetaTag({ property: 'og:site_name', content: siteConfig.name });
     upsertMetaTag({ property: 'og:locale', content: seoLocaleMap[lang] });
 
@@ -153,6 +157,8 @@ const SEO = ({
     upsertMetaTag({ name: 'twitter:title', content: resolvedTitle });
     upsertMetaTag({ name: 'twitter:description', content: description });
     upsertMetaTag({ name: 'twitter:image', content: imageUrl });
+    upsertMetaTag({ name: 'twitter:image:alt', content: resolvedImageAlt });
+    upsertMetaTag({ name: 'twitter:url', content: canonicalUrl });
 
     upsertLinkTag({ rel: 'canonical', href: canonicalUrl });
 
@@ -176,6 +182,7 @@ const SEO = ({
     keywordsContent,
     lang,
     noindex,
+    resolvedImageAlt,
     resolvedTitle,
     robotsContent,
     serializedStructuredData,

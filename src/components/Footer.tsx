@@ -1,12 +1,10 @@
 import { useI18n } from '@/lib/i18n';
-import { Instagram, ArrowUp, Send } from 'lucide-react';
+import { Instagram } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import proactiveLogo from '@/assets/proactive-logo.jpg';
 
 const Footer = () => {
   const { t } = useI18n();
-
-  const scrollToTop = () => window.scrollTo({ top: 0, behavior: 'smooth' });
 
   const menuLinks = [
     { label: t.nav.about, href: '/about' },
@@ -17,7 +15,6 @@ const Footer = () => {
 
   const moreLinks = [
     { label: t.nav.academy, href: '/academy' },
-    { label: t.nav.events, href: '/events' },
     { label: t.nav.careers, href: '/careers' },
     { label: t.nav.contact, href: '/contact' },
   ];
@@ -61,11 +58,6 @@ const Footer = () => {
             <a href="https://www.instagram.com/proactive.agencyuz/" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 text-secondary-foreground/70 hover:text-primary transition-colors duration-300 mb-6">
               <Instagram className="w-5 h-5" /> @proactive.agencyuz
             </a>
-            <div className="mt-4">
-              <button onClick={scrollToTop} className="w-12 h-12 rounded-xl bg-primary flex items-center justify-center transition-transform duration-300 hover:scale-110">
-                <ArrowUp className="w-5 h-5 text-secondary" />
-              </button>
-            </div>
           </div>
         </div>
 

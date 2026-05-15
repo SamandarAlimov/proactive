@@ -10,6 +10,12 @@ const TeamPage = () => {
   const { t, lang } = useI18n();
   const { resolvedTheme } = useTheme();
   const isDark = resolvedTheme === 'dark';
+  const heading =
+    lang === 'uz'
+      ? 'Proactive jamoasi'
+      : lang === 'ru'
+        ? 'Команда Proactive'
+        : 'The Proactive team';
 
   return (
     <PageLayout>
@@ -70,11 +76,11 @@ const TeamPage = () => {
           <motion.h1
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            className={`mt-5 text-5xl font-heading font-bold leading-tight md:text-7xl lg:text-8xl ${
+            className={`mt-5 text-4xl font-heading font-bold leading-tight md:text-6xl lg:text-7xl ${
               isDark ? 'text-secondary-foreground' : 'text-secondary'
             }`}
           >
-            The Proactive jamoasi
+            {heading}
           </motion.h1>
           <motion.p
             initial={{ opacity: 0 }}

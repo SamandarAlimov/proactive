@@ -11,7 +11,7 @@ const ContactSection: React.FC = () => {
         </label>
         <PhoneInput />
         <p className="text-xs text-gray-500 dark:text-gray-400">
-          Telefon raqamingizni to'liq kiriting (masalan, +998 90 123 45 67)
+          Telefon raqamingizni to'liq kiriting (masalan, +998 88 664 05 55)
         </p>
       </div>
 

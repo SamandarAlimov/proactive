@@ -4,6 +4,7 @@ import {
   contactEmail,
   contactInstagram,
   contactPhone,
+  contactSecondaryPhone,
 } from '@/lib/contact-details';
 import { founderProfile } from '@/lib/founder-profile';
 import type { Language } from '@/lib/i18n';
@@ -115,7 +116,7 @@ export const createOrganizationSchema = (lang: Language): SeoStructuredData => (
   image: defaultSeoImage,
   description: localizedSiteDescriptions[lang],
   email: contactEmail,
-  telephone: contactPhone,
+  telephone: [contactPhone, contactSecondaryPhone],
   founder: {
     '@type': 'Person',
     name: founderProfile.name,

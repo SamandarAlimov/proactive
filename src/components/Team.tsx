@@ -5,10 +5,16 @@ import { useScrollAnimation } from '@/hooks/useScrollAnimation';
 import TeamShowcaseStrip from '@/components/TeamShowcaseStrip';
 
 const Team = () => {
-  const { t } = useI18n();
+  const { t, lang } = useI18n();
   const { ref, getMotionProps } = useScrollAnimation();
   const { resolvedTheme } = useTheme();
   const isDark = resolvedTheme === 'dark';
+  const heading =
+    lang === 'uz'
+      ? { first: 'Proactive', second: 'jamoasi' }
+      : lang === 'ru'
+        ? { first: 'Команда', second: 'Proactive' }
+        : { first: 'The Proactive', second: 'team' };
 
   return (
     <section id="team" className="section-deferred relative overflow-hidden" ref={ref}>
@@ -63,13 +69,13 @@ const Team = () => {
               {t.team.subtitle}
             </span>
             <h2
-              className={`mt-4 text-4xl font-heading font-bold leading-tight md:text-6xl lg:text-7xl ${
+              className={`mt-4 text-4xl font-heading font-bold leading-tight md:text-5xl lg:text-6xl ${
                 isDark ? 'text-white' : 'text-secondary'
               }`}
             >
-              The Proactive
+              {heading.first}
               <br />
-              <span className="text-primary">jamoasi</span>
+              <span className="text-primary">{heading.second}</span>
             </h2>
             <p
               className={`mt-4 max-w-2xl text-base leading-relaxed md:text-lg ${

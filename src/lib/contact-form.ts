@@ -60,7 +60,7 @@ export const PHONE_COUNTRIES: PhoneCountry[] = [
     dialCode: '+998',
     maxLength: 9,
     groups: [2, 3, 2, 2],
-    placeholder: '90 123 45 67',
+    placeholder: '88 664 05 55',
   },
   {
     code: 'kz',

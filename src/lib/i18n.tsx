@@ -21,7 +21,7 @@ const translations = {
       title: "Marketing kuchini",
       titleHighlight: "Proactive",
       titleEnd: "bilan his qiling",
-      subtitle: "Kompleks marketingni to'liq formatda amalga oshiruvchi In-house mutaxassislar jamoasi",
+      subtitle: "Kompleks marketingni tizimli formatda amalga oshiruvchi mutaxassislar jamoasi",
       cta: "Loyiha boshlash",
       ctaSecondary: "Batafsil",
       trustedBy: "Bizga ishonch bildirganlar",
@@ -278,8 +278,8 @@ const translations = {
     },
     team: {
       title: "Jamoa",
-      subtitle: "The Proactive jamoasi",
-      description: "Kompleks marketingni to'liq formatda amalga oshiruvchi In-house mutaxassislar jamoasi",
+      subtitle: "Proactive jamoasi",
+      description: "Kompleks marketingni tizimli formatda amalga oshiruvchi mutaxassislar jamoasi",
     },
     clients: {
       title: "Mijozlarimiz",
@@ -298,7 +298,7 @@ const translations = {
     events: {
       title: "Tadbirlar",
       subtitle: "Proactive Events",
-      description: "Marketing, brending va biznes sohasidagi eng so'nggi tadbirlar, seminarlar va konferensiyalar.",
+      description: "Proactive tadbirlari, seminar va masterclasslari tasdiqlanganda shu sahifada e’lon qilinadi.",
       upcoming: "Yaqinlashayotgan tadbirlar",
       past: "O'tgan tadbirlar",
       register: "Ro'yxatdan o'tish",
@@ -307,7 +307,7 @@ const translations = {
       title: "Ish va hamkorlik",
       subtitle: "Bizga qo'shiling",
       description:
-        "Proactive jamoasiga qo'shiling yoki hamkorlik uchun murojaat qiling. Biz doimo iqtidorli mutaxassislarni izlaymiz.",
+        "Proactive bilan ishlash yoki hamkorlik qilish uchun murojaat qiling. Ochiq vakansiyalar mavjud bo‘lganda shu sahifada e’lon qilamiz.",
       openPositions: "Ochiq pozitsiyalar",
       partnership: "Hamkorlik",
       apply: "Ariza topshirish",
@@ -361,10 +361,10 @@ const translations = {
       contact: "Contact",
     },
     hero: {
-      title: "Feel the power of marketing",
+      title: "Feel the power of marketing with",
       titleHighlight: "Proactive",
-      titleEnd: "with",
-      subtitle: "A team of in-house specialists delivering comprehensive marketing solutions",
+      titleEnd: "",
+      subtitle: "A team of specialists delivering comprehensive marketing solutions",
       cta: "Start a Project",
       ctaSecondary: "Learn More",
       trustedBy: "Trusted by leading brands",
@@ -622,7 +622,7 @@ const translations = {
     team: {
       title: "Team",
       subtitle: "The Proactive Team",
-      description: "A team of in-house specialists delivering comprehensive marketing solutions",
+      description: "A team of specialists delivering comprehensive marketing solutions",
     },
     clients: {
       title: "Our Clients",
@@ -641,7 +641,7 @@ const translations = {
     events: {
       title: "Events",
       subtitle: "Proactive Events",
-      description: "The latest events, seminars, and conferences in marketing, branding, and business.",
+      description: "Proactive events, seminars, and masterclasses will be published here once confirmed.",
       upcoming: "Upcoming Events",
       past: "Past Events",
       register: "Register",
@@ -650,7 +650,7 @@ const translations = {
       title: "Careers & Partnership",
       subtitle: "Join Our Team",
       description:
-        "Join the Proactive team or reach out for partnership opportunities. We are always looking for talented specialists.",
+        "Reach out to work or collaborate with Proactive. When open vacancies are available, we publish them on this page.",
       openPositions: "Open Positions",
       partnership: "Partnership",
       apply: "Apply",
@@ -704,10 +704,10 @@ const translations = {
       contact: "Контакты",
     },
     hero: {
-      title: "Почувствуйте силу маркетинга",
+      title: "Почувствуйте силу маркетинга с",
       titleHighlight: "Proactive",
-      titleEnd: "с",
-      subtitle: "Команда штатных специалистов, реализующих комплексный маркетинг в полном формате",
+      titleEnd: "",
+      subtitle: "Команда специалистов, реализующая комплексный маркетинг в полном формате",
       cta: "Начать проект",
       ctaSecondary: "Подробнее",
       trustedBy: "Нам доверяют ведущие бренды",
@@ -965,7 +965,7 @@ const translations = {
     team: {
       title: "Команда",
       subtitle: "Команда Proactive",
-      description: "Команда штатных специалистов, реализующих комплексный маркетинг в полном формате",
+      description: "Команда специалистов, реализующая комплексный маркетинг в полном формате",
     },
     clients: {
       title: "Наши клиенты",
@@ -984,7 +984,7 @@ const translations = {
     events: {
       title: "События",
       subtitle: "Proactive Events",
-      description: "Актуальные события, семинары и конференции в сфере маркетинга, брендинга и бизнеса.",
+      description: "События, семинары и мастер-классы Proactive будут опубликованы здесь после подтверждения.",
       upcoming: "Предстоящие события",
       past: "Прошедшие",
       register: "Зарегистрироваться",
@@ -993,7 +993,7 @@ const translations = {
       title: "Работа и партнерство",
       subtitle: "Присоединяйтесь к нам",
       description:
-        "Присоединяйтесь к команде Proactive или обращайтесь по вопросам партнерства. Мы всегда ищем сильных специалистов.",
+        "Свяжитесь с нами, чтобы работать или сотрудничать с Proactive. Когда появляются открытые вакансии, мы публикуем их на этой странице.",
       openPositions: "Открытые позиции",
       partnership: "Партнерство",
       apply: "Подать заявку",

@@ -1,5 +1,4 @@
 import { motion } from 'framer-motion';
-import { ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { services } from '@/data/services';
 import { useI18n } from '@/lib/i18n';
@@ -93,23 +92,6 @@ const Services = () => {
             );
           })}
         </div>
-
-        <motion.div
-          {...getMotionProps({ distance: 18, delay: 0.8 })}
-          className="mt-14 text-center"
-        >
-          <Link
-            to="/services"
-            className="inline-flex items-center gap-2 rounded-xl px-6 py-3 font-semibold transition-all duration-300 hover:gap-3 hover:shadow-lg"
-            style={{
-              background: 'linear-gradient(135deg, hsla(166, 75%, 61%, 0.1) 0%, hsla(181, 100%, 50%, 0.05) 100%)',
-              color: 'hsl(166, 75%, 50%)',
-              border: '1px solid hsla(166, 75%, 61%, 0.2)',
-            }}
-          >
-            {t.services.viewAll} <ArrowRight className="h-4 w-4" />
-          </Link>
-        </motion.div>
       </div>
     </section>
   );

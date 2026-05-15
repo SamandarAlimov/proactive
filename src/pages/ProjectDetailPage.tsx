@@ -1,4 +1,4 @@
-import { Link, useParams } from 'react-router-dom';
+import { Link, useLocation, useParams } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { ArrowLeft, ArrowRight } from 'lucide-react';
 import { useI18n } from '@/lib/i18n';
@@ -48,6 +48,14 @@ type ProjectDetail = {
   deliverables?: LocalizedList;
   gallery?: ProjectGalleryItem[];
 };
+
+type ProjectBackState = {
+  from?: string;
+  fromLabel?: string;
+};
+
+const isSafeInternalPath = (value: unknown): value is string =>
+  typeof value === 'string' && value.startsWith('/') && !value.startsWith('//');
 
 const projectsData: Record<string, ProjectDetail> = {
   marf: {
@@ -456,8 +464,16 @@ const genericTitles: Record<string, string> = {
 
 const ProjectDetailPage = () => {
   const { slug } = useParams<{ slug: string }>();
+  const location = useLocation();
   const { t, lang } = useI18n();
   const currentLang = (lang in { uz: true, en: true, ru: true } ? lang : 'uz') as LangKey;
+  const navigationState = location.state as ProjectBackState | null;
+  const backPath = isSafeInternalPath(navigationState?.from) ? navigationState.from : '/projects';
+  const homeBackLabel =
+    currentLang === 'uz' ? 'Asosiy sahifa' : currentLang === 'ru' ? 'Главная страница' : 'Home page';
+  const backLabel =
+    navigationState?.fromLabel ||
+    (backPath === '/' || backPath.startsWith('/#') ? homeBackLabel : t.projects.viewAll);
 
   const project = slug ? projectsData[slug] : null;
   const genericTitle = slug ? genericTitles[slug] : null;
@@ -476,8 +492,8 @@ const ProjectDetailPage = () => {
           <h1 className="text-3xl font-heading font-bold text-foreground">
             {currentLang === 'uz' ? 'Loyiha topilmadi' : currentLang === 'ru' ? 'Проект не найден' : 'Project not found'}
           </h1>
-          <Link to="/projects" className="mt-4 inline-block text-primary">
-            {t.projects.viewAll}
+          <Link to={backPath} className="mt-4 inline-block text-primary">
+            {backLabel}
           </Link>
         </div>
       </PageLayout>
@@ -538,6 +554,16 @@ const ProjectDetailPage = () => {
         lang={currentLang}
         path={`/projects/${slug}`}
         image={image || undefined}
+        imageAlt={`${title} - ${category}`}
+        keywords={[
+          title,
+          category,
+          'Proactive case study',
+          'marketing portfolio',
+          ...tags,
+          ...services,
+        ]}
+        type="article"
         structuredData={[
           createWebPageSchema({
             title,
@@ -571,9 +597,9 @@ const ProjectDetailPage = () => {
           }}
         />
         <div className="relative z-10 mx-auto max-w-7xl px-6 py-24 md:py-32">
-          <Link to="/projects" className="mb-8 inline-flex items-center gap-2 text-white/50 transition-colors hover:text-primary">
+          <Link to={backPath} className="mb-8 inline-flex items-center gap-2 text-white/50 transition-colors hover:text-primary">
             <ArrowLeft className="h-4 w-4" />
-            {t.projects.viewAll}
+            {backLabel}
           </Link>
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
             <span className="text-sm font-medium text-primary">{category}</span>
@@ -588,9 +614,9 @@ const ProjectDetailPage = () => {
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              className="mb-12 overflow-hidden rounded-3xl shadow-xl"
+              className="mb-12 overflow-hidden rounded-3xl bg-muted/30 shadow-xl"
             >
-              <img src={image} alt={title} className="h-auto w-full" />
+              <img src={image} alt={title} decoding="async" className="max-h-[68vh] w-full object-contain md:max-h-[640px]" />
             </motion.div>
           )}
 
@@ -676,7 +702,13 @@ const ProjectDetailPage = () => {
                       gallery.length % 2 === 1 && index === gallery.length - 1 ? 'md:col-span-2' : ''
                     }`}
                   >
-                    <img src={item.src} alt={item.title[currentLang]} className="h-full w-full object-cover" loading="lazy" />
+                    <img
+                      src={item.src}
+                      alt={item.title[currentLang]}
+                      className="h-full w-full object-cover"
+                      loading="lazy"
+                      decoding="async"
+                    />
                     <figcaption className="border-t border-border/70 px-5 py-4 text-sm text-muted-foreground">
                       {item.title[currentLang]}
                     </figcaption>

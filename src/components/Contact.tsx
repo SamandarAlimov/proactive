@@ -21,6 +21,7 @@ import {
   contactMapEmbedUrl,
   contactMapUrl,
   contactPhone,
+  contactSecondaryPhone,
 } from '@/lib/contact-details';
 import { supabase } from '@/integrations/supabase/client';
 import { buildPhoneNumber, DEFAULT_PHONE_COUNTRY } from '@/lib/contact-form';
@@ -80,7 +81,7 @@ const Contact = () => {
 
   const contactCards = [
     { icon: MapPin, title: contactAddressLine, sub: contactAddressCity },
-    { icon: Phone, title: contactPhone, sub: '24/7' },
+    { icon: Phone, title: contactPhone, sub: contactSecondaryPhone },
     { icon: Mail, title: contactEmail, sub: 'Email' },
   ];
 

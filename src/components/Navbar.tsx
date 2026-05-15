@@ -5,10 +5,11 @@ import { Menu, X, ChevronDown, Mail, Phone } from 'lucide-react';
 import { Link, useLocation } from 'react-router-dom';
 import proactiveLogo from '@/assets/proactive-logo.jpg';
 import { ThemeToggle } from '@/components/ThemeToggle';
-import { contactEmail, contactPhone } from '@/lib/contact-details';
+import { contactEmail, contactPhone, contactSecondaryPhone } from '@/lib/contact-details';
 
 const langLabels: Record<Language, string> = { uz: "O'z", en: 'En', ru: 'Ru' };
 const headerPhone = contactPhone;
+const headerSecondaryPhone = contactSecondaryPhone;
 const headerEmail = contactEmail;
 
 const Navbar = () => {
@@ -112,7 +113,6 @@ const Navbar = () => {
     { label: t.nav.projects, href: '/projects' },
     { label: t.nav.team, href: '/team' },
     { label: t.nav.academy, href: '/academy' },
-    { label: t.nav.events, href: '/events' },
     { label: t.nav.careers, href: '/careers' },
   ];
 
@@ -160,7 +160,7 @@ const Navbar = () => {
             </span>
           </Link>
 
-          <div className="hidden min-w-0 items-center justify-center gap-4 xl:flex xl:gap-5">
+          <div className="hidden min-w-0 items-center justify-center gap-3 xl:flex 2xl:gap-5">
             {navItems.map((item) => (
               <Link
                 key={item.href}
@@ -180,19 +180,8 @@ const Navbar = () => {
           </div>
 
           <div className="hidden items-center justify-end gap-2 xl:flex">
-            <Link
-              to="/contact"
-              className="inline-flex items-center justify-center rounded-xl px-4 py-3 font-heading text-sm font-semibold tracking-[0.02em] text-secondary transition-all duration-300 hover:-translate-y-0.5 2xl:hidden"
-              style={{
-                background: 'linear-gradient(135deg, #52E6C8 0%, #79f5e2 100%)',
-                boxShadow: '0 16px 36px rgba(82, 230, 200, 0.2)',
-              }}
-            >
-              {t.nav.contact}
-            </Link>
-
             <div
-              className="hidden shrink-0 items-center gap-3 rounded-2xl border px-4 py-3 2xl:flex"
+              className="flex shrink-0 items-center gap-3 rounded-2xl border px-3 py-2.5 2xl:px-4 2xl:py-3"
               style={{
                 borderColor: scrolled || showDarkNav ? 'hsla(0, 0%, 100%, 0.14)' : 'hsla(204, 47%, 28%, 0.12)',
                 background: scrolled || showDarkNav ? 'hsla(202, 100%, 11%, 0.22)' : 'hsla(0, 0%, 100%, 0.74)',
@@ -202,27 +191,30 @@ const Navbar = () => {
               <div className="space-y-1 text-right leading-none">
                 <a
                   href={`tel:${headerPhone.replace(/\s+/g, '')}`}
-                  className={`block whitespace-nowrap text-sm font-semibold transition-colors duration-300 ${
+                  className={`block whitespace-nowrap text-[12px] font-semibold transition-colors duration-300 2xl:text-sm ${
                     scrolled || showDarkNav ? 'text-white hover:text-primary' : 'text-secondary hover:text-primary'
                   }`}
                 >
                   {headerPhone}
                 </a>
                 <a
-                  href={`mailto:${headerEmail}`}
+                  href={`tel:${headerSecondaryPhone.replace(/\s+/g, '')}`}
                   className={`block whitespace-nowrap text-[11px] transition-colors duration-300 ${
                     scrolled || showDarkNav ? 'text-white/65 hover:text-white' : 'text-foreground/60 hover:text-secondary'
                   }`}
                 >
+                  {headerSecondaryPhone}
+                </a>
+                <a href={`mailto:${headerEmail}`} className="sr-only">
                   {headerEmail}
                 </a>
               </div>
 
-              <div className={`h-9 w-px ${scrolled || showDarkNav ? 'bg-white/10' : 'bg-secondary/10'}`} />
+              <div className={`hidden h-9 w-px 2xl:block ${scrolled || showDarkNav ? 'bg-white/10' : 'bg-secondary/10'}`} />
 
               <Link
                 to="/contact"
-                className="inline-flex items-center justify-center rounded-xl px-4 py-3 font-heading text-sm font-semibold tracking-[0.02em] text-secondary transition-all duration-300 hover:-translate-y-0.5"
+                className="hidden items-center justify-center rounded-xl px-4 py-3 font-heading text-sm font-semibold tracking-[0.02em] text-secondary transition-all duration-300 hover:-translate-y-0.5 2xl:inline-flex"
                 style={{
                   background: 'linear-gradient(135deg, #52E6C8 0%, #79f5e2 100%)',
                   boxShadow: '0 16px 36px rgba(82, 230, 200, 0.24)',
@@ -318,6 +310,13 @@ const Navbar = () => {
                 >
                   <Phone className="h-4 w-4" />
                   {headerPhone}
+                </a>
+                <a
+                  href={`tel:${headerSecondaryPhone.replace(/\s+/g, '')}`}
+                  className="mt-2 flex items-center justify-center gap-2 text-sm font-medium text-foreground/75 transition-colors hover:text-primary"
+                >
+                  <Phone className="h-4 w-4" />
+                  {headerSecondaryPhone}
                 </a>
                 <a
                   href={`mailto:${headerEmail}`}

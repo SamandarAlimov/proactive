@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { useI18n } from '@/lib/i18n';
 import { useScrollAnimation } from '@/hooks/useScrollAnimation';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { supabase } from '@/integrations/supabase/client';
 import type { Tables } from '@/integrations/supabase/types';
 
@@ -18,7 +18,12 @@ type DisplayNewsItem = {
 const News = () => {
   const { t, lang } = useI18n();
   const { ref, getMotionProps } = useScrollAnimation();
+  const location = useLocation();
   const [newsData, setNewsData] = useState<NewsRow[]>([]);
+  const articleState = {
+    from: `${location.pathname}${location.search}#news`,
+    fromLabel: lang === 'uz' ? 'Asosiy sahifa' : lang === 'ru' ? 'Главная страница' : 'Home page',
+  };
 
   useEffect(() => {
     const fetchNews = async () => {
@@ -50,7 +55,7 @@ const News = () => {
         <div className="grid md:grid-cols-3 gap-8">
           {displayNews.map((news, i) => (
             <motion.div key={news.id} {...getMotionProps({ distance: 30, delay: 0.15 * i, duration: 0.5 })}>
-              <Link to={`/news/${news.id}`} className="block group">
+              <Link to={`/news/${news.id}`} state={articleState} className="block group">
                 <article className="glass-card-light rounded-2xl overflow-hidden hover:shadow-2xl transition-shadow duration-500">
                   <div className="h-48 bg-secondary relative overflow-hidden">
                     <div className="absolute inset-0 flex items-center justify-center">

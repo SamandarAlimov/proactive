@@ -145,13 +145,13 @@ const ContactPage = () => {
       </section>
 
       <section className="section-padding">
-        <div className="mx-auto grid max-w-7xl items-start gap-8 lg:grid-cols-[minmax(0,1.04fr)_minmax(320px,0.88fr)] xl:gap-12">
+        <div className="mx-auto grid max-w-7xl items-stretch gap-8 lg:grid-cols-[minmax(0,1.04fr)_minmax(320px,0.88fr)] xl:gap-12">
           <motion.form
             onSubmit={handleSubmit}
             initial={{ opacity: 0, x: -30 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.2 }}
-            className="glass-card-light space-y-6 rounded-[2rem] p-8 md:space-y-7 md:p-10 lg:p-12"
+            className="glass-card-light h-full space-y-6 rounded-[2rem] p-8 md:space-y-7 md:p-10 lg:p-12"
           >
             <div>
               <label className={contactLabelClass} htmlFor="contact-page-service">
@@ -252,16 +252,16 @@ const ContactPage = () => {
             initial={{ opacity: 0, x: 30 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.3 }}
-            className="space-y-5 lg:space-y-6"
+            className="flex h-full flex-col gap-5 lg:gap-6"
           >
             <motion.a
               href={contactMapUrl}
               target="_blank"
               rel="noopener noreferrer"
               whileHover={{ y: -4 }}
-              className="glass-card-light block overflow-hidden rounded-[1.75rem] transition-all duration-300 hover:shadow-lg"
+              className="glass-card-light block min-h-[280px] flex-1 overflow-hidden rounded-[1.75rem] transition-all duration-300 hover:shadow-lg lg:min-h-[300px]"
             >
-              <div className="relative h-[244px] overflow-hidden">
+              <div className="relative h-full min-h-[280px] overflow-hidden lg:min-h-[300px]">
                 <iframe
                   title={contactAddressFull}
                   src={contactMapEmbedUrl}
@@ -282,7 +282,7 @@ const ContactPage = () => {
             {contactCards.map((card) => (
               <div
                 key={card.title}
-                className="glass-card-light group flex items-center gap-4 rounded-[1.75rem] p-5 transition-all duration-300 hover:shadow-lg md:p-6"
+                className="glass-card-light group flex min-h-[86px] items-center gap-4 rounded-[1.75rem] p-5 transition-all duration-300 hover:shadow-lg md:p-6"
               >
                 <div
                   className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-[1rem] transition-transform duration-300 group-hover:scale-110"
@@ -303,7 +303,7 @@ const ContactPage = () => {
               href={contactInstagram}
               target="_blank"
               rel="noopener noreferrer"
-              className="glass-card-light group block rounded-[1.75rem] p-5 transition-all duration-300 hover:shadow-lg md:p-6"
+              className="glass-card-light group block min-h-[86px] rounded-[1.75rem] p-5 transition-all duration-300 hover:shadow-lg md:p-6"
             >
               <div className="flex items-center gap-4">
                 <div className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-[1rem] bg-secondary transition-transform duration-300 group-hover:scale-110">

@@ -118,8 +118,8 @@ const Navbar = () => {
 
   const otherLangs = (['uz', 'en', 'ru'] as Language[]).filter((currentLang) => currentLang !== lang);
   const showDarkNav = !scrolled && (isHome || location.pathname === '/team');
-  const navTextClass = scrolled || showDarkNav ? 'text-white/80 hover:text-primary' : 'text-foreground/80 hover:text-primary';
-  const brandTextClass = scrolled || showDarkNav ? 'text-white' : 'text-secondary dark:text-secondary-foreground';
+  const navTextClass = 'text-white/78 hover:text-primary';
+  const brandTextClass = 'text-white';
 
   return (
     <>
@@ -133,7 +133,7 @@ const Navbar = () => {
             ? 'shadow-lg backdrop-blur-xl'
             : showDarkNav
               ? 'backdrop-blur-md'
-              : 'bg-background/80 backdrop-blur-md'
+              : 'shadow-sm backdrop-blur-xl'
         }`}
         style={
           scrolled
@@ -143,9 +143,13 @@ const Navbar = () => {
               }
             : showDarkNav
               ? {
-                  background: 'linear-gradient(135deg, hsla(202, 100%, 11%, 0.4) 0%, hsla(204, 47%, 28%, 0.3) 100%)',
+                  background: 'linear-gradient(135deg, hsla(202, 100%, 11%, 0.64) 0%, hsla(204, 47%, 28%, 0.52) 100%)',
+                  borderBottom: '1px solid hsla(166, 75%, 61%, 0.08)',
                 }
-              : undefined
+              : {
+                  background: 'linear-gradient(135deg, hsla(202, 100%, 11%, 0.94) 0%, hsla(204, 47%, 22%, 0.9) 100%)',
+                  borderBottom: '1px solid hsla(166, 75%, 61%, 0.1)',
+                }
         }
       >
         <div className="mx-auto grid h-full max-w-7xl grid-cols-[auto_1fr_auto] items-center gap-4 px-5 sm:px-6 xl:px-8">
@@ -183,25 +187,21 @@ const Navbar = () => {
             <div
               className="flex shrink-0 items-center gap-3 rounded-2xl border px-3 py-2.5 2xl:px-4 2xl:py-3"
               style={{
-                borderColor: scrolled || showDarkNav ? 'hsla(0, 0%, 100%, 0.14)' : 'hsla(204, 47%, 28%, 0.12)',
-                background: scrolled || showDarkNav ? 'hsla(202, 100%, 11%, 0.22)' : 'hsla(0, 0%, 100%, 0.74)',
+                borderColor: 'hsla(0, 0%, 100%, 0.14)',
+                background: 'hsla(202, 100%, 11%, 0.26)',
                 backdropFilter: 'blur(18px)',
               }}
             >
               <div className="space-y-1 text-right leading-none">
                 <a
                   href={`tel:${headerPhone.replace(/\s+/g, '')}`}
-                  className={`block whitespace-nowrap text-[12px] font-semibold transition-colors duration-300 2xl:text-sm ${
-                    scrolled || showDarkNav ? 'text-white hover:text-primary' : 'text-secondary hover:text-primary'
-                  }`}
+                  className="block whitespace-nowrap text-[12px] font-semibold text-white transition-colors duration-300 hover:text-primary 2xl:text-sm"
                 >
                   {headerPhone}
                 </a>
                 <a
                   href={`tel:${headerSecondaryPhone.replace(/\s+/g, '')}`}
-                  className={`block whitespace-nowrap text-[11px] transition-colors duration-300 ${
-                    scrolled || showDarkNav ? 'text-white/65 hover:text-white' : 'text-foreground/60 hover:text-secondary'
-                  }`}
+                  className="block whitespace-nowrap text-[11px] text-white/68 transition-colors duration-300 hover:text-white"
                 >
                   {headerSecondaryPhone}
                 </a>
@@ -210,7 +210,7 @@ const Navbar = () => {
                 </a>
               </div>
 
-              <div className={`hidden h-9 w-px 2xl:block ${scrolled || showDarkNav ? 'bg-white/10' : 'bg-secondary/10'}`} />
+              <div className="hidden h-9 w-px bg-white/10 2xl:block" />
 
               <Link
                 to="/contact"
@@ -224,7 +224,7 @@ const Navbar = () => {
               </Link>
             </div>
 
-            <ThemeToggle variant={scrolled || showDarkNav ? 'dark' : 'default'} />
+            <ThemeToggle variant="dark" />
 
             <div className="relative" ref={langRef}>
               <button
@@ -232,9 +232,7 @@ const Navbar = () => {
                 className={`flex items-center gap-1 rounded-lg border px-3 py-1.5 text-xs font-semibold transition-all duration-300 ${
                   langOpen
                     ? 'border-primary bg-primary text-secondary'
-                    : scrolled || showDarkNav
-                      ? 'border-white/20 text-white/80 hover:border-primary hover:text-primary'
-                      : 'border-border text-foreground/70 hover:border-primary hover:text-primary'
+                    : 'border-white/20 text-white/80 hover:border-primary hover:text-primary'
                 }`}
               >
                 {langLabels[lang]}
@@ -274,7 +272,7 @@ const Navbar = () => {
 
           <button
             onClick={() => setMobileOpen(!mobileOpen)}
-            className={`justify-self-end p-2 xl:hidden ${scrolled || showDarkNav ? 'text-white' : 'text-foreground'}`}
+            className="justify-self-end p-2 text-white xl:hidden"
           >
             {mobileOpen ? <X size={24} /> : <Menu size={24} />}
           </button>

@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { useI18n } from '@/lib/i18n';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { supabase } from '@/integrations/supabase/client';
 import PageLayout from '@/components/PageLayout';
 import type { Tables } from '@/integrations/supabase/types';
@@ -18,7 +18,12 @@ type DisplayNewsItem = {
 
 const NewsPage = () => {
   const { t, lang } = useI18n();
+  const location = useLocation();
   const [newsData, setNewsData] = useState<NewsRow[]>([]);
+  const articleState = {
+    from: `${location.pathname}${location.search}${location.hash}`,
+    fromLabel: t.news.backToNews,
+  };
 
   useEffect(() => {
     const fetchNews = async () => {
@@ -52,7 +57,7 @@ const NewsPage = () => {
         <div className="max-w-7xl mx-auto grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {displayNews.map((news, i) => (
             <motion.div key={news.id} initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 * i }}>
-              <Link to={`/news/${news.id}`} className="block group">
+              <Link to={`/news/${news.id}`} state={articleState} className="block group">
                 <article className="glass-card-light rounded-2xl overflow-hidden hover:shadow-2xl transition-shadow duration-500">
                   <div className="h-48 bg-secondary relative overflow-hidden">
                     {news.image ? (

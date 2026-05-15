@@ -6,6 +6,7 @@ import PageLayout from '@/components/PageLayout';
 import SEO from '@/components/SEO';
 import { createBreadcrumbSchema, createCreativeWorkSchema, createWebPageSchema } from '@/lib/seo';
 import marfImg from '@/assets/marf-project.png';
+import proactiveLogo from '@/assets/proactive-logo.jpg';
 import aurusHero from '@/assets/projects/aurus/aurus-hero.webp';
 import aurusGallery01 from '@/assets/projects/aurus/aurus-gallery-01.webp';
 import aurusGallery02 from '@/assets/projects/aurus/aurus-gallery-02.webp';
@@ -47,6 +48,14 @@ type ProjectDetail = {
   challenges?: LocalizedList;
   deliverables?: LocalizedList;
   gallery?: ProjectGalleryItem[];
+};
+
+type ProjectTeaser = {
+  slug: string;
+  title: string;
+  category: string;
+  image: string | null;
+  tags: string[];
 };
 
 type ProjectBackState = {
@@ -462,6 +471,48 @@ const genericTitles: Record<string, string> = {
   zafaron: "Za'faron",
 };
 
+const projectTeasers: ProjectTeaser[] = [
+  {
+    slug: 'marf',
+    title: 'MARF',
+    category: 'Product Market Fit & Brand Platform',
+    image: marfImg,
+    tags: ['Product Market Fit', 'Brand Platform', 'Go-To-Market'],
+  },
+  {
+    slug: 'milestone-is',
+    title: 'Milestone International School',
+    category: 'Go-To-Market, Brand Platform & Admissions System',
+    image: milestoneHero,
+    tags: ['Education', 'Brand Platform', 'Admissions Strategy'],
+  },
+  {
+    slug: 'aurus-pharm',
+    title: 'Aurus Pharm',
+    category: 'Brand Platform, Packaging & Marketing Operations',
+    image: aurusHero,
+    tags: ['Pharma', 'Brand Platform', 'Marketing Operations'],
+  },
+  { slug: 'ahmad-tea', title: 'Ahmad Tea', category: 'Marketing', image: null, tags: ['Marketing Strategy', 'Branding'] },
+  { slug: 'bek-ota', title: 'Bek Ota', category: 'Brending', image: null, tags: ['Brand Platform', 'Visual Identity'] },
+  { slug: 'dilmuss', title: 'Dilmuss', category: 'Brending', image: null, tags: ['Branding', 'Visual Identity'] },
+  { slug: 'taxtakon', title: 'Taxtakon', category: 'Marketing', image: null, tags: ['Marketing Strategy'] },
+  { slug: 'najot-nur', title: 'Najot Nur', category: 'Marketing & Brending', image: null, tags: ['Education', 'Branding'] },
+  { slug: 'merit-chemicals', title: 'Merit Chemicals', category: 'Strategy', image: null, tags: ['Strategy', 'Market Analysis'] },
+  { slug: 'zahratun', title: 'Zahratun', category: 'Marketing', image: null, tags: ['Retail', 'Marketing'] },
+  { slug: 'impuls', title: 'Impuls Tibbiyot Instituti', category: 'Marketing & Brending', image: null, tags: ['Education', 'Medical'] },
+  { slug: 'damar', title: 'Damar', category: 'Brending', image: null, tags: ['Branding'] },
+  { slug: 'aqly', title: 'AQLY', category: 'Strategy', image: null, tags: ['Strategy'] },
+  { slug: 'baxtiyor-oila', title: 'Baxtiyor Oila', category: 'Marketing', image: null, tags: ['Marketing'] },
+  { slug: 'asr-kimyo', title: 'Asr Kimyo', category: 'Strategy', image: null, tags: ['Strategy', 'Branding'] },
+  { slug: 'oxus-university', title: 'OXUS University', category: 'Marketing & Brending', image: null, tags: ['Education'] },
+  { slug: 'mobetco', title: 'MobetCo', category: 'Marketing', image: null, tags: ['Marketing'] },
+  { slug: 'president-gifts', title: 'President Gifts', category: 'Brending', image: null, tags: ['Branding'] },
+  { slug: 'sfera', title: 'Sfera', category: 'Marketing', image: null, tags: ['Marketing'] },
+  { slug: 'tima', title: 'Tima', category: 'Brending', image: null, tags: ['Branding'] },
+  { slug: 'zafaron', title: "Za'faron", category: 'Marketing', image: null, tags: ['Marketing', 'Strategy'] },
+];
+
 const ProjectDetailPage = () => {
   const { slug } = useParams<{ slug: string }>();
   const location = useLocation();
@@ -474,6 +525,7 @@ const ProjectDetailPage = () => {
   const backLabel =
     navigationState?.fromLabel ||
     (backPath === '/' || backPath.startsWith('/#') ? homeBackLabel : t.projects.viewAll);
+  const projectNavigationState: ProjectBackState = { from: backPath, fromLabel: backLabel };
 
   const project = slug ? projectsData[slug] : null;
   const genericTitle = slug ? genericTitles[slug] : null;
@@ -521,12 +573,27 @@ const ProjectDetailPage = () => {
   const challenges = project?.challenges?.[currentLang] || [];
   const deliverables = project?.deliverables?.[currentLang] || [];
   const gallery = project?.gallery || [];
+  const currentTeaserIndex = projectTeasers.findIndex((item) => item.slug === slug);
+  const relatedProjects =
+    currentTeaserIndex >= 0
+      ? [
+          ...projectTeasers.slice(currentTeaserIndex + 1),
+          ...projectTeasers.slice(0, currentTeaserIndex),
+        ].slice(0, 3)
+      : projectTeasers.slice(0, 3);
 
   const aboutLabel = currentLang === 'uz' ? 'Loyiha haqida' : currentLang === 'ru' ? 'О проекте' : 'About the project';
   const servicesLabel = currentLang === 'uz' ? "Ko'rsatilgan xizmatlar" : currentLang === 'ru' ? 'Оказанные услуги' : 'Services provided';
   const challengesLabel = currentLang === 'uz' ? 'Aniqlangan ehtiyoj va muammolar' : currentLang === 'ru' ? 'Выявленные задачи и проблемы' : 'Challenges and needs identified';
   const deliverablesLabel = currentLang === 'uz' ? 'Bajarilgan ishlar' : currentLang === 'ru' ? 'Что было сделано' : 'What we delivered';
   const galleryLabel = currentLang === 'uz' ? 'Loyiha vizuallari' : currentLang === 'ru' ? 'Визуалы проекта' : 'Project visuals';
+  const relatedLabel = currentLang === 'uz' ? 'Boshqa loyihalar' : currentLang === 'ru' ? 'Другие проекты' : 'Other projects';
+  const relatedDescription =
+    currentLang === 'uz'
+      ? "Yana 3 ta case'ni ko'rib, Proactive turli biznes vazifalarini qanday yechganini solishtiring."
+      : currentLang === 'ru'
+        ? 'Посмотрите ещё 3 кейса и сравните, как Proactive решает разные бизнес-задачи.'
+        : 'Explore 3 more cases and compare how Proactive solves different business challenges.';
   const galleryDescription =
     slug === 'aurus-pharm'
       ? currentLang === 'uz'
@@ -743,6 +810,85 @@ const ProjectDetailPage = () => {
               {t.contact.title} <ArrowRight className="h-4 w-4" />
             </Link>
           </div>
+
+          <section className="mt-16">
+            <div className="mb-8 flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
+              <div>
+                <h2 className="text-2xl font-heading font-bold text-foreground md:text-3xl">{relatedLabel}</h2>
+                <p className="mt-3 max-w-3xl text-muted-foreground">{relatedDescription}</p>
+              </div>
+              <Link
+                to="/projects"
+                className="inline-flex items-center gap-2 text-sm font-semibold text-primary transition-all hover:gap-3"
+              >
+                {t.projects.viewAll} <ArrowRight className="h-4 w-4" />
+              </Link>
+            </div>
+
+            <div className="grid gap-5 md:grid-cols-3">
+              {relatedProjects.map((item, index) => (
+                <motion.div
+                  key={item.slug}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: '-60px' }}
+                  transition={{ delay: index * 0.08 }}
+                  className="group"
+                >
+                  <Link to={`/projects/${item.slug}`} state={projectNavigationState} className="block h-full">
+                    <article className="glass-card-light h-full overflow-hidden rounded-[1.6rem] transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
+                      <div className="relative h-44 overflow-hidden">
+                        {item.image ? (
+                          <img
+                            src={item.image}
+                            alt={item.title}
+                            loading="lazy"
+                            decoding="async"
+                            className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                          />
+                        ) : (
+                          <div
+                            className="relative flex h-full w-full items-center justify-center overflow-hidden"
+                            style={{
+                              background:
+                                'linear-gradient(135deg, hsla(204, 47%, 28%, 0.94) 0%, hsla(202, 100%, 11%, 0.98) 100%)',
+                            }}
+                          >
+                            <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_30%,rgba(82,230,200,0.18),transparent_48%)]" />
+                            <img
+                              src={proactiveLogo}
+                              alt=""
+                              aria-hidden="true"
+                              loading="lazy"
+                              decoding="async"
+                              className="relative h-14 w-14 rounded-2xl object-cover opacity-90 shadow-[0_14px_34px_rgba(0,0,0,0.18)]"
+                            />
+                          </div>
+                        )}
+                      </div>
+
+                      <div className="p-5">
+                        <span className="mb-2 block text-xs font-semibold text-primary">{item.category}</span>
+                        <h3 className="font-heading text-lg font-bold text-foreground transition-colors group-hover:text-primary">
+                          {item.title}
+                        </h3>
+                        <div className="mt-4 flex flex-wrap gap-1.5">
+                          {item.tags.slice(0, 3).map((tag) => (
+                            <span key={tag} className="rounded-full bg-primary/10 px-2 py-0.5 text-[10px] font-medium text-primary">
+                              {tag}
+                            </span>
+                          ))}
+                        </div>
+                        <span className="mt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-primary transition-all group-hover:gap-2.5">
+                          {t.projects.viewProject} <ArrowRight className="h-3.5 w-3.5" />
+                        </span>
+                      </div>
+                    </article>
+                  </Link>
+                </motion.div>
+              ))}
+            </div>
+          </section>
         </div>
       </section>
     </PageLayout>

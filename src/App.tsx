@@ -25,6 +25,8 @@ const ContactPage = lazy(() => import("./pages/ContactPage"));
 const AcademyPage = lazy(() => import("./pages/AcademyPage"));
 const EventsPage = lazy(() => import("./pages/EventsPage"));
 const CareersPage = lazy(() => import("./pages/CareersPage"));
+const NewsPage = lazy(() => import("./pages/NewsPage"));
+const NewsArticlePage = lazy(() => import("./pages/NewsArticlePage"));
 
 const PageLoader = () => (
   <div className="min-h-screen bg-background" aria-hidden="true" />
@@ -75,6 +77,8 @@ const App = () => (
               <Route path="/academy" element={<AcademyPage />} />
               <Route path="/events" element={<EventsPage />} />
               <Route path="/careers" element={<CareersPage />} />
+              <Route path="/news" element={<NewsPage />} />
+              <Route path="/news/:id" element={<NewsArticlePage />} />
               <Route path="/internship" element={<InternshipPage />} />
               <Route path="/contact" element={<ContactPage />} />
               <Route path="/admin" element={<Admin />} />

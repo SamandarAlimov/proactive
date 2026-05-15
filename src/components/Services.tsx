@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { services } from '@/data/services';
 import { useI18n } from '@/lib/i18n';
 import { useScrollAnimation } from '@/hooks/useScrollAnimation';
@@ -7,6 +7,11 @@ import { useScrollAnimation } from '@/hooks/useScrollAnimation';
 const Services = () => {
   const { t, lang } = useI18n();
   const { ref, getMotionProps } = useScrollAnimation();
+  const location = useLocation();
+  const serviceDetailState = {
+    from: `${location.pathname}${location.search}#services`,
+    fromLabel: lang === 'uz' ? 'Asosiy sahifa' : lang === 'ru' ? 'Главная страница' : 'Home page',
+  };
 
   return (
     <section id="services" className="section-deferred relative overflow-hidden py-24 md:py-32" ref={ref}>
@@ -50,13 +55,13 @@ const Services = () => {
                 whileHover={{ y: -6, scale: 1.01 }}
                 className="h-full"
               >
-                <Link to={`/services/${service.slug}`} className="block h-full">
+                <Link to={`/services/${service.slug}`} state={serviceDetailState} className="block h-full">
                   <div
                     className="group relative h-full overflow-hidden rounded-2xl p-8 transition-all duration-300 hover:shadow-xl"
                     style={{
-                      background: 'hsl(var(--background))',
-                      border: '1px solid hsla(166, 75%, 61%, 0.08)',
-                      boxShadow: '0 4px 24px hsla(202, 100%, 11%, 0.04)',
+                      background: 'hsl(var(--card))',
+                      border: '1px solid hsl(var(--border) / 0.72)',
+                      boxShadow: '0 12px 36px hsl(var(--foreground) / 0.08)',
                     }}
                   >
                     <span className="absolute right-6 top-5 font-heading text-5xl font-bold text-secondary/5 transition-colors duration-300 group-hover:text-primary/15 dark:text-white/5">

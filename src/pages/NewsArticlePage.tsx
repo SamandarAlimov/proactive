@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { useParams, Link } from 'react-router-dom';
+import { Link, useLocation, useParams } from 'react-router-dom';
 import { useI18n } from '@/lib/i18n';
 import { ArrowLeft } from 'lucide-react';
 import { supabase } from '@/integrations/supabase/client';
@@ -14,11 +14,23 @@ type Article = {
   image?: string | null;
 };
 
+type ArticleBackState = {
+  from?: string;
+  fromLabel?: string;
+};
+
+const isSafeInternalPath = (value: unknown): value is string =>
+  typeof value === 'string' && value.startsWith('/') && !value.startsWith('//');
+
 const NewsArticlePage = () => {
   const { id } = useParams<{ id: string }>();
+  const location = useLocation();
   const { t, lang } = useI18n();
   const [article, setArticle] = useState<Article | null>(null);
   const [loading, setLoading] = useState(true);
+  const navigationState = location.state as ArticleBackState | null;
+  const backPath = isSafeInternalPath(navigationState?.from) ? navigationState.from : '/news';
+  const backLabel = navigationState?.fromLabel || t.news.backToNews;
 
   useEffect(() => {
     const fetchArticle = async () => {
@@ -41,14 +53,25 @@ const NewsArticlePage = () => {
   }, [id, lang]);
 
   if (loading) return <PageLayout><div className="section-padding text-center"><p className="text-foreground">Loading...</p></div></PageLayout>;
-  if (!article) return <PageLayout><div className="section-padding text-center"><h1 className="text-3xl font-heading font-bold text-foreground">404</h1></div></PageLayout>;
+  if (!article) {
+    return (
+      <PageLayout>
+        <div className="section-padding text-center">
+          <h1 className="text-3xl font-heading font-bold text-foreground">404</h1>
+          <Link to={backPath} className="mt-4 inline-flex items-center gap-2 text-primary hover:text-primary/80">
+            <ArrowLeft className="w-4 h-4" /> {backLabel}
+          </Link>
+        </div>
+      </PageLayout>
+    );
+  }
 
   return (
     <PageLayout>
       <section className="section-padding bg-secondary text-secondary-foreground">
         <div className="max-w-4xl mx-auto">
-          <Link to="/news" className="inline-flex items-center gap-2 text-primary hover:text-primary/80 transition-colors mb-6">
-            <ArrowLeft className="w-4 h-4" /> {t.news.backToNews}
+          <Link to={backPath} className="inline-flex items-center gap-2 text-primary hover:text-primary/80 transition-colors mb-6">
+            <ArrowLeft className="w-4 h-4" /> {backLabel}
           </Link>
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
             <span className="text-sm text-secondary-foreground/60">{article.date}</span>

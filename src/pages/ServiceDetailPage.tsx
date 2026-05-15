@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
 import { ArrowLeft, ArrowRight, CheckCircle2, Cog, HelpCircle, TrendingUp } from 'lucide-react';
-import { Link, Navigate, useParams } from 'react-router-dom';
+import { Link, Navigate, useLocation, useParams } from 'react-router-dom';
 import PageLayout from '@/components/PageLayout';
 import SEO from '@/components/SEO';
 import { getServiceBySlug, serviceSlugRedirects, services } from '@/data/services';
@@ -44,20 +44,33 @@ const labels = {
   },
 };
 
+type DetailBackState = {
+  from?: string;
+  fromLabel?: string;
+};
+
+const isSafeInternalPath = (value: unknown): value is string =>
+  typeof value === 'string' && value.startsWith('/') && !value.startsWith('//');
+
 const ServiceDetailPage = () => {
   const { slug } = useParams<{ slug: string }>();
+  const location = useLocation();
   const { lang } = useI18n();
+  const navigationState = location.state as DetailBackState | null;
+  const L = labels[lang];
+  const backPath = isSafeInternalPath(navigationState?.from) ? navigationState.from : '/services';
+  const backLabel = navigationState?.fromLabel || L.back;
+  const forwardedState: DetailBackState = { from: backPath, fromLabel: backLabel };
   const legacyRedirect =
     slug && Object.prototype.hasOwnProperty.call(serviceSlugRedirects, slug)
       ? serviceSlugRedirects[slug]
       : undefined;
 
   if (legacyRedirect) {
-    return <Navigate to={`/services/${legacyRedirect}`} replace />;
+    return <Navigate to={`/services/${legacyRedirect}`} replace state={forwardedState} />;
   }
 
   const service = slug ? getServiceBySlug(slug) : undefined;
-  const L = labels[lang];
 
   if (!service) {
     return (
@@ -71,8 +84,8 @@ const ServiceDetailPage = () => {
         />
         <div className="section-padding pt-40 text-center">
           <h1 className="font-heading text-3xl font-bold text-foreground">404</h1>
-          <Link to="/services" className="mt-4 inline-block text-primary">
-            {L.back}
+          <Link to={backPath} className="mt-4 inline-block text-primary">
+            {backLabel}
           </Link>
         </div>
       </PageLayout>
@@ -129,11 +142,11 @@ const ServiceDetailPage = () => {
         />
         <div className="mx-auto max-w-5xl px-6">
           <Link
-            to="/services"
+            to={backPath}
             className="group mb-8 inline-flex items-center gap-2 text-sm font-semibold text-muted-foreground transition-colors hover:text-primary"
           >
             <ArrowLeft className="h-4 w-4 transition-transform group-hover:-translate-x-1" />
-            {L.back}
+            {backLabel}
           </Link>
 
           <motion.div
@@ -192,9 +205,9 @@ const ServiceDetailPage = () => {
                 transition={{ duration: 0.5, delay: blockIndex * 0.1 }}
                 className="rounded-3xl p-7 transition-all duration-500 hover:shadow-xl md:p-9"
                 style={{
-                  background: 'hsl(var(--background))',
-                  border: '1px solid hsla(202, 100%, 11%, 0.08)',
-                  boxShadow: '0 4px 24px hsla(202, 100%, 11%, 0.04)',
+                  background: 'hsl(var(--card))',
+                  border: '1px solid hsl(var(--border) / 0.72)',
+                  boxShadow: '0 12px 36px hsl(var(--foreground) / 0.08)',
                 }}
               >
                 <div className="mb-5 flex items-center gap-3">
@@ -242,10 +255,11 @@ const ServiceDetailPage = () => {
 
           <Link
             to={`/services/${next.slug}`}
+            state={forwardedState}
             className="group block rounded-3xl p-8 transition-all duration-500 hover:shadow-xl md:p-10"
             style={{
-              background: 'hsl(var(--background))',
-              border: '1px solid hsla(202, 100%, 11%, 0.08)',
+              background: 'hsl(var(--card))',
+              border: '1px solid hsl(var(--border) / 0.72)',
             }}
           >
             <div className="mb-3 text-xs font-semibold uppercase tracking-widest text-muted-foreground">{L.next}</div>

@@ -70,7 +70,7 @@ const Hero = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.7 }}
-          className="mx-auto mb-8 max-w-2xl text-balance text-sm font-normal leading-relaxed text-white/56 sm:text-base md:mb-12 md:text-lg xl:text-xl"
+          className="mx-auto mb-8 max-w-2xl text-balance text-sm font-normal leading-relaxed text-white/82 sm:text-base md:mb-12 md:text-lg xl:text-xl"
         >
           {t.hero.subtitle}
         </motion.p>
@@ -88,19 +88,19 @@ const Hero = () => {
             <span className="relative">{t.hero.cta}</span>
             <ArrowRight className="relative w-5 h-5 transition-transform duration-300 group-hover:translate-x-1" />
           </a>
-          <a href="#about" className="group inline-flex items-center justify-center gap-3 px-6 sm:px-8 py-3.5 sm:py-4 rounded-xl border border-white/12 bg-white/[0.04] backdrop-blur-sm text-white font-semibold text-base sm:text-lg transition-all duration-400 hover:border-primary/40 hover:bg-white/[0.08] hover:scale-[1.03]">
+          <a href="#about" className="group inline-flex items-center justify-center gap-3 px-6 sm:px-8 py-3.5 sm:py-4 rounded-xl border border-white/24 bg-white/[0.08] backdrop-blur-sm text-white font-semibold text-base sm:text-lg transition-all duration-400 hover:border-primary/50 hover:bg-white/[0.12] hover:scale-[1.03]">
             <Play className="w-5 h-5 transition-transform duration-300 group-hover:scale-110" />
             {t.hero.ctaSecondary}
           </a>
         </motion.div>
 
         <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.7, delay: 1.1 }} className="mt-10 md:mt-14 lg:mt-16">
-          <p className="mb-4 text-xs uppercase tracking-[0.2em] text-white/38 md:mb-5">{t.hero.trustedBy}</p>
+          <p className="mb-4 text-xs uppercase tracking-[0.2em] text-white/58 md:mb-5">{t.hero.trustedBy}</p>
           <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 md:gap-x-8 md:gap-y-3">
             {clientNames.map((name) => (
               <span
                 key={name}
-                className="cursor-default text-[10px] font-heading font-bold tracking-wider text-white/48 transition-colors duration-300 hover:text-primary/75 md:text-xs"
+                className="cursor-default text-[10px] font-heading font-bold tracking-wider text-white/68 transition-colors duration-300 hover:text-primary/90 md:text-xs"
               >
                 {name}
               </span>

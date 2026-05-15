@@ -79,7 +79,7 @@ const Team = () => {
             </h2>
             <p
               className={`mt-4 max-w-2xl text-base leading-relaxed md:text-lg ${
-                isDark ? 'text-white/56' : 'text-secondary/68'
+                isDark ? 'text-white/74' : 'text-secondary/72'
               }`}
             >
               {t.team.description}

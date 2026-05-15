@@ -147,9 +147,9 @@ const ServicesPage = () => {
                 <div
                   className="group relative overflow-hidden rounded-3xl p-6 transition-all duration-500 hover:shadow-2xl md:p-10"
                   style={{
-                    background: 'hsl(var(--background))',
-                    border: '1px solid hsla(202, 100%, 11%, 0.08)',
-                    boxShadow: '0 4px 24px hsla(202, 100%, 11%, 0.04)',
+                    background: 'hsl(var(--card))',
+                    border: '1px solid hsl(var(--border) / 0.72)',
+                    boxShadow: '0 12px 36px hsl(var(--foreground) / 0.08)',
                   }}
                 >
                   <div
@@ -168,7 +168,7 @@ const ServicesPage = () => {
                   <div className="relative grid items-start gap-6 md:grid-cols-[auto_auto_1fr_auto] md:items-center md:gap-8">
                     <div
                       className="font-heading text-5xl font-bold leading-none tabular-nums transition-colors duration-500 md:text-7xl"
-                      style={{ color: isOpen ? service.accent.from : 'hsla(202, 100%, 11%, 0.08)' }}
+                      style={{ color: isOpen ? service.accent.from : 'hsl(var(--foreground) / 0.12)' }}
                     >
                       {service.number}
                     </div>
@@ -272,8 +272,8 @@ const ServicesPage = () => {
                                 transition={{ delay: 0.06 * blockIndex }}
                                 className="rounded-2xl bg-background/70 p-5"
                                 style={{
-                                  border: '1px solid hsla(202, 100%, 11%, 0.07)',
-                                  boxShadow: '0 3px 16px hsla(202, 100%, 11%, 0.03)',
+                                  border: '1px solid hsl(var(--border) / 0.68)',
+                                  boxShadow: '0 8px 24px hsl(var(--foreground) / 0.06)',
                                 }}
                               >
                                 <h4 className="font-heading text-base font-bold text-foreground md:text-lg">

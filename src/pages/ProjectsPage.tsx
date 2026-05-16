@@ -104,6 +104,120 @@ const ProjectsPage = () => {
       : lang === 'ru'
         ? 'Подробный кейс по этому проекту пока готовится.'
         : 'A detailed case study for this project is still being prepared.';
+  const detailedProjects = projects.filter((project) => detailedProjectSlugs.has(project.slug));
+  const pendingProjects = projects.filter((project) => !detailedProjectSlugs.has(project.slug));
+  const readyCasesTitle =
+    lang === 'uz' ? "Tayyor case'lar" : lang === 'ru' ? 'Готовые кейсы' : 'Completed cases';
+  const pendingCasesTitle =
+    lang === 'uz' ? 'Boshqa loyihalar' : lang === 'ru' ? 'Другие проекты' : 'Other projects';
+  const pendingCasesDescription =
+    lang === 'uz'
+      ? "Quyidagi loyihalar bo'yicha materiallar yig'ilmoqda. To'liq case tayyor bo'lishi bilan alohida sahifa ochiladi."
+      : lang === 'ru'
+        ? 'Материалы по этим проектам собираются. Когда кейс будет готов, для него откроется отдельная страница.'
+        : 'Materials for these projects are being collected. Once a full case is ready, it will get a dedicated page.';
+
+  const renderProjectCard = (project: ProjectCard, index: number) => {
+    const hasDetailedCase = detailedProjectSlugs.has(project.slug);
+    const card = (
+      <div
+        className={`overflow-hidden rounded-2xl glass-card-light transition-all duration-500 ${
+          hasDetailedCase ? 'hover:shadow-xl' : 'cursor-default'
+        }`}
+      >
+        <div className="relative h-48 overflow-hidden">
+          {!hasDetailedCase && (
+            <div className="absolute right-4 top-4 z-10 inline-flex items-center gap-1.5 rounded-full border border-white/15 bg-secondary/75 px-3 py-1.5 text-[11px] font-semibold text-white shadow-[0_10px_24px_rgba(0,0,0,0.18)] backdrop-blur">
+              <Clock3 className="h-3.5 w-3.5" />
+              {comingSoonLabel}
+            </div>
+          )}
+          {project.image ? (
+            <img
+              src={project.image}
+              alt={project.title}
+              loading="lazy"
+              decoding="async"
+              className={`h-full w-full object-cover transition-transform duration-700 ${
+                hasDetailedCase ? 'group-hover:scale-[1.025]' : ''
+              }`}
+            />
+          ) : (
+            <div
+              className="relative flex h-full w-full items-center justify-center overflow-hidden"
+              style={{
+                background:
+                  'linear-gradient(135deg, hsla(204, 47%, 28%, 0.94) 0%, hsla(202, 100%, 11%, 0.98) 100%)',
+              }}
+            >
+              <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_30%,rgba(82,230,200,0.18),transparent_48%)]" />
+              <div className="relative flex flex-col items-center gap-3 text-center">
+                <img
+                  src={proactiveLogo}
+                  alt=""
+                  aria-hidden="true"
+                  loading="lazy"
+                  decoding="async"
+                  className="h-16 w-16 rounded-2xl object-cover opacity-90 shadow-[0_14px_34px_rgba(0,0,0,0.18)]"
+                />
+                <span className="max-w-[13rem] text-sm font-heading font-semibold tracking-wide text-white/90">
+                  {project.title}
+                </span>
+              </div>
+            </div>
+          )}
+        </div>
+        <div className="p-6">
+          <span className="mb-2 block text-xs font-medium text-primary">{project.category}</span>
+          <h3
+            className={`mb-3 text-lg font-heading font-bold text-foreground transition-colors ${
+              hasDetailedCase ? 'group-hover:text-primary' : ''
+            }`}
+          >
+            {project.title}
+          </h3>
+          <p className="mb-4 line-clamp-2 text-sm leading-relaxed text-muted-foreground">
+            {project.description || comingSoonDescription}
+          </p>
+          <div className="mb-4 flex flex-wrap gap-1.5">
+            {project.tags.map((tag) => (
+              <span key={tag} className="rounded-full bg-primary/10 px-2 py-0.5 text-[10px] font-medium text-primary">
+                {tag}
+              </span>
+            ))}
+          </div>
+          {hasDetailedCase ? (
+            <span className="inline-flex items-center gap-1.5 text-sm font-semibold text-primary transition-all group-hover:gap-2.5">
+              {t.projects.viewProject} <ArrowRight className="h-3.5 w-3.5" />
+            </span>
+          ) : (
+            <span className="inline-flex items-center gap-1.5 text-sm font-semibold text-muted-foreground">
+              {comingSoonLabel} <Clock3 className="h-3.5 w-3.5" />
+            </span>
+          )}
+        </div>
+      </div>
+    );
+
+    return (
+      <motion.div
+        key={project.slug}
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={revealViewport}
+        transition={{ delay: 0.05 * index }}
+        className="group"
+      >
+        {hasDetailedCase ? (
+          <Link to={`/projects/${project.slug}`} state={projectDetailState} className="block">
+            {card}
+          </Link>
+        ) : (
+          <article aria-disabled="true">{card}</article>
+        )}
+      </motion.div>
+    );
+  };
 
   return (
     <PageLayout>
@@ -155,108 +269,33 @@ const ProjectsPage = () => {
       </section>
 
       <section className="section-padding">
-        <div className="mx-auto grid max-w-7xl gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {projects.map((project, i) => {
-            const hasDetailedCase = detailedProjectSlugs.has(project.slug);
-            const card = (
-              <div
-                className={`overflow-hidden rounded-2xl glass-card-light transition-all duration-500 ${
-                  hasDetailedCase ? 'hover:shadow-xl' : 'cursor-default'
-                }`}
-              >
-                <div className="relative h-48 overflow-hidden">
-                  {!hasDetailedCase && (
-                    <div className="absolute right-4 top-4 z-10 inline-flex items-center gap-1.5 rounded-full border border-white/15 bg-secondary/75 px-3 py-1.5 text-[11px] font-semibold text-white shadow-[0_10px_24px_rgba(0,0,0,0.18)] backdrop-blur">
-                      <Clock3 className="h-3.5 w-3.5" />
-                      {comingSoonLabel}
-                    </div>
-                  )}
-                  {project.image ? (
-                    <img
-                      src={project.image}
-                      alt={project.title}
-                      loading="lazy"
-                      decoding="async"
-                      className={`h-full w-full object-cover transition-transform duration-700 ${
-                        hasDetailedCase ? 'group-hover:scale-[1.025]' : ''
-                      }`}
-                    />
-                  ) : (
-                    <div
-                      className="relative flex h-full w-full items-center justify-center overflow-hidden"
-                      style={{
-                        background:
-                          'linear-gradient(135deg, hsla(204, 47%, 28%, 0.94) 0%, hsla(202, 100%, 11%, 0.98) 100%)',
-                      }}
-                    >
-                      <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_30%,rgba(82,230,200,0.18),transparent_48%)]" />
-                      <div className="relative flex flex-col items-center gap-3 text-center">
-                        <img
-                          src={proactiveLogo}
-                          alt=""
-                          aria-hidden="true"
-                          loading="lazy"
-                          decoding="async"
-                          className="h-16 w-16 rounded-2xl object-cover opacity-90 shadow-[0_14px_34px_rgba(0,0,0,0.18)]"
-                        />
-                        <span className="max-w-[13rem] text-sm font-heading font-semibold tracking-wide text-white/90">
-                          {project.title}
-                        </span>
-                      </div>
-                    </div>
-                  )}
-                </div>
-                <div className="p-6">
-                  <span className="mb-2 block text-xs font-medium text-primary">{project.category}</span>
-                  <h3
-                    className={`mb-3 text-lg font-heading font-bold text-foreground transition-colors ${
-                      hasDetailedCase ? 'group-hover:text-primary' : ''
-                    }`}
-                  >
-                    {project.title}
-                  </h3>
-                  <p className="mb-4 line-clamp-2 text-sm leading-relaxed text-muted-foreground">
-                    {project.description || comingSoonDescription}
-                  </p>
-                  <div className="mb-4 flex flex-wrap gap-1.5">
-                    {project.tags.map((tag) => (
-                      <span key={tag} className="rounded-full bg-primary/10 px-2 py-0.5 text-[10px] font-medium text-primary">
-                        {tag}
-                      </span>
-                    ))}
-                  </div>
-                  {hasDetailedCase ? (
-                    <span className="inline-flex items-center gap-1.5 text-sm font-semibold text-primary transition-all group-hover:gap-2.5">
-                      {t.projects.viewProject} <ArrowRight className="h-3.5 w-3.5" />
-                    </span>
-                  ) : (
-                    <span className="inline-flex items-center gap-1.5 text-sm font-semibold text-muted-foreground">
-                      {comingSoonLabel} <Clock3 className="h-3.5 w-3.5" />
-                    </span>
-                  )}
-                </div>
-              </div>
-            );
+        <div className="mx-auto max-w-7xl">
+          <div className="mb-8 flex flex-col gap-2 md:flex-row md:items-end md:justify-between">
+            <div>
+              <span className="text-sm font-semibold uppercase tracking-widest text-primary">{readyCasesTitle}</span>
+              <h2 className="mt-2 font-heading text-2xl font-bold text-foreground md:text-3xl">
+                MARF, Milestone International School, Aurus Pharm
+              </h2>
+            </div>
+          </div>
 
-            return (
-              <motion.div
-                key={project.slug}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={revealViewport}
-                transition={{ delay: 0.05 * i }}
-                className="group"
-              >
-                {hasDetailedCase ? (
-                  <Link to={`/projects/${project.slug}`} state={projectDetailState} className="block">
-                    {card}
-                  </Link>
-                ) : (
-                  <article aria-disabled="true">{card}</article>
-                )}
-              </motion.div>
-            );
-          })}
+          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+            {detailedProjects.map(renderProjectCard)}
+          </div>
+
+          <div className="mt-16 border-t border-border/70 pt-12">
+            <div className="mb-8 max-w-3xl">
+              <span className="text-sm font-semibold uppercase tracking-widest text-primary">{pendingCasesTitle}</span>
+              <h2 className="mt-2 font-heading text-2xl font-bold text-foreground md:text-3xl">
+                {comingSoonLabel}
+              </h2>
+              <p className="mt-3 text-muted-foreground">{pendingCasesDescription}</p>
+            </div>
+
+            <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+              {pendingProjects.map(renderProjectCard)}
+            </div>
+          </div>
         </div>
       </section>
     </PageLayout>

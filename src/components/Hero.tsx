@@ -8,7 +8,41 @@ import { cn } from '@/lib/utils';
 const Hero = () => {
   const { t } = useI18n();
   const shouldReduceMotion = useReducedMotion();
-  const trustedLogos = shouldReduceMotion ? heroClientLogos : [...heroClientLogos, ...heroClientLogos];
+  const heroLogoRows = [1, 2, 3].map((row) =>
+    heroClientLogos.filter((client) => client.heroRow === row),
+  );
+  const getHeroTileTone = (tone = 'light') => {
+    if (tone === 'dark') {
+      return 'border-white/[0.16] bg-secondary/80 shadow-[0_14px_32px_rgba(0,0,0,0.24)] ring-1 ring-white/10';
+    }
+
+    if (tone === 'glass') {
+      return 'border-white/[0.18] bg-white/[0.16] shadow-[0_14px_32px_rgba(0,0,0,0.18)] ring-1 ring-white/10';
+    }
+
+    return 'border-white/60 bg-white/[0.9] shadow-[0_14px_32px_rgba(0,0,0,0.18)]';
+  };
+  const renderHeroLogo = (client: (typeof heroClientLogos)[number], compact = false) => (
+    <div
+      key={client.name}
+      className={cn(
+        'flex h-12 flex-shrink-0 items-center justify-center rounded-xl border px-3 py-2 backdrop-blur-md transition duration-300 hover:-translate-y-0.5 hover:shadow-[0_18px_42px_rgba(0,0,0,0.24)] sm:h-14 sm:px-4',
+        getHeroTileTone(client.heroTone),
+        compact ? 'w-full' : client.heroTileClassName,
+      )}
+    >
+      <img
+        src={client.logo}
+        alt={client.name}
+        loading="lazy"
+        decoding="async"
+        className={cn(
+          'h-full w-full object-contain drop-shadow-[0_1px_2px_rgba(0,0,0,0.14)]',
+          client.heroImageClassName,
+        )}
+      />
+    </div>
+  );
 
   return (
     <section className="relative min-h-[100svh] overflow-hidden">
@@ -38,14 +72,14 @@ const Hero = () => {
           minHeight: '100svh',
           paddingTop: 'calc(var(--site-header-offset) + clamp(1.25rem, 2.8vw, 2.75rem))',
         }}
-        className="relative z-10 mx-auto flex w-full max-w-5xl flex-col px-6 pb-8 text-center sm:pb-10 lg:pb-12"
+        className="relative z-10 mx-auto flex w-full max-w-7xl flex-col px-6 pb-8 text-center sm:pb-10 lg:pb-12"
       >
         <div className="hero-stage">
         <motion.h1
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.9, delay: 0.5, ease: [0.25, 0.46, 0.45, 0.94] }}
-          className="mb-5 font-heading text-[clamp(2.45rem,5vw,5.35rem)] font-bold leading-[1.04] tracking-tight text-white md:mb-8"
+          className="mx-auto mb-5 max-w-5xl font-heading text-[clamp(2.45rem,5vw,5.35rem)] font-bold leading-[1.04] tracking-tight text-white md:mb-8"
         >
           {t.hero.title}{' '}
           <span className="relative inline-block">
@@ -89,44 +123,24 @@ const Hero = () => {
           </a>
         </motion.div>
 
-        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.7, delay: 1.1 }} className="mt-10 md:mt-14 lg:mt-16">
+        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.7, delay: 1.1 }} className="mt-8 md:mt-10 lg:mt-12">
           <p className="mb-4 text-xs font-semibold uppercase tracking-[0.2em] text-white/80 md:mb-5">{t.hero.trustedBy}</p>
-          <div className="relative mx-auto max-w-5xl overflow-hidden">
-            {!shouldReduceMotion && (
-              <>
+          <div className="relative mx-auto max-w-6xl">
+            <div className="grid grid-cols-2 gap-2.5 sm:grid-cols-3 md:grid-cols-4 xl:hidden">
+              {heroClientLogos.map((client) => renderHeroLogo(client, true))}
+            </div>
+
+            <div className="hidden space-y-3 xl:block">
+              {heroLogoRows.map((row, rowIndex) => (
                 <div
-                  className="pointer-events-none absolute inset-y-0 left-0 z-10 w-14 sm:w-24"
-                  style={{ background: 'linear-gradient(90deg, hsla(202, 100%, 11%, 0.78), transparent)' }}
-                />
-                <div
-                  className="pointer-events-none absolute inset-y-0 right-0 z-10 w-14 sm:w-24"
-                  style={{ background: 'linear-gradient(270deg, hsla(202, 100%, 11%, 0.78), transparent)' }}
-                />
-              </>
-            )}
-            <div
-              className={
-                shouldReduceMotion
-                  ? 'flex flex-wrap items-center justify-center gap-2.5'
-                  : 'brand-marquee-track flex w-max items-center gap-3 will-change-transform'
-              }
-            >
-              {trustedLogos.map((client, index) => (
-                <div
-                  key={`${client.name}-${index}`}
-                  aria-hidden={!shouldReduceMotion && index >= heroClientLogos.length}
-                  className="flex h-12 min-w-[132px] flex-shrink-0 items-center justify-center rounded-xl border border-white/15 bg-white/[0.96] px-3 py-2 shadow-[0_10px_30px_rgba(0,0,0,0.16)] backdrop-blur transition duration-300 hover:-translate-y-0.5 hover:bg-white"
+                  key={rowIndex}
+                  className={cn(
+                    'flex items-center justify-center gap-3',
+                    rowIndex === 1 && 'xl:-translate-x-5',
+                    rowIndex === 2 && 'xl:translate-x-4',
+                  )}
                 >
-                  <img
-                    src={client.logo}
-                    alt={client.name}
-                    loading="lazy"
-                    decoding="async"
-                    className={cn(
-                      'h-full w-full object-contain',
-                      client.heroImageClassName,
-                    )}
-                  />
+                  {row.map((client) => renderHeroLogo(client))}
                 </div>
               ))}
             </div>

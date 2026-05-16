@@ -494,24 +494,6 @@ const projectTeasers: ProjectTeaser[] = [
     image: aurusHero,
     tags: ['Pharma', 'Brand Platform', 'Marketing Operations'],
   },
-  { slug: 'ahmad-tea', title: 'Ahmad Tea', category: 'Marketing', image: null, tags: ['Marketing Strategy', 'Branding'] },
-  { slug: 'bek-ota', title: 'Bek Ota', category: 'Brending', image: null, tags: ['Brand Platform', 'Visual Identity'] },
-  { slug: 'dilmuss', title: 'Dilmuss', category: 'Brending', image: null, tags: ['Branding', 'Visual Identity'] },
-  { slug: 'taxtakon', title: 'Taxtakon', category: 'Marketing', image: null, tags: ['Marketing Strategy'] },
-  { slug: 'najot-nur', title: 'Najot Nur', category: 'Marketing & Brending', image: null, tags: ['Education', 'Branding'] },
-  { slug: 'merit-chemicals', title: 'Merit Chemicals', category: 'Strategy', image: null, tags: ['Strategy', 'Market Analysis'] },
-  { slug: 'zahratun', title: 'Zahratun', category: 'Marketing', image: null, tags: ['Retail', 'Marketing'] },
-  { slug: 'impuls', title: 'Impuls Tibbiyot Instituti', category: 'Marketing & Brending', image: null, tags: ['Education', 'Medical'] },
-  { slug: 'damar', title: 'Damar', category: 'Brending', image: null, tags: ['Branding'] },
-  { slug: 'aqly', title: 'AQLY', category: 'Strategy', image: null, tags: ['Strategy'] },
-  { slug: 'baxtiyor-oila', title: 'Baxtiyor Oila', category: 'Marketing', image: null, tags: ['Marketing'] },
-  { slug: 'asr-kimyo', title: 'Asr Kimyo', category: 'Strategy', image: null, tags: ['Strategy', 'Branding'] },
-  { slug: 'oxus-university', title: 'OXUS University', category: 'Marketing & Brending', image: null, tags: ['Education'] },
-  { slug: 'mobetco', title: 'MobetCo', category: 'Marketing', image: null, tags: ['Marketing'] },
-  { slug: 'president-gifts', title: 'President Gifts', category: 'Brending', image: null, tags: ['Branding'] },
-  { slug: 'sfera', title: 'Sfera', category: 'Marketing', image: null, tags: ['Marketing'] },
-  { slug: 'tima', title: 'Tima', category: 'Brending', image: null, tags: ['Branding'] },
-  { slug: 'zafaron', title: "Za'faron", category: 'Marketing', image: null, tags: ['Marketing', 'Strategy'] },
 ];
 
 const ProjectDetailPage = () => {
@@ -531,49 +513,78 @@ const ProjectDetailPage = () => {
   const project = slug ? projectsData[slug] : null;
   const genericTitle = slug ? genericTitles[slug] : null;
 
-  if (!project && !genericTitle) {
+  if (!project) {
+    const isKnownPendingProject = Boolean(genericTitle);
+    const pageTitle = isKnownPendingProject
+      ? genericTitle || ''
+      : currentLang === 'uz'
+        ? 'Loyiha topilmadi'
+        : currentLang === 'ru'
+          ? 'Проект не найден'
+          : 'Project not found';
+    const pageDescription = isKnownPendingProject
+      ? currentLang === 'uz'
+        ? "Bu loyiha bo'yicha batafsil case materiali hali tayyorlanmoqda. Hozircha faqat tayyor case'larni ko'rishingiz mumkin."
+        : currentLang === 'ru'
+          ? 'Подробный кейс по этому проекту пока готовится. Сейчас доступны только готовые кейсы.'
+          : 'The detailed case study for this project is still being prepared. For now, only completed case studies are available.'
+      : currentLang === 'uz'
+        ? "Bunday loyiha topilmadi."
+        : currentLang === 'ru'
+          ? 'Такой проект не найден.'
+          : 'This project could not be found.';
+
     return (
       <PageLayout>
         <SEO
-          title="Project not found"
-          description="The requested project page could not be found."
+          title={pageTitle}
+          description={pageDescription}
           lang={currentLang}
           noindex
           path={slug ? `/projects/${slug}` : '/projects'}
         />
-        <div className="section-padding text-center">
-          <h1 className="text-3xl font-heading font-bold text-foreground">
-            {currentLang === 'uz' ? 'Loyiha topilmadi' : currentLang === 'ru' ? 'Проект не найден' : 'Project not found'}
-          </h1>
-          <Link to={backPath} className="mt-4 inline-block text-primary">
-            {backLabel}
-          </Link>
-        </div>
+        <section className="section-padding">
+          <div className="mx-auto max-w-3xl text-center">
+            <Link to={backPath} className="mb-8 inline-flex items-center gap-2 text-sm font-semibold text-muted-foreground transition-colors hover:text-primary">
+              <ArrowLeft className="h-4 w-4" />
+              {backLabel}
+            </Link>
+            <div className="rounded-[2rem] border border-border/70 bg-card px-6 py-12 shadow-[0_18px_50px_rgba(0,0,0,0.05)] md:px-10">
+              <span className="text-sm font-semibold uppercase tracking-[0.28em] text-primary">
+                {isKnownPendingProject
+                  ? currentLang === 'uz'
+                    ? 'Case tayyorlanmoqda'
+                    : currentLang === 'ru'
+                      ? 'Кейс готовится'
+                      : 'Case coming soon'
+                  : '404'}
+              </span>
+              <h1 className="mt-4 font-heading text-3xl font-bold text-foreground md:text-5xl">{pageTitle}</h1>
+              <p className="mx-auto mt-5 max-w-2xl text-base leading-relaxed text-muted-foreground md:text-lg">
+                {pageDescription}
+              </p>
+              <Link
+                to="/projects"
+                className="mt-8 inline-flex items-center gap-2 rounded-xl bg-primary px-6 py-3 font-semibold text-secondary transition-all hover:-translate-y-0.5 hover:shadow-lg"
+              >
+                {t.projects.viewAll} <ArrowRight className="h-4 w-4" />
+              </Link>
+            </div>
+          </div>
+        </section>
       </PageLayout>
     );
   }
 
-  const title = project?.title || genericTitle || '';
-  const category = project?.category || 'Marketing & Strategy';
-  const image = project?.image || null;
-  const description =
-    project?.description?.[currentLang] ||
-    (currentLang === 'uz'
-      ? `${title} uchun marketing va brending xizmatlarini taqdim etdik.`
-      : currentLang === 'ru'
-        ? `Мы оказали маркетинговые и брендинговые услуги для ${title}.`
-        : `Provided marketing and branding services for ${title}.`);
-  const tags = project?.tags || ['Marketing', 'Strategy'];
-  const services =
-    project?.services?.[currentLang] ||
-    (currentLang === 'uz'
-      ? ['Marketing strategiyasi', 'Brend platformasi']
-      : currentLang === 'ru'
-        ? ['Маркетинговая стратегия', 'Бренд-платформа']
-        : ['Marketing Strategy', 'Brand Platform']);
-  const challenges = project?.challenges?.[currentLang] || [];
-  const deliverables = project?.deliverables?.[currentLang] || [];
-  const gallery = project?.gallery || [];
+  const title = project.title;
+  const category = project.category;
+  const image = project.image;
+  const description = project.description[currentLang];
+  const tags = project.tags;
+  const services = project.services[currentLang];
+  const challenges = project.challenges?.[currentLang] || [];
+  const deliverables = project.deliverables?.[currentLang] || [];
+  const gallery = project.gallery || [];
   const currentTeaserIndex = projectTeasers.findIndex((item) => item.slug === slug);
   const relatedProjects =
     currentTeaserIndex >= 0
@@ -591,10 +602,10 @@ const ProjectDetailPage = () => {
   const relatedLabel = currentLang === 'uz' ? 'Boshqa loyihalar' : currentLang === 'ru' ? 'Другие проекты' : 'Other projects';
   const relatedDescription =
     currentLang === 'uz'
-      ? "Yana 3 ta case'ni ko'rib, Proactive turli biznes vazifalarini qanday yechganini solishtiring."
+      ? "Boshqa tayyor case'larni ko'rib, Proactive turli biznes vazifalarini qanday yechganini solishtiring."
       : currentLang === 'ru'
-        ? 'Посмотрите ещё 3 кейса и сравните, как Proactive решает разные бизнес-задачи.'
-        : 'Explore 3 more cases and compare how Proactive solves different business challenges.';
+        ? 'Посмотрите другие готовые кейсы и сравните, как Proactive решает разные бизнес-задачи.'
+        : 'Explore other completed cases and compare how Proactive solves different business challenges.';
   const galleryDescription =
     slug === 'aurus-pharm'
       ? currentLang === 'uz'

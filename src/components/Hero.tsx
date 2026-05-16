@@ -2,18 +2,13 @@ import { motion, useReducedMotion } from 'framer-motion';
 import { useI18n } from '@/lib/i18n';
 import { ArrowRight, Play } from 'lucide-react';
 import heroBg from '@/assets/hero-bg.jpg';
-
-const clientNames = [
-  'AHMAD TEA', 'IMPULS', 'MILESTONE IS', 'DAMAR', 'AURUS PHARM',
-  'BEK OTA', 'NAJOT NUR', 'MERIT CHEMICALS', 'ZAHRATUN', 'AQLY',
-  'DILMUSS', 'TAXTAKON', 'BAXTIYOR OILA', 'ASR KIMYO', 'MARF',
-  'OXUS UNIVERSITY', 'MOBETCO', 'PRESIDENT GIFTS', 'SFERA', 'TIMA',
-  "ZA'FARON",
-];
+import { heroClientLogos } from '@/lib/client-logos';
+import { cn } from '@/lib/utils';
 
 const Hero = () => {
   const { t } = useI18n();
   const shouldReduceMotion = useReducedMotion();
+  const trustedLogos = shouldReduceMotion ? heroClientLogos : [...heroClientLogos, ...heroClientLogos];
 
   return (
     <section className="relative min-h-[100svh] overflow-hidden">
@@ -96,15 +91,45 @@ const Hero = () => {
 
         <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.7, delay: 1.1 }} className="mt-10 md:mt-14 lg:mt-16">
           <p className="mb-4 text-xs font-semibold uppercase tracking-[0.2em] text-white/80 md:mb-5">{t.hero.trustedBy}</p>
-          <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 md:gap-x-8 md:gap-y-3">
-            {clientNames.map((name) => (
-              <span
-                key={name}
-                className="cursor-default text-[10px] font-heading font-bold tracking-wider text-white/90 transition-colors duration-300 hover:text-primary md:text-xs"
-              >
-                {name}
-              </span>
-            ))}
+          <div className="relative mx-auto max-w-5xl overflow-hidden">
+            {!shouldReduceMotion && (
+              <>
+                <div
+                  className="pointer-events-none absolute inset-y-0 left-0 z-10 w-14 sm:w-24"
+                  style={{ background: 'linear-gradient(90deg, hsla(202, 100%, 11%, 0.78), transparent)' }}
+                />
+                <div
+                  className="pointer-events-none absolute inset-y-0 right-0 z-10 w-14 sm:w-24"
+                  style={{ background: 'linear-gradient(270deg, hsla(202, 100%, 11%, 0.78), transparent)' }}
+                />
+              </>
+            )}
+            <div
+              className={
+                shouldReduceMotion
+                  ? 'flex flex-wrap items-center justify-center gap-2.5'
+                  : 'brand-marquee-track flex w-max items-center gap-3 will-change-transform'
+              }
+            >
+              {trustedLogos.map((client, index) => (
+                <div
+                  key={`${client.name}-${index}`}
+                  aria-hidden={!shouldReduceMotion && index >= heroClientLogos.length}
+                  className="flex h-12 min-w-[132px] flex-shrink-0 items-center justify-center rounded-xl border border-white/15 bg-white/[0.96] px-3 py-2 shadow-[0_10px_30px_rgba(0,0,0,0.16)] backdrop-blur transition duration-300 hover:-translate-y-0.5 hover:bg-white"
+                >
+                  <img
+                    src={client.logo}
+                    alt={client.name}
+                    loading="lazy"
+                    decoding="async"
+                    className={cn(
+                      'h-full w-full object-contain',
+                      client.heroImageClassName,
+                    )}
+                  />
+                </div>
+              ))}
+            </div>
           </div>
         </motion.div>
         </div>

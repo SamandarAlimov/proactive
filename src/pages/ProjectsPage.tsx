@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight, Clock3 } from 'lucide-react';
 import { Link, useLocation } from 'react-router-dom';
 import { useI18n } from '@/lib/i18n';
 import PageLayout from '@/components/PageLayout';
@@ -12,6 +12,17 @@ import proactiveLogo from '@/assets/proactive-logo.jpg';
 import aurusHero from '@/assets/projects/aurus/aurus-hero.webp';
 import milestoneHero from '@/assets/projects/milestone/milestone-hero.webp';
 
+type ProjectCard = {
+  slug: string;
+  title: string;
+  category: string;
+  image: string | null;
+  description?: string;
+  tags: string[];
+};
+
+const detailedProjectSlugs = new Set(['marf', 'milestone-is', 'aurus-pharm']);
+
 const ProjectsPage = () => {
   const { t, lang } = useI18n();
   const location = useLocation();
@@ -22,7 +33,7 @@ const ProjectsPage = () => {
         ? 'Portfolio Proactive: keisy po brand-platforme, marketingovoy strategii, go-to-market i sistemnomu rostu biznesa.'
         : 'The Proactive portfolio featuring brand platform, marketing strategy, go-to-market, and business growth case studies.';
 
-  const projects = [
+  const projects: ProjectCard[] = [
     {
       slug: 'marf',
       title: 'MARF',
@@ -85,6 +96,14 @@ const ProjectsPage = () => {
     from: `${location.pathname}${location.search}${location.hash}`,
     fromLabel: t.projects.viewAll,
   };
+  const comingSoonLabel =
+    lang === 'uz' ? "Ma'lumot tayyorlanmoqda" : lang === 'ru' ? 'Материалы готовятся' : 'Details coming soon';
+  const comingSoonDescription =
+    lang === 'uz'
+      ? "Bu loyiha bo'yicha batafsil case materiali hali yig'ilmoqda."
+      : lang === 'ru'
+        ? 'Подробный кейс по этому проекту пока готовится.'
+        : 'A detailed case study for this project is still being prepared.';
 
   return (
     <PageLayout>
@@ -137,70 +156,107 @@ const ProjectsPage = () => {
 
       <section className="section-padding">
         <div className="mx-auto grid max-w-7xl gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {projects.map((project, i) => (
-            <motion.div
-              key={project.slug}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={revealViewport}
-              transition={{ delay: 0.05 * i }}
-              className="group"
-            >
-              <Link to={`/projects/${project.slug}`} state={projectDetailState} className="block">
-                <div className="overflow-hidden rounded-2xl glass-card-light transition-all duration-500 hover:shadow-xl">
-                  <div className="relative h-48 overflow-hidden">
-                    {project.image ? (
-                      <img
-                        src={project.image}
-                        alt={project.title}
-                        loading="lazy"
-                        decoding="async"
-                        className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.025]"
-                      />
-                    ) : (
-                      <div
-                        className="relative flex h-full w-full items-center justify-center overflow-hidden"
-                        style={{
-                          background:
-                            'linear-gradient(135deg, hsla(204, 47%, 28%, 0.94) 0%, hsla(202, 100%, 11%, 0.98) 100%)',
-                        }}
-                      >
-                        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_30%,rgba(82,230,200,0.18),transparent_48%)]" />
-                        <div className="relative flex flex-col items-center gap-3 text-center">
-                          <img
-                            src={proactiveLogo}
-                            alt=""
-                            aria-hidden="true"
-                            loading="lazy"
-                            decoding="async"
-                            className="h-16 w-16 rounded-2xl object-cover opacity-90 shadow-[0_14px_34px_rgba(0,0,0,0.18)]"
-                          />
-                          <span className="max-w-[13rem] text-sm font-heading font-semibold tracking-wide text-white/90">
-                            {project.title}
-                          </span>
-                        </div>
-                      </div>
-                    )}
-                  </div>
-                  <div className="p-6">
-                    <span className="mb-2 block text-xs font-medium text-primary">{project.category}</span>
-                    <h3 className="mb-3 text-lg font-heading font-bold text-foreground transition-colors group-hover:text-primary">{project.title}</h3>
-                    {project.description && <p className="mb-4 line-clamp-2 text-sm leading-relaxed text-muted-foreground">{project.description}</p>}
-                    <div className="mb-4 flex flex-wrap gap-1.5">
-                      {project.tags.map((tag) => (
-                        <span key={tag} className="rounded-full bg-primary/10 px-2 py-0.5 text-[10px] font-medium text-primary">
-                          {tag}
-                        </span>
-                      ))}
+          {projects.map((project, i) => {
+            const hasDetailedCase = detailedProjectSlugs.has(project.slug);
+            const card = (
+              <div
+                className={`overflow-hidden rounded-2xl glass-card-light transition-all duration-500 ${
+                  hasDetailedCase ? 'hover:shadow-xl' : 'cursor-default'
+                }`}
+              >
+                <div className="relative h-48 overflow-hidden">
+                  {!hasDetailedCase && (
+                    <div className="absolute right-4 top-4 z-10 inline-flex items-center gap-1.5 rounded-full border border-white/15 bg-secondary/75 px-3 py-1.5 text-[11px] font-semibold text-white shadow-[0_10px_24px_rgba(0,0,0,0.18)] backdrop-blur">
+                      <Clock3 className="h-3.5 w-3.5" />
+                      {comingSoonLabel}
                     </div>
+                  )}
+                  {project.image ? (
+                    <img
+                      src={project.image}
+                      alt={project.title}
+                      loading="lazy"
+                      decoding="async"
+                      className={`h-full w-full object-cover transition-transform duration-700 ${
+                        hasDetailedCase ? 'group-hover:scale-[1.025]' : ''
+                      }`}
+                    />
+                  ) : (
+                    <div
+                      className="relative flex h-full w-full items-center justify-center overflow-hidden"
+                      style={{
+                        background:
+                          'linear-gradient(135deg, hsla(204, 47%, 28%, 0.94) 0%, hsla(202, 100%, 11%, 0.98) 100%)',
+                      }}
+                    >
+                      <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_30%,rgba(82,230,200,0.18),transparent_48%)]" />
+                      <div className="relative flex flex-col items-center gap-3 text-center">
+                        <img
+                          src={proactiveLogo}
+                          alt=""
+                          aria-hidden="true"
+                          loading="lazy"
+                          decoding="async"
+                          className="h-16 w-16 rounded-2xl object-cover opacity-90 shadow-[0_14px_34px_rgba(0,0,0,0.18)]"
+                        />
+                        <span className="max-w-[13rem] text-sm font-heading font-semibold tracking-wide text-white/90">
+                          {project.title}
+                        </span>
+                      </div>
+                    </div>
+                  )}
+                </div>
+                <div className="p-6">
+                  <span className="mb-2 block text-xs font-medium text-primary">{project.category}</span>
+                  <h3
+                    className={`mb-3 text-lg font-heading font-bold text-foreground transition-colors ${
+                      hasDetailedCase ? 'group-hover:text-primary' : ''
+                    }`}
+                  >
+                    {project.title}
+                  </h3>
+                  <p className="mb-4 line-clamp-2 text-sm leading-relaxed text-muted-foreground">
+                    {project.description || comingSoonDescription}
+                  </p>
+                  <div className="mb-4 flex flex-wrap gap-1.5">
+                    {project.tags.map((tag) => (
+                      <span key={tag} className="rounded-full bg-primary/10 px-2 py-0.5 text-[10px] font-medium text-primary">
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                  {hasDetailedCase ? (
                     <span className="inline-flex items-center gap-1.5 text-sm font-semibold text-primary transition-all group-hover:gap-2.5">
                       {t.projects.viewProject} <ArrowRight className="h-3.5 w-3.5" />
                     </span>
-                  </div>
+                  ) : (
+                    <span className="inline-flex items-center gap-1.5 text-sm font-semibold text-muted-foreground">
+                      {comingSoonLabel} <Clock3 className="h-3.5 w-3.5" />
+                    </span>
+                  )}
                 </div>
-              </Link>
-            </motion.div>
-          ))}
+              </div>
+            );
+
+            return (
+              <motion.div
+                key={project.slug}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={revealViewport}
+                transition={{ delay: 0.05 * i }}
+                className="group"
+              >
+                {hasDetailedCase ? (
+                  <Link to={`/projects/${project.slug}`} state={projectDetailState} className="block">
+                    {card}
+                  </Link>
+                ) : (
+                  <article aria-disabled="true">{card}</article>
+                )}
+              </motion.div>
+            );
+          })}
         </div>
       </section>
     </PageLayout>

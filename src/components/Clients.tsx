@@ -1,12 +1,14 @@
 import { motion, useReducedMotion } from 'framer-motion';
 import { useI18n } from '@/lib/i18n';
 import { useScrollAnimation } from '@/hooks/useScrollAnimation';
-import { clientList } from '@/lib/client-list';
+import { clientLogos } from '@/lib/client-logos';
+import { cn } from '@/lib/utils';
 
 const Clients = () => {
   const { t } = useI18n();
   const { ref, getMotionProps } = useScrollAnimation();
   const shouldReduceMotion = useReducedMotion();
+  const logoItems = shouldReduceMotion ? clientLogos : [...clientLogos, ...clientLogos];
 
   return (
     <section id="clients" className="section-deferred relative overflow-hidden py-24 md:py-32" ref={ref}>
@@ -37,16 +39,24 @@ const Clients = () => {
           <div className="absolute left-0 top-0 bottom-0 w-20 z-10 bg-gradient-to-r from-background to-transparent" />
           <div className="absolute right-0 top-0 bottom-0 w-20 z-10 bg-gradient-to-l from-background to-transparent" />
           <div
-            className={shouldReduceMotion ? 'flex flex-wrap justify-center gap-4' : 'brand-marquee-track flex w-max gap-6 will-change-transform'}
+            className={shouldReduceMotion ? 'flex flex-wrap justify-center gap-4' : 'brand-marquee-track flex w-max gap-5 will-change-transform'}
           >
-            {[...clientList, ...clientList].map((client, i) => (
+            {logoItems.map((client, i) => (
               <div
-                key={`${client}-${i}`}
-                className="group flex min-w-[220px] flex-shrink-0 items-center justify-center rounded-2xl border border-border/70 bg-card/90 px-8 py-5 shadow-[0_6px_18px_rgba(38,79,107,0.05)] transition-colors duration-300 hover:border-primary/20"
+                key={`${client.name}-${i}`}
+                aria-hidden={!shouldReduceMotion && i >= clientLogos.length}
+                className="group flex h-24 min-w-[218px] flex-shrink-0 items-center justify-center rounded-2xl border border-border/70 bg-white px-7 py-4 shadow-[0_10px_28px_rgba(38,79,107,0.07)] transition duration-300 hover:-translate-y-0.5 hover:border-primary/25 hover:shadow-[0_18px_42px_rgba(38,79,107,0.12)] dark:border-white/10 dark:bg-white"
               >
-                <span className="text-center font-heading text-sm font-bold whitespace-nowrap text-foreground/60 transition-colors duration-300 group-hover:text-primary">
-                  {client}
-                </span>
+                <img
+                  src={client.logo}
+                  alt={client.name}
+                  loading="lazy"
+                  decoding="async"
+                  className={cn(
+                    'h-full w-full object-contain opacity-85 transition duration-300 group-hover:scale-[1.03] group-hover:opacity-100',
+                    client.marqueeImageClassName,
+                  )}
+                />
               </div>
             ))}
           </div>

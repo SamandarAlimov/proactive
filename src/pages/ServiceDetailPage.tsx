@@ -158,9 +158,8 @@ const ServiceDetailPage = () => {
               <div
                 className="font-heading text-6xl font-bold leading-none tabular-nums md:text-8xl"
                 style={{
-                  background: `linear-gradient(135deg, ${service.accent.from}, ${service.accent.to})`,
-                  WebkitBackgroundClip: 'text',
-                  WebkitTextFillColor: 'transparent',
+                  color: service.accent.from,
+                  textShadow: `0 12px 34px ${service.accent.from}22`,
                 }}
               >
                 {service.number}
@@ -267,9 +266,8 @@ const ServiceDetailPage = () => {
               <span
                 className="font-heading text-3xl font-bold tabular-nums"
                 style={{
-                  background: `linear-gradient(135deg, ${next.accent.from}, ${next.accent.to})`,
-                  WebkitBackgroundClip: 'text',
-                  WebkitTextFillColor: 'transparent',
+                  color: next.accent.from,
+                  textShadow: `0 8px 20px ${next.accent.from}20`,
                 }}
               >
                 {next.number}

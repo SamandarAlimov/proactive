@@ -10,15 +10,15 @@ import { cn } from '@/lib/utils';
 const copy: Record<Language, { eyebrow: string; title: string }> = {
   uz: {
     eyebrow: 'Founder tajribasi',
-    title: 'Habibullo ishlagan brendlar',
+    title: 'Habibullo Sadulloyev ishlagan brendlar',
   },
   en: {
     eyebrow: 'Founder experience',
-    title: 'Brands Habibullo has worked with',
+    title: 'Brands Habibullo Sadulloyev has worked with',
   },
   ru: {
     eyebrow: 'Опыт основателя',
-    title: 'Бренды, с которыми работал Хабибулло',
+    title: 'Бренды, с которыми работал Хабибулло Садуллоев',
   },
 };
 

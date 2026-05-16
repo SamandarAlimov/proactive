@@ -35,7 +35,7 @@ const TeamConnector = ({ side, isDark }: { side: 'left' | 'right'; isDark: boole
     return (
       <svg
         aria-hidden="true"
-        className="pointer-events-none absolute -right-28 top-[4.4rem] hidden h-[4.75rem] w-28 overflow-visible lg:block"
+        className="pointer-events-none absolute -right-28 top-[4.4rem] hidden h-[4.75rem] w-28 overflow-visible sm:block"
         viewBox="0 0 112 76"
         fill="none"
       >
@@ -48,7 +48,7 @@ const TeamConnector = ({ side, isDark }: { side: 'left' | 'right'; isDark: boole
   return (
     <svg
       aria-hidden="true"
-      className="pointer-events-none absolute -left-28 top-[4.4rem] hidden h-[4.75rem] w-28 overflow-visible lg:block"
+      className="pointer-events-none absolute -left-28 top-[4.4rem] hidden h-[4.75rem] w-28 overflow-visible sm:block"
       viewBox="0 0 112 76"
       fill="none"
     >
@@ -65,8 +65,6 @@ const TeamShowcaseStrip = ({ className = '' }: { className?: string }) => {
 
   const isDark = resolvedTheme === 'dark';
   const copy = panelCopy[lang];
-  const compactActiveId = activeId ?? teamMembers[0]?.id;
-  const compactActiveMember = teamMembers.find((member) => member.id === compactActiveId) ?? teamMembers[0];
 
   const tone = useMemo(
     () => ({
@@ -109,128 +107,34 @@ const TeamShowcaseStrip = ({ className = '' }: { className?: string }) => {
         }}
       />
 
-      <div className="relative lg:hidden">
+      <div className="relative overflow-x-auto pb-4" style={{ scrollbarWidth: 'thin', scrollbarColor: '#52E6C8 transparent' }}>
         <div
-          className="overflow-x-auto"
-          style={{ scrollbarWidth: 'thin', scrollbarColor: '#52E6C8 transparent' }}
-        >
-          <div className="flex min-w-max gap-3 px-5 py-6 sm:gap-4 sm:px-6">
-            {teamMembers.map((member) => {
-              const visual = getTeamMemberVisualConfig(member.id);
-              const isActive = compactActiveId === member.id;
-              const image = isActive ? member.hoverImage : member.image;
-              const compactScale = isActive
-                ? Math.min(visual.hoverScale, member.id === 11 ? 1.12 : 1.08)
-                : Math.min(visual.defaultScale, member.id === 11 ? 1.22 : 1.32);
-
-              return (
-                <button
-                  key={member.id}
-                  type="button"
-                  aria-pressed={isActive}
-                  onClick={() => setActiveId(member.id)}
-                  onFocus={() => setActiveId(member.id)}
-                  className={`group relative w-[132px] flex-shrink-0 overflow-hidden rounded-[1.35rem] border p-2 text-left outline-none transition duration-300 focus-visible:ring-2 focus-visible:ring-primary/60 sm:w-[160px] ${
-                    isActive
-                      ? 'border-primary/[0.45] bg-primary/10 shadow-[0_18px_44px_rgba(38,79,107,0.16)]'
-                      : isDark
-                        ? 'border-white/10 bg-white/[0.04]'
-                        : 'border-secondary/10 bg-white/[0.55]'
-                  }`}
-                >
-                  <div className="relative h-[230px] overflow-hidden rounded-[1rem] sm:h-[280px]">
-                    <img
-                      src={image}
-                      alt={member.name}
-                      loading="lazy"
-                      className="absolute inset-0 h-full w-full origin-bottom object-contain object-bottom transition-[filter,opacity,transform] duration-300"
-                      style={{
-                        opacity: isActive ? 1 : 0.76,
-                        filter: isActive ? tone.activeFilter : tone.defaultFilter,
-                        transform: `scale(${compactScale})`,
-                      }}
-                    />
-                    <div className="pointer-events-none absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-black/30 to-transparent" />
-                  </div>
-
-                  <div className="mt-2 min-w-0 px-1 pb-1">
-                    <p className={`truncate font-heading text-sm font-bold ${tone.nameClass}`}>
-                      {member.name}
-                    </p>
-                    <p className={`mt-0.5 truncate text-[0.62rem] font-semibold uppercase tracking-[0.16em] ${tone.roleClass}`}>
-                      {member.role[lang]}
-                    </p>
-                  </div>
-                </button>
-              );
-            })}
-          </div>
-        </div>
-
-        {compactActiveMember && (
-          <div className="px-5 pb-7 sm:px-6">
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={compactActiveMember.id}
-                initial={{ opacity: 0, y: 12, scale: 0.98 }}
-                animate={{ opacity: 1, y: 0, scale: 1 }}
-                exit={{ opacity: 0, y: 8, scale: 0.98 }}
-                transition={{ duration: 0.26, ease: [0.22, 1, 0.36, 1] }}
-                className={`rounded-[1.35rem] border px-5 py-4 backdrop-blur-[10px] ${tone.tooltipClass}`}
-              >
-                <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
-                  <div className="min-w-0">
-                    <p className={`font-brand text-[0.6rem] font-semibold uppercase tracking-[0.28em] ${tone.eyebrowClass}`}>
-                      {copy.eyebrow}
-                    </p>
-                    <h4 className={`mt-2 font-heading text-2xl font-semibold leading-tight ${tone.nameClass}`}>
-                      {compactActiveMember.name}
-                    </h4>
-                  </div>
-                  <div className={`h-px w-full sm:h-auto sm:w-px sm:self-stretch ${tone.dividerClass}`} />
-                  <div className="min-w-0 sm:max-w-[55%]">
-                    <p className={`font-brand text-[0.58rem] font-semibold uppercase tracking-[0.24em] ${tone.roleLabelClass}`}>
-                      {copy.roleLabel}
-                    </p>
-                    <p className={`mt-1 text-xs font-semibold uppercase tracking-[0.18em] ${tone.roleClass}`}>
-                      {compactActiveMember.role[lang]}
-                    </p>
-                    <p className={`mt-3 text-sm leading-6 ${tone.bioClass}`}>{compactActiveMember.bio[lang]}</p>
-                  </div>
-                </div>
-              </motion.div>
-            </AnimatePresence>
-          </div>
-        )}
-      </div>
-
-      <div className="relative hidden overflow-x-auto pb-4 lg:block" style={{ scrollbarWidth: 'thin', scrollbarColor: '#52E6C8 transparent' }}>
-        <div
-          className="flex min-w-max items-end px-12 pb-0 pt-8 pr-[24rem]"
+          className="flex min-w-max items-end px-5 pb-0 pt-8 pr-[18rem] sm:px-8 sm:pr-[21rem] lg:px-12 lg:pr-[24rem]"
           style={{ gap: 'clamp(0.75rem, 2.4vw, 1.5rem)' }}
         >
           {teamMembers.map((member) => {
             const visual = getTeamMemberVisualConfig(member.id);
             const isActive = activeId === member.id;
             const isMuted = activeId !== null && activeId !== member.id;
+            const tooltipWidth = `clamp(236px, 72vw, ${TEAM_TOOLTIP_WIDTH}px)`;
             const tooltipStyle =
               visual.tooltipSide === 'left'
                 ? {
-                    left: `-${TEAM_TOOLTIP_WIDTH + TEAM_TOOLTIP_OFFSET}px`,
+                    right: `calc(100% + ${TEAM_TOOLTIP_OFFSET}px)`,
                     top: '-2px',
-                    width: `${TEAM_TOOLTIP_WIDTH}px`,
+                    width: tooltipWidth,
                   }
                 : {
-                    right: `-${TEAM_TOOLTIP_WIDTH + TEAM_TOOLTIP_OFFSET}px`,
+                    left: `calc(100% + ${TEAM_TOOLTIP_OFFSET}px)`,
                     top: '-2px',
-                    width: `${TEAM_TOOLTIP_WIDTH}px`,
+                    width: tooltipWidth,
                   };
 
             return (
               <div
                 key={member.id}
                 className={`relative flex-shrink-0 overflow-visible ${isActive ? 'z-20' : 'z-10'}`}
-                style={{ width: `clamp(138px, 42vw, ${TEAM_CARD_WIDTH}px)` }}
+                style={{ width: `clamp(148px, 38vw, ${TEAM_CARD_WIDTH}px)` }}
               >
                 <div
                   role="button"
@@ -257,15 +161,15 @@ const TeamShowcaseStrip = ({ className = '' }: { className?: string }) => {
                         animate={{ opacity: 1, y: 0, scale: 1 }}
                         exit={{ opacity: 0, y: 8, scale: 0.97 }}
                         transition={{ duration: 0.24, ease: [0.22, 1, 0.36, 1] }}
-                        className="pointer-events-none absolute z-30 hidden lg:block"
+                        className="pointer-events-none absolute z-30"
                         style={tooltipStyle}
                       >
                         <TeamConnector side={visual.tooltipSide} isDark={isDark} />
-                        <div className={`rounded-[1.45rem] border px-6 py-5 backdrop-blur-[8px] ${tone.tooltipClass}`}>
+                        <div className={`rounded-[1.2rem] border px-4 py-4 backdrop-blur-[8px] sm:rounded-[1.45rem] sm:px-6 sm:py-5 ${tone.tooltipClass}`}>
                           <p className={`font-brand text-[0.62rem] font-semibold uppercase tracking-[0.34em] ${tone.eyebrowClass}`}>
                             {copy.eyebrow}
                           </p>
-                          <h4 className={`mt-3 font-heading text-[2rem] font-semibold leading-none ${tone.nameClass}`}>
+                          <h4 className={`mt-3 font-heading text-2xl font-semibold leading-tight sm:text-[2rem] sm:leading-none ${tone.nameClass}`}>
                             {member.name}
                           </h4>
                           <div className={`mt-4 h-px w-full ${tone.dividerClass}`} />
@@ -277,13 +181,13 @@ const TeamShowcaseStrip = ({ className = '' }: { className?: string }) => {
                               {member.role[lang]}
                             </p>
                           </div>
-                          <p className={`mt-3 text-sm leading-7 ${tone.bioClass}`}>{member.bio[lang]}</p>
+                          <p className={`mt-3 text-sm leading-6 sm:leading-7 ${tone.bioClass}`}>{member.bio[lang]}</p>
                         </div>
                       </motion.div>
                     )}
                   </AnimatePresence>
 
-                  <div className="relative overflow-visible" style={{ height: `clamp(260px, 76vw, ${TEAM_CARD_HEIGHT}px)` }}>
+                  <div className="relative overflow-visible" style={{ height: `clamp(300px, 78vw, ${TEAM_CARD_HEIGHT}px)` }}>
                     <img
                       src={member.image}
                       alt={member.name}

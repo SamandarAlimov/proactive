@@ -106,16 +106,7 @@ const ProjectsPage = () => {
         : 'A detailed case study for this project is still being prepared.';
   const detailedProjects = projects.filter((project) => detailedProjectSlugs.has(project.slug));
   const pendingProjects = projects.filter((project) => !detailedProjectSlugs.has(project.slug));
-  const readyCasesTitle =
-    lang === 'uz' ? "Tayyor case'lar" : lang === 'ru' ? 'Готовые кейсы' : 'Completed cases';
-  const pendingCasesTitle =
-    lang === 'uz' ? 'Boshqa loyihalar' : lang === 'ru' ? 'Другие проекты' : 'Other projects';
-  const pendingCasesDescription =
-    lang === 'uz'
-      ? "Quyidagi loyihalar bo'yicha materiallar yig'ilmoqda. To'liq case tayyor bo'lishi bilan alohida sahifa ochiladi."
-      : lang === 'ru'
-        ? 'Материалы по этим проектам собираются. Когда кейс будет готов, для него откроется отдельная страница.'
-        : 'Materials for these projects are being collected. Once a full case is ready, it will get a dedicated page.';
+  const orderedProjects = [...detailedProjects, ...pendingProjects];
 
   const renderProjectCard = (project: ProjectCard, index: number) => {
     const hasDetailedCase = detailedProjectSlugs.has(project.slug);
@@ -270,31 +261,8 @@ const ProjectsPage = () => {
 
       <section className="section-padding">
         <div className="mx-auto max-w-7xl">
-          <div className="mb-8 flex flex-col gap-2 md:flex-row md:items-end md:justify-between">
-            <div>
-              <span className="text-sm font-semibold uppercase tracking-widest text-primary">{readyCasesTitle}</span>
-              <h2 className="mt-2 font-heading text-2xl font-bold text-foreground md:text-3xl">
-                MARF, Milestone International School, Aurus Pharm
-              </h2>
-            </div>
-          </div>
-
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-            {detailedProjects.map(renderProjectCard)}
-          </div>
-
-          <div className="mt-16 border-t border-border/70 pt-12">
-            <div className="mb-8 max-w-3xl">
-              <span className="text-sm font-semibold uppercase tracking-widest text-primary">{pendingCasesTitle}</span>
-              <h2 className="mt-2 font-heading text-2xl font-bold text-foreground md:text-3xl">
-                {comingSoonLabel}
-              </h2>
-              <p className="mt-3 text-muted-foreground">{pendingCasesDescription}</p>
-            </div>
-
-            <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-              {pendingProjects.map(renderProjectCard)}
-            </div>
+            {orderedProjects.map(renderProjectCard)}
           </div>
         </div>
       </section>

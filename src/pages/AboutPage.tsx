@@ -10,6 +10,7 @@ import {
 
 import PageLayout from '@/components/PageLayout';
 import FounderSpecialtyChips from '@/components/FounderSpecialtyChips';
+import FounderWorkLogos from '@/components/FounderWorkLogos';
 import SEO from '@/components/SEO';
 import SourceBackLink from '@/components/SourceBackLink';
 import founderHabibullo from '@/assets/founder-habibullo.png';
@@ -290,6 +291,8 @@ const AboutPage = () => {
                   <p className="mt-6 max-w-2xl text-base leading-8 text-muted-foreground md:text-lg">
                     {founderProfile.summary[founderLang]}
                   </p>
+
+                  <FounderWorkLogos className="mt-7 max-w-2xl" />
 
                   <div className="mt-8 flex min-w-0 flex-wrap gap-3">
                     <a

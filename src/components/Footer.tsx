@@ -1,10 +1,28 @@
 import { useI18n } from '@/lib/i18n';
-import { Instagram } from 'lucide-react';
+import { Instagram, Mail, Phone } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import proactiveLogo from '@/assets/proactive-logo.jpg';
+import {
+  contactEmail,
+  contactInstagram,
+  contactInstagramHandle,
+  contactPhone,
+  contactSecondaryPhone,
+} from '@/lib/contact-details';
 
 const Footer = () => {
-  const { t } = useI18n();
+  const { t, lang } = useI18n();
+  const madeByText =
+    lang === 'uz'
+      ? 'Sayt Alsamos tomonidan qilindi'
+      : lang === 'ru'
+        ? 'Сайт разработан Alsamos'
+        : 'Website by Alsamos';
+  const contactLinks = [
+    { label: contactPhone, href: `tel:${contactPhone.replace(/\s/g, '')}`, icon: Phone },
+    { label: contactSecondaryPhone, href: `tel:${contactSecondaryPhone.replace(/\s/g, '')}`, icon: Phone },
+    { label: contactEmail, href: `mailto:${contactEmail}`, icon: Mail },
+  ];
 
   const menuLinks = [
     { label: t.nav.about, href: '/about' },
@@ -54,15 +72,41 @@ const Footer = () => {
           </div>
 
           <div className="min-w-0">
-            <h4 className="font-heading font-bold mb-4">{t.footer.followUs}</h4>
-            <a href="https://www.instagram.com/proactive.agencyuz/" target="_blank" rel="noopener noreferrer" className="mb-6 inline-flex max-w-full items-center gap-2 text-secondary-foreground/70 transition-colors duration-300 hover:text-primary">
-              <Instagram className="h-5 w-5 shrink-0" /> <span className="min-w-0 break-all">@proactive.agencyuz</span>
+            <h4 className="mb-4 font-heading font-bold">{t.nav.contact}</h4>
+            <div className="space-y-3">
+              {contactLinks.map((item) => {
+                const Icon = item.icon;
+
+                return (
+                  <a
+                    key={item.href}
+                    href={item.href}
+                    className="group inline-flex max-w-full items-center gap-2 text-sm text-secondary-foreground/70 transition-colors duration-300 hover:text-primary"
+                  >
+                    <Icon className="h-4 w-4 shrink-0 text-primary/80 transition-transform duration-300 group-hover:scale-105" />
+                    <span className="min-w-0 break-all">{item.label}</span>
+                  </a>
+                );
+              })}
+            </div>
+
+            <h4 className="mb-4 mt-7 font-heading font-bold">{t.footer.followUs}</h4>
+            <a href={contactInstagram} target="_blank" rel="noopener noreferrer" className="mb-6 inline-flex max-w-full items-center gap-2 text-secondary-foreground/70 transition-colors duration-300 hover:text-primary">
+              <Instagram className="h-5 w-5 shrink-0" /> <span className="min-w-0 break-all">{contactInstagramHandle}</span>
             </a>
           </div>
         </div>
 
-        <div className="border-t border-secondary-foreground/10 mt-12 pt-8 text-center">
+        <div className="mt-12 border-t border-secondary-foreground/10 pt-8 text-center">
           <p className="text-secondary-foreground/40 text-sm">© 2026 Proactive. {t.footer.rights}.</p>
+          <a
+            href="https://alsamos.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mt-3 inline-flex items-center justify-center text-sm font-medium text-secondary-foreground/50 transition-colors duration-300 hover:text-primary"
+          >
+            {madeByText}
+          </a>
         </div>
       </div>
     </footer>

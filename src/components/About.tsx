@@ -14,6 +14,7 @@ import { useScrollAnimation } from '@/hooks/useScrollAnimation';
 import proactiveLogo from '@/assets/proactive-logo.jpg';
 import founderPhoto from '@/assets/founder-photo.jpg';
 import FounderSpecialtyChips from '@/components/FounderSpecialtyChips';
+import FounderWorkLogos from '@/components/FounderWorkLogos';
 import { founderProfile, type FounderLang } from '@/lib/founder-profile';
 import { createMainSectionState, readMoreLabel } from '@/lib/source-navigation';
 
@@ -300,6 +301,11 @@ const About = () => {
                 <p className="mb-5 max-w-2xl text-base leading-relaxed text-muted-foreground md:text-lg">
                   {founderBio}
                 </p>
+
+                <FounderWorkLogos
+                  variant="compact"
+                  className="mx-auto mb-5 max-w-2xl text-left md:mx-0"
+                />
 
                 <div className="flex min-w-0 flex-wrap items-center justify-center gap-3 md:justify-start">
                   <a

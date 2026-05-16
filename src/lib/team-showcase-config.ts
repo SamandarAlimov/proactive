@@ -10,7 +10,7 @@ export const TEAM_TOOLTIP_WIDTH = 304;
 export const TEAM_TOOLTIP_OFFSET = 28;
 
 export const teamMemberVisualConfig: Record<number, TeamMemberVisualConfig> = {
-  11: { defaultScale: 1.3, hoverScale: 1.03, tooltipSide: 'right' },
+  11: { defaultScale: 1.5, hoverScale: 1.18, tooltipSide: 'right' },
   1: { defaultScale: 2.03, hoverScale: 1.06, tooltipSide: 'right' },
   2: { defaultScale: 1.85, hoverScale: 1.06, tooltipSide: 'right' },
   3: { defaultScale: 1.93, hoverScale: 0.97, tooltipSide: 'right' },

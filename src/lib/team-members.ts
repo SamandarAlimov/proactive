@@ -11,7 +11,8 @@ export type TeamMember = {
   bio: LocalizedText;
 };
 
-import founderHabibullo from '@/assets/founder-habibullo.png';
+import founderMember from '@/assets/team/founder-member.png';
+import founderMemberHover from '@/assets/team/founder-member-hover.png';
 import member1 from '@/assets/team/member-1.png';
 import member2 from '@/assets/team/member-2.png';
 import member3 from '@/assets/team/member-3.png';
@@ -38,8 +39,8 @@ export const teamMembers: TeamMember[] = [
   {
     id: 11,
     name: "Habibullo Sa'dullayev",
-    image: founderHabibullo,
-    hoverImage: founderHabibullo,
+    image: founderMember,
+    hoverImage: founderMemberHover,
     role: {
       uz: 'Asoschi',
       en: 'Founder',

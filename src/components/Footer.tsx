@@ -97,14 +97,22 @@ const Footer = () => {
           </div>
         </div>
 
-        <div className="mt-12 border-t border-secondary-foreground/10 pt-8 text-center">
-          <p className="text-secondary-foreground/40 text-sm">© 2026 Proactive. {t.footer.rights}.</p>
+        <div className="mt-12 flex flex-col gap-4 border-t border-secondary-foreground/10 pt-8 text-center sm:flex-row sm:items-center sm:justify-between sm:text-left">
+          <p className="text-sm text-secondary-foreground/40">© 2026 Proactive. {t.footer.rights}.</p>
           <a
             href="https://alsamos.com"
             target="_blank"
             rel="noopener noreferrer"
-            className="mt-3 inline-flex items-center justify-center text-sm font-medium text-secondary-foreground/50 transition-colors duration-300 hover:text-primary"
+            className="inline-flex items-center justify-center gap-2 text-sm font-medium text-secondary-foreground/50 transition-colors duration-300 hover:text-primary sm:justify-end"
           >
+            <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full border border-secondary-foreground/10 bg-white/[0.08]">
+              <img
+                src="/alsamos-favicon.ico"
+                alt=""
+                aria-hidden="true"
+                className="h-4 w-4 object-contain"
+              />
+            </span>
             {madeByText}
           </a>
         </div>

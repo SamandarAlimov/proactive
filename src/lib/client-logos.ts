@@ -1,5 +1,5 @@
 import ahmadTeaLogo from '@/assets/clients/Ahmadtea.png';
-import aqlyLogo from '@/assets/clients/aqly.jpeg';
+import aqlyLogo from '@/assets/clients/aqly.png';
 import asrKimyoLogo from '@/assets/clients/asrkimyo.png';
 import aurusPharmLogo from '@/assets/clients/AurusPharm.png';
 import baxtiyorOilaLogo from '@/assets/clients/baxtiyoroila.png';
@@ -10,7 +10,7 @@ import marfLogo from '@/assets/clients/marf.png';
 import meritChemicalsLogo from '@/assets/clients/merit.png';
 import milestoneLogo from '@/assets/clients/milestone.png';
 import mobetcoLogo from '@/assets/clients/mobetco.webp';
-import najotNurLogo from '@/assets/clients/najotnur.webp';
+import najotNurLogo from '@/assets/clients/najotnur.png';
 import oxusUniversityLogo from '@/assets/clients/oxusuniversity.png';
 import presidentGiftsLogo from '@/assets/clients/president.png';
 import sferaLogo from '@/assets/clients/sfera.webp';
@@ -61,7 +61,7 @@ export const clientLogos: ClientLogo[] = [
     name: 'Damar',
     logo: damarLogo,
     heroRow: 1,
-    heroTone: 'dark',
+    heroTone: 'light',
     heroTileClassName: 'w-[132px] lg:w-[152px]',
     heroImageClassName: 'max-h-10',
     marqueeImageClassName: 'max-h-14',
@@ -178,7 +178,7 @@ export const clientLogos: ClientLogo[] = [
     name: 'President Gifts',
     logo: presidentGiftsLogo,
     heroRow: 3,
-    heroTone: 'dark',
+    heroTone: 'light',
     heroTileClassName: 'w-[168px] lg:w-[206px]',
     heroImageClassName: 'max-h-10',
     marqueeImageClassName: 'max-h-14',

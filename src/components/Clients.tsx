@@ -9,6 +9,13 @@ const Clients = () => {
   const { ref, getMotionProps } = useScrollAnimation();
   const shouldReduceMotion = useReducedMotion();
   const logoItems = shouldReduceMotion ? clientLogos : [...clientLogos, ...clientLogos];
+  const getLogoCardTone = (tone = 'light') => {
+    if (tone === 'dark') {
+      return 'border-white/10 bg-secondary/90 shadow-[0_14px_34px_rgba(0,0,0,0.18)] dark:border-white/10 dark:bg-secondary/90';
+    }
+
+    return 'border-border/70 bg-white shadow-[0_10px_28px_rgba(38,79,107,0.07)] dark:border-white/10 dark:bg-white';
+  };
 
   return (
     <section id="clients" className="section-deferred relative overflow-hidden py-24 md:py-32" ref={ref}>
@@ -45,7 +52,10 @@ const Clients = () => {
               <div
                 key={`${client.name}-${i}`}
                 aria-hidden={!shouldReduceMotion && i >= clientLogos.length}
-                className="group flex h-24 min-w-[218px] flex-shrink-0 items-center justify-center rounded-2xl border border-border/70 bg-white px-7 py-4 shadow-[0_10px_28px_rgba(38,79,107,0.07)] transition duration-300 hover:-translate-y-0.5 hover:border-primary/25 hover:shadow-[0_18px_42px_rgba(38,79,107,0.12)] dark:border-white/10 dark:bg-white"
+                className={cn(
+                  'group flex h-24 min-w-[218px] flex-shrink-0 items-center justify-center rounded-2xl border px-7 py-4 transition duration-300 hover:-translate-y-0.5 hover:border-primary/25 hover:shadow-[0_18px_42px_rgba(38,79,107,0.12)]',
+                  getLogoCardTone(client.heroTone),
+                )}
               >
                 <img
                   src={client.logo}

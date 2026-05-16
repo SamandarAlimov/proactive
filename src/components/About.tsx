@@ -111,7 +111,7 @@ const About = () => {
         }}
       />
 
-      <div className="relative mx-auto max-w-7xl px-6">
+      <div className="relative mx-auto max-w-7xl px-5 sm:px-6">
         <motion.div
           {...getMotionProps({ distance: 30, duration: 0.6 })}
           className="mb-20 text-center"
@@ -156,7 +156,7 @@ const About = () => {
                   key={item.title}
                   {...getMotionProps({ distance: 24, delay: 0.3 + i * 0.1 })}
                   whileHover={{ y: -4, scale: 1.006 }}
-                  className="group relative overflow-hidden rounded-[1.75rem] border border-border/60 bg-card/90 p-6 shadow-[0_16px_40px_rgba(0,0,0,0.05)] backdrop-blur-sm transition-all duration-300"
+                  className="group relative min-w-0 overflow-hidden rounded-[1.5rem] border border-border/60 bg-card/90 p-5 shadow-[0_16px_40px_rgba(0,0,0,0.05)] backdrop-blur-sm transition-all duration-300 sm:rounded-[1.75rem] sm:p-6"
                 >
                   <div className="absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
                     <div className="absolute -right-10 -top-10 h-32 w-32 rounded-full bg-primary/10 blur-2xl" />
@@ -190,7 +190,7 @@ const About = () => {
             className="relative"
           >
             <div
-              className="relative flex aspect-square items-center justify-center overflow-hidden rounded-3xl"
+              className="relative flex aspect-square min-h-[280px] items-center justify-center overflow-hidden rounded-3xl"
               style={{
                 background:
                   'linear-gradient(160deg, hsla(204, 47%, 28%, 0.95) 0%, hsla(202, 100%, 11%, 0.98) 100%)',
@@ -258,7 +258,7 @@ const About = () => {
           className="mt-20 md:mt-28"
         >
           <div
-            className="relative overflow-hidden rounded-3xl p-8 md:p-12 lg:p-16"
+            className="relative overflow-hidden rounded-[1.5rem] p-5 sm:rounded-3xl sm:p-8 md:p-12 lg:p-16"
             style={{
               background:
                 'linear-gradient(135deg, hsla(204, 47%, 28%, 0.06) 0%, hsla(166, 75%, 61%, 0.04) 100%)',
@@ -276,13 +276,13 @@ const About = () => {
 
             <div className="relative z-10 flex flex-col items-center gap-8 md:flex-row md:gap-12">
               <div className="relative flex-shrink-0">
-                <div className="h-36 w-36 overflow-hidden rounded-2xl ring-2 ring-primary/20 shadow-xl md:h-44 md:w-44">
+                <div className="h-32 w-32 overflow-hidden rounded-2xl shadow-xl ring-2 ring-primary/20 sm:h-36 sm:w-36 md:h-44 md:w-44">
                   <img src={founderPhoto} alt={founderName} className="h-full w-full object-cover" />
                 </div>
                 <div className="absolute -bottom-1 -right-1 h-6 w-6 rounded-full border-4 border-background bg-primary" />
               </div>
 
-              <div className="flex-1 text-center md:text-left">
+              <div className="min-w-0 flex-1 text-center md:text-left">
                 <div className="mb-3 flex flex-col gap-2 md:flex-row md:items-center md:gap-4">
                   <h3 className="text-2xl font-heading font-bold text-foreground md:text-3xl">
                     {founderName}
@@ -301,22 +301,22 @@ const About = () => {
                   {founderBio}
                 </p>
 
-                <div className="flex items-center justify-center gap-3 md:justify-start">
+                <div className="flex min-w-0 flex-wrap items-center justify-center gap-3 md:justify-start">
                   <a
                     href="https://t.me/habibullo_sadulloyev"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 rounded-xl bg-secondary px-4 py-2 text-sm font-medium text-secondary-foreground transition-colors duration-300 hover:bg-secondary/90"
+                    className="inline-flex max-w-full items-center gap-2 rounded-xl bg-secondary px-4 py-2 text-sm font-medium text-secondary-foreground transition-colors duration-300 hover:bg-secondary/90"
                   >
-                    <Send className="h-4 w-4" /> Telegram
+                    <Send className="h-4 w-4 shrink-0" /> <span className="min-w-0">Telegram</span>
                   </a>
                   <a
                     href="https://www.instagram.com/habibullo_sadulloyev/"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 rounded-xl bg-secondary px-4 py-2 text-sm font-medium text-secondary-foreground transition-colors duration-300 hover:bg-secondary/90"
+                    className="inline-flex max-w-full items-center gap-2 rounded-xl bg-secondary px-4 py-2 text-sm font-medium text-secondary-foreground transition-colors duration-300 hover:bg-secondary/90"
                   >
-                    Instagram
+                    <span className="min-w-0">Instagram</span>
                   </a>
                 </div>
               </div>

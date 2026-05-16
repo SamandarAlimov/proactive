@@ -682,7 +682,7 @@ const ProjectDetailPage = () => {
           </Link>
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
             <span className="text-sm font-medium text-primary">{category}</span>
-            <h1 className="mt-2 text-4xl font-heading font-bold text-white md:text-6xl">{title}</h1>
+            <h1 className="mt-2 font-heading text-4xl font-bold leading-tight text-white text-balance md:text-6xl">{title}</h1>
           </motion.div>
         </div>
       </section>
@@ -700,10 +700,10 @@ const ProjectDetailPage = () => {
             </motion.div>
           )}
 
-          <div className="grid gap-12 md:grid-cols-3">
+          <div className="grid gap-10 md:grid-cols-3 md:gap-12">
             <div className="md:col-span-2">
               <h2 className="mb-4 text-2xl font-heading font-bold text-foreground">{aboutLabel}</h2>
-              <p className="text-lg leading-relaxed text-muted-foreground">{description}</p>
+              <p className="text-base leading-relaxed text-muted-foreground md:text-lg">{description}</p>
             </div>
 
             <div>
@@ -733,8 +733,8 @@ const ProjectDetailPage = () => {
           {(challenges.length > 0 || deliverables.length > 0) && (
             <div className="mt-14 grid gap-6 lg:grid-cols-2">
               {challenges.length > 0 && (
-                <div className="rounded-[1.75rem] border border-border/70 bg-card p-7 shadow-[0_18px_50px_rgba(0,0,0,0.05)]">
-                  <h3 className="mb-5 text-2xl font-heading font-bold text-foreground">{challengesLabel}</h3>
+                <div className="rounded-[1.5rem] border border-border/70 bg-card p-5 shadow-[0_18px_50px_rgba(0,0,0,0.05)] sm:rounded-[1.75rem] sm:p-7">
+                  <h3 className="mb-5 font-heading text-xl font-bold text-foreground sm:text-2xl">{challengesLabel}</h3>
                   <div className="space-y-4">
                     {challenges.map((item) => (
                       <div key={item} className="flex items-start gap-3 text-muted-foreground">
@@ -747,8 +747,8 @@ const ProjectDetailPage = () => {
               )}
 
               {deliverables.length > 0 && (
-                <div className="rounded-[1.75rem] border border-border/70 bg-card p-7 shadow-[0_18px_50px_rgba(0,0,0,0.05)]">
-                  <h3 className="mb-5 text-2xl font-heading font-bold text-foreground">{deliverablesLabel}</h3>
+                <div className="rounded-[1.5rem] border border-border/70 bg-card p-5 shadow-[0_18px_50px_rgba(0,0,0,0.05)] sm:rounded-[1.75rem] sm:p-7">
+                  <h3 className="mb-5 font-heading text-xl font-bold text-foreground sm:text-2xl">{deliverablesLabel}</h3>
                   <div className="space-y-4">
                     {deliverables.map((item) => (
                       <div key={item} className="flex items-start gap-3 text-muted-foreground">
@@ -833,7 +833,7 @@ const ProjectDetailPage = () => {
               </div>
               <Link
                 to="/projects"
-                className="inline-flex items-center gap-2 text-sm font-semibold text-primary transition-all hover:gap-3"
+                className="inline-flex w-fit items-center gap-2 text-sm font-semibold text-primary transition-all hover:gap-3"
               >
                 {t.projects.viewAll} <ArrowRight className="h-4 w-4" />
               </Link>

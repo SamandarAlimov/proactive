@@ -21,9 +21,9 @@ const Footer = () => {
 
   return (
     <footer className="bg-secondary text-secondary-foreground">
-      <div className="max-w-7xl mx-auto px-6 py-16">
-        <div className="grid md:grid-cols-4 gap-12">
-          <div>
+      <div className="mx-auto max-w-7xl px-5 py-14 sm:px-6 sm:py-16">
+        <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-4 lg:gap-12">
+          <div className="min-w-0">
             <Link to="/" className="flex items-center gap-3 mb-4">
               <img src={proactiveLogo} alt="Proactive Logo" className="w-10 h-10 rounded-lg object-cover" />
               <span className="font-heading font-bold text-xl">Proactive</span>
@@ -31,7 +31,7 @@ const Footer = () => {
             <p className="text-secondary-foreground/60 text-sm leading-relaxed">Marketing • Brending • Strategy</p>
           </div>
 
-          <div>
+          <div className="min-w-0">
             <h4 className="font-heading font-bold mb-4">Menu</h4>
             <div className="space-y-2">
               {menuLinks.map(item => (
@@ -42,7 +42,7 @@ const Footer = () => {
             </div>
           </div>
 
-          <div>
+          <div className="min-w-0">
             <h4 className="font-heading font-bold mb-4">{t.common.learnMore}</h4>
             <div className="space-y-2">
               {moreLinks.map(item => (
@@ -53,10 +53,10 @@ const Footer = () => {
             </div>
           </div>
 
-          <div>
+          <div className="min-w-0">
             <h4 className="font-heading font-bold mb-4">{t.footer.followUs}</h4>
-            <a href="https://www.instagram.com/proactive.agencyuz/" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 text-secondary-foreground/70 hover:text-primary transition-colors duration-300 mb-6">
-              <Instagram className="w-5 h-5" /> @proactive.agencyuz
+            <a href="https://www.instagram.com/proactive.agencyuz/" target="_blank" rel="noopener noreferrer" className="mb-6 inline-flex max-w-full items-center gap-2 text-secondary-foreground/70 transition-colors duration-300 hover:text-primary">
+              <Instagram className="h-5 w-5 shrink-0" /> <span className="min-w-0 break-all">@proactive.agencyuz</span>
             </a>
           </div>
         </div>

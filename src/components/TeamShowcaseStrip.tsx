@@ -35,7 +35,7 @@ const TeamConnector = ({ side, isDark }: { side: 'left' | 'right'; isDark: boole
     return (
       <svg
         aria-hidden="true"
-        className="pointer-events-none absolute -right-28 top-[4.4rem] h-[4.75rem] w-28 overflow-visible"
+        className="pointer-events-none absolute -right-28 top-[4.4rem] hidden h-[4.75rem] w-28 overflow-visible md:block"
         viewBox="0 0 112 76"
         fill="none"
       >
@@ -48,7 +48,7 @@ const TeamConnector = ({ side, isDark }: { side: 'left' | 'right'; isDark: boole
   return (
     <svg
       aria-hidden="true"
-      className="pointer-events-none absolute -left-28 top-[4.4rem] h-[4.75rem] w-28 overflow-visible"
+      className="pointer-events-none absolute -left-28 top-[4.4rem] hidden h-[4.75rem] w-28 overflow-visible md:block"
       viewBox="0 0 112 76"
       fill="none"
     >
@@ -108,7 +108,10 @@ const TeamShowcaseStrip = ({ className = '' }: { className?: string }) => {
       />
 
       <div className="relative overflow-x-auto pb-4" style={{ scrollbarWidth: 'thin', scrollbarColor: '#52E6C8 transparent' }}>
-        <div className="flex min-w-max items-end px-6 pb-0 pt-8 pr-[22rem] md:px-12 md:pr-[24rem]" style={{ gap: '1.5rem' }}>
+        <div
+          className="flex min-w-max items-end px-5 pb-0 pt-8 pr-5 sm:px-6 sm:pr-[14rem] md:px-12 md:pr-[24rem]"
+          style={{ gap: 'clamp(0.75rem, 2.4vw, 1.5rem)' }}
+        >
           {teamMembers.map((member) => {
             const visual = getTeamMemberVisualConfig(member.id);
             const isActive = activeId === member.id;
@@ -130,7 +133,7 @@ const TeamShowcaseStrip = ({ className = '' }: { className?: string }) => {
               <div
                 key={member.id}
                 className={`relative flex-shrink-0 overflow-visible ${isActive ? 'z-20' : 'z-10'}`}
-                style={{ width: `${TEAM_CARD_WIDTH}px` }}
+                style={{ width: `clamp(138px, 42vw, ${TEAM_CARD_WIDTH}px)` }}
               >
                 <div
                   role="button"
@@ -157,7 +160,7 @@ const TeamShowcaseStrip = ({ className = '' }: { className?: string }) => {
                         animate={{ opacity: 1, y: 0, scale: 1 }}
                         exit={{ opacity: 0, y: 8, scale: 0.97 }}
                         transition={{ duration: 0.24, ease: [0.22, 1, 0.36, 1] }}
-                        className="absolute z-30 pointer-events-none"
+                        className="pointer-events-none absolute z-30 hidden md:block"
                         style={tooltipStyle}
                       >
                         <TeamConnector side={visual.tooltipSide} isDark={isDark} />
@@ -183,7 +186,7 @@ const TeamShowcaseStrip = ({ className = '' }: { className?: string }) => {
                     )}
                   </AnimatePresence>
 
-                  <div className="relative overflow-visible" style={{ height: `${TEAM_CARD_HEIGHT}px` }}>
+                  <div className="relative overflow-visible" style={{ height: `clamp(260px, 76vw, ${TEAM_CARD_HEIGHT}px)` }}>
                     <img
                       src={member.image}
                       alt={member.name}
@@ -207,6 +210,29 @@ const TeamShowcaseStrip = ({ className = '' }: { className?: string }) => {
                       }}
                     />
                   </div>
+
+                  <AnimatePresence initial={false}>
+                    {isActive && (
+                      <motion.div
+                        initial={{ opacity: 0, y: 8 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: 6 }}
+                        transition={{ duration: 0.22, ease: [0.22, 1, 0.36, 1] }}
+                        className={`mt-3 rounded-2xl border px-4 py-3 backdrop-blur-[8px] md:hidden ${tone.tooltipClass}`}
+                      >
+                        <p className={`font-brand text-[0.56rem] font-semibold uppercase tracking-[0.24em] ${tone.eyebrowClass}`}>
+                          {copy.eyebrow}
+                        </p>
+                        <h4 className={`mt-2 font-heading text-lg font-semibold leading-tight ${tone.nameClass}`}>
+                          {member.name}
+                        </h4>
+                        <p className={`mt-2 text-[0.68rem] font-semibold uppercase tracking-[0.16em] ${tone.roleClass}`}>
+                          {member.role[lang]}
+                        </p>
+                        <p className={`mt-2 text-xs leading-5 ${tone.bioClass}`}>{member.bio[lang]}</p>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
                 </div>
               </div>
             );

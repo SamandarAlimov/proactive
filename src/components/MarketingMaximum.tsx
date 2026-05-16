@@ -80,8 +80,8 @@ const MarketingMaximum = () => {
         }}
       />
 
-      <div className="relative mx-auto grid max-w-7xl items-center gap-12 px-6 lg:grid-cols-[minmax(0,1fr)_minmax(360px,0.82fr)]">
-        <motion.div {...getMotionProps({ distance: 32, duration: 0.6 })}>
+      <div className="relative mx-auto grid max-w-7xl items-center gap-10 px-5 sm:px-6 lg:grid-cols-[minmax(0,1fr)_minmax(360px,0.82fr)] lg:gap-12">
+        <motion.div {...getMotionProps({ distance: 32, duration: 0.6 })} className="min-w-0">
           <span
             className="inline-flex items-center gap-2 rounded-full px-4 py-1.5 text-xs font-semibold uppercase tracking-widest"
             style={{
@@ -106,7 +106,7 @@ const MarketingMaximum = () => {
               const Icon = item.icon;
 
               return (
-                <div key={item.title[lang]} className="rounded-2xl border border-white/10 bg-white/[0.04] p-5 backdrop-blur-md">
+                <div key={item.title[lang]} className="min-w-0 rounded-2xl border border-white/10 bg-white/[0.04] p-5 backdrop-blur-md">
                   <div className="mb-4 flex h-11 w-11 items-center justify-center rounded-xl bg-primary/15 text-primary">
                     <Icon className="h-5 w-5" />
                   </div>
@@ -117,7 +117,7 @@ const MarketingMaximum = () => {
             })}
           </div>
 
-          <div className="mt-9 flex flex-col gap-3 sm:flex-row">
+          <div className="mt-9 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
             <Link
               to="/academy"
               state={academyPageState}
@@ -138,7 +138,7 @@ const MarketingMaximum = () => {
           </div>
         </motion.div>
 
-        <motion.div {...getMotionProps({ axis: 'x', distance: 32, duration: 0.7, delay: 0.15 })} className="relative">
+        <motion.div {...getMotionProps({ axis: 'x', distance: 32, duration: 0.7, delay: 0.15 })} className="relative min-w-0">
           <div className="overflow-hidden rounded-[2rem] border border-white/10 bg-white/[0.04] shadow-2xl shadow-black/20">
             <img src={academySpeaker} alt={text.imageAlt} className="aspect-[4/5] w-full object-cover" />
           </div>
@@ -147,9 +147,9 @@ const MarketingMaximum = () => {
               const Icon = item.icon;
 
               return (
-                <div key={item.value} className="rounded-2xl border border-white/10 bg-white/[0.05] p-4 backdrop-blur-md">
+                <div key={item.value} className="min-w-0 rounded-2xl border border-white/10 bg-white/[0.05] p-4 backdrop-blur-md">
                   <Icon className="mb-3 h-5 w-5 text-primary" />
-                  <div className="font-heading text-2xl font-bold">{item.value}</div>
+                  <div className="break-words font-heading text-xl font-bold leading-tight sm:text-2xl">{item.value}</div>
                   <div className="mt-1 text-xs font-semibold uppercase tracking-wider text-white/60">{item.label[lang]}</div>
                 </div>
               );

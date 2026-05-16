@@ -169,7 +169,7 @@ const ServicesPage = () => {
                     }}
                   />
 
-                  <div className="relative grid items-start gap-6 md:grid-cols-[auto_auto_1fr_auto] md:items-center md:gap-8">
+                  <div className="relative grid grid-cols-[auto_1fr] items-center gap-4 sm:gap-5 md:grid-cols-[auto_auto_1fr_auto] md:gap-8">
                     <div
                       className="font-heading text-5xl font-bold leading-none tabular-nums transition-colors duration-500 md:text-7xl"
                       style={{ color: isOpen ? service.accent.from : 'hsl(var(--foreground) / 0.12)' }}
@@ -187,7 +187,7 @@ const ServicesPage = () => {
                       <Icon className="h-7 w-7 text-white md:h-8 md:w-8" />
                     </div>
 
-                    <div className="min-w-0">
+                    <div className="col-span-2 min-w-0 md:col-span-1">
                       <h3 className="font-heading text-xl font-bold tracking-tight text-foreground transition-colors duration-300 group-hover:text-primary md:text-2xl lg:text-3xl">
                         {content.title}
                       </h3>
@@ -204,7 +204,7 @@ const ServicesPage = () => {
                       aria-expanded={isOpen}
                       aria-controls={`service-panel-${service.slug}`}
                       onClick={() => setExpandedService(isOpen ? null : service.slug)}
-                      className="flex items-center gap-2 whitespace-nowrap rounded-full px-1 text-sm font-semibold transition-all duration-300 hover:gap-3 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+                      className="col-span-2 flex w-fit items-center gap-2 whitespace-nowrap rounded-full px-1 text-sm font-semibold transition-all duration-300 hover:gap-3 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 md:col-span-1"
                       style={{ color: 'hsl(166, 75%, 40%)' }}
                     >
                       {isOpen ? labels.less : labels.cta}

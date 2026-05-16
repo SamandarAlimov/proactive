@@ -103,7 +103,7 @@ const CareersPage = () => {
         <div className="max-w-7xl mx-auto relative">
           <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
             <span className="text-sm font-semibold text-primary uppercase tracking-widest">{t.careers.subtitle}</span>
-            <h1 className="text-4xl md:text-6xl lg:text-7xl font-heading font-bold mt-4 mb-6">{t.careers.title}</h1>
+            <h1 className="mt-4 mb-6 font-heading text-4xl font-bold leading-tight md:text-6xl lg:text-7xl">{t.careers.title}</h1>
             <p className="text-secondary-foreground/70 text-lg md:text-xl max-w-2xl leading-relaxed">{t.careers.description}</p>
           </motion.div>
         </div>
@@ -113,8 +113,8 @@ const CareersPage = () => {
       <section className="section-padding relative overflow-hidden">
         <div className="max-w-7xl mx-auto">
           <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={revealViewport} className="mb-12">
-            <h2 className="text-3xl md:text-4xl font-heading font-bold text-foreground flex items-center gap-3">
-              <Briefcase className="w-8 h-8 text-primary" />
+            <h2 className="flex flex-col gap-3 font-heading text-3xl font-bold leading-tight text-foreground sm:flex-row sm:items-center md:text-4xl">
+              <Briefcase className="h-8 w-8 shrink-0 text-primary" />
               {t.careers.openPositions}
             </h2>
           </motion.div>
@@ -123,18 +123,18 @@ const CareersPage = () => {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={revealViewport}
-            className="glass-card-light rounded-3xl p-8 transition-all duration-500 hover:shadow-xl"
+            className="glass-card-light rounded-[1.5rem] p-5 transition-all duration-500 hover:shadow-xl sm:rounded-3xl sm:p-8"
           >
             <div className="flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
-              <div className="max-w-3xl">
-                <h3 className="text-xl font-heading font-bold text-foreground">{openPositionCopy.title}</h3>
+              <div className="min-w-0 max-w-3xl">
+                <h3 className="font-heading text-xl font-bold leading-tight text-foreground">{openPositionCopy.title}</h3>
                 <p className="mt-3 leading-relaxed text-muted-foreground">{openPositionCopy.desc}</p>
               </div>
               <Link
                 to="/contact"
                 className="inline-flex flex-shrink-0 items-center justify-center gap-2 rounded-xl bg-primary px-6 py-3 font-semibold text-primary-foreground transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-primary/30"
               >
-                {openPositionCopy.cta} <ArrowRight className="w-4 h-4" />
+                {openPositionCopy.cta} <ArrowRight className="h-4 w-4 shrink-0" />
               </Link>
             </div>
           </motion.div>
@@ -144,13 +144,13 @@ const CareersPage = () => {
       {/* Perks */}
       <section className="section-padding bg-muted/30">
         <div className="max-w-7xl mx-auto">
-          <motion.h2 initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={revealViewport} className="text-3xl md:text-4xl font-heading font-bold text-foreground text-center mb-12">
+          <motion.h2 initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={revealViewport} className="mb-12 text-center font-heading text-3xl font-bold leading-tight text-foreground md:text-4xl">
             {lang === 'uz' ? 'Ishlash tamoyillarimiz' : lang === 'ru' ? 'Принципы работы' : 'How We Work'}
           </motion.h2>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {perks.map((perk, i) => (
               <motion.div key={i} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={revealViewport} transition={{ delay: i * 0.08 }}
-                className="glass-card-light rounded-2xl p-6 text-center hover:shadow-lg transition-all duration-300">
+                className="glass-card-light rounded-2xl p-5 text-center transition-all duration-300 hover:shadow-lg sm:p-6">
                 <span className="text-foreground font-medium">{perk}</span>
               </motion.div>
             ))}
@@ -162,8 +162,8 @@ const CareersPage = () => {
       <section className="section-padding relative overflow-hidden">
         <div className="max-w-7xl mx-auto">
           <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={revealViewport} className="mb-12">
-            <h2 className="text-3xl md:text-4xl font-heading font-bold text-foreground flex items-center gap-3">
-              <Handshake className="w-8 h-8 text-primary" />
+            <h2 className="flex flex-col gap-3 font-heading text-3xl font-bold leading-tight text-foreground sm:flex-row sm:items-center md:text-4xl">
+              <Handshake className="h-8 w-8 shrink-0 text-primary" />
               {t.careers.partnership}
             </h2>
           </motion.div>
@@ -177,7 +177,7 @@ const CareersPage = () => {
                 viewport={revealViewport}
                 transition={{ delay: i * 0.1 }}
                 whileHover={{ y: -4 }}
-                className="glass-card-light rounded-3xl p-8 text-center group hover:shadow-xl transition-all duration-500"
+                className="glass-card-light group min-w-0 rounded-[1.5rem] p-5 text-center transition-all duration-500 hover:shadow-xl sm:rounded-3xl sm:p-8"
               >
                 <div className="w-14 h-14 rounded-xl bg-primary flex items-center justify-center mx-auto mb-6 group-hover:scale-105 transition-transform duration-300">
                   <pt.icon className="w-7 h-7 text-primary-foreground" />

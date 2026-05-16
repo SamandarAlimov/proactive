@@ -438,10 +438,10 @@ const AcademyPage = () => {
                 initial={{ opacity: 0, y: 18 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: index * 0.08 }}
-                className="rounded-[1.75rem] border border-white/10 bg-white/[0.04] p-6 backdrop-blur-sm"
+                className="min-w-0 rounded-[1.75rem] border border-white/10 bg-white/[0.04] p-5 backdrop-blur-sm sm:p-6"
               >
                 <item.icon className="h-6 w-6 text-[#74f2d8]" />
-                <div className="mt-6 text-3xl font-heading font-bold md:text-4xl">{item.value}</div>
+                <div className="mt-6 break-words font-heading text-2xl font-bold leading-tight md:text-4xl">{item.value}</div>
                 <div className="mt-2 text-sm uppercase tracking-[0.22em] text-white/60">{tr(item.label)}</div>
               </motion.div>
             ))}
@@ -465,7 +465,7 @@ const AcademyPage = () => {
             className="grid gap-4 md:grid-cols-2"
           >
             {blueprintSteps.map((step, index) => (
-              <div key={tr(step.label)} className="rounded-[1.75rem] border border-border/70 bg-card p-6 shadow-[0_18px_50px_rgba(0,0,0,0.06)]">
+              <div key={tr(step.label)} className="min-w-0 rounded-[1.75rem] border border-border/70 bg-card p-6 shadow-[0_18px_50px_rgba(0,0,0,0.06)]">
                 <div className="flex items-center gap-3 text-primary">
                   <step.icon className="h-5 w-5" />
                   <span className="text-xs font-semibold uppercase tracking-[0.24em]">0{index + 1}</span>
@@ -519,9 +519,9 @@ const AcademyPage = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={revealViewport}
                 transition={{ delay: index * 0.05 }}
-                className="rounded-[1.9rem] border border-border/70 bg-card p-7 shadow-[0_18px_50px_rgba(0,0,0,0.05)]"
+                className="min-w-0 rounded-[1.65rem] border border-border/70 bg-card p-5 shadow-[0_18px_50px_rgba(0,0,0,0.05)] sm:rounded-[1.9rem] sm:p-7"
               >
-                <div className="text-[3.25rem] font-heading font-bold leading-none tracking-[-0.08em] text-primary/90">{item.order}</div>
+                <div className="font-heading text-[2.75rem] font-bold leading-none tracking-tight text-primary/90 sm:text-[3.25rem] sm:tracking-[-0.08em]">{item.order}</div>
                 <h3 className="mt-5 font-heading text-2xl font-bold text-foreground">{tr(item.title)}</h3>
                 <p className="mt-4 text-base leading-relaxed text-muted-foreground">{tr(item.description)}</p>
               </motion.div>
@@ -544,7 +544,7 @@ const AcademyPage = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={revealViewport}
                 transition={{ delay: index * 0.07 }}
-                className="rounded-[1.9rem] border border-white/10 bg-white/[0.04] p-7"
+                className="min-w-0 rounded-[1.65rem] border border-white/10 bg-white/[0.04] p-5 sm:rounded-[1.9rem] sm:p-7"
               >
                 <span className="text-xs font-semibold uppercase tracking-[0.24em] text-[#74f2d8]">{tr(stage.stage)}</span>
                 <div className="mt-6 space-y-3">
@@ -575,7 +575,7 @@ const AcademyPage = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={revealViewport}
                 transition={{ delay: index * 0.06 }}
-                className="rounded-[1.75rem] border border-border/70 bg-card p-6"
+                className="min-w-0 rounded-[1.75rem] border border-border/70 bg-card p-5 sm:p-6"
               >
                 <div className="text-xs font-semibold uppercase tracking-[0.24em] text-primary/80">0{index + 1}</div>
                 <h3 className="mt-4 font-heading text-2xl font-bold text-foreground">{tr(item.title)}</h3>
@@ -592,9 +592,9 @@ const AcademyPage = () => {
             initial={{ opacity: 0, x: -24 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={revealViewport}
-            className="overflow-hidden rounded-[2rem] border border-border/60 bg-card"
+            className="overflow-hidden rounded-[1.5rem] border border-border/60 bg-card sm:rounded-[2rem]"
           >
-            <img src={academySpeaker} alt="Habibullo Sa'dullayev" className="h-full w-full object-cover" />
+            <img src={academySpeaker} alt="Habibullo Sa'dullayev" className="max-h-[520px] w-full object-cover lg:h-full lg:max-h-none" />
           </motion.div>
           <motion.div initial={{ opacity: 0, x: 24 }} whileInView={{ opacity: 1, x: 0 }} viewport={revealViewport}>
             <span className="text-sm font-semibold uppercase tracking-[0.32em] text-primary/80">{text.speakerEyebrow}</span>
@@ -636,7 +636,7 @@ const AcademyPage = () => {
               <h2 className="font-heading text-3xl font-bold md:text-5xl">{text.quotes}</h2>
               <p className="mt-5 max-w-2xl text-lg leading-relaxed text-white/75">{text.quotesDescription}</p>
 
-              <div className="mt-8 rounded-[2rem] border border-white/10 bg-white/[0.04] p-6 shadow-[0_18px_60px_rgba(0,0,0,0.24)]">
+              <div className="mt-8 rounded-[1.6rem] border border-white/10 bg-white/[0.04] p-5 shadow-[0_18px_60px_rgba(0,0,0,0.24)] sm:rounded-[2rem] sm:p-6">
                 <div className="flex items-center gap-3 text-[#74f2d8]">
                   <Quote className="h-5 w-5" />
                   <span className="text-xs font-semibold uppercase tracking-[0.28em] text-white/60">{tr(quotePanel.label)}</span>
@@ -646,7 +646,7 @@ const AcademyPage = () => {
 
                 <div className="mt-7 space-y-4">
                   {quoteThemes.map((theme, index) => (
-                    <div key={tr(theme.title)} className="rounded-[1.5rem] border border-white/10 bg-black/10 px-4 py-4">
+                    <div key={tr(theme.title)} className="min-w-0 rounded-[1.5rem] border border-white/10 bg-black/10 px-4 py-4">
                       <div className="text-[11px] font-semibold uppercase tracking-[0.28em] text-[#74f2d8]">0{index + 1}</div>
                       <h4 className="mt-3 text-lg font-semibold text-white">{tr(theme.title)}</h4>
                       <p className="mt-2 text-sm leading-relaxed text-white/60">{tr(theme.description)}</p>
@@ -664,7 +664,7 @@ const AcademyPage = () => {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={revealViewport}
                   transition={{ delay: index * 0.06 }}
-                  className="group rounded-[2rem] border border-white/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.06),rgba(255,255,255,0.03))] p-6 shadow-[0_22px_70px_rgba(0,0,0,0.26)] transition-transform duration-300 hover:-translate-y-1 md:p-8"
+                  className="group min-w-0 rounded-[1.6rem] border border-white/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.06),rgba(255,255,255,0.03))] p-5 shadow-[0_22px_70px_rgba(0,0,0,0.26)] transition-transform duration-300 hover:-translate-y-1 sm:rounded-[2rem] md:p-8"
                 >
                   <div className="flex items-start justify-between gap-5">
                     <div className="inline-flex rounded-full border border-white/10 bg-white/5 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.28em] text-white/60">
@@ -673,7 +673,7 @@ const AcademyPage = () => {
                     <Quote className="h-9 w-9 text-[#74f2d8]" />
                   </div>
 
-                  <p className="mt-8 max-w-4xl font-heading text-2xl leading-[1.45] text-white md:text-[2rem]">
+                  <p className="mt-8 max-w-4xl font-heading text-xl leading-[1.45] text-white sm:text-2xl md:text-[2rem]">
                     {tr(quote.text)}
                   </p>
 

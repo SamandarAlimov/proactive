@@ -50,7 +50,7 @@ const NewsPage = () => {
       <section className="section-padding bg-secondary text-secondary-foreground">
         <div className="max-w-7xl mx-auto text-center">
           <motion.span initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="text-sm font-semibold text-primary uppercase tracking-widest">{t.news.subtitle}</motion.span>
-          <motion.h1 initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }} className="text-4xl md:text-6xl font-heading font-bold mt-4">{t.news.title}</motion.h1>
+          <motion.h1 initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }} className="mt-4 font-heading text-4xl font-bold leading-tight md:text-6xl">{t.news.title}</motion.h1>
         </div>
       </section>
 
@@ -65,7 +65,7 @@ const NewsPage = () => {
               transition={{ delay: 0.1 * i }}
             >
               <Link to={`/news/${news.id}`} state={articleState} className="block group">
-                <article className="glass-card-light rounded-2xl overflow-hidden hover:shadow-2xl transition-shadow duration-500">
+                <article className="glass-card-light min-w-0 overflow-hidden rounded-2xl transition-shadow duration-500 hover:shadow-2xl">
                   <div className="h-48 bg-secondary relative overflow-hidden">
                     {news.image ? (
                       <img src={news.image} alt={news.title} className="w-full h-full object-cover" />
@@ -75,9 +75,9 @@ const NewsPage = () => {
                       </div>
                     )}
                   </div>
-                  <div className="p-6">
+                  <div className="p-5 sm:p-6">
                     <span className="text-xs text-muted-foreground">{news.date}</span>
-                    <h3 className="text-lg font-heading font-bold text-foreground mt-2 mb-3 group-hover:text-primary transition-colors duration-300">{news.title}</h3>
+                    <h3 className="mt-2 mb-3 font-heading text-lg font-bold leading-tight text-foreground transition-colors duration-300 group-hover:text-primary">{news.title}</h3>
                     <p className="text-muted-foreground text-sm leading-relaxed">{news.excerpt}</p>
                     <span className="inline-block mt-4 text-primary text-sm font-semibold group-hover:translate-x-1 transition-transform duration-300">
                       {t.news.readMore} →

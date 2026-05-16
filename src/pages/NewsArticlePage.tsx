@@ -70,12 +70,12 @@ const NewsArticlePage = () => {
     <PageLayout>
       <section className="section-padding bg-secondary text-secondary-foreground">
         <div className="max-w-4xl mx-auto">
-          <Link to={backPath} className="inline-flex items-center gap-2 text-primary hover:text-primary/80 transition-colors mb-6">
-            <ArrowLeft className="w-4 h-4" /> {backLabel}
+          <Link to={backPath} className="mb-6 inline-flex items-center gap-2 text-primary transition-colors hover:text-primary/80">
+            <ArrowLeft className="h-4 w-4 shrink-0" /> {backLabel}
           </Link>
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
             <span className="text-sm text-secondary-foreground/60">{article.date}</span>
-            <h1 className="text-3xl md:text-5xl font-heading font-bold mt-2">{article.title}</h1>
+            <h1 className="mt-2 font-heading text-3xl font-bold leading-tight md:text-5xl">{article.title}</h1>
           </motion.div>
         </div>
       </section>
@@ -83,10 +83,10 @@ const NewsArticlePage = () => {
       <section className="section-padding">
         <div className="max-w-4xl mx-auto">
           {article.image && (
-            <motion.img initial={{ opacity: 0 }} animate={{ opacity: 1 }} src={article.image} alt={article.title} className="w-full rounded-3xl mb-8 object-cover max-h-[400px]" />
+            <motion.img initial={{ opacity: 0 }} animate={{ opacity: 1 }} src={article.image} alt={article.title} className="mb-8 max-h-[400px] w-full rounded-[1.5rem] object-cover sm:rounded-3xl" />
           )}
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }} className="prose prose-lg max-w-none dark:prose-invert">
-            <p className="text-lg text-muted-foreground leading-relaxed">{article.content || article.excerpt}</p>
+            <p className="text-base leading-relaxed text-muted-foreground md:text-lg">{article.content || article.excerpt}</p>
           </motion.div>
         </div>
       </section>

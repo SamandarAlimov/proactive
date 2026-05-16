@@ -118,7 +118,7 @@ const ProjectsPage = () => {
       >
         <div className="relative h-48 overflow-hidden">
           {!hasDetailedCase && (
-            <div className="absolute right-4 top-4 z-10 inline-flex items-center gap-1.5 rounded-full border border-white/15 bg-secondary/75 px-3 py-1.5 text-[11px] font-semibold text-white shadow-[0_10px_24px_rgba(0,0,0,0.18)] backdrop-blur">
+            <div className="absolute left-4 right-4 top-4 z-10 inline-flex items-center justify-center gap-1.5 rounded-full border border-white/15 bg-secondary/75 px-3 py-1.5 text-center text-[11px] font-semibold text-white shadow-[0_10px_24px_rgba(0,0,0,0.18)] backdrop-blur sm:left-auto sm:right-4">
               <Clock3 className="h-3.5 w-3.5" />
               {comingSoonLabel}
             </div>
@@ -158,7 +158,7 @@ const ProjectsPage = () => {
             </div>
           )}
         </div>
-        <div className="p-6">
+        <div className="min-w-0 p-5 sm:p-6">
           <span className="mb-2 block text-xs font-medium text-primary">{project.category}</span>
           <h3
             className={`mb-3 text-lg font-heading font-bold text-foreground transition-colors ${
@@ -172,7 +172,7 @@ const ProjectsPage = () => {
           </p>
           <div className="mb-4 flex flex-wrap gap-1.5">
             {project.tags.map((tag) => (
-              <span key={tag} className="rounded-full bg-primary/10 px-2 py-0.5 text-[10px] font-medium text-primary">
+              <span key={tag} className="rounded-full bg-primary/10 px-2 py-0.5 text-[10px] font-medium leading-relaxed text-primary">
                 {tag}
               </span>
             ))}

@@ -63,7 +63,7 @@ const Projects = () => {
 
   return (
     <section id="projects" className="section-deferred relative scroll-mt-24 overflow-hidden py-24 md:py-32" ref={ref}>
-      <div className="relative mx-auto max-w-7xl px-6">
+      <div className="relative mx-auto max-w-7xl px-5 sm:px-6">
         <motion.div
           {...getMotionProps({ distance: 30, duration: 0.6 })}
           className="mb-16 text-center"
@@ -104,7 +104,7 @@ const Projects = () => {
               <motion.span
                 key={name}
                 {...getMotionProps({ distance: 12, delay: 0.5 + i * 0.02, scale: 0.94 })}
-                className="cursor-default rounded-full border px-4 py-2 text-sm font-medium transition-all duration-300 hover:-translate-y-0.5"
+                className="cursor-default rounded-full border px-4 py-2 text-sm font-medium leading-relaxed transition-all duration-300 hover:-translate-y-0.5"
                 style={{
                   borderColor: 'hsla(166, 75%, 61%, 0.15)',
                   background: 'hsla(166, 75%, 61%, 0.04)',
@@ -121,7 +121,7 @@ const Projects = () => {
           <Link
             to="/projects"
             state={projectsPageState}
-            className="group inline-flex items-center gap-2 rounded-xl border border-primary/20 px-6 py-3 font-semibold text-primary transition-all duration-300 hover:bg-primary/5"
+            className="group inline-flex items-center justify-center gap-2 rounded-xl border border-primary/20 px-6 py-3 font-semibold text-primary transition-all duration-300 hover:bg-primary/5"
           >
             {t.projects.viewAll}
             <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
@@ -148,12 +148,12 @@ const FeaturedCard = ({
   return (
     <motion.div
       {...motionProps}
-      className="group relative overflow-hidden rounded-3xl transition-all duration-500"
+      className="group relative min-w-0 overflow-hidden rounded-[1.5rem] transition-all duration-500 sm:rounded-3xl"
       style={{ background: project.color, border: `1px solid ${project.accent}20` }}
     >
       <div className={`grid gap-0 lg:grid-cols-2 ${index % 2 === 1 ? 'lg:[direction:rtl]' : ''}`}>
         <div className="relative overflow-hidden">
-          <div className="relative h-full min-h-[280px] overflow-hidden md:min-h-[360px]">
+          <div className="relative h-full min-h-[240px] overflow-hidden sm:min-h-[280px] md:min-h-[360px]">
             <img
               src={project.image}
               alt={project.title}
@@ -164,13 +164,13 @@ const FeaturedCard = ({
           </div>
         </div>
 
-        <div className={`flex flex-col justify-center p-8 lg:p-12 ${index % 2 === 1 ? 'lg:[direction:ltr]' : ''}`}>
-          <span className="mb-3 text-sm font-medium text-primary">{project.category}</span>
-          <h3 className="mb-4 text-2xl font-heading font-bold text-foreground md:text-3xl">{project.title}</h3>
-          <p className="mb-6 leading-relaxed text-muted-foreground">{project.description}</p>
+        <div className={`flex min-w-0 flex-col justify-center p-5 sm:p-8 lg:p-12 ${index % 2 === 1 ? 'lg:[direction:ltr]' : ''}`}>
+          <span className="mb-3 text-sm font-medium leading-relaxed text-primary">{project.category}</span>
+          <h3 className="mb-4 font-heading text-2xl font-bold leading-tight text-foreground md:text-3xl">{project.title}</h3>
+          <p className="mb-6 text-sm leading-relaxed text-muted-foreground sm:text-base">{project.description}</p>
           <div className="mb-6 flex flex-wrap gap-2">
             {project.tags.map((tag) => (
-              <span key={tag} className="rounded-full border border-primary/10 bg-primary/10 px-3 py-1.5 text-xs font-medium text-primary">
+              <span key={tag} className="rounded-full border border-primary/10 bg-primary/10 px-3 py-1.5 text-xs font-medium leading-relaxed text-primary">
                 {tag}
               </span>
             ))}

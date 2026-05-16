@@ -141,7 +141,7 @@ const Contact = () => {
           <motion.form
             onSubmit={handleSubmit}
             {...getMotionProps({ axis: 'x', distance: 30, duration: 0.6, delay: 0.2 })}
-            className="glass-card-light h-full space-y-6 rounded-[2rem] p-8 md:space-y-7 md:p-10 lg:p-12"
+            className="glass-card-light h-full space-y-5 rounded-[1.6rem] p-5 sm:rounded-[2rem] sm:p-6 md:space-y-7 md:p-10 lg:p-12"
           >
             <div>
               <label className={contactLabelClass} htmlFor="contact-service">
@@ -247,9 +247,9 @@ const Contact = () => {
               target="_blank"
               rel="noopener noreferrer"
               whileHover={{ y: -4 }}
-              className="glass-card-light block min-h-[280px] flex-1 overflow-hidden rounded-[1.75rem] transition-all duration-300 hover:shadow-lg lg:min-h-[300px]"
+              className="glass-card-light block min-h-[240px] flex-1 overflow-hidden rounded-[1.5rem] transition-all duration-300 hover:shadow-lg sm:min-h-[280px] sm:rounded-[1.75rem] lg:min-h-[340px]"
             >
-              <div className="relative h-full min-h-[280px] overflow-hidden lg:min-h-[300px]">
+              <div className="relative h-full min-h-[240px] overflow-hidden sm:min-h-[280px] lg:min-h-[340px]">
                 <iframe
                   title={contactAddressFull}
                   src={contactMapEmbedUrl}
@@ -261,7 +261,7 @@ const Contact = () => {
                   <p className="font-brand text-[10px] font-semibold uppercase tracking-[0.22em] text-white/70">
                     Office address
                   </p>
-                  <p className="mt-2 font-heading text-xl font-bold text-white">{contactAddressLine}</p>
+                  <p className="mt-2 font-heading text-lg font-bold text-white sm:text-xl">{contactAddressLine}</p>
                   <p className="text-sm text-white/75">{contactAddressCity}</p>
                 </div>
               </div>
@@ -271,7 +271,7 @@ const Contact = () => {
               <motion.div
                 key={card.title}
                 whileHover={{ y: -4 }}
-                className="glass-card-light group flex min-h-[86px] items-center gap-4 rounded-[1.75rem] p-5 transition-all duration-300 hover:shadow-lg md:p-6"
+                className="glass-card-light group flex min-h-[82px] items-center gap-3 rounded-[1.5rem] p-4 transition-all duration-300 hover:shadow-lg sm:gap-4 sm:rounded-[1.75rem] sm:p-5 md:p-6"
               >
                 <div
                   className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-[1rem] transition-transform duration-300 group-hover:scale-105"
@@ -281,8 +281,8 @@ const Contact = () => {
                 >
                   <card.icon className="h-6 w-6" style={{ color: 'hsl(202, 100%, 11%)' }} />
                 </div>
-                <div>
-                  <h4 className="font-heading text-lg font-bold text-foreground">{card.title}</h4>
+                <div className="min-w-0">
+                  <h4 className="font-heading text-base font-bold leading-snug text-foreground sm:text-lg">{card.title}</h4>
                   <p className="text-sm leading-6 text-muted-foreground">{card.sub}</p>
                 </div>
               </motion.div>
@@ -293,14 +293,14 @@ const Contact = () => {
               target="_blank"
               rel="noopener noreferrer"
               whileHover={{ y: -4 }}
-              className="glass-card-light group block min-h-[86px] rounded-[1.75rem] p-5 transition-all duration-300 hover:shadow-lg md:p-6"
+              className="glass-card-light group block min-h-[82px] rounded-[1.5rem] p-4 transition-all duration-300 hover:shadow-lg sm:rounded-[1.75rem] sm:p-5 md:p-6"
             >
-              <div className="flex items-center gap-4">
+              <div className="flex items-center gap-3 sm:gap-4">
                 <div className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-[1rem] bg-secondary transition-transform duration-300 group-hover:scale-105">
                   <Instagram className="h-6 w-6 text-secondary-foreground" />
                 </div>
-                <div>
-                  <h4 className="font-heading text-lg font-bold text-foreground">{contactInstagramHandle}</h4>
+                <div className="min-w-0">
+                  <h4 className="font-heading text-base font-bold leading-snug text-foreground sm:text-lg">{contactInstagramHandle}</h4>
                   <p className="text-sm leading-6 text-muted-foreground">Instagram</p>
                 </div>
               </div>

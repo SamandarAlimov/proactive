@@ -33,12 +33,12 @@ const Internship = () => {
       <div className="absolute top-0 left-0 w-full h-1 bg-primary" />
 
       <div className="max-w-7xl mx-auto">
-        <div className="grid lg:grid-cols-2 gap-16 items-center">
+        <div className="grid items-center gap-10 lg:grid-cols-2 lg:gap-16">
           <motion.div
             {...getMotionProps({ axis: 'x', distance: 30, duration: 0.6 })}
           >
             <span className="text-sm font-semibold text-primary uppercase tracking-widest">{t.internship.title}</span>
-            <h2 className="text-3xl md:text-5xl font-heading font-bold text-foreground mt-3 mb-6">{t.internship.subtitle}</h2>
+            <h2 className="mt-3 mb-6 font-heading text-3xl font-bold leading-tight text-foreground md:text-5xl">{t.internship.subtitle}</h2>
             <p className="text-muted-foreground leading-relaxed mb-8">{t.internship.description}</p>
             <div className="flex flex-col gap-3 sm:flex-row">
               <Link
@@ -51,9 +51,9 @@ const Internship = () => {
               </Link>
               <Link
                 to="/contact"
-                className="inline-flex items-center gap-2 px-8 py-4 rounded-xl bg-primary text-primary-foreground font-semibold transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-primary/30"
+                className="inline-flex items-center justify-center gap-2 rounded-xl bg-primary px-8 py-4 font-semibold text-primary-foreground transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-primary/30"
               >
-                <GraduationCap className="w-5 h-5" />
+                <GraduationCap className="h-5 w-5 shrink-0" />
                 {t.internship.cta}
               </Link>
             </div>
@@ -65,12 +65,12 @@ const Internship = () => {
                 key={f.title}
                 {...getMotionProps({ axis: 'x', distance: 30, delay: 0.2 + i * 0.15, duration: 0.5 })}
                 whileHover={{ x: 6 }}
-                className="glass-card-light group flex items-start gap-5 rounded-2xl p-6 transition-shadow duration-300 hover:shadow-lg"
+                className="glass-card-light group flex min-w-0 items-start gap-4 rounded-2xl p-5 transition-shadow duration-300 hover:shadow-lg sm:gap-5 sm:p-6"
               >
-                <div className="w-12 h-12 rounded-xl bg-secondary flex items-center justify-center flex-shrink-0 transition-transform duration-300 group-hover:scale-105">
+                <div className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-xl bg-secondary transition-transform duration-300 group-hover:scale-105">
                   <f.icon className="w-6 h-6 text-secondary-foreground" />
                 </div>
-                <div>
+                <div className="min-w-0">
                   <h4 className="font-heading font-bold text-foreground text-lg">{f.title}</h4>
                   <p className="text-muted-foreground text-sm mt-1">{f.desc}</p>
                 </div>

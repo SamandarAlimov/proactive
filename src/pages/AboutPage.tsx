@@ -206,11 +206,11 @@ const AboutPage = () => {
                 {content.eyebrow}
               </span>
 
-              <h1 className="mt-7 max-w-5xl text-[clamp(3rem,7vw,6rem)] font-heading font-bold leading-[0.92] tracking-[-0.04em] text-white text-balance">
+              <h1 className="mt-7 max-w-5xl text-[clamp(2.55rem,7vw,6rem)] font-heading font-bold leading-[0.96] tracking-tight text-white text-balance sm:leading-[0.92] sm:tracking-[-0.04em]">
                 {t.about.title}
               </h1>
 
-              <p className="mt-7 max-w-4xl text-[clamp(1.35rem,2.6vw,2.5rem)] font-medium leading-[1.06] text-primary text-balance">
+              <p className="mt-7 max-w-4xl text-[clamp(1.2rem,2.6vw,2.5rem)] font-medium leading-tight text-primary text-balance sm:leading-[1.06]">
                 {content.heroStatement}
               </p>
 
@@ -260,7 +260,7 @@ const AboutPage = () => {
               className="overflow-hidden rounded-[2rem] border border-border/60 bg-card shadow-[0_24px_80px_rgba(0,0,0,0.06)]"
             >
               <div className="grid gap-0 lg:grid-cols-[0.82fr_1.18fr]">
-                <div className="relative min-h-[360px] overflow-hidden bg-[#f3efe9] dark:bg-[#141414]">
+                <div className="relative min-h-[280px] overflow-hidden bg-[#f3efe9] sm:min-h-[340px] lg:min-h-[360px] dark:bg-[#141414]">
                   <div className="absolute inset-0 bg-gradient-to-br from-transparent via-transparent to-black/5 dark:to-white/[0.03]" />
                   <img
                     src={founderHabibullo}
@@ -291,25 +291,25 @@ const AboutPage = () => {
                     {founderProfile.summary[founderLang]}
                   </p>
 
-                  <div className="mt-8 flex flex-wrap gap-3">
+                  <div className="mt-8 flex min-w-0 flex-wrap gap-3">
                     <a
                       href={founderProfile.telegram}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 rounded-xl bg-primary px-4 py-2.5 font-brand text-sm font-semibold text-primary-foreground transition-transform duration-300 hover:-translate-y-0.5"
+                      className="inline-flex max-w-full items-center gap-2 rounded-xl bg-primary px-4 py-2.5 font-brand text-sm font-semibold text-primary-foreground transition-transform duration-300 hover:-translate-y-0.5"
                     >
                       <Send className="h-4 w-4" />
-                      t.me/habibullo_sadulloyev
+                      <span className="min-w-0 break-all">t.me/habibullo_sadulloyev</span>
                     </a>
 
                     <a
                       href={founderProfile.instagram}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 rounded-xl border border-border/70 bg-background px-4 py-2.5 font-brand text-sm font-semibold text-foreground transition-colors duration-300 hover:border-primary hover:text-primary"
+                      className="inline-flex max-w-full items-center gap-2 rounded-xl border border-border/70 bg-background px-4 py-2.5 font-brand text-sm font-semibold text-foreground transition-colors duration-300 hover:border-primary hover:text-primary"
                     >
                       <Instagram className="h-4 w-4" />
-                      @habibullo_sadulloyev
+                      <span className="min-w-0 break-all">@habibullo_sadulloyev</span>
                     </a>
                   </div>
                 </div>
@@ -330,7 +330,7 @@ const AboutPage = () => {
               </div>
 
               <div className="p-7 md:p-10">
-                <p className="text-[clamp(1.5rem,3vw,2.6rem)] font-medium leading-[1.08] text-primary text-balance">
+                <p className="text-[clamp(1.25rem,3vw,2.6rem)] font-medium leading-tight text-primary text-balance md:leading-[1.08]">
                   {content.missionText}
                 </p>
               </div>
@@ -348,7 +348,7 @@ const AboutPage = () => {
               </div>
 
               <div className="p-7 md:p-10">
-                <p className="text-lg leading-8 text-foreground/90 md:text-[1.55rem] md:leading-[1.45]">
+                <p className="text-base leading-8 text-foreground/90 md:text-[1.55rem] md:leading-[1.45]">
                   {content.outlookText}
                 </p>
               </div>

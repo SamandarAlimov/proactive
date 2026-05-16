@@ -95,6 +95,33 @@
     @apply bg-background text-foreground font-body antialiased;
     overflow-x: hidden;
   }
+
+  html,
+  body,
+  #root {
+    min-width: 0;
+  }
+
+  img,
+  video,
+  canvas,
+  svg {
+    max-width: 100%;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  p,
+  a,
+  span,
+  li {
+    overflow-wrap: break-word;
+  }
+
   h1, h2, h3, h4, h5, h6 {
     @apply font-heading;
   }
@@ -148,7 +175,7 @@
   }
 
   .section-padding {
-    @apply px-6 py-20 md:px-12 lg:px-20 xl:px-32;
+    @apply px-5 py-16 sm:px-6 sm:py-20 md:px-12 lg:px-20 xl:px-32;
   }
 
   .glow {
@@ -172,7 +199,23 @@
   }
 
   .brand-marquee-track {
-    animation: brand-marquee 42s linear infinite;
+    animation: brand-marquee 82s linear infinite;
+  }
+
+  .brand-marquee-track:hover {
+    animation-play-state: paused;
+  }
+
+  @media (max-width: 767px) {
+    .brand-marquee-track {
+      animation-duration: 68s;
+    }
+  }
+
+  @media (min-width: 1280px) {
+    .brand-marquee-track {
+      animation-duration: 96s;
+    }
   }
 
   @media (min-height: 860px) {

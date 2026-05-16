@@ -25,7 +25,7 @@ const Services = () => {
         }}
       />
 
-      <div className="relative mx-auto max-w-7xl px-6">
+      <div className="relative mx-auto max-w-7xl px-5 sm:px-6">
         <motion.div
           {...getMotionProps({ distance: 30, duration: 0.6 })}
           className="mb-20 text-center"
@@ -60,14 +60,14 @@ const Services = () => {
               >
                 <Link to={`/services/${service.slug}`} state={serviceDetailState} className="block h-full">
                   <div
-                    className="group relative h-full overflow-hidden rounded-2xl p-8 transition-all duration-300 hover:shadow-xl"
+                    className="group relative h-full min-w-0 overflow-hidden rounded-2xl p-5 transition-all duration-300 hover:shadow-xl sm:p-6 md:p-8"
                     style={{
                       background: 'hsl(var(--card))',
                       border: '1px solid hsl(var(--border) / 0.72)',
                       boxShadow: '0 12px 36px hsl(var(--foreground) / 0.08)',
                     }}
                   >
-                    <span className="absolute right-6 top-5 font-heading text-5xl font-bold text-secondary/5 transition-colors duration-300 group-hover:text-primary/15 dark:text-white/5">
+                    <span className="absolute right-5 top-5 font-heading text-4xl font-bold text-secondary/5 transition-colors duration-300 group-hover:text-primary/15 dark:text-white/5 sm:right-6 sm:text-5xl">
                       {service.number}
                     </span>
                     <div
@@ -86,10 +86,10 @@ const Services = () => {
                       <Icon className="h-7 w-7 text-white" />
                     </div>
                     <div className="relative z-10 mb-3 text-sm font-semibold text-primary">{service.number}</div>
-                    <h3 className="relative z-10 mb-3 text-xl font-heading font-bold text-foreground transition-colors duration-300 group-hover:text-primary">
+                    <h3 className="relative z-10 mb-3 font-heading text-lg font-bold leading-tight text-foreground transition-colors duration-300 group-hover:text-primary sm:text-xl">
                       {content.title}
                     </h3>
-                    <p className="relative z-10 leading-relaxed text-muted-foreground">{content.shortDescription}</p>
+                    <p className="relative z-10 text-sm leading-relaxed text-muted-foreground sm:text-base">{content.shortDescription}</p>
                     <div
                       className="absolute bottom-0 left-0 right-0 h-[2px] origin-left scale-x-0 transition-transform duration-500 group-hover:scale-x-100"
                       style={{ background: `linear-gradient(90deg, ${service.accent.from}, ${service.accent.to})` }}
@@ -105,7 +105,7 @@ const Services = () => {
           <Link
             to="/services"
             state={servicesPageState}
-            className="group inline-flex items-center gap-2 rounded-xl border border-primary/20 px-6 py-3 font-semibold text-primary transition-all duration-300 hover:-translate-y-0.5 hover:bg-primary/5"
+            className="group inline-flex items-center justify-center gap-2 rounded-xl border border-primary/20 px-6 py-3 font-semibold text-primary transition-all duration-300 hover:-translate-y-0.5 hover:bg-primary/5"
           >
             {readMoreLabel(lang)}
             <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />

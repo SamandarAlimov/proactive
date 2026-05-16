@@ -43,17 +43,21 @@ const Clients = () => {
         </motion.div>
 
         <div className="relative overflow-hidden">
-          <div className="absolute left-0 top-0 bottom-0 w-20 z-10 bg-gradient-to-r from-background to-transparent" />
-          <div className="absolute right-0 top-0 bottom-0 w-20 z-10 bg-gradient-to-l from-background to-transparent" />
+          <div className="absolute left-0 top-0 bottom-0 z-10 w-10 bg-gradient-to-r from-background to-transparent sm:w-16 lg:w-20" />
+          <div className="absolute right-0 top-0 bottom-0 z-10 w-10 bg-gradient-to-l from-background to-transparent sm:w-16 lg:w-20" />
           <div
-            className={shouldReduceMotion ? 'flex flex-wrap justify-center gap-4' : 'brand-marquee-track flex w-max gap-5 will-change-transform'}
+            className={
+              shouldReduceMotion
+                ? 'flex flex-wrap justify-center gap-3 sm:gap-4 lg:gap-5'
+                : 'brand-marquee-track flex w-max gap-3 will-change-transform sm:gap-4 lg:gap-5'
+            }
           >
             {logoItems.map((client, i) => (
               <div
                 key={`${client.name}-${i}`}
                 aria-hidden={!shouldReduceMotion && i >= clientLogos.length}
                 className={cn(
-                  'group flex h-24 min-w-[218px] flex-shrink-0 items-center justify-center rounded-2xl border px-7 py-4 transition duration-300 hover:-translate-y-0.5 hover:border-primary/25 hover:shadow-[0_18px_42px_rgba(38,79,107,0.12)]',
+                  'group flex h-16 min-w-[138px] flex-shrink-0 items-center justify-center rounded-xl border px-4 py-3 transition duration-300 hover:-translate-y-0.5 hover:border-primary/25 hover:shadow-[0_18px_42px_rgba(38,79,107,0.12)] sm:h-20 sm:min-w-[176px] sm:rounded-2xl sm:px-5 sm:py-3.5 lg:h-24 lg:min-w-[218px] lg:px-7 lg:py-4',
                   getLogoCardTone(client.heroTone),
                 )}
               >

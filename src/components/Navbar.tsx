@@ -285,15 +285,16 @@ const Navbar = () => {
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
-            className="fixed inset-0 z-40 bg-background/95 pt-20 backdrop-blur-xl"
+            className="fixed inset-0 z-40 overflow-y-auto bg-background/95 backdrop-blur-xl"
+            style={{ paddingTop: 'var(--site-header-offset)' }}
           >
-            <div className="flex flex-col items-center gap-5 py-8">
+            <div className="mx-auto flex min-h-full w-full max-w-md flex-col items-center gap-4 px-5 py-8 sm:gap-5">
               {navItems.map((item) => (
                 <Link
                   key={item.href}
                   to={item.href}
                   onClick={() => setMobileOpen(false)}
-                  className={`text-lg font-medium transition-colors ${
+                  className={`w-full rounded-xl px-4 py-2.5 text-center text-base font-medium transition-colors sm:text-lg ${
                     location.pathname === item.href ? 'text-primary' : 'text-foreground hover:text-primary'
                   }`}
                 >
@@ -301,7 +302,7 @@ const Navbar = () => {
                 </Link>
               ))}
 
-              <div className="mt-2 w-full max-w-sm rounded-2xl border border-border bg-background px-5 py-4 text-center shadow-sm">
+              <div className="mt-2 w-full rounded-2xl border border-border bg-background px-4 py-4 text-center shadow-sm sm:px-5">
                 <a
                   href={`tel:${headerPhone.replace(/\s+/g, '')}`}
                   className="flex items-center justify-center gap-2 text-base font-semibold text-foreground transition-colors hover:text-primary"
@@ -336,7 +337,7 @@ const Navbar = () => {
                 </Link>
               </div>
 
-              <div className="mt-4 flex items-center gap-2">
+              <div className="mt-4 flex flex-wrap items-center justify-center gap-2">
                 {(['uz', 'en', 'ru'] as Language[]).map((currentLang) => (
                   <button
                     key={currentLang}

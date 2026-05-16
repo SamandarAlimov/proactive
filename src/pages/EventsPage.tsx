@@ -63,7 +63,7 @@ const EventsPage = () => {
         <div className="relative mx-auto max-w-7xl">
           <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
             <span className="text-sm font-semibold uppercase tracking-widest text-primary">{t.events.subtitle}</span>
-            <h1 className="mb-6 mt-4 text-4xl font-heading font-bold md:text-6xl">{t.events.title}</h1>
+            <h1 className="mb-6 mt-4 font-heading text-4xl font-bold leading-tight md:text-6xl">{t.events.title}</h1>
             <p className="max-w-2xl text-lg leading-relaxed text-secondary-foreground/70 md:text-xl">{t.events.description}</p>
           </motion.div>
         </div>
@@ -75,18 +75,18 @@ const EventsPage = () => {
             initial={{ opacity: 0, y: 24 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={revealViewport}
-            className="glass-card-light rounded-3xl p-8 text-center md:p-12"
+            className="glass-card-light rounded-[1.5rem] p-5 text-center sm:rounded-3xl sm:p-8 md:p-12"
           >
             <div className="mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-2xl bg-primary/10 text-primary">
               <CalendarDays className="h-8 w-8" />
             </div>
-            <h2 className="text-2xl font-heading font-bold text-foreground md:text-3xl">{copy.title}</h2>
+            <h2 className="font-heading text-2xl font-bold leading-tight text-foreground md:text-3xl">{copy.title}</h2>
             <p className="mx-auto mt-4 max-w-2xl leading-relaxed text-muted-foreground">{copy.description}</p>
             <Link
               to="/contact"
-              className="mt-8 inline-flex items-center gap-2 rounded-xl bg-primary px-6 py-3 font-semibold text-primary-foreground transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-primary/30"
+              className="mt-8 inline-flex items-center justify-center gap-2 rounded-xl bg-primary px-6 py-3 font-semibold text-primary-foreground transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-primary/30"
             >
-              {copy.cta} <ArrowRight className="h-4 w-4" />
+              {copy.cta} <ArrowRight className="h-4 w-4 shrink-0" />
             </Link>
           </motion.div>
         </div>

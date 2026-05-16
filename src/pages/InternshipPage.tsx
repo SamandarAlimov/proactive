@@ -43,26 +43,26 @@ const InternshipPage = () => {
           <SourceBackLink variant="dark" />
           <div className="text-center">
           <motion.span initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="text-sm font-semibold text-primary uppercase tracking-widest">{t.internship.title}</motion.span>
-          <motion.h1 initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }} className="text-4xl md:text-6xl font-heading font-bold mt-4">{t.internship.subtitle}</motion.h1>
+          <motion.h1 initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }} className="mt-4 font-heading text-4xl font-bold leading-tight md:text-6xl">{t.internship.subtitle}</motion.h1>
           </div>
         </div>
       </section>
 
       <section className="section-padding">
         <div className="max-w-7xl mx-auto">
-          <div className="grid lg:grid-cols-2 gap-16 items-center">
+          <div className="grid items-center gap-10 lg:grid-cols-2 lg:gap-16">
             <motion.div
               initial={{ opacity: 0, x: -30 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={revealViewport}
               transition={{ delay: 0.2 }}
             >
-              <p className="text-lg text-muted-foreground leading-relaxed mb-8">{t.internship.description}</p>
+              <p className="mb-8 text-base leading-relaxed text-muted-foreground md:text-lg">{t.internship.description}</p>
               <Link
                 to="/contact"
-                className="inline-flex items-center gap-2 px-8 py-4 rounded-xl bg-primary text-primary-foreground font-semibold transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-primary/30"
+                className="inline-flex items-center justify-center gap-2 rounded-xl bg-primary px-8 py-4 font-semibold text-primary-foreground transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-primary/30"
               >
-                <GraduationCap className="w-5 h-5" />
+                <GraduationCap className="h-5 w-5 shrink-0" />
                 {t.internship.cta}
               </Link>
             </motion.div>
@@ -76,12 +76,12 @@ const InternshipPage = () => {
                   viewport={revealViewport}
                   transition={{ delay: 0.3 + i * 0.15 }}
                   whileHover={{ x: 4 }}
-                  className="glass-card-light rounded-2xl p-6 flex items-start gap-5 group hover:shadow-lg transition-shadow duration-300"
+                  className="glass-card-light group flex min-w-0 items-start gap-4 rounded-2xl p-5 transition-shadow duration-300 hover:shadow-lg sm:gap-5 sm:p-6"
                 >
-                  <div className="w-12 h-12 rounded-xl bg-secondary flex items-center justify-center flex-shrink-0 transition-transform duration-300 group-hover:scale-105">
+                  <div className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-xl bg-secondary transition-transform duration-300 group-hover:scale-105">
                     <f.icon className="w-6 h-6 text-secondary-foreground" />
                   </div>
-                  <div>
+                  <div className="min-w-0">
                     <h4 className="font-heading font-bold text-foreground text-lg">{f.title}</h4>
                     <p className="text-muted-foreground text-sm mt-1">{f.desc}</p>
                   </div>

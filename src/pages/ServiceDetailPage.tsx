@@ -152,7 +152,7 @@ const ServiceDetailPage = () => {
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="flex flex-col gap-6 md:flex-row md:items-center md:gap-8"
+            className="flex min-w-0 flex-col gap-6 md:flex-row md:items-center md:gap-8"
           >
             <div className="flex items-center gap-5">
               <div
@@ -174,7 +174,7 @@ const ServiceDetailPage = () => {
                 <Icon className="h-8 w-8 text-white md:h-10 md:w-10" />
               </div>
             </div>
-            <h1 className="font-heading text-3xl font-bold leading-[1.05] tracking-tight text-foreground md:text-5xl lg:text-6xl">
+            <h1 className="min-w-0 font-heading text-3xl font-bold leading-[1.05] tracking-tight text-foreground md:text-5xl lg:text-6xl">
               {content.title}
             </h1>
           </motion.div>
@@ -262,7 +262,7 @@ const ServiceDetailPage = () => {
             }}
           >
             <div className="mb-3 text-xs font-semibold uppercase tracking-widest text-muted-foreground">{L.next}</div>
-            <div className="mb-6 flex items-center gap-3">
+            <div className="mb-6 flex min-w-0 flex-wrap items-center gap-3">
               <span
                 className="font-heading text-3xl font-bold tabular-nums"
                 style={{
@@ -272,7 +272,7 @@ const ServiceDetailPage = () => {
               >
                 {next.number}
               </span>
-              <div className="font-heading text-2xl font-bold leading-tight text-foreground md:text-3xl">
+              <div className="min-w-0 font-heading text-2xl font-bold leading-tight text-foreground md:text-3xl">
                 {nextContent.title}
               </div>
             </div>

@@ -3,15 +3,15 @@ import { ExternalLink, ArrowRight } from 'lucide-react';
 import { Link, useLocation } from 'react-router-dom';
 import { useI18n } from '@/lib/i18n';
 import { useScrollAnimation } from '@/hooks/useScrollAnimation';
-import marfImg from '@/assets/marf-project.png';
-import milestoneHero from '@/assets/projects/milestone/milestone-hero.webp';
-import { clientList } from '@/lib/client-list';
+import marfLogo from '@/assets/clients/marf.png';
+import milestoneLogo from '@/assets/clients/milestone.png';
 import { createMainSectionState } from '@/lib/source-navigation';
 
 type FeaturedProject = {
   title: string;
   category: string;
-  image: string;
+  logo: string;
+  logoClassName?: string;
   description: string;
   tags: string[];
   color: string;
@@ -23,7 +23,6 @@ const Projects = () => {
   const { ref, getMotionProps } = useScrollAnimation();
   const location = useLocation();
 
-  const allProjects = clientList;
   const projectsPageState = createMainSectionState('projects', lang);
   const projectDetailState = {
     from: `${location.pathname}${location.search}#projects`,
@@ -34,7 +33,8 @@ const Projects = () => {
     {
       title: 'MARF',
       category: 'Product Market Fit & Brand Platform',
-      image: marfImg,
+      logo: marfLogo,
+      logoClassName: 'max-h-24',
       description:
         lang === 'uz'
           ? "MARF uchun maktab formasi bozori yo'nalishida product-market fit, brend platformasi va bozorga chiqish asosi ishlab chiqildi."
@@ -48,7 +48,8 @@ const Projects = () => {
     {
       title: 'Milestone International School',
       category: 'Go-To-Market, Brand Platform & Admissions System',
-      image: milestoneHero,
+      logo: milestoneLogo,
+      logoClassName: 'max-h-32',
       description:
         lang === 'uz'
           ? "Milestone International School uchun nol holatdan boshlab brand platforma, qabul strategiyasi, CRM va ichki sotuv-marketing tizimi qurildi."
@@ -82,7 +83,7 @@ const Projects = () => {
           <h2 className="mt-6 text-3xl font-heading font-bold tracking-tight text-foreground md:text-5xl">{t.projects.title}</h2>
         </motion.div>
 
-        <div className="mb-16 space-y-8">
+        <div className="space-y-8">
           {featured.map((project, i) => (
             <FeaturedCard
               key={project.title}
@@ -95,29 +96,7 @@ const Projects = () => {
           ))}
         </div>
 
-        <motion.div {...getMotionProps({ distance: 18, delay: 0.5 })}>
-          <h3 className="mb-6 text-center text-xl font-heading font-bold text-foreground">
-            {lang === 'uz' ? 'Barcha loyihalar' : lang === 'ru' ? 'Все проекты' : 'All Projects'}
-          </h3>
-          <div className="flex flex-wrap justify-center gap-3">
-            {allProjects.map((name, i) => (
-              <motion.span
-                key={name}
-                {...getMotionProps({ distance: 12, delay: 0.5 + i * 0.02, scale: 0.94 })}
-                className="cursor-default rounded-full border px-4 py-2 text-sm font-medium leading-relaxed transition-all duration-300 hover:-translate-y-0.5"
-                style={{
-                  borderColor: 'hsla(166, 75%, 61%, 0.15)',
-                  background: 'hsla(166, 75%, 61%, 0.04)',
-                  color: 'hsl(var(--foreground))',
-                }}
-              >
-                {name}
-              </motion.span>
-            ))}
-          </div>
-        </motion.div>
-
-        <motion.div {...getMotionProps({ distance: 18, delay: 0.6 })} className="mt-14 text-center">
+        <motion.div {...getMotionProps({ distance: 18, delay: 0.5 })} className="mt-12 text-center">
           <Link
             to="/projects"
             state={projectsPageState}
@@ -153,14 +132,24 @@ const FeaturedCard = ({
     >
       <div className={`grid gap-0 lg:grid-cols-2 ${index % 2 === 1 ? 'lg:[direction:rtl]' : ''}`}>
         <div className="relative overflow-hidden">
-          <div className="relative h-full min-h-[240px] overflow-hidden sm:min-h-[280px] md:min-h-[360px]">
-            <img
-              src={project.image}
-              alt={project.title}
-              loading="lazy"
-              decoding="async"
-              className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.025]"
-            />
+          <div
+            className="relative flex h-full min-h-[240px] items-center justify-center overflow-hidden p-6 sm:min-h-[280px] sm:p-8 md:min-h-[360px]"
+            style={{
+              background:
+                'radial-gradient(circle at 50% 30%, hsla(166, 75%, 61%, 0.18), transparent 48%), linear-gradient(135deg, hsla(202, 100%, 11%, 0.94), hsla(204, 47%, 28%, 0.9))',
+            }}
+          >
+            <div className="absolute inset-0 opacity-30 [background-image:linear-gradient(rgba(255,255,255,0.08)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.08)_1px,transparent_1px)] [background-size:42px_42px]" />
+            <div className="relative flex aspect-[16/10] w-full max-w-[26rem] items-center justify-center rounded-[1.75rem] border border-white/60 bg-white/90 p-8 shadow-[0_24px_80px_rgba(0,0,0,0.22)] transition-transform duration-700 group-hover:scale-[1.015]">
+              <div className="absolute inset-0 rounded-[1.75rem] bg-[radial-gradient(circle_at_top_right,rgba(82,230,200,0.14),transparent_42%)]" />
+              <img
+                src={project.logo}
+                alt={`${project.title} logo`}
+                loading="lazy"
+                decoding="async"
+                className={`relative w-full object-contain drop-shadow-[0_12px_28px_rgba(0,37,58,0.14)] ${project.logoClassName || 'max-h-28'}`}
+              />
+            </div>
           </div>
         </div>
 

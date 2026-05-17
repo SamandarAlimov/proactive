@@ -7,7 +7,9 @@ import SEO from '@/components/SEO';
 import { createBreadcrumbSchema, createCreativeWorkSchema, createWebPageSchema } from '@/lib/seo';
 import { revealViewport } from '@/lib/motion';
 import marfImg from '@/assets/marf-project.png';
-import proactiveLogo from '@/assets/proactive-logo.jpg';
+import marfLogo from '@/assets/clients/marf.png';
+import aurusPharmLogo from '@/assets/clients/AurusPharm.png';
+import milestoneLogo from '@/assets/clients/milestone.png';
 import aurusHero from '@/assets/projects/aurus/aurus-hero.webp';
 import aurusGallery01 from '@/assets/projects/aurus/aurus-gallery-01.webp';
 import aurusGallery02 from '@/assets/projects/aurus/aurus-gallery-02.webp';
@@ -55,7 +57,8 @@ type ProjectTeaser = {
   slug: string;
   title: string;
   category: string;
-  image: string | null;
+  logo: string;
+  logoClassName?: string;
   tags: string[];
 };
 
@@ -472,21 +475,24 @@ const projectTeasers: ProjectTeaser[] = [
     slug: 'marf',
     title: 'MARF',
     category: 'Product Market Fit & Brand Platform',
-    image: marfImg,
+    logo: marfLogo,
+    logoClassName: 'max-h-20',
     tags: ['Product Market Fit', 'Brand Platform', 'Go-To-Market'],
   },
   {
     slug: 'milestone-is',
     title: 'Milestone International School',
     category: 'Go-To-Market, Brand Platform & Admissions System',
-    image: milestoneHero,
+    logo: milestoneLogo,
+    logoClassName: 'max-h-24',
     tags: ['Education', 'Brand Platform', 'Admissions Strategy'],
   },
   {
     slug: 'aurus-pharm',
     title: 'Aurus Pharm',
     category: 'Brand Platform, Packaging & Marketing Operations',
-    image: aurusHero,
+    logo: aurusPharmLogo,
+    logoClassName: 'max-h-20',
     tags: ['Pharma', 'Brand Platform', 'Marketing Operations'],
   },
 ];
@@ -846,34 +852,23 @@ const ProjectDetailPage = () => {
                 >
                   <Link to={`/projects/${item.slug}`} state={projectNavigationState} className="block h-full">
                     <article className="glass-card-light h-full overflow-hidden rounded-[1.6rem] transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
-                      <div className="relative h-44 overflow-hidden">
-                        {item.image ? (
+                      <div
+                        className="relative flex h-44 items-center justify-center overflow-hidden p-5"
+                        style={{
+                          background:
+                            'radial-gradient(circle at 50% 28%, hsla(166, 75%, 61%, 0.16), transparent 46%), linear-gradient(135deg, hsla(202, 100%, 11%, 0.94), hsla(204, 47%, 28%, 0.9))',
+                        }}
+                      >
+                        <div className="relative flex h-full w-full items-center justify-center rounded-[1.35rem] border border-white/70 bg-white/[0.92] p-6 shadow-[0_18px_50px_rgba(0,0,0,0.18)] transition-transform duration-700 group-hover:scale-[1.02]">
+                          <div className="absolute inset-0 rounded-[1.35rem] bg-[radial-gradient(circle_at_top_right,rgba(82,230,200,0.12),transparent_44%)]" />
                           <img
-                            src={item.image}
-                            alt={item.title}
+                            src={item.logo}
+                            alt={`${item.title} logo`}
                             loading="lazy"
                             decoding="async"
-                            className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.025]"
+                            className={`relative w-full object-contain drop-shadow-[0_10px_24px_rgba(0,37,58,0.14)] ${item.logoClassName || 'max-h-20'}`}
                           />
-                        ) : (
-                          <div
-                            className="relative flex h-full w-full items-center justify-center overflow-hidden"
-                            style={{
-                              background:
-                                'linear-gradient(135deg, hsla(204, 47%, 28%, 0.94) 0%, hsla(202, 100%, 11%, 0.98) 100%)',
-                            }}
-                          >
-                            <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_30%,rgba(82,230,200,0.18),transparent_48%)]" />
-                            <img
-                              src={proactiveLogo}
-                              alt=""
-                              aria-hidden="true"
-                              loading="lazy"
-                              decoding="async"
-                              className="relative h-14 w-14 rounded-2xl object-cover opacity-90 shadow-[0_14px_34px_rgba(0,0,0,0.18)]"
-                            />
-                          </div>
-                        )}
+                        </div>
                       </div>
 
                       <div className="p-5">

@@ -313,10 +313,10 @@ const translations = {
       apply: "Ariza topshirish",
     },
     internship: {
-      title: "Onlayn stajirovka",
+      title: "Stajirovka",
       subtitle: "Marketing sohasida o'z karerangizni boshlang",
       description:
-        "Proactive Academy marketing, brending va strategiya bo'yicha amaliy bilimlar olish imkoniyatini beradi. Professional mentorlar bilan ishlang va real loyihalarda tajriba orttiring.",
+        "Proactive Agency amaliy bilimlar olish imkoniyatini beradi. Professional mentorlar bilan ishlang va real loyihalarda tajriba orttiring.",
       cta: "Ro'yxatdan o'tish",
       benefits: "Afzalliklar",
     },

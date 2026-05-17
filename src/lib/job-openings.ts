@@ -1,6 +1,6 @@
 import type { Language } from '@/lib/i18n';
 
-export type JobOpeningId = 'internship' | 'pm' | 'researcher';
+export type JobOpeningId = 'internship' | 'project-manager' | 'researcher';
 
 type LocalizedText = Record<Language, string>;
 
@@ -38,11 +38,11 @@ export const jobOpenings: JobOpening[] = [
     ],
   },
   {
-    id: 'pm',
+    id: 'project-manager',
     title: {
-      uz: 'PM',
-      en: 'PM',
-      ru: 'PM',
+      uz: 'Project Manager',
+      en: 'Project Manager',
+      ru: 'Project Manager',
     },
     summary: {
       uz: 'Loyiha muddatlari, jamoa koordinatsiyasi va mijoz bilan ish jarayonini tartibda ushlab boradigan yo‘nalish.',

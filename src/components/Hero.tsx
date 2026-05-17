@@ -9,10 +9,8 @@ import { cn } from '@/lib/utils';
 const Hero = () => {
   const { t } = useI18n();
   const shouldReduceMotion = useReducedMotion();
-  const heroLogoRows = [1, 2, 3].map((row) =>
-    heroClientLogos.filter((client) => client.heroRow === row),
-  );
-  const heroRowDurations = ['46s', '52s', '48s'];
+  const heroLogoRows = [heroClientLogos, heroClientLogos, heroClientLogos];
+  const heroRowDurations = ['96s', '108s', '102s'];
   const renderHeroLogo = (client: (typeof heroClientLogos)[number], copyIndex: number) => (
     <div
       key={`${client.name}-${copyIndex}`}

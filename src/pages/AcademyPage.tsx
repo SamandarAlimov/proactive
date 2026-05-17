@@ -2,7 +2,6 @@ import PageLayout from '@/components/PageLayout';
 import SEO from '@/components/SEO';
 import SourceBackLink from '@/components/SourceBackLink';
 import { motion } from 'framer-motion';
-import { Link } from 'react-router-dom';
 import { useI18n } from '@/lib/i18n';
 import { revealViewport } from '@/lib/motion';
 import {
@@ -29,9 +28,12 @@ import {
   Workflow,
 } from 'lucide-react';
 import academySpeaker from '@/assets/academy-speaker.jpg';
+import marketingMaximumLogo from '@/assets/marketing-maximum-logo.png';
 
 type LangKey = 'uz' | 'en' | 'ru';
 type Localized = Record<LangKey, string>;
+
+const marketingMaximumTelegram = 'https://t.me/marketingmaximum_rasmiy';
 
 const pageCopy: Record<LangKey, Record<string, string>> = {
   uz: {
@@ -59,8 +61,8 @@ const pageCopy: Record<LangKey, Record<string, string>> = {
     quotes: "O'quvchilar fikri",
     quotesDescription: "Asosiy e'tirof: kurs marketingga kengroq va tizimli qarashni beradi.",
     finalTitle: "Marketingni tizimli o'rganishga tayyormisiz?",
-    finalDescription: "Kurs dasturi, qatnashish formati va boshlanish sanasi bo'yicha batafsil ma'lumot olish uchun biz bilan bog'laning.",
-    finalCta: "Bog'lanish",
+    finalDescription: "Kurs dasturi, qatnashish formati va boshlanish sanasi bo'yicha batafsil ma'lumotni Telegram orqali oling.",
+    finalCta: "Telegram orqali yozilish",
   },
   en: {
     eyebrow: 'Marketing Maximum',
@@ -86,8 +88,8 @@ const pageCopy: Record<LangKey, Record<string, string>> = {
     quotes: 'Student feedback',
     quotesDescription: 'The core takeaway: the course builds a broader and more systematic marketing mindset.',
     finalTitle: 'Ready to learn marketing as a real system?',
-    finalDescription: 'Reach out to get full details about the program, participation format, and the next intake.',
-    finalCta: 'Contact us',
+    finalDescription: 'Open the Telegram channel to get full details about the program, participation format, and the next intake.',
+    finalCta: 'Apply via Telegram',
   },
   ru: {
     eyebrow: 'Marketing Maximum',
@@ -114,8 +116,8 @@ const pageCopy: Record<LangKey, Record<string, string>> = {
     quotes: 'Отзывы студентов',
     quotesDescription: 'Главный вывод: курс дает более широкое и системное понимание маркетинга.',
     finalTitle: 'Готовы изучать маркетинг как систему?',
-    finalDescription: 'Свяжитесь с нами, чтобы получить подробности о программе, формате участия и ближайшем наборе.',
-    finalCta: 'Связаться',
+    finalDescription: 'Откройте Telegram-канал, чтобы получить подробности о программе, формате участия и ближайшем наборе.',
+    finalCta: 'Записаться через Telegram',
   },
 };
 
@@ -409,27 +411,62 @@ const AcademyPage = () => {
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(103,248,214,0.18),transparent_34%),radial-gradient(circle_at_bottom_left,rgba(103,248,214,0.12),transparent_28%)]" />
         <div className="relative mx-auto max-w-7xl px-6 py-20 md:px-10 md:py-24">
           <SourceBackLink variant="dark" />
-          <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.55 }}>
-            <span className="text-sm font-semibold uppercase tracking-[0.32em] text-[#74f2d8]">{text.eyebrow}</span>
-            <h1 className="mt-5 max-w-5xl font-heading text-4xl font-bold leading-tight md:text-6xl lg:text-7xl">{text.title}</h1>
-            <p className="mt-6 max-w-3xl text-lg leading-relaxed text-white/75 md:text-xl">{text.description}</p>
-            <div className="mt-10 flex flex-wrap gap-4">
-              <Link
-                to="/contact"
-                className="inline-flex items-center gap-2 rounded-2xl bg-[#74f2d8] px-6 py-3 text-sm font-semibold text-[#082233] transition-transform duration-300 hover:-translate-y-0.5"
-              >
-                <Send className="h-4 w-4" />
-                {text.apply}
-              </Link>
-              <a
-                href="#academy-modules"
-                className="inline-flex items-center gap-2 rounded-2xl border border-white/15 bg-white/5 px-6 py-3 text-sm font-semibold text-white transition-colors duration-300 hover:bg-white/10"
-              >
-                <ArrowRight className="h-4 w-4" />
-                {text.modules}
-              </a>
-            </div>
-          </motion.div>
+          <div className="grid gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(300px,0.45fr)] lg:items-center">
+            <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.55 }}>
+              <span className="text-sm font-semibold uppercase tracking-[0.32em] text-[#74f2d8]">{text.eyebrow}</span>
+              <h1 className="mt-5 max-w-5xl font-heading text-4xl font-bold leading-tight md:text-6xl lg:text-7xl">{text.title}</h1>
+              <p className="mt-6 max-w-3xl text-lg leading-relaxed text-white/75 md:text-xl">{text.description}</p>
+              <div className="mt-10 flex flex-wrap gap-4">
+                <a
+                  href={marketingMaximumTelegram}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 rounded-2xl bg-[#74f2d8] px-6 py-3 text-sm font-semibold text-[#082233] transition-transform duration-300 hover:-translate-y-0.5"
+                >
+                  <Send className="h-4 w-4" />
+                  {text.apply}
+                </a>
+                <a
+                  href="#academy-modules"
+                  className="inline-flex items-center gap-2 rounded-2xl border border-white/15 bg-white/5 px-6 py-3 text-sm font-semibold text-white transition-colors duration-300 hover:bg-white/10"
+                >
+                  <ArrowRight className="h-4 w-4" />
+                  {text.modules}
+                </a>
+              </div>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, x: 24 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.6, delay: 0.12 }}
+              className="relative min-w-0"
+            >
+              <div className="relative overflow-hidden rounded-[2rem] border border-white/12 bg-[linear-gradient(145deg,rgba(255,255,255,0.94),rgba(185,255,245,0.72))] p-6 shadow-[0_28px_90px_rgba(0,0,0,0.26)] sm:p-7">
+                <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(82,230,200,0.24),transparent_46%)]" />
+                <div className="relative flex aspect-[4/3] items-center justify-center rounded-[1.5rem] border border-[#00364a]/10 bg-white/45 p-6">
+                  <img
+                    src={marketingMaximumLogo}
+                    alt="Marketing Maximum logo"
+                    className="max-h-44 w-full object-contain drop-shadow-[0_16px_34px_rgba(0,37,58,0.18)]"
+                  />
+                </div>
+                <div className="relative mt-5 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+                  <span className="font-brand text-xs font-semibold uppercase tracking-[0.24em] text-[#00364a]/70">
+                    Marketing Maximum
+                  </span>
+                  <a
+                    href={marketingMaximumTelegram}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 text-sm font-semibold text-[#00364a] transition-colors duration-300 hover:text-[#008f7b]"
+                  >
+                    Telegram <ArrowRight className="h-4 w-4" />
+                  </a>
+                </div>
+              </div>
+            </motion.div>
+          </div>
 
           <div className="mt-14 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
             {statItems.map((item, index) => (
@@ -704,13 +741,15 @@ const AcademyPage = () => {
             <Sparkles className="mx-auto h-8 w-8 text-primary" />
             <h2 className="mt-6 font-heading text-3xl font-bold text-foreground md:text-5xl">{text.finalTitle}</h2>
             <p className="mx-auto mt-6 max-w-3xl text-lg leading-relaxed text-muted-foreground">{text.finalDescription}</p>
-            <Link
-              to="/contact"
+            <a
+              href={marketingMaximumTelegram}
+              target="_blank"
+              rel="noopener noreferrer"
               className="mt-10 inline-flex items-center gap-2 rounded-2xl bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground transition-transform duration-300 hover:-translate-y-0.5"
             >
               <Send className="h-4 w-4" />
               {text.finalCta}
-            </Link>
+            </a>
           </motion.div>
         </div>
       </section>

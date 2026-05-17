@@ -1,10 +1,12 @@
 import { motion } from 'framer-motion';
 import { ArrowRight, BadgeCheck, BookOpen, Clock3, GraduationCap, LayoutGrid, Users } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import academySpeaker from '@/assets/academy-speaker.jpg';
+import marketingMaximumLogo from '@/assets/marketing-maximum-logo.png';
 import { useScrollAnimation } from '@/hooks/useScrollAnimation';
 import { useI18n, type Language } from '@/lib/i18n';
 import { createMainSectionState } from '@/lib/source-navigation';
+
+const marketingMaximumTelegram = 'https://t.me/marketingmaximum_rasmiy';
 
 const copy = {
   uz: {
@@ -14,7 +16,7 @@ const copy = {
       'Kurs marketingni faqat reklama yoki kontent sifatida emas, balki tahlil, strategiya, reja, ijro va nazoratdan iborat boshqaruv tizimi sifatida o‘rgatadi.',
     primary: 'Kurs haqida',
     secondary: 'Kursga yozilish',
-    imageAlt: "Marketing Maximum kursi spikeri",
+    imageAlt: 'Marketing Maximum kursi logosi',
   },
   en: {
     eyebrow: 'Marketing Maximum',
@@ -23,7 +25,7 @@ const copy = {
       'The course teaches marketing not as ads or content alone, but as a management system built from analysis, strategy, planning, execution and control.',
     primary: 'About the course',
     secondary: 'Apply for the course',
-    imageAlt: 'Marketing Maximum course speaker',
+    imageAlt: 'Marketing Maximum course logo',
   },
   ru: {
     eyebrow: 'Marketing Maximum',
@@ -32,7 +34,7 @@ const copy = {
       'Курс показывает маркетинг не только как рекламу или контент, а как систему управления: анализ, стратегия, планирование, исполнение и контроль.',
     primary: 'О курсе',
     secondary: 'Записаться',
-    imageAlt: 'Спикер курса Marketing Maximum',
+    imageAlt: 'Логотип курса Marketing Maximum',
   },
 } satisfies Record<Language, Record<string, string>>;
 
@@ -129,18 +131,32 @@ const MarketingMaximum = () => {
             >
               {text.primary} <ArrowRight className="h-4 w-4" />
             </Link>
-            <Link
-              to="/contact"
+            <a
+              href={marketingMaximumTelegram}
+              target="_blank"
+              rel="noopener noreferrer"
               className="inline-flex items-center justify-center rounded-xl border border-white/20 px-6 py-3 font-semibold text-white/90 transition-all duration-300 hover:border-primary/60 hover:text-primary"
             >
               {text.secondary}
-            </Link>
+            </a>
           </div>
         </motion.div>
 
         <motion.div {...getMotionProps({ axis: 'x', distance: 32, duration: 0.7, delay: 0.15 })} className="relative min-w-0">
-          <div className="overflow-hidden rounded-[2rem] border border-white/10 bg-white/[0.04] shadow-2xl shadow-black/20">
-            <img src={academySpeaker} alt={text.imageAlt} className="aspect-[4/5] w-full object-cover" />
+          <div className="relative overflow-hidden rounded-[2rem] border border-white/15 bg-[linear-gradient(145deg,rgba(255,255,255,0.92),rgba(185,255,245,0.76))] p-7 shadow-2xl shadow-black/20 sm:p-8">
+            <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(82,230,200,0.22),transparent_45%)]" />
+            <div className="relative flex aspect-[4/5] w-full items-center justify-center rounded-[1.5rem] border border-[#00364a]/10 bg-white/45 p-6">
+              <img
+                src={marketingMaximumLogo}
+                alt={text.imageAlt}
+                className="max-h-[72%] w-full object-contain drop-shadow-[0_16px_34px_rgba(0,37,58,0.18)]"
+              />
+            </div>
+            <div className="relative mt-5 text-center">
+              <p className="font-brand text-xs font-semibold uppercase tracking-[0.28em] text-[#00364a]/70">
+                Marketing Maximum
+              </p>
+            </div>
           </div>
           <div className="mt-4 grid grid-cols-2 gap-3">
             {stats.map((item) => {

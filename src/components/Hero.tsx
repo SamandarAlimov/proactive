@@ -22,11 +22,31 @@ const Hero = () => {
 
     return 'border-white/60 bg-white/[0.9] shadow-[0_14px_32px_rgba(0,0,0,0.18)]';
   };
-  const renderHeroLogo = (client: (typeof heroClientLogos)[number], compact = false) => (
-    <div
+  const getHeroLogoFloat = (index: number) => {
+    const drift = 3 + (index % 4);
+    const sideDrift = index % 2 === 0 ? 1.5 : -1.5;
+    const tilt = index % 2 === 0 ? 0.35 : -0.35;
+
+    return {
+      y: [0, -drift, 0, drift * 0.42, 0],
+      x: [0, sideDrift, 0, -sideDrift * 0.45, 0],
+      rotate: [0, tilt, 0, -tilt, 0],
+    };
+  };
+  const getHeroLogoTransition = (index: number) => ({
+    duration: 7.5 + (index % 5) * 0.45,
+    delay: index * 0.08,
+    repeat: Infinity,
+    ease: 'easeInOut' as const,
+  });
+  const renderHeroLogo = (client: (typeof heroClientLogos)[number], compact = false, index = 0) => (
+    <motion.div
       key={client.name}
+      animate={shouldReduceMotion ? undefined : getHeroLogoFloat(index)}
+      transition={shouldReduceMotion ? undefined : getHeroLogoTransition(index)}
+      whileHover={shouldReduceMotion ? undefined : { y: -6, scale: 1.025 }}
       className={cn(
-        'flex h-12 flex-shrink-0 items-center justify-center rounded-xl border px-3 py-2 backdrop-blur-md transition duration-300 hover:-translate-y-0.5 hover:shadow-[0_18px_42px_rgba(0,0,0,0.24)] sm:h-14 sm:px-4',
+        'flex h-12 flex-shrink-0 items-center justify-center rounded-xl border px-3 py-2 backdrop-blur-md transition-shadow duration-300 will-change-transform hover:shadow-[0_18px_42px_rgba(0,0,0,0.24)] sm:h-14 sm:px-4',
         getHeroTileTone(client.heroTone),
         compact ? 'w-full' : client.heroTileClassName,
       )}
@@ -41,7 +61,7 @@ const Hero = () => {
           client.heroImageClassName,
         )}
       />
-    </div>
+    </motion.div>
   );
 
   return (
@@ -127,7 +147,7 @@ const Hero = () => {
           <p className="mb-4 text-xs font-semibold uppercase tracking-[0.2em] text-white/80 md:mb-5">{t.hero.trustedBy}</p>
           <div className="relative mx-auto max-w-6xl">
             <div className="grid grid-cols-2 gap-2.5 sm:grid-cols-3 md:grid-cols-4 xl:hidden">
-              {heroClientLogos.map((client) => renderHeroLogo(client, true))}
+              {heroClientLogos.map((client, index) => renderHeroLogo(client, true, index))}
             </div>
 
             <div className="hidden space-y-3 xl:block">
@@ -140,7 +160,7 @@ const Hero = () => {
                     rowIndex === 2 && 'xl:translate-x-4',
                   )}
                 >
-                  {row.map((client) => renderHeroLogo(client))}
+                  {row.map((client, index) => renderHeroLogo(client, false, rowIndex * 7 + index))}
                 </div>
               ))}
             </div>

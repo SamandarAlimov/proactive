@@ -26,16 +26,22 @@ const founderWorkLogos = [
     name: 'Chortoq',
     logo: chortoqLogo,
     imageClassName: 'max-h-14 sm:max-h-16',
+    tileClassName:
+      'border-secondary/10 bg-white shadow-[0_12px_28px_rgba(38,79,107,0.10)] hover:border-primary/25 hover:shadow-[0_18px_38px_rgba(38,79,107,0.16)]',
   },
   {
     name: 'MFaktor',
     logo: mfaktorLogo,
     imageClassName: 'max-h-11 sm:max-h-12',
+    tileClassName:
+      'border-white/10 bg-[linear-gradient(135deg,hsl(202,100%,11%),hsl(204,47%,20%))] shadow-[0_12px_28px_rgba(0,37,58,0.18)] hover:border-primary/35 hover:shadow-[0_18px_38px_rgba(0,37,58,0.24)]',
   },
   {
     name: 'Samsung',
     logo: samsungLogo,
     imageClassName: 'max-h-14 sm:max-h-16',
+    tileClassName:
+      'border-secondary/10 bg-white shadow-[0_12px_28px_rgba(38,79,107,0.10)] hover:border-primary/25 hover:shadow-[0_18px_38px_rgba(38,79,107,0.16)]',
   },
 ];
 
@@ -74,8 +80,9 @@ const FounderWorkLogos = ({ className, variant = 'panel' }: FounderWorkLogosProp
             <div
               key={item.name}
               className={cn(
-                'group flex h-16 min-w-0 items-center justify-center rounded-2xl border border-white/10 bg-[linear-gradient(135deg,hsl(202,100%,11%),hsl(204,47%,20%))] px-3 py-2.5 shadow-[0_12px_28px_rgba(0,37,58,0.18)] transition duration-300 hover:-translate-y-0.5 hover:border-primary/35 hover:shadow-[0_18px_38px_rgba(0,37,58,0.24)]',
+                'group flex h-16 min-w-0 items-center justify-center rounded-2xl border px-3 py-2.5 transition duration-300 hover:-translate-y-0.5',
                 variant === 'panel' && 'sm:h-[4.75rem] sm:px-4',
+                item.tileClassName,
               )}
             >
               <img

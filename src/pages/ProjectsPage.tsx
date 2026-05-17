@@ -75,8 +75,6 @@ const ProjectsPage = () => {
             : 'Delivered a full-scope project for Aurus Pharm covering BFQ market analysis, packaging redesign, brand platform development, and marketing operations systemization.',
       tags: ['Pharma', 'Brand Platform', 'Packaging Design', 'Marketing Operations'],
     },
-    { slug: 'dilmuss', title: 'Dilmuss', category: 'Brending', image: null, tags: ['Branding', 'Visual Identity'] },
-    { slug: 'taxtakon', title: 'Taxtakon', category: 'Marketing', image: null, tags: ['Marketing Strategy'] },
     { slug: 'najot-nur', title: 'Najot Nur', category: 'Marketing & Brending', image: null, tags: ['Education', 'Branding'] },
     { slug: 'merit-chemicals', title: 'Merit Chemicals', category: 'Strategy', image: null, tags: ['Strategy', 'Market Analysis'] },
     { slug: 'zahratun', title: 'Zahratun', category: 'Marketing', image: null, tags: ['Retail', 'Marketing'] },
@@ -88,9 +86,6 @@ const ProjectsPage = () => {
     { slug: 'oxus-university', title: 'OXUS University', category: 'Marketing & Brending', image: null, tags: ['Education'] },
     { slug: 'mobetco', title: 'MobetCo', category: 'Marketing', image: null, tags: ['Marketing'] },
     { slug: 'president-gifts', title: 'President Gifts', category: 'Brending', image: null, tags: ['Branding'] },
-    { slug: 'sfera', title: 'Sfera', category: 'Marketing', image: null, tags: ['Marketing'] },
-    { slug: 'tima', title: 'Tima', category: 'Brending', image: null, tags: ['Branding'] },
-    { slug: 'zafaron', title: "Za'faron", category: 'Marketing', image: null, tags: ['Marketing', 'Strategy'] },
   ];
   const projectDetailState = {
     from: `${location.pathname}${location.search}${location.hash}`,

@@ -454,8 +454,6 @@ const projectsData: Record<string, ProjectDetail> = {
 const genericTitles: Record<string, string> = {
   'ahmad-tea': 'Ahmad Tea',
   'bek-ota': 'Bek Ota',
-  dilmuss: 'Dilmuss',
-  taxtakon: 'Taxtakon',
   'najot-nur': 'Najot Nur',
   'merit-chemicals': 'Merit Chemicals',
   zahratun: 'Zahratun',
@@ -467,9 +465,6 @@ const genericTitles: Record<string, string> = {
   'oxus-university': 'OXUS University',
   mobetco: 'MobetCo',
   'president-gifts': 'President Gifts',
-  sfera: 'Sfera',
-  tima: 'Tima',
-  zafaron: "Za'faron",
 };
 
 const projectTeasers: ProjectTeaser[] = [

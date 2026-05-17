@@ -71,9 +71,9 @@ const Index = () => {
         <div className="relative z-10 bg-background">
           <About />
           <Services />
-          <MarketingMaximum />
           <Projects />
           <Team />
+          <MarketingMaximum />
           <Internship />
           <Contact />
           <Footer />

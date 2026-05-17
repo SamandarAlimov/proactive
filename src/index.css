@@ -202,6 +202,14 @@
     animation: brand-marquee 82s linear infinite;
   }
 
+  .hero-logo-marquee-track {
+    animation: hero-logo-marquee var(--hero-logo-marquee-duration, 48s) linear infinite;
+  }
+
+  .hero-logo-marquee-track-reverse {
+    animation-name: hero-logo-marquee-reverse;
+  }
+
   .brand-marquee-track:hover {
     animation-play-state: paused;
   }
@@ -241,8 +249,29 @@ html {
   }
 }
 
+@keyframes hero-logo-marquee {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+@keyframes hero-logo-marquee-reverse {
+  from {
+    transform: translate3d(-50%, 0, 0);
+  }
+
+  to {
+    transform: translate3d(0, 0, 0);
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
-  .brand-marquee-track {
+  .brand-marquee-track,
+  .hero-logo-marquee-track {
     animation: none;
   }
 }

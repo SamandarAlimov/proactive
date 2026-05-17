@@ -56,8 +56,6 @@ const pageCopy: Record<LangKey, Record<string, string>> = {
     processDescription: 'Kurs 2.5 oy davom etadi va darslar uzluksiz amaliy mashqlar bilan birga olib boriladi.',
     speakerEyebrow: 'Spiker va kurs muallifi',
     speakerRole: 'Asoschi, marketolog, analitik, trener',
-    brands: 'Bitiruvchilarimiz qayerlarda ishlaydi?',
-    brandsDescription: "Retail, ta'lim, xizmat ko'rsatish, tibbiyot, agentlik va media yo'nalishlaridagi yetakchi brendlar.",
     quotes: "O'quvchilar fikri",
     quotesDescription: "Asosiy e'tirof: kurs marketingga kengroq va tizimli qarashni beradi.",
     finalTitle: "Marketingni tizimli o'rganishga tayyormisiz?",
@@ -83,8 +81,6 @@ const pageCopy: Record<LangKey, Record<string, string>> = {
     processDescription: 'The course runs for 2.5 months and every lesson is paired with practical application.',
     speakerEyebrow: 'Speaker and course author',
     speakerRole: 'Founder, marketer, analyst, trainer',
-    brands: 'Where do our graduates work?',
-    brandsDescription: 'Leading brands across retail, education, service, healthcare, agency, and media sectors.',
     quotes: 'Student feedback',
     quotesDescription: 'The core takeaway: the course builds a broader and more systematic marketing mindset.',
     finalTitle: 'Ready to learn marketing as a real system?',
@@ -111,8 +107,6 @@ const pageCopy: Record<LangKey, Record<string, string>> = {
     processDescription: 'Курс длится 2,5 месяца, и каждое занятие сопровождается практической работой.',
     speakerEyebrow: 'Спикер и автор курса',
     speakerRole: 'Основатель, маркетолог, аналитик, тренер',
-    brands: 'Где работают наши выпускники?',
-    brandsDescription: 'Ведущие бренды в сферах ритейла, образования, сервиса, медицины, агентского бизнеса и медиа.',
     quotes: 'Отзывы студентов',
     quotesDescription: 'Главный вывод: курс дает более широкое и системное понимание маркетинга.',
     finalTitle: 'Готовы изучать маркетинг как систему?',
@@ -254,25 +248,6 @@ const speakerFacts = [
       ru: 'MFactor, Shark, Lelas, Najot Nur, Credit Asia, Silver Rain, Duplextel.',
     },
   },
-];
-
-const brandNames = [
-  'KochA',
-  'leti',
-  'Zaman',
-  'IDU',
-  'Impuls Tibbiyot Instituti',
-  'Qarshi International University',
-  'Zahratun',
-  'PCG',
-  'President',
-  'Plan Baby.uz',
-  "Registon O'quv Markazi",
-  'Milestone International School',
-  'JETSO',
-  'Ilm-u Ziyo',
-  'asno',
-  'OXUS University',
 ];
 
 const quotePanel = {
@@ -646,22 +621,6 @@ const AcademyPage = () => {
               ))}
             </div>
           </motion.div>
-        </div>
-      </section>
-
-      <section className="bg-background py-20">
-        <div className="mx-auto max-w-7xl px-6 md:px-10">
-          <motion.div initial={{ opacity: 0, y: 22 }} whileInView={{ opacity: 1, y: 0 }} viewport={revealViewport}>
-            <h2 className="font-heading text-3xl font-bold text-foreground md:text-5xl">{text.brands}</h2>
-            <p className="mt-5 max-w-3xl text-lg leading-relaxed text-muted-foreground">{text.brandsDescription}</p>
-          </motion.div>
-          <div className="mt-10 flex flex-wrap gap-3">
-            {brandNames.map((brand) => (
-              <div key={brand} className="rounded-full border border-border/70 bg-card px-4 py-2 text-sm font-medium text-foreground/84">
-                {brand}
-              </div>
-            ))}
-          </div>
         </div>
       </section>
 

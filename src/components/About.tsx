@@ -179,10 +179,6 @@ const About = () => {
                 </motion.div>
               ))}
 
-              <motion.div
-                {...getMotionProps({ distance: 18, delay: 0.75, scale: 0.94 })}
-                className="pointer-events-none absolute -left-10 top-12 hidden h-24 w-24 rounded-full border border-primary/10 bg-primary/5 blur-xl lg:block"
-              />
             </div>
           </motion.div>
 

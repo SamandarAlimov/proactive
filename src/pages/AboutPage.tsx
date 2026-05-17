@@ -333,7 +333,7 @@ const AboutPage = () => {
               </div>
 
               <div className="p-7 md:p-10">
-                <p className="text-[clamp(1.25rem,3vw,2.6rem)] font-medium leading-tight text-primary text-balance md:leading-[1.08]">
+                <p className="text-lg font-semibold leading-8 text-primary text-balance md:text-2xl md:leading-[1.35]">
                   {content.missionText}
                 </p>
               </div>
@@ -351,7 +351,7 @@ const AboutPage = () => {
               </div>
 
               <div className="p-7 md:p-10">
-                <p className="text-base leading-8 text-foreground/90 md:text-[1.55rem] md:leading-[1.45]">
+                <p className="text-base leading-8 text-foreground/90 md:text-xl md:leading-9">
                   {content.outlookText}
                 </p>
               </div>

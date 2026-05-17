@@ -5,14 +5,16 @@ import type { Tables, TablesInsert } from '@/integrations/supabase/types';
 import { toast } from 'sonner';
 import {
   LogOut, MessageSquare, Newspaper, Filter, Plus, Eye, Trash2,
-  Settings, Bell, Search, Clock, CheckCircle2,
-  AlertCircle, X, Save, Lock, User, RefreshCw, Mail, Phone, Calendar
+  Settings, Bell, Search, Clock,
+  AlertCircle, X, Save, Lock, User, RefreshCw, Mail, Phone, Calendar,
+  BriefcaseBusiness
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ThemeToggle } from '@/components/ThemeToggle';
 import SEO from '@/components/SEO';
+import { getJobOpeningById } from '@/lib/job-openings';
 
-type Tab = 'contacts' | 'news' | 'settings';
+type Tab = 'contacts' | 'applications' | 'news' | 'settings';
 type ContactStatus = 'all' | 'new' | 'in_progress' | 'done';
 type ContactRow = Tables<'contacts'>;
 type NewsRow = Tables<'news'>;
@@ -74,6 +76,18 @@ const createEmptyNewsForm = (): NewsFormState => ({
   content_ru: '',
   published: false,
 });
+
+const jobApplicationPattern = /^\[JOB_APPLICATION:([^\]]+)\]/;
+
+const isJobApplication = (contact: ContactRow) => jobApplicationPattern.test(contact.message);
+
+const getApplicationRole = (message: string) => {
+  const jobId = message.match(jobApplicationPattern)?.[1];
+  return jobId ? getJobOpeningById(jobId).title.uz : "Noma'lum yo'nalish";
+};
+
+const formatContactMessage = (message: string) =>
+  message.replace(jobApplicationPattern, '').replace(/^\n+/, '').trim();
 
 const Admin = () => {
   const navigate = useNavigate();
@@ -193,16 +207,35 @@ const Admin = () => {
     setChangingPassword(false);
   };
 
-  const filteredContacts = contacts.filter((c) => {
+  const regularContacts = contacts.filter((contact) => !isJobApplication(contact));
+  const jobApplications = contacts.filter(isJobApplication);
+
+  const filteredContacts = regularContacts.filter((c) => {
     const matchStatus = filterStatus === 'all' || c.status === filterStatus;
     const matchSearch = !searchQuery ||
       c.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
       c.phone.includes(searchQuery) ||
-      (c.email && c.email.toLowerCase().includes(searchQuery.toLowerCase()));
+      (c.email && c.email.toLowerCase().includes(searchQuery.toLowerCase())) ||
+      c.message.toLowerCase().includes(searchQuery.toLowerCase());
     return matchStatus && matchSearch;
   });
 
-  const newCount = contacts.filter(c => c.status === 'new').length;
+  const filteredApplications = jobApplications.filter((c) => {
+    const normalizedSearch = searchQuery.toLowerCase();
+    const role = getApplicationRole(c.message).toLowerCase();
+    const matchStatus = filterStatus === 'all' || c.status === filterStatus;
+    const matchSearch = !searchQuery ||
+      c.name.toLowerCase().includes(normalizedSearch) ||
+      c.phone.includes(searchQuery) ||
+      role.includes(normalizedSearch) ||
+      (c.email && c.email.toLowerCase().includes(normalizedSearch)) ||
+      c.message.toLowerCase().includes(normalizedSearch);
+    return matchStatus && matchSearch;
+  });
+
+  const newContactCount = regularContacts.filter(c => c.status === 'new').length;
+  const newApplicationCount = jobApplications.filter(c => c.status === 'new').length;
+  const newCount = newContactCount + newApplicationCount;
 
   if (loading) {
     return (
@@ -256,11 +289,12 @@ const Admin = () => {
 
       <div className="max-w-[1600px] mx-auto px-6 py-6">
         {/* Stats */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
+        <div className="grid grid-cols-2 md:grid-cols-5 gap-4 mb-6">
           {[
-            { label: 'Jami kontaktlar', value: contacts.length, icon: MessageSquare, color: 'text-primary' },
-            { label: 'Yangi xabarlar', value: newCount, icon: AlertCircle, color: 'text-primary' },
-            { label: 'Jarayonda', value: contacts.filter(c => c.status === 'in_progress').length, icon: Clock, color: 'text-amber-500' },
+            { label: 'Jami kontaktlar', value: regularContacts.length, icon: MessageSquare, color: 'text-primary' },
+            { label: 'Yangi xabarlar', value: newContactCount, icon: AlertCircle, color: 'text-primary' },
+            { label: 'Arizalar', value: jobApplications.length, icon: BriefcaseBusiness, color: 'text-emerald-500' },
+            { label: 'Yangi arizalar', value: newApplicationCount, icon: Clock, color: 'text-amber-500' },
             { label: 'Yangiliklar', value: news.length, icon: Newspaper, color: 'text-secondary' },
           ].map((stat, i) => (
             <motion.div key={i} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.05 }}
@@ -275,14 +309,15 @@ const Admin = () => {
         </div>
 
         {/* Tabs */}
-        <div className="flex items-center gap-1 mb-6 glass-card-light rounded-xl p-1 w-fit">
+        <div className="mb-6 flex w-full max-w-full items-center gap-1 overflow-x-auto rounded-xl p-1 sm:w-fit glass-card-light">
           {[
             { id: 'contacts' as Tab, label: 'Kontaktlar', icon: MessageSquare },
+            { id: 'applications' as Tab, label: 'Arizalar', icon: BriefcaseBusiness },
             { id: 'news' as Tab, label: 'Yangiliklar', icon: Newspaper },
             { id: 'settings' as Tab, label: 'Sozlamalar', icon: Settings },
           ].map(item => (
             <button key={item.id} onClick={() => setTab(item.id)}
-              className={`flex items-center gap-2 px-4 py-2 rounded-lg text-xs font-medium transition-all ${
+              className={`flex shrink-0 items-center gap-2 px-4 py-2 rounded-lg text-xs font-medium transition-all ${
                 tab === item.id ? 'bg-primary/15 text-primary border border-primary/20' : 'text-muted-foreground hover:text-foreground'
               }`}>
               <item.icon className="w-3.5 h-3.5" /> {item.label}
@@ -353,6 +388,81 @@ const Admin = () => {
                   <div className="text-center py-16">
                     <MessageSquare className="w-10 h-10 text-muted-foreground/30 mx-auto mb-3" />
                     <p className="text-muted-foreground text-sm">Kontaktlar topilmadi</p>
+                  </div>
+                )}
+              </div>
+            </motion.div>
+          )}
+
+          {/* Applications */}
+          {tab === 'applications' && (
+            <motion.div key="applications" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
+              <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 mb-6">
+                <div className="relative flex-1 max-w-md">
+                  <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
+                  <input value={searchQuery} onChange={e => setSearchQuery(e.target.value)} placeholder="Arizani qidirish..."
+                    className={`${inputCls} pl-10`} />
+                </div>
+                <div className="flex items-center gap-1.5 flex-wrap">
+                  <Filter className="w-3.5 h-3.5 text-muted-foreground" />
+                  {(['all', 'new', 'in_progress', 'done'] as ContactStatus[]).map(s => (
+                    <button key={s} onClick={() => setFilterStatus(s)}
+                      className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-all border ${
+                        filterStatus === s ? 'bg-primary/15 text-primary border-primary/20' : 'text-muted-foreground border-transparent hover:text-foreground'
+                      }`}>
+                      {statusLabels[s]}
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              <div className="space-y-3">
+                {filteredApplications.map((application, i) => (
+                  <motion.div key={application.id} initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.03 }}
+                    className={`${cardCls} cursor-pointer group`}>
+                    <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
+                      <div className="flex-1">
+                        <div className="flex items-start gap-3">
+                          <div className="w-9 h-9 rounded-xl bg-primary/10 flex items-center justify-center">
+                            <BriefcaseBusiness className="w-4 h-4 text-primary" />
+                          </div>
+                          <div>
+                            <div className="flex flex-wrap items-center gap-2 mb-1">
+                              <h3 className="font-semibold text-foreground text-sm">{application.name}</h3>
+                              <span className="rounded-lg border border-primary/20 bg-primary/10 px-2 py-0.5 text-[10px] font-semibold text-primary">
+                                {getApplicationRole(application.message)}
+                              </span>
+                            </div>
+                            <p className="text-[11px] text-muted-foreground">
+                              {application.phone} {application.email && `• ${application.email}`}
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                      <div className="flex items-center gap-3 sm:justify-end">
+                        <span className="text-[10px] text-muted-foreground hidden sm:inline">
+                          {new Date(application.created_at).toLocaleDateString('uz', { day: '2-digit', month: 'short', year: 'numeric' })}
+                        </span>
+                        <button onClick={() => setViewContact(application)}
+                          className="p-1.5 rounded-lg hover:bg-primary/10 text-muted-foreground hover:text-primary transition-all" title="Ko'rish">
+                          <Eye className="w-3.5 h-3.5" />
+                        </button>
+                        <select
+                          value={application.status}
+                          onChange={(e) => updateContactStatus(application.id, e.target.value)}
+                          className={`px-2.5 py-1 rounded-lg text-[11px] font-medium border outline-none cursor-pointer bg-transparent ${statusColors[application.status] || 'text-muted-foreground border-border'}`}>
+                          <option value="new" className="bg-background text-foreground">Yangi</option>
+                          <option value="in_progress" className="bg-background text-foreground">Jarayonda</option>
+                          <option value="done" className="bg-background text-foreground">Bajarildi</option>
+                        </select>
+                      </div>
+                    </div>
+                  </motion.div>
+                ))}
+                {filteredApplications.length === 0 && (
+                  <div className="text-center py-16">
+                    <BriefcaseBusiness className="w-10 h-10 text-muted-foreground/30 mx-auto mb-3" />
+                    <p className="text-muted-foreground text-sm">Arizalar topilmadi</p>
                   </div>
                 )}
               </div>
@@ -540,8 +650,16 @@ const Admin = () => {
                   </span>
                 </div>
                 <div className="mt-4 pt-4 border-t border-border">
-                  <p className="text-xs text-muted-foreground uppercase tracking-wider mb-2">Xabar</p>
-                  <p className="text-foreground leading-relaxed">{viewContact.message}</p>
+                  {isJobApplication(viewContact) && (
+                    <div className="mb-4 rounded-2xl border border-primary/20 bg-primary/10 px-4 py-3">
+                      <p className="text-[10px] text-primary uppercase tracking-wider mb-1">Ariza yo'nalishi</p>
+                      <p className="text-sm font-semibold text-foreground">{getApplicationRole(viewContact.message)}</p>
+                    </div>
+                  )}
+                  <p className="text-xs text-muted-foreground uppercase tracking-wider mb-2">
+                    {isJobApplication(viewContact) ? 'Ariza matni' : 'Xabar'}
+                  </p>
+                  <p className="text-foreground leading-relaxed whitespace-pre-line">{formatContactMessage(viewContact.message)}</p>
                 </div>
               </div>
 

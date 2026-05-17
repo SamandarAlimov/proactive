@@ -1,4 +1,5 @@
 import { motion, useReducedMotion } from 'framer-motion';
+import type { CSSProperties } from 'react';
 import { useI18n } from '@/lib/i18n';
 import { ArrowRight, Play } from 'lucide-react';
 import heroBg from '@/assets/hero-bg.jpg';
@@ -11,44 +12,13 @@ const Hero = () => {
   const heroLogoRows = [1, 2, 3].map((row) =>
     heroClientLogos.filter((client) => client.heroRow === row),
   );
-  const getHeroTileTone = (tone = 'light') => {
-    if (tone === 'dark') {
-      return 'border-white/[0.16] bg-secondary/80 shadow-[0_14px_32px_rgba(0,0,0,0.24)] ring-1 ring-white/10';
-    }
-
-    if (tone === 'glass') {
-      return 'border-white/[0.18] bg-white/[0.16] shadow-[0_14px_32px_rgba(0,0,0,0.18)] ring-1 ring-white/10';
-    }
-
-    return 'border-white/60 bg-white/[0.9] shadow-[0_14px_32px_rgba(0,0,0,0.18)]';
-  };
-  const getHeroLogoFloat = (index: number) => {
-    const drift = 3 + (index % 4);
-    const sideDrift = index % 2 === 0 ? 1.5 : -1.5;
-    const tilt = index % 2 === 0 ? 0.35 : -0.35;
-
-    return {
-      y: [0, -drift, 0, drift * 0.42, 0],
-      x: [0, sideDrift, 0, -sideDrift * 0.45, 0],
-      rotate: [0, tilt, 0, -tilt, 0],
-    };
-  };
-  const getHeroLogoTransition = (index: number) => ({
-    duration: 7.5 + (index % 5) * 0.45,
-    delay: index * 0.08,
-    repeat: Infinity,
-    ease: 'easeInOut' as const,
-  });
-  const renderHeroLogo = (client: (typeof heroClientLogos)[number], compact = false, index = 0) => (
-    <motion.div
-      key={client.name}
-      animate={shouldReduceMotion ? undefined : getHeroLogoFloat(index)}
-      transition={shouldReduceMotion ? undefined : getHeroLogoTransition(index)}
-      whileHover={shouldReduceMotion ? undefined : { y: -6, scale: 1.025 }}
+  const heroRowDurations = ['46s', '52s', '48s'];
+  const renderHeroLogo = (client: (typeof heroClientLogos)[number], copyIndex: number) => (
+    <div
+      key={`${client.name}-${copyIndex}`}
       className={cn(
-        'flex h-12 flex-shrink-0 items-center justify-center rounded-xl border px-3 py-2 backdrop-blur-md transition-shadow duration-300 will-change-transform hover:shadow-[0_18px_42px_rgba(0,0,0,0.24)] sm:h-14 sm:px-4',
-        getHeroTileTone(client.heroTone),
-        compact ? 'w-full' : client.heroTileClassName,
+        'flex h-10 shrink-0 items-center justify-center px-2 sm:h-12 sm:px-3 md:h-14',
+        client.heroTileClassName,
       )}
     >
       <img
@@ -57,11 +27,43 @@ const Hero = () => {
         loading="lazy"
         decoding="async"
         className={cn(
-          'h-full w-full object-contain drop-shadow-[0_1px_2px_rgba(0,0,0,0.14)]',
-          client.heroImageClassName,
+          'h-full w-full object-contain opacity-95 drop-shadow-[0_8px_18px_rgba(0,0,0,0.3)]',
+          client.marqueeImageClassName ?? client.heroImageClassName,
         )}
       />
-    </motion.div>
+    </div>
+  );
+
+  const renderHeroLogoRow = (row: typeof heroClientLogos, rowIndex: number) => (
+    <div
+      key={rowIndex}
+      className="relative overflow-hidden py-0.5 [mask-image:linear-gradient(90deg,transparent,black_12%,black_88%,transparent)] sm:py-1"
+    >
+      <div
+        className={cn(
+          'flex min-w-full items-center',
+          shouldReduceMotion
+            ? 'justify-center'
+            : 'hero-logo-marquee-track w-max will-change-transform',
+          rowIndex === 1 && !shouldReduceMotion && 'hero-logo-marquee-track-reverse',
+        )}
+        style={
+          {
+            '--hero-logo-marquee-duration': heroRowDurations[rowIndex],
+          } as CSSProperties
+        }
+      >
+        {(shouldReduceMotion ? [0] : [0, 1]).map((copyIndex) => (
+          <div
+            key={copyIndex}
+            aria-hidden={copyIndex > 0}
+            className="flex min-w-full shrink-0 items-center justify-center gap-5 px-4 sm:gap-7 md:gap-8 lg:gap-9"
+          >
+            {row.map((client) => renderHeroLogo(client, copyIndex))}
+          </div>
+        ))}
+      </div>
+    </div>
   );
 
   return (
@@ -145,25 +147,8 @@ const Hero = () => {
 
         <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.7, delay: 1.1 }} className="mt-8 md:mt-10 lg:mt-12">
           <p className="mb-4 text-xs font-semibold uppercase tracking-[0.2em] text-white/80 md:mb-5">{t.hero.trustedBy}</p>
-          <div className="relative mx-auto max-w-6xl">
-            <div className="grid grid-cols-2 gap-2.5 sm:grid-cols-3 md:grid-cols-4 xl:hidden">
-              {heroClientLogos.map((client, index) => renderHeroLogo(client, true, index))}
-            </div>
-
-            <div className="hidden space-y-3 xl:block">
-              {heroLogoRows.map((row, rowIndex) => (
-                <div
-                  key={rowIndex}
-                  className={cn(
-                    'flex items-center justify-center gap-3',
-                    rowIndex === 1 && 'xl:-translate-x-5',
-                    rowIndex === 2 && 'xl:translate-x-4',
-                  )}
-                >
-                  {row.map((client, index) => renderHeroLogo(client, false, rowIndex * 7 + index))}
-                </div>
-              ))}
-            </div>
+          <div className="relative mx-auto flex w-full max-w-6xl flex-col gap-2 sm:gap-2.5 md:gap-3">
+            {heroLogoRows.map((row, rowIndex) => renderHeroLogoRow(row, rowIndex))}
           </div>
         </motion.div>
         </div>

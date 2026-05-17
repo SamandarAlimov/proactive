@@ -9,13 +9,12 @@ import { cn } from '@/lib/utils';
 const Hero = () => {
   const { t } = useI18n();
   const shouldReduceMotion = useReducedMotion();
-  const heroLogoRows = [heroClientLogos, heroClientLogos, heroClientLogos];
-  const heroRowDurations = ['96s', '108s', '102s'];
+  const heroLogoCopies = [0, 1, 2];
   const renderHeroLogo = (client: (typeof heroClientLogos)[number], copyIndex: number) => (
     <div
       key={`${client.name}-${copyIndex}`}
       className={cn(
-        'flex h-10 shrink-0 items-center justify-center px-2 sm:h-12 sm:px-3 md:h-14',
+        'flex h-9 shrink-0 items-center justify-center px-2 sm:h-11 sm:px-3 md:h-12',
         client.heroTileClassName,
       )}
     >
@@ -29,38 +28,6 @@ const Hero = () => {
           client.marqueeImageClassName ?? client.heroImageClassName,
         )}
       />
-    </div>
-  );
-
-  const renderHeroLogoRow = (row: typeof heroClientLogos, rowIndex: number) => (
-    <div
-      key={rowIndex}
-      className="relative overflow-hidden py-0.5 [mask-image:linear-gradient(90deg,transparent,black_12%,black_88%,transparent)] sm:py-1"
-    >
-      <div
-        className={cn(
-          'flex min-w-full items-center',
-          shouldReduceMotion
-            ? 'justify-center'
-            : 'hero-logo-marquee-track w-max will-change-transform',
-          rowIndex === 1 && !shouldReduceMotion && 'hero-logo-marquee-track-reverse',
-        )}
-        style={
-          {
-            '--hero-logo-marquee-duration': heroRowDurations[rowIndex],
-          } as CSSProperties
-        }
-      >
-        {(shouldReduceMotion ? [0] : [0, 1]).map((copyIndex) => (
-          <div
-            key={copyIndex}
-            aria-hidden={copyIndex > 0}
-            className="flex min-w-full shrink-0 items-center justify-center gap-5 px-4 sm:gap-7 md:gap-8 lg:gap-9"
-          >
-            {row.map((client) => renderHeroLogo(client, copyIndex))}
-          </div>
-        ))}
-      </div>
     </div>
   );
 
@@ -145,8 +112,31 @@ const Hero = () => {
 
         <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.7, delay: 1.1 }} className="mt-8 md:mt-10 lg:mt-12">
           <p className="mb-4 text-xs font-semibold uppercase tracking-[0.2em] text-white/80 md:mb-5">{t.hero.trustedBy}</p>
-          <div className="relative mx-auto flex w-full max-w-6xl flex-col gap-2 sm:gap-2.5 md:gap-3">
-            {heroLogoRows.map((row, rowIndex) => renderHeroLogoRow(row, rowIndex))}
+          <div className="relative mx-auto w-full max-w-6xl overflow-hidden py-1.5 [mask-image:linear-gradient(90deg,transparent,black_8%,black_92%,transparent)] sm:py-2">
+            {shouldReduceMotion ? (
+              <div className="flex flex-wrap items-center justify-center gap-5 sm:gap-7">
+                {heroClientLogos.map((client) => renderHeroLogo(client, 0))}
+              </div>
+            ) : (
+              <div
+                className="hero-logo-marquee-track flex w-max items-center will-change-transform"
+                style={
+                  {
+                    '--hero-logo-marquee-duration': '88s',
+                  } as CSSProperties
+                }
+              >
+                {heroLogoCopies.map((copyIndex) => (
+                  <div
+                    key={copyIndex}
+                    aria-hidden={copyIndex > 0}
+                    className="flex shrink-0 items-center gap-6 pr-6 sm:gap-8 sm:pr-8 md:gap-10 md:pr-10 lg:gap-12 lg:pr-12"
+                  >
+                    {heroClientLogos.map((client) => renderHeroLogo(client, copyIndex))}
+                  </div>
+                ))}
+              </div>
+            )}
           </div>
         </motion.div>
         </div>

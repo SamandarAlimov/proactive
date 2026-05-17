@@ -1,8 +1,11 @@
 import {
-  contactAddressCity,
   contactAddressLine,
+  contactAddressLocality,
+  contactAddressPostalCode,
   contactEmail,
   contactInstagram,
+  contactMapLatitude,
+  contactMapLongitude,
   contactPhone,
   contactSecondaryPhone,
 } from '@/lib/contact-details';
@@ -126,8 +129,14 @@ export const createOrganizationSchema = (lang: Language): SeoStructuredData => (
   address: {
     '@type': 'PostalAddress',
     streetAddress: contactAddressLine,
-    addressLocality: contactAddressCity,
+    addressLocality: contactAddressLocality,
+    postalCode: contactAddressPostalCode,
     addressCountry: 'UZ',
+  },
+  geo: {
+    '@type': 'GeoCoordinates',
+    latitude: contactMapLatitude,
+    longitude: contactMapLongitude,
   },
   sameAs: [contactInstagram, founderProfile.telegram, founderProfile.instagram],
   foundingDate: '2022-12-12',

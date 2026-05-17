@@ -47,7 +47,7 @@ const Internship = () => {
       <div className="max-w-7xl mx-auto">
         <div className="grid items-center gap-10 lg:grid-cols-2 lg:gap-16">
           <motion.div
-            {...getMotionProps({ axis: 'x', distance: 30, duration: 0.6 })}
+            {...getMotionProps({ axis: 'x', distance: 24, duration: 0.45 })}
           >
             <span className="text-sm font-semibold text-primary uppercase tracking-widest">{sectionCopy.eyebrow}</span>
             <h2 className="mt-3 mb-6 font-heading text-3xl font-bold leading-tight text-foreground md:text-5xl">{sectionCopy.title}</h2>
@@ -79,8 +79,8 @@ const Internship = () => {
               return (
               <motion.div
                 key={job.id}
-                {...getMotionProps({ axis: 'x', distance: 30, delay: 0.2 + i * 0.15, duration: 0.5 })}
-                whileHover={{ x: 6 }}
+                {...getMotionProps({ axis: 'x', distance: 20, delay: 0.14 + i * 0.06, duration: 0.4 })}
+                whileHover={{ x: 3 }}
                 className="glass-card-light group flex min-w-0 items-start gap-4 rounded-2xl p-5 transition-shadow duration-300 hover:shadow-lg sm:gap-5 sm:p-6"
               >
                 <div className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-xl bg-secondary transition-transform duration-300 group-hover:scale-105">

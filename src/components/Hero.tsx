@@ -63,9 +63,9 @@ const Hero = () => {
       >
         <div className="hero-stage">
         <motion.h1
-          initial={{ opacity: 0, y: 40 }}
+          initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.9, delay: 0.5, ease: [0.25, 0.46, 0.45, 0.94] }}
+          transition={{ duration: 0.5, delay: 0.18, ease: [0.25, 0.46, 0.45, 0.94] }}
           className="mx-auto mb-5 max-w-5xl font-heading text-[clamp(2.45rem,5vw,5.35rem)] font-bold leading-[1.04] tracking-tight text-white md:mb-8"
         >
           {t.hero.title}{' '}
@@ -74,7 +74,7 @@ const Hero = () => {
             <motion.span
               initial={{ scaleX: 0 }}
               animate={{ scaleX: 1 }}
-              transition={{ duration: 0.7, delay: 1.2, ease: 'easeOut' }}
+              transition={{ duration: 0.42, delay: 0.42, ease: 'easeOut' }}
               className="absolute -bottom-1 left-0 right-0 h-[3px] rounded-full origin-left"
               style={{ background: 'linear-gradient(90deg, hsl(166, 75%, 61%), hsl(181, 100%, 50%))' }}
             />
@@ -83,18 +83,18 @@ const Hero = () => {
         </motion.h1>
 
         <motion.p
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 14 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.7 }}
+          transition={{ duration: 0.42, delay: 0.28 }}
           className="mx-auto mb-8 max-w-2xl text-balance text-sm font-medium leading-relaxed text-white drop-shadow-[0_2px_12px_rgba(0,0,0,0.22)] sm:text-base md:mb-12 md:text-lg xl:text-xl"
         >
           {t.hero.subtitle}
         </motion.p>
 
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 14 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.9 }}
+          transition={{ duration: 0.42, delay: 0.36 }}
           className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center px-4 sm:px-0"
         >
           <a href="#contact" className="group relative inline-flex items-center justify-center gap-3 px-6 sm:px-8 py-3.5 sm:py-4 rounded-xl font-semibold text-base sm:text-lg overflow-hidden transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_0_50px_hsla(166,75%,61%,0.28)]"
@@ -110,7 +110,7 @@ const Hero = () => {
           </a>
         </motion.div>
 
-        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.7, delay: 1.1 }} className="mt-8 md:mt-10 lg:mt-12">
+        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.36, delay: 0.5 }} className="mt-8 md:mt-10 lg:mt-12">
           <p className="mb-4 text-xs font-semibold uppercase tracking-[0.2em] text-white/80 md:mb-5">{t.hero.trustedBy}</p>
           <div className="relative mx-auto w-full max-w-6xl overflow-hidden py-1.5 [mask-image:linear-gradient(90deg,transparent,black_8%,black_92%,transparent)] sm:py-2">
             {shouldReduceMotion ? (
@@ -142,27 +142,11 @@ const Hero = () => {
         </div>
       </div>
 
-      <motion.div
-        animate={shouldReduceMotion ? undefined : { y: [0, 10, 0] }}
-        transition={
-          shouldReduceMotion
-            ? undefined
-            : { duration: 2.5, repeat: Infinity, ease: 'easeInOut' }
-        }
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10"
-      >
+      <div className="absolute bottom-8 left-1/2 z-10 -translate-x-1/2">
         <div className="w-5 h-9 rounded-full border border-white/15 flex items-start justify-center p-1.5">
-          <motion.div
-            animate={shouldReduceMotion ? undefined : { y: [0, 14, 0], opacity: [1, 0.2, 1] }}
-            transition={
-              shouldReduceMotion
-                ? undefined
-                : { duration: 2.5, repeat: Infinity, ease: 'easeInOut' }
-            }
-            className="w-1 h-1 rounded-full bg-primary"
-          />
+          <div className="h-1 w-1 rounded-full bg-primary" />
         </div>
-      </motion.div>
+      </div>
     </section>
   );
 };

@@ -66,7 +66,7 @@ const Projects = () => {
     <section id="projects" className="section-deferred relative scroll-mt-24 overflow-hidden py-24 md:py-32" ref={ref}>
       <div className="relative mx-auto max-w-7xl px-5 sm:px-6">
         <motion.div
-          {...getMotionProps({ distance: 30, duration: 0.6 })}
+          {...getMotionProps({ distance: 24, duration: 0.45 })}
           className="mb-16 text-center"
         >
           <span
@@ -89,7 +89,7 @@ const Projects = () => {
               key={project.title}
               project={project}
               index={i}
-              motionProps={getMotionProps({ distance: 40, delay: 0.15 * i, duration: 0.6 })}
+              motionProps={getMotionProps({ distance: 24, delay: 0.06 * i, duration: 0.45 })}
               state={projectDetailState}
               viewProjectText={t.projects.viewProject}
             />

@@ -471,7 +471,7 @@ const CareersPage = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={revealViewport}
                 transition={{ delay: i * 0.1 }}
-                whileHover={{ y: -4 }}
+                whileHover={{ y: -2 }}
                 className="glass-card-light group min-w-0 rounded-[1.5rem] p-5 text-center transition-all duration-500 hover:shadow-xl sm:rounded-3xl sm:p-8"
               >
                 <div className="mx-auto mb-6 flex h-14 w-14 items-center justify-center rounded-xl bg-primary transition-transform duration-300 group-hover:scale-105">

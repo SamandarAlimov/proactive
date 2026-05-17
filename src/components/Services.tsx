@@ -27,7 +27,7 @@ const Services = () => {
 
       <div className="relative mx-auto max-w-7xl px-5 sm:px-6">
         <motion.div
-          {...getMotionProps({ distance: 30, duration: 0.6 })}
+          {...getMotionProps({ distance: 24, duration: 0.45 })}
           className="mb-20 text-center"
         >
           <span
@@ -55,7 +55,7 @@ const Services = () => {
               <motion.div
                 key={service.slug}
                 {...getMotionProps({ distance: 24, delay: 0.08 * index, duration: 0.42 })}
-                whileHover={{ y: -4, scale: 1.004 }}
+                whileHover={{ y: -2 }}
                 className="h-full"
               >
                 <Link to={`/services/${service.slug}`} state={serviceDetailState} className="block h-full">

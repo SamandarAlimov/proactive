@@ -20,7 +20,7 @@ import { createMainSectionState, readMoreLabel } from '@/lib/source-navigation';
 
 const About = () => {
   const { t, lang } = useI18n();
-  const { ref, getMotionProps, shouldReduceMotion } = useScrollAnimation();
+  const { ref, getMotionProps } = useScrollAnimation();
   const founderLang = (lang in founderProfile.tags ? lang : 'uz') as FounderLang;
   const aboutPageState = createMainSectionState('about', lang);
 
@@ -114,7 +114,7 @@ const About = () => {
 
       <div className="relative mx-auto max-w-7xl px-5 sm:px-6">
         <motion.div
-          {...getMotionProps({ distance: 30, duration: 0.6 })}
+          {...getMotionProps({ distance: 24, duration: 0.45 })}
           className="mb-20 text-center"
         >
           <span
@@ -136,7 +136,7 @@ const About = () => {
 
         <div className="grid items-center gap-16 lg:grid-cols-2 lg:gap-20">
           <motion.div
-            {...getMotionProps({ axis: 'x', distance: 40, duration: 0.7, delay: 0.2 })}
+            {...getMotionProps({ axis: 'x', distance: 24, duration: 0.45, delay: 0.12 })}
           >
             <p className="mb-10 text-lg leading-relaxed text-muted-foreground md:text-xl">
               {t.about.description}
@@ -155,12 +155,12 @@ const About = () => {
               {capabilityCards.map((item, i) => (
                 <motion.div
                   key={item.title}
-                  {...getMotionProps({ distance: 24, delay: 0.3 + i * 0.1 })}
-                  whileHover={{ y: -4, scale: 1.006 }}
+                  {...getMotionProps({ distance: 18, delay: 0.18 + i * 0.05 })}
+                  whileHover={{ y: -2 }}
                   className="group relative min-w-0 overflow-hidden rounded-[1.5rem] border border-border/60 bg-card/90 p-5 shadow-[0_16px_40px_rgba(0,0,0,0.05)] backdrop-blur-sm transition-all duration-300 sm:rounded-[1.75rem] sm:p-6"
                 >
                   <div className="absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
-                    <div className="absolute -right-10 -top-10 h-32 w-32 rounded-full bg-primary/10 blur-2xl" />
+                    <div className="absolute -right-10 -top-10 h-32 w-32 rounded-full bg-primary/8" />
                   </div>
 
                   <div className="relative z-10">
@@ -183,7 +183,7 @@ const About = () => {
           </motion.div>
 
           <motion.div
-            {...getMotionProps({ axis: 'x', distance: 40, duration: 0.7, delay: 0.4 })}
+            {...getMotionProps({ axis: 'x', distance: 24, duration: 0.45, delay: 0.2 })}
             className="relative"
           >
             <div
@@ -193,18 +193,12 @@ const About = () => {
                   'linear-gradient(160deg, hsla(204, 47%, 28%, 0.95) 0%, hsla(202, 100%, 11%, 0.98) 100%)',
               }}
             >
-              <motion.div
-                animate={shouldReduceMotion ? undefined : { rotate: 360 }}
-                transition={
-                  shouldReduceMotion ? undefined : { duration: 18, repeat: Infinity, ease: 'linear' }
-                }
-                className="absolute inset-0"
-              >
+              <div className="absolute inset-0">
                 <div className="absolute left-1/2 top-[12%] h-3 w-3 -translate-x-1/2 rounded-full bg-primary/70 shadow-[0_0_20px_rgba(82,230,200,0.55)]" />
                 <div className="absolute right-[14%] top-1/2 h-2.5 w-2.5 -translate-y-1/2 rounded-full bg-white/50" />
                 <div className="absolute bottom-[14%] left-1/2 h-2.5 w-2.5 -translate-x-1/2 rounded-full bg-primary/40" />
                 <div className="absolute left-[14%] top-1/2 h-2 w-2 -translate-y-1/2 rounded-full bg-white/30" />
-              </motion.div>
+              </div>
 
               <div
                 className="absolute right-8 top-8 h-32 w-32 rounded-full"
@@ -224,17 +218,9 @@ const About = () => {
               <div className="absolute inset-[14%] rounded-full border border-white/10" />
 
               <div className="relative z-10 text-center">
-                <motion.div
-                  animate={shouldReduceMotion ? undefined : { y: [0, -8, 0] }}
-                  transition={
-                    shouldReduceMotion
-                      ? undefined
-                      : { duration: 4.5, repeat: Infinity, ease: 'easeInOut' }
-                  }
-                  className="mx-auto mb-6 h-28 w-28 overflow-hidden rounded-2xl shadow-2xl ring-2 ring-white/10 md:h-36 md:w-36"
-                >
+                <div className="mx-auto mb-6 h-28 w-28 overflow-hidden rounded-2xl shadow-2xl ring-2 ring-white/10 md:h-36 md:w-36">
                   <img src={proactiveLogo} alt="Proactive Logo" className="h-full w-full object-cover" />
-                </motion.div>
+                </div>
 
                 <h3 className="mb-2 text-2xl font-heading font-bold text-white md:text-3xl">
                   Proactive
@@ -250,7 +236,7 @@ const About = () => {
         </div>
 
         <motion.div
-          {...getMotionProps({ distance: 40, duration: 0.7, delay: 0.6 })}
+          {...getMotionProps({ distance: 24, duration: 0.45, delay: 0.28 })}
           className="mt-20 md:mt-28"
         >
           <div
@@ -266,7 +252,6 @@ const About = () => {
               style={{
                 background:
                   'radial-gradient(circle, hsla(166, 75%, 61%, 0.06) 0%, transparent 70%)',
-                filter: 'blur(60px)',
               }}
             />
 

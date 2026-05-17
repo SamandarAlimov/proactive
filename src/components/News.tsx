@@ -47,14 +47,14 @@ const News = () => {
   return (
     <section id="news" className="section-padding bg-muted/30 relative overflow-hidden" ref={ref}>
       <div className="max-w-7xl mx-auto">
-        <motion.div {...getMotionProps({ distance: 30, duration: 0.6 })} className="text-center mb-16">
+        <motion.div {...getMotionProps({ distance: 24, duration: 0.45 })} className="text-center mb-16">
           <span className="text-sm font-semibold text-primary uppercase tracking-widest">{t.news.subtitle}</span>
           <h2 className="text-3xl md:text-5xl font-heading font-bold text-foreground mt-3">{t.news.title}</h2>
         </motion.div>
 
         <div className="grid md:grid-cols-3 gap-8">
           {displayNews.map((news, i) => (
-            <motion.div key={news.id} {...getMotionProps({ distance: 30, delay: 0.15 * i, duration: 0.5 })}>
+            <motion.div key={news.id} {...getMotionProps({ distance: 22, delay: 0.06 * i, duration: 0.4 })}>
               <Link to={`/news/${news.id}`} state={articleState} className="block group">
                 <article className="glass-card-light rounded-2xl overflow-hidden hover:shadow-2xl transition-shadow duration-500">
                   <div className="h-48 bg-secondary relative overflow-hidden">

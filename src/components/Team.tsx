@@ -51,7 +51,7 @@ const Team = () => {
         />
         <div className="relative z-10 mx-auto max-w-7xl px-6 md:px-12">
           <motion.div
-            {...getMotionProps({ distance: 30, duration: 0.6 })}
+            {...getMotionProps({ distance: 24, duration: 0.45 })}
           >
             <span
               className="mb-6 inline-flex items-center gap-2 rounded-full px-4 py-1.5 font-brand text-xs font-semibold uppercase tracking-widest"

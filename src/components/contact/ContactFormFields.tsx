@@ -138,7 +138,7 @@ export const ContactPhoneInput = ({
           {countryOpen && (
             <div
               role="listbox"
-              className="absolute left-0 top-[calc(100%+0.8rem)] z-40 w-[min(360px,calc(100vw-3rem))] overflow-hidden rounded-[1.4rem] border border-border/80 bg-background/95 shadow-[0_28px_72px_-32px_rgba(15,23,42,0.45)] backdrop-blur-xl dark:border-white/10 dark:bg-secondary/95"
+              className="absolute left-0 top-[calc(100%+0.8rem)] z-40 w-[min(360px,calc(100vw-3rem))] overflow-hidden rounded-[1.4rem] border border-border/80 bg-background/95 shadow-[0_28px_72px_-32px_rgba(15,23,42,0.45)] backdrop-blur-md dark:border-white/10 dark:bg-secondary/95"
             >
               <div className="border-b border-border/80 p-3 dark:border-white/10">
                 <div className="flex items-center gap-3 rounded-2xl border border-border/80 bg-background/80 px-3 py-3 dark:border-white/10 dark:bg-white/[0.04]">

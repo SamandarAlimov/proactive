@@ -83,7 +83,7 @@ const MarketingMaximum = () => {
       />
 
       <div className="relative mx-auto grid max-w-7xl items-center gap-10 px-5 sm:px-6 lg:grid-cols-[minmax(0,1fr)_minmax(360px,0.82fr)] lg:gap-12">
-        <motion.div {...getMotionProps({ distance: 32, duration: 0.6 })} className="min-w-0">
+        <motion.div {...getMotionProps({ distance: 24, duration: 0.45 })} className="min-w-0">
           <span
             className="inline-flex items-center gap-2 rounded-full px-4 py-1.5 text-xs font-semibold uppercase tracking-widest"
             style={{
@@ -142,7 +142,7 @@ const MarketingMaximum = () => {
           </div>
         </motion.div>
 
-        <motion.div {...getMotionProps({ axis: 'x', distance: 32, duration: 0.7, delay: 0.15 })} className="relative min-w-0">
+        <motion.div {...getMotionProps({ axis: 'x', distance: 22, duration: 0.45, delay: 0.12 })} className="relative min-w-0">
           <div className="relative overflow-hidden rounded-[2rem] border border-white/15 bg-[linear-gradient(145deg,rgba(255,255,255,0.92),rgba(185,255,245,0.76))] p-7 shadow-2xl shadow-black/20 sm:p-8">
             <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(82,230,200,0.22),transparent_45%)]" />
             <div className="relative flex aspect-[4/5] w-full items-center justify-center rounded-[1.5rem] border border-[#00364a]/10 bg-white/45 p-6">

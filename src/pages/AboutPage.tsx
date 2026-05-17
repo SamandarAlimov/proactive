@@ -229,7 +229,7 @@ const AboutPage = () => {
               {facts.map((fact) => (
                 <div
                   key={fact.label}
-                  className="rounded-[1.75rem] border border-white/10 bg-white/[0.06] p-5 backdrop-blur-xl"
+                  className="rounded-[1.75rem] border border-white/10 bg-white/[0.06] p-5 backdrop-blur-sm"
                 >
                   <div className="flex items-center gap-4">
                     <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-primary/10 text-primary">

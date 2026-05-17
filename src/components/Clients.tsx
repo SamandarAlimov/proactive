@@ -26,7 +26,7 @@ const Clients = () => {
 
       <div className="max-w-7xl mx-auto px-6 relative">
         <motion.div
-          {...getMotionProps({ distance: 30, duration: 0.6 })}
+          {...getMotionProps({ distance: 24, duration: 0.45 })}
           className="text-center mb-16"
         >
           <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-semibold uppercase tracking-widest"

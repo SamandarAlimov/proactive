@@ -120,6 +120,19 @@ const Navbar = () => {
   const showDarkNav = !scrolled && (isHome || location.pathname === '/team');
   const navTextClass = 'text-white hover:text-primary';
   const brandTextClass = 'text-white';
+  const scrollToPageTop = () => {
+    if (typeof window === 'undefined') {
+      return;
+    }
+
+    window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
+  };
+
+  const handleHeaderLinkClick = () => {
+    setMobileOpen(false);
+    setLangOpen(false);
+    scrollToPageTop();
+  };
 
   return (
     <>
@@ -130,10 +143,10 @@ const Navbar = () => {
         transition={{ duration: 0.6, ease: 'easeOut' }}
         className={`fixed left-0 right-0 top-0 z-50 h-[78px] transition-[background-color,box-shadow,border-color,backdrop-filter] duration-300 xl:h-[88px] ${
           scrolled
-            ? 'shadow-lg backdrop-blur-xl'
+            ? 'shadow-lg backdrop-blur-sm'
             : showDarkNav
-              ? 'backdrop-blur-md'
-              : 'shadow-sm backdrop-blur-xl'
+              ? 'backdrop-blur-sm'
+              : 'shadow-sm backdrop-blur-sm'
         }`}
         style={
           scrolled
@@ -153,7 +166,7 @@ const Navbar = () => {
         }
       >
         <div className="mx-auto grid h-full max-w-7xl grid-cols-[auto_1fr_auto] items-center gap-4 px-5 sm:px-6 xl:px-8">
-          <Link to="/" className="group flex items-center gap-3">
+          <Link to="/" onClick={handleHeaderLinkClick} className="group flex items-center gap-3">
             <img
               src={proactiveLogo}
               alt="Proactive Logo"
@@ -169,6 +182,7 @@ const Navbar = () => {
               <Link
                 key={item.href}
                 to={item.href}
+                onClick={handleHeaderLinkClick}
                 className={`group relative text-xs font-medium transition-colors duration-300 ${
                   location.pathname === item.href ? 'text-white' : navTextClass
                 } whitespace-nowrap xl:text-[13px] 2xl:text-sm`}
@@ -189,7 +203,7 @@ const Navbar = () => {
               style={{
                 borderColor: 'hsla(0, 0%, 100%, 0.14)',
                 background: 'hsla(202, 100%, 11%, 0.26)',
-                backdropFilter: 'blur(18px)',
+                backdropFilter: 'blur(8px)',
               }}
             >
               <div className="space-y-1 text-right leading-none">
@@ -214,6 +228,7 @@ const Navbar = () => {
 
               <Link
                 to="/contact"
+                onClick={handleHeaderLinkClick}
                 className="hidden items-center justify-center rounded-xl px-4 py-3 font-heading text-sm font-semibold tracking-[0.02em] text-secondary transition-all duration-300 hover:-translate-y-0.5 2xl:inline-flex"
                 style={{
                   background: 'linear-gradient(135deg, #52E6C8 0%, #79f5e2 100%)',
@@ -249,7 +264,7 @@ const Navbar = () => {
                     className="absolute right-0 mt-2 overflow-hidden rounded-lg border border-border shadow-lg"
                     style={{
                       background: 'hsla(202, 100%, 11%, 0.95)',
-                      backdropFilter: 'blur(20px)',
+                      backdropFilter: 'blur(10px)',
                     }}
                   >
                     {otherLangs.map((currentLang) => (
@@ -285,7 +300,7 @@ const Navbar = () => {
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
-            className="fixed inset-0 z-40 overflow-y-auto bg-background/95 backdrop-blur-xl"
+            className="fixed inset-0 z-40 overflow-y-auto bg-background/95 backdrop-blur-md"
             style={{ paddingTop: 'var(--site-header-offset)' }}
           >
             <div className="mx-auto flex min-h-full w-full max-w-md flex-col items-center gap-4 px-5 py-8 sm:gap-5">
@@ -293,7 +308,7 @@ const Navbar = () => {
                 <Link
                   key={item.href}
                   to={item.href}
-                  onClick={() => setMobileOpen(false)}
+                  onClick={handleHeaderLinkClick}
                   className={`w-full rounded-xl px-4 py-2.5 text-center text-base font-medium transition-colors sm:text-lg ${
                     location.pathname === item.href ? 'text-primary' : 'text-foreground hover:text-primary'
                   }`}
@@ -326,7 +341,7 @@ const Navbar = () => {
                 </a>
                 <Link
                   to="/contact"
-                  onClick={() => setMobileOpen(false)}
+                  onClick={handleHeaderLinkClick}
                   className="mt-4 inline-flex w-full items-center justify-center rounded-xl px-4 py-3 font-heading text-sm font-semibold tracking-[0.02em] text-secondary transition-all duration-300"
                   style={{
                     background: 'linear-gradient(135deg, #52E6C8 0%, #79f5e2 100%)',

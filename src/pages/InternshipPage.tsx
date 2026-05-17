@@ -71,11 +71,11 @@ const InternshipPage = () => {
               {features.map((f, i) => (
                 <motion.div
                   key={f.title}
-                  initial={{ opacity: 0, x: 30 }}
+                  initial={{ opacity: 0, x: 20 }}
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={revealViewport}
-                  transition={{ delay: 0.3 + i * 0.15 }}
-                  whileHover={{ x: 4 }}
+                  transition={{ duration: 0.4, delay: 0.14 + i * 0.06 }}
+                  whileHover={{ x: 3 }}
                   className="glass-card-light group flex min-w-0 items-start gap-4 rounded-2xl p-5 transition-shadow duration-300 hover:shadow-lg sm:gap-5 sm:p-6"
                 >
                   <div className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-xl bg-secondary transition-transform duration-300 group-hover:scale-105">

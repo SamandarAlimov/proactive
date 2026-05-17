@@ -265,7 +265,7 @@ const ContactPage = () => {
               href={contactMapUrl}
               target="_blank"
               rel="noopener noreferrer"
-              whileHover={{ y: -4 }}
+              whileHover={{ y: -2 }}
               className="glass-card-light block min-h-[240px] flex-1 overflow-hidden rounded-[1.5rem] transition-all duration-300 hover:shadow-lg sm:min-h-[280px] sm:rounded-[1.75rem] lg:min-h-[340px]"
             >
               <div className="relative h-full min-h-[240px] overflow-hidden sm:min-h-[280px] lg:min-h-[340px]">

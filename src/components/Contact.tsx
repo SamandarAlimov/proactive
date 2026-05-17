@@ -110,7 +110,7 @@ const Contact = () => {
 
       <div className="relative mx-auto max-w-7xl px-6">
         <motion.div
-          {...getMotionProps({ distance: 30, duration: 0.6 })}
+          {...getMotionProps({ distance: 24, duration: 0.45 })}
           className="mb-16 text-center"
         >
           <span
@@ -140,7 +140,7 @@ const Contact = () => {
         <div className="grid items-stretch gap-8 lg:grid-cols-[minmax(0,1.04fr)_minmax(320px,0.88fr)] xl:gap-12">
           <motion.form
             onSubmit={handleSubmit}
-            {...getMotionProps({ axis: 'x', distance: 30, duration: 0.6, delay: 0.2 })}
+            {...getMotionProps({ axis: 'x', distance: 24, duration: 0.45, delay: 0.12 })}
             className="glass-card-light h-full space-y-5 rounded-[1.6rem] p-5 sm:rounded-[2rem] sm:p-6 md:space-y-7 md:p-10 lg:p-12"
           >
             <div>
@@ -239,14 +239,14 @@ const Contact = () => {
           </motion.form>
 
           <motion.div
-            {...getMotionProps({ axis: 'x', distance: 30, duration: 0.6, delay: 0.4 })}
+            {...getMotionProps({ axis: 'x', distance: 24, duration: 0.45, delay: 0.18 })}
             className="flex h-full flex-col gap-5 lg:gap-6"
           >
             <motion.a
               href={contactMapUrl}
               target="_blank"
               rel="noopener noreferrer"
-              whileHover={{ y: -4 }}
+              whileHover={{ y: -2 }}
               className="glass-card-light block min-h-[240px] flex-1 overflow-hidden rounded-[1.5rem] transition-all duration-300 hover:shadow-lg sm:min-h-[280px] sm:rounded-[1.75rem] lg:min-h-[340px]"
             >
               <div className="relative h-full min-h-[240px] overflow-hidden sm:min-h-[280px] lg:min-h-[340px]">
@@ -270,7 +270,7 @@ const Contact = () => {
             {contactCards.map((card) => (
               <motion.div
                 key={card.title}
-                whileHover={{ y: -4 }}
+                whileHover={{ y: -2 }}
                 className="glass-card-light group flex min-h-[82px] items-center gap-3 rounded-[1.5rem] p-4 transition-all duration-300 hover:shadow-lg sm:gap-4 sm:rounded-[1.75rem] sm:p-5 md:p-6"
               >
                 <div
@@ -292,7 +292,7 @@ const Contact = () => {
               href={contactInstagram}
               target="_blank"
               rel="noopener noreferrer"
-              whileHover={{ y: -4 }}
+              whileHover={{ y: -2 }}
               className="glass-card-light group block min-h-[82px] rounded-[1.5rem] p-4 transition-all duration-300 hover:shadow-lg sm:rounded-[1.75rem] sm:p-5 md:p-6"
             >
               <div className="flex items-center gap-3 sm:gap-4">

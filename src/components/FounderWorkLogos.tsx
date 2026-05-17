@@ -1,6 +1,5 @@
 import { Sparkles } from 'lucide-react';
 
-import ahmadTeaLogo from '@/assets/founder-work/ahmadtea.png';
 import chortoqLogo from '@/assets/founder-work/chortoq.png';
 import mfaktorLogo from '@/assets/founder-work/mfaktor.webp';
 import samsungLogo from '@/assets/founder-work/samsung.png';
@@ -23,11 +22,6 @@ const copy: Record<Language, { eyebrow: string; title: string }> = {
 };
 
 const founderWorkLogos = [
-  {
-    name: 'Ahmad Tea',
-    logo: ahmadTeaLogo,
-    imageClassName: 'max-h-10 sm:max-h-12',
-  },
   {
     name: 'Chortoq',
     logo: chortoqLogo,
@@ -75,12 +69,12 @@ const FounderWorkLogos = ({ className, variant = 'panel' }: FounderWorkLogosProp
           </span>
         </div>
 
-        <div className="grid grid-cols-2 gap-2.5 sm:grid-cols-4">
+        <div className="grid grid-cols-1 gap-2.5 sm:grid-cols-3">
           {founderWorkLogos.map((item) => (
             <div
               key={item.name}
               className={cn(
-                'group flex h-16 min-w-0 items-center justify-center rounded-2xl border border-secondary/10 bg-white px-3 py-2.5 shadow-[0_10px_24px_rgba(38,79,107,0.08)] transition duration-300 hover:-translate-y-0.5 hover:border-primary/25 hover:shadow-[0_16px_34px_rgba(38,79,107,0.14)]',
+                'group flex h-16 min-w-0 items-center justify-center rounded-2xl border border-white/10 bg-[linear-gradient(135deg,hsl(202,100%,11%),hsl(204,47%,20%))] px-3 py-2.5 shadow-[0_12px_28px_rgba(0,37,58,0.18)] transition duration-300 hover:-translate-y-0.5 hover:border-primary/35 hover:shadow-[0_18px_38px_rgba(0,37,58,0.24)]',
                 variant === 'panel' && 'sm:h-[4.75rem] sm:px-4',
               )}
             >

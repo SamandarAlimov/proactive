@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react';
+import { useMemo, useRef, useState } from 'react';
 import { motion } from 'framer-motion';
 import { CalendarDays, ExternalLink, Play, Sparkles, Youtube } from 'lucide-react';
 
@@ -161,11 +161,22 @@ const formatDate = (date: string, lang: Language) =>
 const EventsPage = () => {
   const { t, lang } = useI18n();
   const [activeVideoId, setActiveVideoId] = useState(cubicPodcastVideos[0].id);
+  const [hasUserSelectedVideo, setHasUserSelectedVideo] = useState(false);
+  const playerRef = useRef<HTMLDivElement>(null);
   const labels = copy[lang];
   const selectedVideo = useMemo(
     () => cubicPodcastVideos.find((video) => video.id === activeVideoId) ?? cubicPodcastVideos[0],
     [activeVideoId],
   );
+
+  const handleVideoSelect = (videoId: string) => {
+    setActiveVideoId(videoId);
+    setHasUserSelectedVideo(true);
+
+    window.requestAnimationFrame(() => {
+      playerRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  };
 
   return (
     <PageLayout>
@@ -233,16 +244,17 @@ const EventsPage = () => {
         <div className="mx-auto max-w-7xl px-6">
           <div className="grid gap-6 lg:grid-cols-[minmax(0,1.35fr)_minmax(320px,0.65fr)]">
             <motion.div
+              ref={playerRef}
               initial={{ opacity: 0, y: 24 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={revealViewport}
               transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
-              className="overflow-hidden rounded-[1.5rem] border border-border/70 bg-card shadow-xl shadow-secondary/5 sm:rounded-[2rem]"
+              className="scroll-mt-28 overflow-hidden rounded-[1.5rem] border border-border/70 bg-card shadow-xl shadow-secondary/5 sm:rounded-[2rem]"
             >
               <div className="relative aspect-video bg-secondary">
                 <iframe
                   key={selectedVideo.id}
-                  src={`https://www.youtube.com/embed/${selectedVideo.id}?rel=0&modestbranding=1`}
+                  src={`https://www.youtube.com/embed/${selectedVideo.id}?rel=0&modestbranding=1&playsinline=1${hasUserSelectedVideo ? '&autoplay=1' : ''}`}
                   title={selectedVideo.title}
                   className="absolute inset-0 h-full w-full"
                   loading="lazy"
@@ -345,7 +357,7 @@ const EventsPage = () => {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={revealViewport}
                     transition={{ duration: 0.38, delay: index * 0.03, ease: [0.16, 1, 0.3, 1] }}
-                    onClick={() => setActiveVideoId(video.id)}
+                    onClick={() => handleVideoSelect(video.id)}
                     aria-pressed={isActive}
                     className={`group overflow-hidden rounded-2xl border bg-card text-left shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-secondary/10 ${
                       isActive ? 'border-primary/55 ring-2 ring-primary/15' : 'border-border/70'

@@ -33,7 +33,7 @@ const PageLoader = () => (
 );
 
 const ScrollToTop = () => {
-  const { hash, pathname } = useLocation();
+  const { hash, pathname, search } = useLocation();
 
   useEffect(() => {
     if (!("scrollRestoration" in window.history)) {
@@ -80,7 +80,7 @@ const ScrollToTop = () => {
       window.cancelAnimationFrame(secondFrame);
       window.clearTimeout(timeout);
     };
-  }, [hash, pathname]);
+  }, [hash, pathname, search]);
 
   return null;
 };

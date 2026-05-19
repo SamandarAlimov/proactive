@@ -6,6 +6,7 @@ import Services from '@/components/Services';
 import MarketingMaximum from '@/components/MarketingMaximum';
 import Projects from '@/components/Projects';
 import Team from '@/components/Team';
+import Events from '@/components/Events';
 import Internship from '@/components/Internship';
 import Contact from '@/components/Contact';
 import Footer from '@/components/Footer';
@@ -74,6 +75,7 @@ const Index = () => {
           <Projects />
           <Team />
           <MarketingMaximum />
+          <Events />
           <Internship />
           <Contact />
           <Footer />

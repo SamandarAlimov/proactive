@@ -1,104 +1,19 @@
-import { useMemo, useRef, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { motion } from 'framer-motion';
 import { CalendarDays, ExternalLink, Play, Sparkles, Youtube } from 'lucide-react';
+import { useLocation } from 'react-router-dom';
 
 import PageLayout from '@/components/PageLayout';
 import SEO from '@/components/SEO';
-import { useI18n, type Language } from '@/lib/i18n';
+import SourceBackLink from '@/components/SourceBackLink';
+import { useI18n } from '@/lib/i18n';
+import {
+  cubicPodcastChannelUrl,
+  cubicPodcastVideos,
+  formatPodcastDate,
+} from '@/lib/cubic-podcast';
 import { revealViewport } from '@/lib/motion';
 import { createBreadcrumbSchema, createWebPageSchema } from '@/lib/seo';
-
-type PodcastVideo = {
-  focus: Record<Language, string>;
-  id: string;
-  published: string;
-  title: string;
-};
-
-const channelUrl = 'https://www.youtube.com/@Cubic_podcast';
-
-const cubicPodcastVideos: PodcastVideo[] = [
-  {
-    id: 'PKPNaNzkNbI',
-    title: '25 Yoshda Marketing Direktori Bo’lish Yo’li | Cubic Podcast',
-    published: '2025-09-20',
-    focus: {
-      uz: 'Marketing karyerasi',
-      en: 'Marketing career',
-      ru: 'Карьера в маркетинге',
-    },
-  },
-  {
-    id: 'iH1bAJjQBKI',
-    title: 'Jamoasiz Marketolog Hech Narsa Qilolmaydi! | Cubic Podcast',
-    published: '2025-08-02',
-    focus: {
-      uz: 'Jamoa va jarayon',
-      en: 'Team and process',
-      ru: 'Команда и процессы',
-    },
-  },
-  {
-    id: 'djBnComskEU',
-    title: 'Tadbirkor fikrlashini o‘zgartirmasa, biznes o‘smaydi! | Cubic Podcast',
-    published: '2025-07-02',
-    focus: {
-      uz: 'Biznes fikrlashi',
-      en: 'Business mindset',
-      ru: 'Мышление предпринимателя',
-    },
-  },
-  {
-    id: 'T7wqbhiuy4E',
-    title: 'Asaxiyda marketing qanday ishlaydi? | Cubic Podcast',
-    published: '2025-06-09',
-    focus: {
-      uz: 'Marketing tizimi',
-      en: 'Marketing system',
-      ru: 'Система маркетинга',
-    },
-  },
-  {
-    id: 'UAzmFedIaaw',
-    title: 'Marketing Nimaga Asoslangan Bo‘lishi kerak? | Cubic Podcast',
-    published: '2025-05-24',
-    focus: {
-      uz: 'Strategiya asoslari',
-      en: 'Strategy foundations',
-      ru: 'Основы стратегии',
-    },
-  },
-  {
-    id: '95ICC4taxR8',
-    title: "Nostandart Universitetning Nostandart Marketologi Qanday bo'ladi? | Cubic Podcast",
-    published: '2025-05-10',
-    focus: {
-      uz: 'Ta’lim marketingi',
-      en: 'Education marketing',
-      ru: 'Маркетинг образования',
-    },
-  },
-  {
-    id: 'qfT1Cp-Tp5U',
-    title: 'Nega Marketing Natija Bermayapti? | Cubic Podcast',
-    published: '2025-04-26',
-    focus: {
-      uz: 'Natija va tahlil',
-      en: 'Results and analysis',
-      ru: 'Результат и анализ',
-    },
-  },
-  {
-    id: 'V76PizhSPzs',
-    title: 'Biznesda Marketolog Vazifasi Nima? Elmurod Raimbaev | Cubic Podcast',
-    published: '2025-04-12',
-    focus: {
-      uz: 'Marketolog roli',
-      en: 'Marketer role',
-      ru: 'Роль маркетолога',
-    },
-  },
-];
 
 const copy = {
   uz: {
@@ -145,22 +60,14 @@ const copy = {
   },
 } as const;
 
-const localeMap: Record<Language, string> = {
-  uz: 'uz-UZ',
-  en: 'en-US',
-  ru: 'ru-RU',
-};
-
-const formatDate = (date: string, lang: Language) =>
-  new Intl.DateTimeFormat(localeMap[lang], {
-    day: '2-digit',
-    month: 'short',
-    year: 'numeric',
-  }).format(new Date(`${date}T00:00:00Z`));
-
 const EventsPage = () => {
   const { t, lang } = useI18n();
-  const [activeVideoId, setActiveVideoId] = useState(cubicPodcastVideos[0].id);
+  const location = useLocation();
+  const requestedVideoId = useMemo(() => {
+    const videoId = new URLSearchParams(location.search).get('video');
+    return videoId && cubicPodcastVideos.some((video) => video.id === videoId) ? videoId : null;
+  }, [location.search]);
+  const [activeVideoId, setActiveVideoId] = useState(requestedVideoId ?? cubicPodcastVideos[0].id);
   const [hasUserSelectedVideo, setHasUserSelectedVideo] = useState(false);
   const playerRef = useRef<HTMLDivElement>(null);
   const labels = copy[lang];
@@ -168,6 +75,15 @@ const EventsPage = () => {
     () => cubicPodcastVideos.find((video) => video.id === activeVideoId) ?? cubicPodcastVideos[0],
     [activeVideoId],
   );
+
+  useEffect(() => {
+    if (!requestedVideoId) {
+      return;
+    }
+
+    setActiveVideoId(requestedVideoId);
+    setHasUserSelectedVideo(false);
+  }, [requestedVideoId]);
 
   const handleVideoSelect = (videoId: string) => {
     setActiveVideoId(videoId);
@@ -211,6 +127,7 @@ const EventsPage = () => {
         <div className="absolute inset-x-0 bottom-0 h-px bg-primary/35" />
 
         <div className="relative mx-auto max-w-7xl px-6">
+          <SourceBackLink variant="dark" />
           <motion.div
             initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
@@ -228,7 +145,7 @@ const EventsPage = () => {
               {labels.description}
             </p>
             <a
-              href={channelUrl}
+              href={cubicPodcastChannelUrl}
               target="_blank"
               rel="noopener noreferrer"
               className="mt-8 inline-flex items-center gap-2 rounded-xl bg-primary px-6 py-3 text-sm font-bold text-primary-foreground shadow-lg shadow-primary/20 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-primary/30"
@@ -274,7 +191,7 @@ const EventsPage = () => {
                 <div className="mt-5 flex flex-col gap-4 text-sm text-muted-foreground sm:flex-row sm:items-center sm:justify-between">
                   <span className="inline-flex items-center gap-2">
                     <CalendarDays className="h-4 w-4 text-primary" />
-                    {labels.meta}: {formatDate(selectedVideo.published, lang)}
+                    {labels.meta}: {formatPodcastDate(selectedVideo.published, lang)}
                   </span>
                   <a
                     href={`https://www.youtube.com/watch?v=${selectedVideo.id}`}
@@ -318,7 +235,7 @@ const EventsPage = () => {
               </div>
 
               <a
-                href={channelUrl}
+                href={cubicPodcastChannelUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="mt-6 inline-flex w-full items-center justify-center gap-2 rounded-xl border border-primary/25 bg-primary/10 px-5 py-3 text-sm font-bold text-primary transition-all duration-300 hover:-translate-y-0.5 hover:bg-primary hover:text-primary-foreground"
@@ -383,7 +300,7 @@ const EventsPage = () => {
                         {video.title}
                       </h3>
                       <p className="mt-3 text-xs font-medium text-muted-foreground">
-                        {formatDate(video.published, lang)}
+                        {formatPodcastDate(video.published, lang)}
                       </p>
                     </div>
                   </motion.button>

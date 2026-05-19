@@ -241,8 +241,8 @@ const EventsPage = () => {
       </section>
 
       <section className="bg-background py-14 md:py-20">
-        <div className="mx-auto max-w-7xl px-6">
-          <div className="grid gap-6 lg:grid-cols-[minmax(0,1.35fr)_minmax(320px,0.65fr)]">
+        <div className="mx-auto max-w-[1500px] px-5 sm:px-6">
+          <div className="grid gap-6 xl:grid-cols-[minmax(0,1fr)_340px] 2xl:grid-cols-[minmax(0,1fr)_360px]">
             <motion.div
               ref={playerRef}
               initial={{ opacity: 0, y: 24 }}
@@ -294,7 +294,7 @@ const EventsPage = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={revealViewport}
               transition={{ duration: 0.45, delay: 0.06, ease: [0.16, 1, 0.3, 1] }}
-              className="rounded-[1.5rem] border border-border/70 bg-card p-6 shadow-xl shadow-secondary/5 sm:rounded-[2rem] md:p-8 lg:sticky lg:top-28 lg:self-start"
+              className="rounded-[1.5rem] border border-border/70 bg-card p-5 shadow-xl shadow-secondary/5 sm:rounded-[2rem] md:p-6 xl:sticky xl:top-28 xl:self-start"
             >
               <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-primary/10 text-primary">
                 <Sparkles className="h-6 w-6" />

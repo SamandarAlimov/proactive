@@ -206,6 +206,64 @@
     animation: hero-logo-marquee var(--hero-logo-marquee-duration, 48s) linear infinite;
   }
 
+  .hero-logo-rail {
+    border-top: 1px solid rgba(255, 255, 255, 0.055);
+    border-bottom: 1px solid rgba(82, 230, 200, 0.08);
+  }
+
+  .hero-logo-rail::before {
+    content: "";
+    position: absolute;
+    inset: 0 7%;
+    border-radius: 999px;
+    background:
+      radial-gradient(ellipse at 28% 50%, rgba(255, 255, 255, 0.11), transparent 58%),
+      radial-gradient(ellipse at 72% 50%, rgba(82, 230, 200, 0.09), transparent 62%),
+      linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.035), transparent);
+    filter: blur(10px);
+    pointer-events: none;
+  }
+
+  .hero-logo-item {
+    position: relative;
+    isolation: isolate;
+  }
+
+  .hero-logo-item::before {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    z-index: -1;
+    width: calc(100% + 1.2rem);
+    height: 82%;
+    border-radius: 999px;
+    transform: translate3d(-50%, -50%, 0);
+    filter: blur(14px);
+    opacity: 0.72;
+    pointer-events: none;
+  }
+
+  .hero-logo-item-light::before {
+    background: radial-gradient(ellipse, rgba(255, 255, 255, 0.86) 0%, rgba(255, 255, 255, 0.42) 42%, transparent 74%);
+  }
+
+  .hero-logo-item-dark::before {
+    background: radial-gradient(ellipse, rgba(0, 30, 48, 0.86) 0%, rgba(0, 48, 67, 0.58) 46%, transparent 76%);
+  }
+
+  .hero-logo-image {
+    filter:
+      drop-shadow(0 2px 2px rgba(255, 255, 255, 0.34))
+      drop-shadow(0 8px 16px rgba(0, 0, 0, 0.28));
+  }
+
+  .hero-logo-item-dark .hero-logo-image {
+    filter:
+      drop-shadow(0 1px 1px rgba(0, 0, 0, 0.54))
+      drop-shadow(0 10px 20px rgba(0, 0, 0, 0.34));
+  }
+
   .brand-marquee-track:hover {
     animation-play-state: paused;
   }

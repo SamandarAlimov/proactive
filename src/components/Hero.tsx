@@ -14,7 +14,8 @@ const Hero = () => {
     <div
       key={`${client.name}-${copyIndex}`}
       className={cn(
-        'flex h-9 shrink-0 items-center justify-center px-2 sm:h-11 sm:px-3 md:h-12',
+        'hero-logo-item flex h-10 shrink-0 items-center justify-center px-2 sm:h-12 sm:px-3 md:h-14',
+        client.heroTone === 'dark' ? 'hero-logo-item-dark' : 'hero-logo-item-light',
         client.heroTileClassName,
       )}
     >
@@ -24,7 +25,7 @@ const Hero = () => {
         loading="lazy"
         decoding="async"
         className={cn(
-          'h-full w-full object-contain opacity-95 drop-shadow-[0_8px_18px_rgba(0,0,0,0.3)]',
+          'hero-logo-image h-full w-full object-contain opacity-100',
           client.marqueeImageClassName ?? client.heroImageClassName,
         )}
       />
@@ -112,7 +113,7 @@ const Hero = () => {
 
         <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.36, delay: 0.5 }} className="mt-8 md:mt-10 lg:mt-12">
           <p className="mb-4 text-xs font-semibold uppercase tracking-[0.2em] text-white/80 md:mb-5">{t.hero.trustedBy}</p>
-          <div className="relative mx-auto w-full max-w-6xl overflow-hidden py-1.5 [mask-image:linear-gradient(90deg,transparent,black_8%,black_92%,transparent)] sm:py-2">
+          <div className="hero-logo-rail relative mx-auto w-full max-w-6xl overflow-hidden py-3 [mask-image:linear-gradient(90deg,transparent,black_8%,black_92%,transparent)] sm:py-4">
             {shouldReduceMotion ? (
               <div className="flex flex-wrap items-center justify-center gap-5 sm:gap-7">
                 {heroClientLogos.map((client) => renderHeroLogo(client, 0))}

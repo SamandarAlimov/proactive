@@ -33,6 +33,7 @@ const Footer = () => {
 
   const moreLinks = [
     { label: t.nav.academy, href: '/academy' },
+    { label: t.nav.events, href: '/events' },
     { label: t.nav.careers, href: '/careers' },
     { label: t.nav.contact, href: '/contact' },
   ];

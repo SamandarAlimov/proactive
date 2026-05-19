@@ -113,6 +113,7 @@ const Navbar = () => {
     { label: t.nav.projects, href: '/projects' },
     { label: t.nav.team, href: '/team' },
     { label: t.nav.academy, href: '/academy' },
+    { label: t.nav.events, href: '/events' },
     { label: t.nav.careers, href: '/careers' },
   ];
 

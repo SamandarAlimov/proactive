@@ -36,20 +36,50 @@ const ScrollToTop = () => {
   const { hash, pathname } = useLocation();
 
   useEffect(() => {
-    const frame = window.requestAnimationFrame(() => {
+    if (!("scrollRestoration" in window.history)) {
+      return undefined;
+    }
+
+    const previousScrollRestoration = window.history.scrollRestoration;
+    window.history.scrollRestoration = "manual";
+
+    return () => {
+      window.history.scrollRestoration = previousScrollRestoration;
+    };
+  }, []);
+
+  useEffect(() => {
+    let secondFrame = 0;
+    let timeout = 0;
+
+    const scrollToRoutePosition = () => {
       if (hash) {
         const target = document.getElementById(hash.slice(1));
 
         if (target) {
           target.scrollIntoView({ behavior: "auto", block: "start" });
-          return;
+          return true;
         }
       }
 
       window.scrollTo({ top: 0, left: 0, behavior: "auto" });
+      return false;
+    };
+
+    const frame = window.requestAnimationFrame(() => {
+      const handled = scrollToRoutePosition();
+
+      if (!handled) {
+        secondFrame = window.requestAnimationFrame(scrollToRoutePosition);
+        timeout = window.setTimeout(scrollToRoutePosition, 120);
+      }
     });
 
-    return () => window.cancelAnimationFrame(frame);
+    return () => {
+      window.cancelAnimationFrame(frame);
+      window.cancelAnimationFrame(secondFrame);
+      window.clearTimeout(timeout);
+    };
   }, [hash, pathname]);
 
   return null;

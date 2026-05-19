@@ -9,7 +9,7 @@ const translations = {
       services: "Xizmatlar",
       projects: "Loyihalar",
       team: "Jamoa",
-      academy: "Academiya",
+      academy: "Akademiya",
       events: "Tadbirlar",
       careers: "Ish va hamkorlik",
       clients: "Mijozlar",

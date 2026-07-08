@@ -189,11 +189,15 @@ const Navbar = () => {
                 } whitespace-nowrap xl:text-[13px] 2xl:text-sm`}
               >
                 {item.label}
-                <span
-                  className={`absolute -bottom-1 left-0 h-0.5 bg-primary transition-all duration-300 ${
-                    location.pathname === item.href ? 'w-full' : 'w-0 group-hover:w-full'
-                  }`}
-                />
+                {location.pathname === item.href ? (
+                  <motion.span
+                    layoutId="desktop-nav-active-line"
+                    className="absolute -bottom-1 left-0 h-0.5 w-full bg-primary"
+                    transition={{ duration: 0.32, ease: [0.22, 1, 0.36, 1] }}
+                  />
+                ) : (
+                  <span className="absolute -bottom-1 left-0 h-0.5 w-0 bg-primary transition-all duration-300 group-hover:w-full" />
+                )}
               </Link>
             ))}
           </div>

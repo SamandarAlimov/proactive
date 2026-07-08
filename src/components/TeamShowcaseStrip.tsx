@@ -107,7 +107,10 @@ const TeamShowcaseStrip = ({ className = '' }: { className?: string }) => {
         }}
       />
 
-      <div className="relative overflow-x-auto pb-4" style={{ scrollbarWidth: 'thin', scrollbarColor: '#52E6C8 transparent' }}>
+      <div
+        className="relative overflow-x-auto pb-4"
+        style={{ scrollbarWidth: 'thin', scrollbarColor: '#52E6C8 transparent' }}
+      >
         <div
           className="flex min-w-max items-end px-5 pb-0 pt-8 pr-[18rem] sm:px-8 sm:pr-[21rem] lg:px-12 lg:pr-[24rem]"
           style={{ gap: 'clamp(0.75rem, 2.4vw, 1.5rem)' }}
@@ -187,15 +190,18 @@ const TeamShowcaseStrip = ({ className = '' }: { className?: string }) => {
                     )}
                   </AnimatePresence>
 
-                  <div className="relative overflow-visible" style={{ height: `clamp(300px, 78vw, ${TEAM_CARD_HEIGHT}px)` }}>
+                  <div
+                    className="relative overflow-visible"
+                    style={{ height: `clamp(300px, 78vw, ${TEAM_CARD_HEIGHT}px)` }}
+                  >
                     <img
                       src={member.image}
                       alt={member.name}
                       loading="lazy"
-                      className="absolute inset-0 h-full w-full origin-bottom object-contain object-bottom transition-[opacity,transform,filter] duration-300"
+                      className="absolute bottom-0 left-1/2 h-full w-auto max-w-none origin-bottom object-contain object-bottom transition-[opacity,transform,filter] duration-300"
                       style={{
                         opacity: isActive ? 0 : isMuted ? tone.mutedOpacity : tone.idleOpacity,
-                        transform: `scale(${visual.defaultScale})`,
+                        transform: `translateX(-50%) scale(${visual.defaultScale})`,
                         filter: tone.defaultFilter,
                       }}
                     />
@@ -203,10 +209,10 @@ const TeamShowcaseStrip = ({ className = '' }: { className?: string }) => {
                       src={member.hoverImage}
                       alt={`${member.name} active portrait`}
                       loading="lazy"
-                      className="absolute inset-0 h-full w-full origin-bottom object-contain object-bottom transition-[opacity,transform,filter] duration-300"
+                      className="absolute bottom-0 left-1/2 h-full w-auto max-w-none origin-bottom object-contain object-bottom transition-[opacity,transform,filter] duration-300"
                       style={{
                         opacity: isActive ? 1 : 0,
-                        transform: `scale(${visual.hoverScale})`,
+                        transform: `translateX(-50%) scale(${visual.hoverScale})`,
                         filter: tone.activeFilter,
                       }}
                     />

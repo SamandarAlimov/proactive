@@ -5,11 +5,10 @@ import { Menu, X, ChevronDown, Mail, Phone } from 'lucide-react';
 import { Link, useLocation } from 'react-router-dom';
 import proactiveLogo from '@/assets/proactive-logo.jpg';
 import { ThemeToggle } from '@/components/ThemeToggle';
-import { contactEmail, contactPhone, contactSecondaryPhone } from '@/lib/contact-details';
+import { contactEmail, contactPhone } from '@/lib/contact-details';
 
 const langLabels: Record<Language, string> = { uz: "O'z", en: 'En', ru: 'Ru' };
 const headerPhone = contactPhone;
-const headerSecondaryPhone = contactSecondaryPhone;
 const headerEmail = contactEmail;
 
 const Navbar = () => {
@@ -211,18 +210,12 @@ const Navbar = () => {
                 backdropFilter: 'blur(8px)',
               }}
             >
-              <div className="space-y-1 text-right leading-none">
+              <div className="text-right leading-none">
                 <a
                   href={`tel:${headerPhone.replace(/\s+/g, '')}`}
-                  className="block whitespace-nowrap text-[12px] font-semibold text-white transition-colors duration-300 hover:text-primary 2xl:text-sm"
+                  className="block whitespace-nowrap text-[13px] font-semibold text-white transition-colors duration-300 hover:text-primary 2xl:text-sm"
                 >
                   {headerPhone}
-                </a>
-                <a
-                  href={`tel:${headerSecondaryPhone.replace(/\s+/g, '')}`}
-                  className="block whitespace-nowrap text-[11px] text-white/80 transition-colors duration-300 hover:text-white"
-                >
-                  {headerSecondaryPhone}
                 </a>
                 <a href={`mailto:${headerEmail}`} className="sr-only">
                   {headerEmail}
@@ -329,13 +322,6 @@ const Navbar = () => {
                 >
                   <Phone className="h-4 w-4" />
                   {headerPhone}
-                </a>
-                <a
-                  href={`tel:${headerSecondaryPhone.replace(/\s+/g, '')}`}
-                  className="mt-2 flex items-center justify-center gap-2 text-sm font-medium text-foreground/75 transition-colors hover:text-primary"
-                >
-                  <Phone className="h-4 w-4" />
-                  {headerSecondaryPhone}
                 </a>
                 <a
                   href={`mailto:${headerEmail}`}

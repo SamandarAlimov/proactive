@@ -23,6 +23,7 @@ export type ClientLogo = {
   heroTileClassName?: string;
   heroImageClassName?: string;
   marqueeImageClassName?: string;
+  heroVisualClassName?: string;
   projectImageClassName?: string;
 };
 
@@ -44,6 +45,7 @@ export const clientLogos: ClientLogo[] = [
     heroTileClassName: 'w-[92px] lg:w-[108px]',
     heroImageClassName: 'max-h-11',
     marqueeImageClassName: 'max-h-16',
+    heroVisualClassName: 'scale-[1.08]',
     projectImageClassName: 'scale-[1.22]',
   },
   {
@@ -54,6 +56,7 @@ export const clientLogos: ClientLogo[] = [
     heroTileClassName: 'w-[98px] lg:w-[116px]',
     heroImageClassName: 'max-h-11',
     marqueeImageClassName: 'max-h-14',
+    heroVisualClassName: 'scale-[2.1]',
     projectImageClassName: 'scale-[1.68]',
   },
   {
@@ -91,6 +94,7 @@ export const clientLogos: ClientLogo[] = [
     heroTileClassName: 'w-[104px] lg:w-[126px]',
     heroImageClassName: 'max-h-10',
     marqueeImageClassName: 'max-h-12',
+    heroVisualClassName: 'scale-[2.35]',
     projectImageClassName: 'scale-[1.52]',
   },
   {
@@ -128,6 +132,7 @@ export const clientLogos: ClientLogo[] = [
     heroTileClassName: 'w-[92px] lg:w-[112px]',
     heroImageClassName: 'max-h-10',
     marqueeImageClassName: 'max-h-12',
+    heroVisualClassName: 'scale-[3.1]',
     projectImageClassName: 'scale-[2.05]',
   },
   {
@@ -147,6 +152,7 @@ export const clientLogos: ClientLogo[] = [
     heroTileClassName: 'w-[112px] lg:w-[134px]',
     heroImageClassName: 'max-h-11',
     marqueeImageClassName: 'max-h-16',
+    heroVisualClassName: 'scale-[1.1]',
     projectImageClassName: 'scale-[1.18]',
   },
   {
@@ -175,6 +181,7 @@ export const clientLogos: ClientLogo[] = [
     heroTileClassName: 'w-[168px] lg:w-[206px]',
     heroImageClassName: 'max-h-10',
     marqueeImageClassName: 'max-h-14',
+    heroVisualClassName: 'scale-[1.1]',
     projectImageClassName: 'scale-[1.18]',
   },
 ];

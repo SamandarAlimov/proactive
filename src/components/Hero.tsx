@@ -38,7 +38,10 @@ const Hero = () => {
         alt={client.name}
         loading="lazy"
         decoding="async"
-        className="hero-logo-image h-auto w-auto max-h-[40px] max-w-[140px] object-contain opacity-100 sm:max-h-[44px] sm:max-w-[160px] md:max-h-[50px] md:max-w-[188px]"
+        className={cn(
+          'hero-logo-image h-auto w-auto max-h-[40px] max-w-[140px] origin-center object-contain opacity-100 sm:max-h-[44px] sm:max-w-[160px] md:max-h-[50px] md:max-w-[188px]',
+          client.heroVisualClassName,
+        )}
       />
     </div>
   );

@@ -320,20 +320,29 @@ const AboutPage = () => {
             </motion.div>
           </div>
 
-          <div className="grid gap-8 lg:grid-cols-2">
+          <div className="grid gap-6 lg:grid-cols-2">
             <motion.section
               {...surfaceMotion}
               transition={{ duration: 0.65, ease: 'easeOut', delay: 0.08 }}
-              className="overflow-hidden rounded-[2rem] border border-white/10 bg-[#083b57] text-white shadow-[0_24px_80px_rgba(0,0,0,0.12)]"
+              className="group relative overflow-hidden rounded-[1.75rem] border border-primary/20 bg-secondary text-white shadow-[0_22px_70px_rgba(0,0,0,0.10)]"
             >
-              <div className="border-b border-white/15 px-7 py-6 md:px-10">
-                <h2 className="text-2xl font-heading font-bold md:text-3xl">
-                  {content.missionTitle}
-                </h2>
+              <div className="pointer-events-none absolute -right-24 -top-24 h-56 w-56 rounded-full bg-primary/15 blur-3xl transition-opacity duration-500 group-hover:opacity-90" />
+              <div className="relative flex items-center justify-between gap-5 border-b border-white/10 px-6 py-5 md:px-8">
+                <div>
+                  <span className="text-[11px] font-bold uppercase tracking-[0.22em] text-primary">
+                    01
+                  </span>
+                  <h2 className="mt-2 font-heading text-[1.65rem] font-bold leading-tight md:text-2xl">
+                    {content.missionTitle}
+                  </h2>
+                </div>
+                <div className="hidden h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-white/8 text-primary ring-1 ring-white/10 sm:flex">
+                  <Compass className="h-5 w-5" />
+                </div>
               </div>
 
-              <div className="p-7 md:p-10">
-                <p className="text-lg font-semibold leading-8 text-primary text-balance md:text-2xl md:leading-[1.35]">
+              <div className="relative px-6 py-6 md:px-8 md:py-7">
+                <p className="max-w-[64ch] text-sm leading-7 text-white/82 md:text-[15px] md:leading-8">
                   {content.missionText}
                 </p>
               </div>
@@ -342,16 +351,25 @@ const AboutPage = () => {
             <motion.section
               {...surfaceMotion}
               transition={{ duration: 0.65, ease: 'easeOut', delay: 0.12 }}
-              className="overflow-hidden rounded-[2rem] border border-border/60 bg-card shadow-[0_24px_80px_rgba(0,0,0,0.06)]"
+              className="group relative overflow-hidden rounded-[1.75rem] border border-border/70 bg-card shadow-[0_22px_70px_rgba(0,0,0,0.06)]"
             >
-              <div className="border-b border-border/70 px-7 py-6 md:px-10">
-                <h2 className="text-2xl font-heading font-bold text-foreground md:text-3xl">
-                  {content.outlookTitle}
-                </h2>
+              <div className="pointer-events-none absolute -right-24 -top-24 h-56 w-56 rounded-full bg-primary/10 blur-3xl transition-opacity duration-500 group-hover:opacity-90" />
+              <div className="relative flex items-center justify-between gap-5 border-b border-border/70 px-6 py-5 md:px-8">
+                <div>
+                  <span className="text-[11px] font-bold uppercase tracking-[0.22em] text-primary">
+                    02
+                  </span>
+                  <h2 className="mt-2 font-heading text-[1.65rem] font-bold leading-tight text-foreground md:text-2xl">
+                    {content.outlookTitle}
+                  </h2>
+                </div>
+                <div className="hidden h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-primary/10 text-primary ring-1 ring-primary/15 sm:flex">
+                  <CheckCircle2 className="h-5 w-5" />
+                </div>
               </div>
 
-              <div className="p-7 md:p-10">
-                <p className="text-base leading-8 text-foreground/90 md:text-xl md:leading-9">
+              <div className="relative px-6 py-6 md:px-8 md:py-7">
+                <p className="max-w-[66ch] text-sm leading-7 text-muted-foreground md:text-[15px] md:leading-8">
                   {content.outlookText}
                 </p>
               </div>

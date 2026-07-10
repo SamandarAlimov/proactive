@@ -11,7 +11,7 @@ type FeaturedProject = {
   title: string;
   category: string;
   logo: string;
-  logoClassName?: string;
+  projectImageClassName?: string;
   description: string;
   tags: string[];
   color: string;
@@ -34,7 +34,6 @@ const Projects = () => {
       title: 'MARF',
       category: 'Product Market Fit & Brand Platform',
       logo: marfLogo,
-      logoClassName: 'max-h-24',
       description:
         lang === 'uz'
           ? "MARF uchun maktab formasi bozori yo'nalishida product-market fit, brend platformasi va bozorga chiqish asosi ishlab chiqildi."
@@ -49,7 +48,7 @@ const Projects = () => {
       title: 'Milestone International School',
       category: 'Go-To-Market, Brand Platform & Admissions System',
       logo: milestoneLogo,
-      logoClassName: 'max-h-32',
+      projectImageClassName: 'scale-[1.75]',
       description:
         lang === 'uz'
           ? "Milestone International School uchun nol holatdan boshlab brand platforma, qabul strategiyasi, CRM va ichki sotuv-marketing tizimi qurildi."
@@ -142,13 +141,15 @@ const FeaturedCard = ({
             <div className="absolute inset-0 opacity-30 [background-image:linear-gradient(rgba(255,255,255,0.08)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.08)_1px,transparent_1px)] [background-size:42px_42px]" />
             <div className="relative flex aspect-[16/10] w-full max-w-[26rem] items-center justify-center rounded-[1.75rem] border border-white/60 bg-white/90 p-8 shadow-[0_24px_80px_rgba(0,0,0,0.22)] transition-transform duration-700 group-hover:scale-[1.015]">
               <div className="absolute inset-0 rounded-[1.75rem] bg-[radial-gradient(circle_at_top_right,rgba(82,230,200,0.14),transparent_42%)]" />
-              <img
-                src={project.logo}
-                alt={`${project.title} logo`}
-                loading="lazy"
-                decoding="async"
-                className={`relative w-full object-contain drop-shadow-[0_12px_28px_rgba(0,37,58,0.14)] ${project.logoClassName || 'max-h-28'}`}
-              />
+              <div className="relative flex h-[112px] w-[220px] items-center justify-center sm:h-[132px] sm:w-[260px] md:h-[148px] md:w-[300px]">
+                <img
+                  src={project.logo}
+                  alt={`${project.title} logo`}
+                  loading="lazy"
+                  decoding="async"
+                  className={`h-auto w-auto max-h-[92px] max-w-[190px] origin-center object-contain drop-shadow-[0_12px_28px_rgba(0,37,58,0.14)] sm:max-h-[104px] sm:max-w-[230px] md:max-h-[116px] md:max-w-[264px] ${project.projectImageClassName || ''}`}
+                />
+              </div>
             </div>
           </div>
         </div>

@@ -23,6 +23,7 @@ export type ClientLogo = {
   heroTileClassName?: string;
   heroImageClassName?: string;
   marqueeImageClassName?: string;
+  projectImageClassName?: string;
 };
 
 export const clientLogos: ClientLogo[] = [
@@ -52,6 +53,7 @@ export const clientLogos: ClientLogo[] = [
     heroTileClassName: 'w-[98px] lg:w-[116px]',
     heroImageClassName: 'max-h-11',
     marqueeImageClassName: 'max-h-14',
+    projectImageClassName: 'scale-[1.75]',
   },
   {
     name: 'Damar',

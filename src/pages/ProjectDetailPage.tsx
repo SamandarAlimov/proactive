@@ -58,7 +58,7 @@ type ProjectTeaser = {
   title: string;
   category: string;
   logo: string;
-  logoClassName?: string;
+  projectImageClassName?: string;
   tags: string[];
 };
 
@@ -476,7 +476,6 @@ const projectTeasers: ProjectTeaser[] = [
     title: 'MARF',
     category: 'Product Market Fit & Brand Platform',
     logo: marfLogo,
-    logoClassName: 'max-h-20',
     tags: ['Product Market Fit', 'Brand Platform', 'Go-To-Market'],
   },
   {
@@ -484,7 +483,7 @@ const projectTeasers: ProjectTeaser[] = [
     title: 'Milestone International School',
     category: 'Go-To-Market, Brand Platform & Admissions System',
     logo: milestoneLogo,
-    logoClassName: 'max-h-24',
+    projectImageClassName: 'scale-[1.75]',
     tags: ['Education', 'Brand Platform', 'Admissions Strategy'],
   },
   {
@@ -492,7 +491,6 @@ const projectTeasers: ProjectTeaser[] = [
     title: 'Aurus Pharm',
     category: 'Brand Platform, Packaging & Marketing Operations',
     logo: aurusPharmLogo,
-    logoClassName: 'max-h-20',
     tags: ['Pharma', 'Brand Platform', 'Marketing Operations'],
   },
 ];
@@ -861,13 +859,15 @@ const ProjectDetailPage = () => {
                       >
                         <div className="relative flex h-full w-full items-center justify-center rounded-[1.35rem] border border-white/70 bg-white/[0.92] p-6 shadow-[0_18px_50px_rgba(0,0,0,0.18)] transition-transform duration-700 group-hover:scale-[1.02]">
                           <div className="absolute inset-0 rounded-[1.35rem] bg-[radial-gradient(circle_at_top_right,rgba(82,230,200,0.12),transparent_44%)]" />
-                          <img
-                            src={item.logo}
-                            alt={`${item.title} logo`}
-                            loading="lazy"
-                            decoding="async"
-                            className={`relative w-full object-contain drop-shadow-[0_10px_24px_rgba(0,37,58,0.14)] ${item.logoClassName || 'max-h-20'}`}
-                          />
+                          <div className="relative flex h-[88px] w-[166px] items-center justify-center sm:h-[100px] sm:w-[190px]">
+                            <img
+                              src={item.logo}
+                              alt={`${item.title} logo`}
+                              loading="lazy"
+                              decoding="async"
+                              className={`h-auto w-auto max-h-[68px] max-w-[140px] origin-center object-contain drop-shadow-[0_10px_24px_rgba(0,37,58,0.14)] sm:max-h-[78px] sm:max-w-[164px] ${item.projectImageClassName || ''}`}
+                            />
+                          </div>
                         </div>
                       </div>
 

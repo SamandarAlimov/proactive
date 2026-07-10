@@ -145,13 +145,15 @@ const ProjectsPage = () => {
             }`}
           >
             <div className="absolute inset-0 rounded-[1.35rem] bg-[radial-gradient(circle_at_top_right,rgba(82,230,200,0.12),transparent_44%)]" />
-            <img
-              src={project.logo.logo}
-              alt={`${project.title} logo`}
-              loading="lazy"
-              decoding="async"
-              className="relative max-h-24 w-full object-contain drop-shadow-[0_10px_24px_rgba(0,37,58,0.14)]"
-            />
+            <div className="relative flex h-[96px] w-[176px] items-center justify-center sm:h-[108px] sm:w-[204px]">
+              <img
+                src={project.logo.logo}
+                alt={`${project.title} logo`}
+                loading="lazy"
+                decoding="async"
+                className={`h-auto w-auto max-h-[74px] max-w-[148px] origin-center object-contain drop-shadow-[0_10px_24px_rgba(0,37,58,0.14)] sm:max-h-[84px] sm:max-w-[176px] ${project.logo.projectImageClassName || ''}`}
+              />
+            </div>
           </div>
         </div>
         <div className="min-w-0 p-5 sm:p-6">

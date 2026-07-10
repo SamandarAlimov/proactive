@@ -27,7 +27,7 @@ import {
   Users,
   Workflow,
 } from 'lucide-react';
-import academySpeaker from '@/assets/academy-speaker.jpg';
+import academySpeaker from '@/assets/optimized/academy-speaker.webp';
 import marketingMaximumLogo from '@/assets/marketing-maximum-logo.png';
 
 type LangKey = 'uz' | 'en' | 'ru';

@@ -198,7 +198,8 @@ const TeamShowcaseStrip = ({ className = '' }: { className?: string }) => {
                       src={member.image}
                       alt={member.name}
                       loading="lazy"
-                      className="absolute bottom-0 left-1/2 h-full w-auto max-w-none origin-bottom object-contain object-bottom transition-[opacity,transform,filter] duration-300"
+                      decoding="async"
+                      className="absolute bottom-0 left-1/2 h-full w-auto max-w-none origin-bottom object-contain object-bottom transition-[opacity,transform] duration-300"
                       style={{
                         opacity: isActive ? 0 : isMuted ? tone.mutedOpacity : tone.idleOpacity,
                         transform: `translateX(-50%) scale(${visual.defaultScale})`,
@@ -209,7 +210,8 @@ const TeamShowcaseStrip = ({ className = '' }: { className?: string }) => {
                       src={member.hoverImage}
                       alt={`${member.name} active portrait`}
                       loading="lazy"
-                      className="absolute bottom-0 left-1/2 h-full w-auto max-w-none origin-bottom object-contain object-bottom transition-[opacity,transform,filter] duration-300"
+                      decoding="async"
+                      className="absolute bottom-0 left-1/2 h-full w-auto max-w-none origin-bottom object-contain object-bottom transition-[opacity,transform] duration-300"
                       style={{
                         opacity: isActive ? 1 : 0,
                         transform: `translateX(-50%) scale(${visual.hoverScale})`,

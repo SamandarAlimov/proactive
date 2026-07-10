@@ -4,7 +4,7 @@ import { Link, useLocation } from 'react-router-dom';
 import { useI18n } from '@/lib/i18n';
 import { useScrollAnimation } from '@/hooks/useScrollAnimation';
 import marfLogo from '@/assets/clients/marf.png';
-import milestoneLogo from '@/assets/clients/milestone.png';
+import milestoneLogo from '@/assets/clients/optimized/milestone.webp';
 import { createMainSectionState } from '@/lib/source-navigation';
 
 type FeaturedProject = {

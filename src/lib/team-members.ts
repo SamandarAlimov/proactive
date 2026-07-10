@@ -11,31 +11,31 @@ export type TeamMember = {
   bio: LocalizedText;
 };
 
-import founderMember from '@/assets/team/founder-member.png';
-import founderMemberHover from '@/assets/team/founder-member-hover.png';
-import member1 from '@/assets/team/member-1.png';
-import member2 from '@/assets/team/member-2.png';
-import member3 from '@/assets/team/member-3.png';
-import member4 from '@/assets/team/member-4.png';
-import member5 from '@/assets/team/member-5.png';
-import member6 from '@/assets/team/member-6.png';
-import member7 from '@/assets/team/member-7.png';
-import member8 from '@/assets/team/member-8.png';
-import member9 from '@/assets/team/member-9.png';
-import member10 from '@/assets/team/member-10.png';
-import member11 from '@/assets/team/member-11.png';
+import founderMember from '@/assets/team/optimized/founder-member.webp';
+import founderMemberHover from '@/assets/team/optimized/founder-member-hover.webp';
+import member1 from '@/assets/team/optimized/member-1.webp';
+import member2 from '@/assets/team/optimized/member-2.webp';
+import member3 from '@/assets/team/optimized/member-3.webp';
+import member4 from '@/assets/team/optimized/member-4.webp';
+import member5 from '@/assets/team/optimized/member-5.webp';
+import member6 from '@/assets/team/optimized/member-6.webp';
+import member7 from '@/assets/team/optimized/member-7.webp';
+import member8 from '@/assets/team/optimized/member-8.webp';
+import member9 from '@/assets/team/optimized/member-9.webp';
+import member10 from '@/assets/team/optimized/member-10.webp';
+import member11 from '@/assets/team/optimized/member-11.webp';
 
-import member1Hover from '@/assets/team/member-1-hover.png';
-import member2Hover from '@/assets/team/member-2-hover.png';
-import member3Hover from '@/assets/team/member-3-hover.png';
-import member4Hover from '@/assets/team/member-4-hover.png';
-import member5Hover from '@/assets/team/member-5-hover.png';
-import member6Hover from '@/assets/team/member-6-hover.png';
-import member7Hover from '@/assets/team/member-7-hover.png';
-import member8Hover from '@/assets/team/member-8-hover.png';
-import member9Hover from '@/assets/team/member-9-hover.png';
-import member10Hover from '@/assets/team/member-10-hover.png';
-import member11Hover from '@/assets/team/member-11-hover.png';
+import member1Hover from '@/assets/team/optimized/member-1-hover.webp';
+import member2Hover from '@/assets/team/optimized/member-2-hover.webp';
+import member3Hover from '@/assets/team/optimized/member-3-hover.webp';
+import member4Hover from '@/assets/team/optimized/member-4-hover.webp';
+import member5Hover from '@/assets/team/optimized/member-5-hover.webp';
+import member6Hover from '@/assets/team/optimized/member-6-hover.webp';
+import member7Hover from '@/assets/team/optimized/member-7-hover.webp';
+import member8Hover from '@/assets/team/optimized/member-8-hover.webp';
+import member9Hover from '@/assets/team/optimized/member-9-hover.webp';
+import member10Hover from '@/assets/team/optimized/member-10-hover.webp';
+import member11Hover from '@/assets/team/optimized/member-11-hover.webp';
 
 export const teamMembers: TeamMember[] = [
   {

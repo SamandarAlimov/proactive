@@ -1,5 +1,5 @@
-import ahmadTeaLogo from '@/assets/clients/Ahmadtea.png';
-import aqlyLogo from '@/assets/clients/aqly.png';
+import ahmadTeaLogo from '@/assets/clients/optimized/Ahmadtea.webp';
+import aqlyLogo from '@/assets/clients/optimized/aqly.webp';
 import asrKimyoLogo from '@/assets/clients/asrkimyo.png';
 import aurusPharmLogo from '@/assets/clients/AurusPharm.png';
 import baxtiyorOilaLogo from '@/assets/clients/baxtiyoroila.png';
@@ -7,13 +7,13 @@ import bekOtaLogo from '@/assets/clients/Bekota.svg';
 import damarLogo from '@/assets/clients/damar.png';
 import impulsLogo from '@/assets/clients/impuls.webp';
 import marfLogo from '@/assets/clients/marf.png';
-import meritChemicalsLogo from '@/assets/clients/merit.png';
-import milestoneLogo from '@/assets/clients/milestone.png';
+import meritChemicalsLogo from '@/assets/clients/optimized/merit.webp';
+import milestoneLogo from '@/assets/clients/optimized/milestone.webp';
 import mobetcoLogo from '@/assets/clients/mobetco.webp';
 import najotNurLogo from '@/assets/clients/najotnur.png';
 import oxusUniversityLogo from '@/assets/clients/oxusuniversity.png';
 import presidentGiftsLogo from '@/assets/clients/president.png';
-import zahratunLogo from '@/assets/clients/zahratun.png';
+import zahratunLogo from '@/assets/clients/optimized/zahratun.webp';
 
 export type ClientLogo = {
   name: string;

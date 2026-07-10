@@ -13,7 +13,7 @@ import FounderSpecialtyChips from '@/components/FounderSpecialtyChips';
 import FounderWorkLogos from '@/components/FounderWorkLogos';
 import SEO from '@/components/SEO';
 import SourceBackLink from '@/components/SourceBackLink';
-import founderHabibullo from '@/assets/founder-habibullo.png';
+import founderHabibullo from '@/assets/optimized/founder-habibullo.webp';
 import { founderProfile, type FounderLang } from '@/lib/founder-profile';
 import { useI18n } from '@/lib/i18n';
 import { premiumRevealTransition, revealViewport } from '@/lib/motion';

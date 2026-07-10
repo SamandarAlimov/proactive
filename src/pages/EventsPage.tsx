@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { motion } from 'framer-motion';
-import { CalendarDays, ExternalLink, Play, Sparkles, Youtube } from 'lucide-react';
+import { CalendarDays, ExternalLink, Play, Youtube } from 'lucide-react';
 import { useLocation } from 'react-router-dom';
 
 import PageLayout from '@/components/PageLayout';
@@ -18,42 +18,36 @@ import { createBreadcrumbSchema, createWebPageSchema } from '@/lib/seo';
 const copy = {
   uz: {
     badge: 'Tadbirlar',
-    channel: 'Cubic Podcast kanali',
     channelCta: 'Kanalga o‘tish',
     description:
       'Marketing, biznes, strategiya va jamoa boshqaruvi bo‘yicha Cubic Podcast suhbatlarini shu sahifada tomosha qiling.',
     featured: 'Tanlangan suhbat',
     latest: 'So‘nggi videolar',
     meta: 'E’lon qilingan',
-    note: 'Video shu sahifaning o‘zida ochiladi. Xohlasangiz, YouTube kanalida ham davom ettirishingiz mumkin.',
     playlist: 'Video ro‘yxati',
     title: 'Cubic Podcast videolari',
     watchYoutube: 'YouTube’da ochish',
   },
   en: {
     badge: 'Events',
-    channel: 'Cubic Podcast channel',
     channelCta: 'Open channel',
     description:
       'Watch Cubic Podcast conversations on marketing, business, strategy, and team management directly on this page.',
     featured: 'Featured conversation',
     latest: 'Latest videos',
     meta: 'Published',
-    note: 'The video plays on this page. You can also continue watching on the YouTube channel.',
     playlist: 'Video playlist',
     title: 'Cubic Podcast Videos',
     watchYoutube: 'Open on YouTube',
   },
   ru: {
     badge: 'События',
-    channel: 'Канал Cubic Podcast',
     channelCta: 'Открыть канал',
     description:
       'Смотрите выпуски Cubic Podcast о маркетинге, бизнесе, стратегии и управлении командой прямо на этой странице.',
     featured: 'Выбранный выпуск',
     latest: 'Последние видео',
     meta: 'Опубликовано',
-    note: 'Видео открывается на этой странице. При желании можно продолжить просмотр на YouTube.',
     playlist: 'Список видео',
     title: 'Видео Cubic Podcast',
     watchYoutube: 'Открыть на YouTube',
@@ -159,7 +153,7 @@ const EventsPage = () => {
 
       <section className="bg-background py-14 md:py-20">
         <div className="mx-auto max-w-[1500px] px-5 sm:px-6">
-          <div className="grid gap-6 xl:grid-cols-[minmax(0,1fr)_340px] 2xl:grid-cols-[minmax(0,1fr)_360px]">
+          <div className="mx-auto max-w-[1334px]">
             <motion.div
               ref={playerRef}
               initial={{ opacity: 0, y: 24 }}
@@ -206,44 +200,6 @@ const EventsPage = () => {
               </div>
             </motion.div>
 
-            <motion.aside
-              initial={{ opacity: 0, y: 24 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={revealViewport}
-              transition={{ duration: 0.45, delay: 0.06, ease: [0.16, 1, 0.3, 1] }}
-              className="rounded-[1.5rem] border border-border/70 bg-card p-5 shadow-xl shadow-secondary/5 sm:rounded-[2rem] md:p-6 xl:sticky xl:top-28 xl:self-start"
-            >
-              <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-primary/10 text-primary">
-                <Sparkles className="h-6 w-6" />
-              </div>
-              <h2 className="mt-5 font-heading text-2xl font-bold text-foreground">{labels.channel}</h2>
-              <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{labels.note}</p>
-
-              <div className="mt-6 grid grid-cols-2 gap-3">
-                <div className="rounded-2xl border border-border/70 bg-muted/30 p-4">
-                  <div className="text-2xl font-bold text-foreground">{cubicPodcastVideos.length}</div>
-                  <div className="mt-1 text-xs font-semibold uppercase tracking-[0.16em] text-muted-foreground">
-                    Video
-                  </div>
-                </div>
-                <div className="rounded-2xl border border-border/70 bg-muted/30 p-4">
-                  <div className="text-2xl font-bold text-foreground">YouTube</div>
-                  <div className="mt-1 text-xs font-semibold uppercase tracking-[0.16em] text-muted-foreground">
-                    Platforma
-                  </div>
-                </div>
-              </div>
-
-              <a
-                href={cubicPodcastChannelUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="mt-6 inline-flex w-full items-center justify-center gap-2 rounded-xl border border-primary/25 bg-primary/10 px-5 py-3 text-sm font-bold text-primary transition-all duration-300 hover:-translate-y-0.5 hover:bg-primary hover:text-primary-foreground"
-              >
-                <Youtube className="h-4 w-4" />
-                {labels.channelCta}
-              </a>
-            </motion.aside>
           </div>
 
           <motion.div

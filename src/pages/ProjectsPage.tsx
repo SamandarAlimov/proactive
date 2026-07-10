@@ -136,12 +136,8 @@ const ProjectsPage = () => {
             </div>
           )}
           <div
-            className={`relative flex h-full w-full items-center justify-center rounded-[1.35rem] border p-6 shadow-[inset_0_1px_0_rgba(255,255,255,0.25),0_18px_50px_rgba(0,0,0,0.18)] transition-transform duration-700 ${
+            className={`relative flex h-full w-full items-center justify-center rounded-[1.35rem] border border-white/70 bg-white/[0.94] p-6 shadow-[inset_0_1px_0_rgba(255,255,255,0.32),0_18px_50px_rgba(0,0,0,0.18)] transition-transform duration-700 dark:border-white/10 dark:bg-brand-dark ${
               hasDetailedCase ? 'group-hover:scale-[1.02]' : ''
-            } ${
-              project.logo.heroTone === 'dark'
-                ? 'border-white/10 bg-secondary'
-                : 'border-white/70 bg-white/[0.92]'
             }`}
           >
             <div className="absolute inset-0 rounded-[1.35rem] bg-[radial-gradient(circle_at_top_right,rgba(82,230,200,0.12),transparent_44%)]" />
@@ -151,7 +147,7 @@ const ProjectsPage = () => {
                 alt={`${project.title} logo`}
                 loading="lazy"
                 decoding="async"
-                className={`h-auto w-auto max-h-[74px] max-w-[148px] origin-center object-contain drop-shadow-[0_10px_24px_rgba(0,37,58,0.14)] sm:max-h-[84px] sm:max-w-[176px] ${project.logo.projectImageClassName || ''}`}
+                className={`project-logo-image h-auto w-auto max-h-[74px] max-w-[148px] origin-center object-contain sm:max-h-[84px] sm:max-w-[176px] ${project.logo.projectImageClassName || ''}`}
               />
             </div>
           </div>

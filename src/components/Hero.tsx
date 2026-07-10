@@ -29,9 +29,8 @@ const Hero = () => {
     <div
       key={`${client.name}-${copyIndex}`}
       className={cn(
-        'hero-logo-item flex h-10 shrink-0 items-center justify-center px-2 sm:h-12 sm:px-3 md:h-14',
+        'hero-logo-item flex h-14 w-[168px] shrink-0 items-center justify-center px-4 sm:h-16 sm:w-[188px] sm:px-5 md:h-[72px] md:w-[208px]',
         client.heroTone === 'dark' ? 'hero-logo-item-dark' : 'hero-logo-item-light',
-        client.heroTileClassName,
       )}
     >
       <img
@@ -39,10 +38,7 @@ const Hero = () => {
         alt={client.name}
         loading="lazy"
         decoding="async"
-        className={cn(
-          'hero-logo-image h-full w-full object-contain opacity-100',
-          client.marqueeImageClassName ?? client.heroImageClassName,
-        )}
+        className="hero-logo-image h-auto w-auto max-h-[40px] max-w-[140px] object-contain opacity-100 sm:max-h-[44px] sm:max-w-[160px] md:max-h-[50px] md:max-w-[188px]"
       />
     </div>
   );

@@ -57,7 +57,7 @@ const Clients = () => {
                 key={`${client.name}-${i}`}
                 aria-hidden={!shouldReduceMotion && i >= clientLogos.length}
                 className={cn(
-                  'group flex h-16 min-w-[138px] flex-shrink-0 items-center justify-center rounded-xl border px-4 py-3 transition duration-300 hover:-translate-y-0.5 hover:border-primary/25 hover:shadow-[0_18px_42px_rgba(38,79,107,0.12)] sm:h-20 sm:min-w-[176px] sm:rounded-2xl sm:px-5 sm:py-3.5 lg:h-24 lg:min-w-[218px] lg:px-7 lg:py-4',
+                  'group flex h-16 w-[148px] flex-shrink-0 items-center justify-center rounded-xl border px-4 py-3 transition duration-300 hover:-translate-y-0.5 hover:border-primary/25 hover:shadow-[0_18px_42px_rgba(38,79,107,0.12)] sm:h-20 sm:w-[184px] sm:rounded-2xl sm:px-5 sm:py-3.5 lg:h-24 lg:w-[224px] lg:px-7 lg:py-4',
                   getLogoCardTone(client.heroTone),
                 )}
               >
@@ -66,10 +66,7 @@ const Clients = () => {
                   alt={client.name}
                   loading="lazy"
                   decoding="async"
-                  className={cn(
-                    'h-full w-full object-contain opacity-85 transition duration-300 group-hover:scale-[1.03] group-hover:opacity-100',
-                    client.marqueeImageClassName,
-                  )}
+                  className="h-auto w-auto max-h-10 max-w-[116px] object-contain opacity-85 transition duration-300 group-hover:scale-[1.03] group-hover:opacity-100 sm:max-h-12 sm:max-w-[148px] lg:max-h-14 lg:max-w-[182px]"
                 />
               </div>
             ))}

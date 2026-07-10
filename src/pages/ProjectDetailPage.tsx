@@ -483,7 +483,7 @@ const projectTeasers: ProjectTeaser[] = [
     title: 'Milestone International School',
     category: 'Go-To-Market, Brand Platform & Admissions System',
     logo: milestoneLogo,
-    projectImageClassName: 'scale-[1.75]',
+    projectImageClassName: 'scale-[1.68]',
     tags: ['Education', 'Brand Platform', 'Admissions Strategy'],
   },
   {

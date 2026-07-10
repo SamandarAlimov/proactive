@@ -48,7 +48,7 @@ const Projects = () => {
       title: 'Milestone International School',
       category: 'Go-To-Market, Brand Platform & Admissions System',
       logo: milestoneLogo,
-      projectImageClassName: 'scale-[1.75]',
+      projectImageClassName: 'scale-[1.68]',
       description:
         lang === 'uz'
           ? "Milestone International School uchun nol holatdan boshlab brand platforma, qabul strategiyasi, CRM va ichki sotuv-marketing tizimi qurildi."

@@ -44,6 +44,7 @@ export const clientLogos: ClientLogo[] = [
     heroTileClassName: 'w-[92px] lg:w-[108px]',
     heroImageClassName: 'max-h-11',
     marqueeImageClassName: 'max-h-16',
+    projectImageClassName: 'scale-[1.22]',
   },
   {
     name: 'Milestone IS',
@@ -53,7 +54,7 @@ export const clientLogos: ClientLogo[] = [
     heroTileClassName: 'w-[98px] lg:w-[116px]',
     heroImageClassName: 'max-h-11',
     marqueeImageClassName: 'max-h-14',
-    projectImageClassName: 'scale-[1.75]',
+    projectImageClassName: 'scale-[1.68]',
   },
   {
     name: 'Damar',
@@ -90,6 +91,7 @@ export const clientLogos: ClientLogo[] = [
     heroTileClassName: 'w-[104px] lg:w-[126px]',
     heroImageClassName: 'max-h-10',
     marqueeImageClassName: 'max-h-12',
+    projectImageClassName: 'scale-[1.52]',
   },
   {
     name: 'Merit Chemicals',
@@ -126,6 +128,7 @@ export const clientLogos: ClientLogo[] = [
     heroTileClassName: 'w-[92px] lg:w-[112px]',
     heroImageClassName: 'max-h-10',
     marqueeImageClassName: 'max-h-12',
+    projectImageClassName: 'scale-[2.05]',
   },
   {
     name: 'Zahratun Supermarket',
@@ -144,6 +147,7 @@ export const clientLogos: ClientLogo[] = [
     heroTileClassName: 'w-[112px] lg:w-[134px]',
     heroImageClassName: 'max-h-11',
     marqueeImageClassName: 'max-h-16',
+    projectImageClassName: 'scale-[1.18]',
   },
   {
     name: 'Baxtiyor Oila',
@@ -171,6 +175,7 @@ export const clientLogos: ClientLogo[] = [
     heroTileClassName: 'w-[168px] lg:w-[206px]',
     heroImageClassName: 'max-h-10',
     marqueeImageClassName: 'max-h-14',
+    projectImageClassName: 'scale-[1.18]',
   },
 ];
 

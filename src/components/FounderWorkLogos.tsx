@@ -1,8 +1,8 @@
 import { Sparkles } from 'lucide-react';
 
-import chortoqLogo from '@/assets/founder-work/chortoq.png';
+import chortoqLogo from '@/assets/founder-work/chortoq-normalized.png';
 import mfaktorLogo from '@/assets/founder-work/mfaktor.webp';
-import samsungLogo from '@/assets/founder-work/samsung.png';
+import samsungLogo from '@/assets/founder-work/samsung-normalized.png';
 import { useI18n, type Language } from '@/lib/i18n';
 import { cn } from '@/lib/utils';
 
@@ -25,23 +25,17 @@ const founderWorkLogos = [
   {
     name: 'Chortoq',
     logo: chortoqLogo,
-    imageClassName: 'max-h-14 sm:max-h-16',
-    tileClassName:
-      'border-secondary/10 bg-white shadow-[0_12px_28px_rgba(38,79,107,0.10)] hover:border-primary/25 hover:shadow-[0_18px_38px_rgba(38,79,107,0.16)]',
+    imageClassName: 'max-h-[46px] max-w-[160px] sm:max-h-[54px] sm:max-w-[184px]',
   },
   {
     name: 'MFaktor',
     logo: mfaktorLogo,
-    imageClassName: 'max-h-11 sm:max-h-12',
-    tileClassName:
-      'border-white/10 bg-[linear-gradient(135deg,hsl(202,100%,11%),hsl(204,47%,20%))] shadow-[0_12px_28px_rgba(0,37,58,0.18)] hover:border-primary/35 hover:shadow-[0_18px_38px_rgba(0,37,58,0.24)]',
+    imageClassName: 'max-h-[40px] max-w-[160px] sm:max-h-[48px] sm:max-w-[184px]',
   },
   {
     name: 'Samsung',
     logo: samsungLogo,
-    imageClassName: 'max-h-14 sm:max-h-16',
-    tileClassName:
-      'border-secondary/10 bg-white shadow-[0_12px_28px_rgba(38,79,107,0.10)] hover:border-primary/25 hover:shadow-[0_18px_38px_rgba(38,79,107,0.16)]',
+    imageClassName: 'max-h-[42px] max-w-[160px] sm:max-h-[50px] sm:max-w-[184px]',
   },
 ];
 
@@ -80,21 +74,22 @@ const FounderWorkLogos = ({ className, variant = 'panel' }: FounderWorkLogosProp
             <div
               key={item.name}
               className={cn(
-                'group flex h-16 min-w-0 items-center justify-center rounded-2xl border px-3 py-2.5 transition duration-300 hover:-translate-y-0.5',
+                'group flex h-16 min-w-0 items-center justify-center rounded-2xl border border-secondary/10 bg-white px-3 py-2.5 shadow-[0_12px_28px_rgba(38,79,107,0.10)] transition duration-300 hover:-translate-y-0.5 hover:border-primary/25 hover:shadow-[0_18px_38px_rgba(38,79,107,0.16)] dark:border-white/10 dark:bg-brand-dark dark:shadow-[0_16px_34px_rgba(0,0,0,0.26)] dark:hover:border-primary/35 dark:hover:shadow-[0_20px_42px_rgba(0,0,0,0.34)]',
                 variant === 'panel' && 'sm:h-[4.75rem] sm:px-4',
-                item.tileClassName,
               )}
             >
-              <img
-                src={item.logo}
-                alt={`${item.name} logo`}
-                loading="lazy"
-                decoding="async"
-                className={cn(
-                  'h-full w-full object-contain opacity-90 transition duration-300 group-hover:scale-[1.03] group-hover:opacity-100',
-                  item.imageClassName,
-                )}
-              />
+              <span className="flex h-[52px] w-full max-w-[190px] items-center justify-center sm:h-[58px]">
+                <img
+                  src={item.logo}
+                  alt={`${item.name} logo`}
+                  loading="lazy"
+                  decoding="async"
+                  className={cn(
+                    'founder-work-logo h-auto w-auto object-contain opacity-95 transition duration-300 group-hover:scale-[1.03] group-hover:opacity-100',
+                    item.imageClassName,
+                  )}
+                />
+              </span>
             </div>
           ))}
         </div>

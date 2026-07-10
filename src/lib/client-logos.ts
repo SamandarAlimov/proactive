@@ -143,6 +143,7 @@ export const clientLogos: ClientLogo[] = [
     heroTileClassName: 'w-[150px] lg:w-[182px]',
     heroImageClassName: 'max-h-10',
     marqueeImageClassName: 'max-h-14',
+    heroVisualClassName: 'scale-[1.42]',
     projectImageClassName: 'zahratun-project-logo',
   },
   {
@@ -153,7 +154,7 @@ export const clientLogos: ClientLogo[] = [
     heroTileClassName: 'w-[112px] lg:w-[134px]',
     heroImageClassName: 'max-h-11',
     marqueeImageClassName: 'max-h-16',
-    heroVisualClassName: 'scale-[1.1]',
+    heroVisualClassName: 'scale-[1.38]',
     projectImageClassName: 'scale-[1.18]',
   },
   {

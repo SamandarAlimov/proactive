@@ -143,6 +143,7 @@ export const clientLogos: ClientLogo[] = [
     heroTileClassName: 'w-[150px] lg:w-[182px]',
     heroImageClassName: 'max-h-10',
     marqueeImageClassName: 'max-h-14',
+    projectImageClassName: 'zahratun-project-logo',
   },
   {
     name: 'MobetCo',

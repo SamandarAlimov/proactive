@@ -112,7 +112,7 @@ const TeamShowcaseStrip = ({ className = '' }: { className?: string }) => {
         style={{ scrollbarWidth: 'thin', scrollbarColor: '#52E6C8 transparent' }}
       >
         <div
-          className="flex min-w-max items-end px-5 pb-0 pt-8 pr-[18rem] sm:px-8 sm:pr-[21rem] lg:px-12 lg:pr-[24rem]"
+          className="flex min-w-max items-end px-5 pb-0 pt-8 sm:px-8 lg:px-12"
           style={{ gap: 'clamp(0.75rem, 2.4vw, 1.5rem)' }}
         >
           {teamMembers.map((member) => {

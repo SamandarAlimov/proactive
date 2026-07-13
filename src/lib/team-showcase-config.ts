@@ -1,5 +1,6 @@
 export type TeamMemberVisualConfig = {
   defaultScale: number;
+  hoverX?: number;
   hoverScale: number;
   tooltipSide: 'left' | 'right';
 };
@@ -10,7 +11,7 @@ export const TEAM_TOOLTIP_WIDTH = 304;
 export const TEAM_TOOLTIP_OFFSET = 28;
 
 export const teamMemberVisualConfig: Record<number, TeamMemberVisualConfig> = {
-  11: { defaultScale: 0.96, hoverScale: 1.08, tooltipSide: 'right' },
+  11: { defaultScale: 0.96, hoverScale: 1.08, hoverX: 28, tooltipSide: 'right' },
   1: { defaultScale: 0.96, hoverScale: 0.96, tooltipSide: 'right' },
   2: { defaultScale: 0.96, hoverScale: 0.96, tooltipSide: 'right' },
   3: { defaultScale: 0.96, hoverScale: 0.96, tooltipSide: 'right' },

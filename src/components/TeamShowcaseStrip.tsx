@@ -214,7 +214,7 @@ const TeamShowcaseStrip = ({ className = '' }: { className?: string }) => {
                       className="absolute bottom-0 left-1/2 h-full w-auto max-w-none origin-bottom object-contain object-bottom transition-[opacity,transform] duration-300"
                       style={{
                         opacity: isActive ? 1 : 0,
-                        transform: `translateX(-50%) scale(${visual.hoverScale})`,
+                        transform: `translateX(calc(-50% + ${visual.hoverX ?? 0}px)) scale(${visual.hoverScale})`,
                         filter: tone.activeFilter,
                       }}
                     />

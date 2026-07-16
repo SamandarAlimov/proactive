@@ -193,40 +193,40 @@ const About = () => {
                   'linear-gradient(160deg, hsla(204, 47%, 28%, 0.95) 0%, hsla(202, 100%, 11%, 0.98) 100%)',
               }}
             >
-              <div className="absolute inset-0">
-                <div className="absolute left-1/2 top-[12%] h-3 w-3 -translate-x-1/2 rounded-full bg-primary/70 shadow-[0_0_20px_rgba(82,230,200,0.55)]" />
-                <div className="absolute right-[14%] top-1/2 h-2.5 w-2.5 -translate-y-1/2 rounded-full bg-white/50" />
-                <div className="absolute bottom-[14%] left-1/2 h-2.5 w-2.5 -translate-x-1/2 rounded-full bg-primary/40" />
-                <div className="absolute left-[14%] top-1/2 h-2 w-2 -translate-y-1/2 rounded-full bg-white/30" />
+              <div className="about-agency-orbit-dots absolute inset-0">
+                <div className="about-agency-dot absolute left-1/2 top-[12%] h-3 w-3 -translate-x-1/2 rounded-full bg-primary/70 shadow-[0_0_20px_rgba(82,230,200,0.55)]" />
+                <div className="about-agency-dot absolute right-[14%] top-1/2 h-2.5 w-2.5 -translate-y-1/2 rounded-full bg-white/50" />
+                <div className="about-agency-dot absolute bottom-[14%] left-1/2 h-2.5 w-2.5 -translate-x-1/2 rounded-full bg-primary/40" />
+                <div className="about-agency-dot absolute left-[14%] top-1/2 h-2 w-2 -translate-y-1/2 rounded-full bg-white/30" />
               </div>
 
               <div
-                className="absolute right-8 top-8 h-32 w-32 rounded-full"
+                className="about-agency-glow about-agency-glow-primary absolute right-8 top-8 h-32 w-32 rounded-full"
                 style={{
                   background:
                     'radial-gradient(circle, hsla(166, 75%, 61%, 0.12) 0%, transparent 70%)',
                 }}
               />
               <div
-                className="absolute bottom-12 left-12 h-48 w-48 rounded-full"
+                className="about-agency-glow about-agency-glow-violet absolute bottom-12 left-12 h-48 w-48 rounded-full"
                 style={{
                   background:
                     'radial-gradient(circle, hsla(259, 43%, 51%, 0.1) 0%, transparent 70%)',
                 }}
               />
 
-              <div className="absolute inset-[14%] rounded-full border border-white/10" />
+              <div className="about-agency-orbit-ring absolute inset-[14%] rounded-full border border-white/10" />
 
               <div className="relative z-10 text-center">
-                <div className="mx-auto mb-6 h-28 w-28 overflow-hidden rounded-2xl shadow-2xl ring-2 ring-white/10 md:h-36 md:w-36">
+                <div className="about-agency-logo mx-auto mb-6 h-28 w-28 overflow-hidden rounded-2xl shadow-2xl ring-2 ring-white/10 md:h-36 md:w-36">
                   <img src={proactiveLogo} alt="Proactive Logo" className="h-full w-full object-cover" />
                 </div>
 
-                <h3 className="mb-2 text-2xl font-heading font-bold text-white md:text-3xl">
+                <h3 className="about-agency-title mb-2 text-2xl font-heading font-bold text-white md:text-3xl">
                   Proactive
                 </h3>
 
-                <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-xs uppercase tracking-[0.22em] text-white/60">
+                <div className="about-agency-badge inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-xs uppercase tracking-[0.22em] text-white/60">
                   <Sparkles className="h-3.5 w-3.5 text-primary" />
                   Marketing Agency
                 </div>

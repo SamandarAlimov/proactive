@@ -308,6 +308,80 @@
       drop-shadow(0 12px 20px rgba(0, 0, 0, 0.36));
   }
 
+  .about-agency-orbit-ring {
+    isolation: isolate;
+  }
+
+  .about-agency-orbit-ring::before {
+    content: "";
+    position: absolute;
+    inset: -1px;
+    border-radius: inherit;
+    background:
+      conic-gradient(
+        from 20deg,
+        transparent 0deg,
+        rgba(82, 230, 200, 0.02) 52deg,
+        rgba(82, 230, 200, 0.56) 82deg,
+        rgba(255, 255, 255, 0.22) 96deg,
+        transparent 126deg,
+        transparent 360deg
+      );
+    mask: radial-gradient(farthest-side, transparent calc(100% - 2px), #000 calc(100% - 1px));
+    -webkit-mask: radial-gradient(farthest-side, transparent calc(100% - 2px), #000 calc(100% - 1px));
+    opacity: 0.9;
+    transform: translate3d(0, 0, 0);
+    animation: about-agency-orbit 16s linear infinite;
+    will-change: transform;
+  }
+
+  .about-agency-orbit-dots {
+    animation: about-agency-orbit 24s linear infinite;
+    transform-origin: 50% 50%;
+    will-change: transform;
+  }
+
+  .about-agency-dot {
+    animation: about-agency-dot-pulse 3.8s ease-in-out infinite;
+    will-change: opacity;
+  }
+
+  .about-agency-dot:nth-child(2) {
+    animation-delay: -0.8s;
+  }
+
+  .about-agency-dot:nth-child(3) {
+    animation-delay: -1.6s;
+  }
+
+  .about-agency-dot:nth-child(4) {
+    animation-delay: -2.4s;
+  }
+
+  .about-agency-logo {
+    animation: about-agency-float 7s ease-in-out infinite;
+    transform: translate3d(0, 0, 0);
+    will-change: transform;
+  }
+
+  .about-agency-title {
+    text-shadow: 0 10px 30px rgba(0, 0, 0, 0.26);
+  }
+
+  .about-agency-badge {
+    animation: about-agency-badge-glow 5.4s ease-in-out infinite;
+    will-change: box-shadow, border-color;
+  }
+
+  .about-agency-glow {
+    animation: about-agency-glow-breathe 8s ease-in-out infinite;
+    will-change: transform, opacity;
+  }
+
+  .about-agency-glow-violet {
+    animation-delay: -3s;
+  }
+
   .brand-marquee-track:hover {
     animation-play-state: paused;
   }
@@ -357,6 +431,64 @@ html {
   }
 }
 
+@keyframes about-agency-orbit {
+  from {
+    transform: rotate(0deg) translate3d(0, 0, 0);
+  }
+
+  to {
+    transform: rotate(360deg) translate3d(0, 0, 0);
+  }
+}
+
+@keyframes about-agency-dot-pulse {
+  0%,
+  100% {
+    opacity: 0.58;
+  }
+
+  50% {
+    opacity: 1;
+  }
+}
+
+@keyframes about-agency-float {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+
+  50% {
+    transform: translate3d(0, -6px, 0);
+  }
+}
+
+@keyframes about-agency-badge-glow {
+  0%,
+  100% {
+    border-color: rgba(255, 255, 255, 0.1);
+    box-shadow: 0 0 0 rgba(82, 230, 200, 0);
+  }
+
+  50% {
+    border-color: rgba(82, 230, 200, 0.28);
+    box-shadow: 0 0 26px rgba(82, 230, 200, 0.12);
+  }
+}
+
+@keyframes about-agency-glow-breathe {
+  0%,
+  100% {
+    opacity: 0.72;
+    transform: scale(1);
+  }
+
+  50% {
+    opacity: 1;
+    transform: scale(1.08);
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
@@ -368,7 +500,13 @@ html {
   }
 
   .brand-marquee-track,
-  .hero-logo-marquee-track {
+  .hero-logo-marquee-track,
+  .about-agency-orbit-ring::before,
+  .about-agency-orbit-dots,
+  .about-agency-dot,
+  .about-agency-logo,
+  .about-agency-badge,
+  .about-agency-glow {
     animation: none;
   }
 }

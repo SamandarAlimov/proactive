@@ -25,7 +25,7 @@ const runtimeSiteUrl =
 
 export const siteConfig = {
   name: 'Proactive',
-  siteUrl: (envSiteUrl || runtimeSiteUrl || 'https://proactive.agency.uz').replace(
+  siteUrl: (envSiteUrl || runtimeSiteUrl || 'https://proactive-agency.uz').replace(
     /\/+$/,
     '',
   ),
